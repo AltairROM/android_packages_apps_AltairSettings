@@ -19,13 +19,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <Preference
-            android:title="@string/navbar_tuner_title" >
-            <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.systemui"
-                android:targetClass="com.android.systemui.tuner.NavBarActivity" />
-    </Preference>
-
     <SwitchPreference
         android:key="navbar_visibility"
         android:title="@string/navbar_visibility" />
@@ -62,7 +55,7 @@
                 android:targetClass="com.android.systemui.tuner.NavBarActivity" />
         </Preference>
     </PreferenceCategory>
-    
+
     <PreferenceCategory
         android:key="category_navbar_general"
         android:title="@string/navbar_general_title" >

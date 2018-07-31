@@ -34,17 +34,48 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.Utils;
 
+import com.altair.settings.preference.CustomSeekBarPreference;
+
 public class StatusBar extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "StatusBar";
+
+    private CustomSeekBarPreference mQsRowsPort;
+    private CustomSeekBarPreference mQsRowsLand;
+    private CustomSeekBarPreference mQsColumnsPort;
+    private CustomSeekBarPreference mQsColumnsLand;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.statusbar);
+        addPreferencesFromResource(R.xml.tab_status_bar);
 
         ContentResolver resolver = getActivity().getContentResolver();
+
+        int value = Settings.System.getIntForUser(resolver,
+                Settings.System.QS_ROWS_PORTRAIT, 3, UserHandle.USER_CURRENT);
+        mQsRowsPort = (CustomSeekBarPreference) findPreference("qs_rows_portrait");
+        mQsRowsPort.setValue(value);
+        mQsRowsPort.setOnPreferenceChangeListener(this);
+
+        value = Settings.System.getIntForUser(resolver,
+                Settings.System.QS_ROWS_LANDSCAPE, 3, UserHandle.USER_CURRENT);
+        mQsRowsLand = (CustomSeekBarPreference) findPreference("qs_rows_landscape");
+        mQsRowsLand.setValue(value);
+        mQsRowsLand.setOnPreferenceChangeListener(this);
+
+        value = Settings.System.getIntForUser(resolver,
+                Settings.System.QS_COLUMNS_PORTRAIT, 3, UserHandle.USER_CURRENT);
+        mQsColumnsPort = (CustomSeekBarPreference) findPreference("qs_columns_portrait");
+        mQsColumnsPort.setValue(value);
+        mQsColumnsPort.setOnPreferenceChangeListener(this);
+
+        value = Settings.System.getIntForUser(resolver,
+                Settings.System.QS_COLUMNS_LANDSCAPE, 3, UserHandle.USER_CURRENT);
+        mQsColumnsLand = (CustomSeekBarPreference) findPreference("qs_columns_landscape");
+        mQsColumnsLand.setValue(value);
+        mQsColumnsLand.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -63,7 +94,28 @@ public class StatusBar extends SettingsPreferenceFragment implements
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-        final String key = preference.getKey();
+        final ContentResolver resolver = getActivity().getContentResolver();
+        if (preference == mQsRowsPort) {
+            int val = (Integer) newValue;
+            Settings.System.putIntForUser(getContentResolver(),
+                    Settings.System.QS_ROWS_PORTRAIT, val, UserHandle.USER_CURRENT);
+            return true;
+        } else if (preference == mQsRowsLand) {
+            int val = (Integer) newValue;
+            Settings.System.putIntForUser(getContentResolver(),
+                    Settings.System.QS_ROWS_LANDSCAPE, val, UserHandle.USER_CURRENT);
+            return true;
+        } else if (preference == mQsColumnsPort) {
+            int val = (Integer) newValue;
+            Settings.System.putIntForUser(getContentResolver(),
+                    Settings.System.QS_COLUMNS_PORTRAIT, val, UserHandle.USER_CURRENT);
+            return true;
+        } else if (preference == mQsColumnsLand) {
+            int val = (Integer) newValue;
+            Settings.System.putIntForUser(getContentResolver(),
+                    Settings.System.QS_COLUMNS_LANDSCAPE, val, UserHandle.USER_CURRENT);
+            return true;
+        }
         return true;
     }
 

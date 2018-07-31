@@ -42,7 +42,7 @@ public class StatusBarBatterySettings extends SettingsPreferenceFragment impleme
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.statusbar_battery_settings);
+        addPreferencesFromResource(R.xml.status_bar_battery_settings);
         final ContentResolver resolver = getActivity().getContentResolver();
 
         /*int batteryStyle = Settings.Secure.getInt(resolver,

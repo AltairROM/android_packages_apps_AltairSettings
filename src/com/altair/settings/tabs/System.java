@@ -42,7 +42,7 @@ public class System extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.system);
+        addPreferencesFromResource(R.xml.tab_system);
 
         ContentResolver resolver = getActivity().getContentResolver();
     }

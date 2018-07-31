@@ -101,9 +101,9 @@ public class AltairSettings extends SettingsPreferenceFragment {
 
         public StatusBarAdapter(FragmentManager fm) {
             super(fm);
-            frags[0] = new System();
-            frags[1] = new StatusBar();
-            frags[2] = new Navigation();
+            frags[0] = new StatusBar();
+            frags[1] = new Navigation();
+            frags[2] = new System();
         }
 
         @Override
@@ -124,10 +124,11 @@ public class AltairSettings extends SettingsPreferenceFragment {
 
     private String[] getTitles() {
         String titleString[];
-        titleString = new String[]{
-                    getString(R.string.system_category),
-                    getString(R.string.statusbar_category),
-                    getString(R.string.navigation_category)};
+        titleString = new String[] {
+                    getString(R.string.status_bar_category),
+                    getString(R.string.navigation_category),
+                    getString(R.string.system_category)
+                    };
         return titleString;
     }
 

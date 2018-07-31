@@ -42,7 +42,7 @@ public class Navigation extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.navigation);
+        addPreferencesFromResource(R.xml.tab_navigation);
 
         ContentResolver resolver = getActivity().getContentResolver();
     }
