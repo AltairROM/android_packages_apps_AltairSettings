@@ -39,10 +39,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.altair.settings.tabs.System;
-import com.altair.settings.tabs.StatusBar;
+import com.altair.settings.tabs.Buttons;
 import com.altair.settings.tabs.Navigation;
+import com.altair.settings.tabs.StatusBar;
+import com.altair.settings.tabs.System;
 import com.altair.settings.PagerSlidingTabStrip;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.SettingsPreferenceFragment;
@@ -103,7 +105,8 @@ public class AltairSettings extends SettingsPreferenceFragment {
             super(fm);
             frags[0] = new StatusBar();
             frags[1] = new Navigation();
-            frags[2] = new System();
+            frags[2] = new Buttons();
+            frags[3] = new System();
         }
 
         @Override
@@ -127,6 +130,7 @@ public class AltairSettings extends SettingsPreferenceFragment {
         titleString = new String[] {
                     getString(R.string.tab_status_bar_category),
                     getString(R.string.tab_navigation_category),
+                    getString(R.string.tab_buttons_category),
                     getString(R.string.tab_system_category)
                     };
         return titleString;
