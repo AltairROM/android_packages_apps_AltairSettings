@@ -22,6 +22,7 @@
 
     <string name="default_string">Default</string>
     <string name="reset">Reset</string>
+    <string name="menu_cancel">Cancel</string>
     <string name="picker_activities">Activities</string>
     <string name="select_custom_app_title">Select custom app</string>
     <string name="select_custom_activity_title">Select custom activity</string>
@@ -84,18 +85,21 @@
 
     <!-- STATUS BAR: Clock options -->
     <string name="status_bar_show_clock_title">Show clock</string>
-    <string name="clock_title_enable">Clock position</string>
-    <string name="right_clock">Right</string>
-    <string name="center_clock">Center</string>
-    <string name="left_clock">Left</string>
-    <string name="status_bar_clock_seconds_title">Show seconds</string>
-    <string name="status_bar_clock_seconds_summary">Show hours, minutes, and seconds</string>
+    <string name="status_bar_clock">Show clock</string>
+
+    <string name="status_bar_clock_position_title">Clock position</string>
+    <string name="status_bar_clock_position_right">Right</string>
+    <string name="status_bar_clock_position_left">Left</string>
+    <string name="status_bar_clock_position_center">Center</string>
+
+    <string name="status_bar_clock_show_seconds_title">Show seconds</string>
+    <string name="status_bar_clock_show_seconds_summary">Show hours, minutes, and seconds</string>
+
     <string name="status_bar_am_pm_title">AM/PM style</string>
     <string name="status_bar_am_pm_info">24-hour clock is enabled</string>
-    <string name="am_pm_clock_normal">Normal</string>
-    <string name="am_pm_clock_small">Small</string>
-    <string name="am_pm_clock_none">Hidden</string>
-    <string name="menu_cancel">Cancel</string>
+    <string name="status_bar_am_pm_normal">Normal</string>
+    <string name="status_bar_am_pm_small">Small</string>
+    <string name="status_bar_am_pm_hidden">Hidden</string>
 
     <!-- STATUS BAR: Battery options -->
     <string name="battery_style_title">Battery icon style</string>

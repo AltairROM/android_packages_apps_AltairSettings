@@ -125,9 +125,9 @@ public class AltairSettings extends SettingsPreferenceFragment {
     private String[] getTitles() {
         String titleString[];
         titleString = new String[] {
-                    getString(R.string.status_bar_category),
-                    getString(R.string.navigation_category),
-                    getString(R.string.system_category)
+                    getString(R.string.tab_status_bar_category),
+                    getString(R.string.tab_navigation_category),
+                    getString(R.string.tab_system_category)
                     };
         return titleString;
     }

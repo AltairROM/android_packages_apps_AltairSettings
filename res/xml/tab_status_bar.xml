@@ -21,6 +21,24 @@
     android:layout="@layout/tab"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
+    <PreferenceScreen
+        android:key="status_bar_icons"
+        android:title="@string/status_bar_items_title"
+        android:summary="@string/status_bar_items_summary">
+        <intent
+            android:action="com.android.settings.action.STATUS_BAR_TUNER" />
+    </PreferenceScreen>
+
+    <Preference
+        android:key="status_bar_clock"
+        android:fragment="com.altair.settings.fragments.StatusBarClockSettings"
+        android:title="@string/status_bar_clock_title" />
+
+    <Preference
+        android:key="status_bar_battery"
+        android:fragment="com.altair.settings.fragments.StatusBarBatterySettings"
+        android:title="@string/status_bar_battery_title" />
+
     <PreferenceCategory
         android:key="qs_category"
         android:title="@string/qs_category_title">
@@ -53,14 +71,6 @@
             settings:min="1"
             settings:units="" />
 
-        <com.altair.settings.preference.CustomSeekBarPreference
-            android:key="sysui_qqs_count_key"
-            android:title="@string/qs_small_tiles_title"
-            android:max="8"
-            settings:min="3"
-            settings:units=""
-            android:persistent="false" />
-
         <com.altair.settings.preference.SystemSettingSwitchPreference
             android:key="qs_tile_title_visibility"
             android:title="@string/qs_tile_titles_visibility_title"
@@ -69,24 +79,5 @@
             android:defaultValue="true" />
 
     </PreferenceCategory>
-
-    <Preference
-        android:title="@string/status_bar_items_title"
-        android:summary="@string/status_bar_items_summary">
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetPackage="com.android.systemui"
-            android:targetClass="com.android.systemui.tuner.StatusbarItemsActivity" />
-    </Preference>
-
-    <Preference
-        android:key="status_bar_clock"
-        android:fragment="com.altair.settings.fragments.StatusBarClockSettings"
-        android:title="@string/status_bar_clock_title" />
-
-    <Preference
-        android:key="status_bar_battery"
-        android:fragment="com.altair.settings.fragments.StatusBarBatterySettings"
-        android:title="@string/status_bar_battery_title" />
 
 </PreferenceScreen>
