@@ -38,11 +38,11 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
+import com.altair.settings.StatusBarIcon;
+
 public class StatusBarClockSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "StatusBarClockSettings";
-
-    private static final String ICON_BLACKLIST = "icon_blacklist";
 
     private static final String STATUS_BAR_SHOW_CLOCK = "status_bar_show_clock";
     private static final String STATUS_BAR_CLOCK = "status_bar_clock";
@@ -50,9 +50,11 @@ public class StatusBarClockSettings extends SettingsPreferenceFragment implement
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
 
     private LineageSystemSettingListPreference mStatusBarClock;
-    private SecureSettingSwitchPreference mClockSeconds;
     private LineageSystemSettingListPreference mStatusBarAmPm;
     private SwitchPreference mStatusBarShowClock;
+
+    private StatusBarIcon mClockIcon;
+    private boolean m24HourClock;
 
     @Override
     public int getMetricsCategory() {
@@ -64,42 +66,34 @@ public class StatusBarClockSettings extends SettingsPreferenceFragment implement
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.status_bar_clock_settings);
 
+        mClockIcon = new StatusBarIcon(getContext(), "clock");
+
         mStatusBarShowClock =
                 (SwitchPreference) findPreference(STATUS_BAR_SHOW_CLOCK);
         mStatusBarShowClock.setOnPreferenceChangeListener(this);
         
         mStatusBarAmPm =
                 (LineageSystemSettingListPreference) findPreference(STATUS_BAR_AM_PM);
-        mClockSeconds =
-                (SecureSettingSwitchPreference) findPreference(CLOCK_SECONDS);
         mStatusBarClock =
                 (LineageSystemSettingListPreference) findPreference(STATUS_BAR_CLOCK);
+
+        m24HourClock = DateFormat.is24HourFormat(getActivity());
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        final boolean hasNotch = getResources().getBoolean(
-                org.lineageos.platform.internal.R.bool.config_haveNotch);
+        boolean iconEnabled = mClockIcon.isEnabled();
+        mStatusBarShowClock.setChecked(iconEnabled);
 
-        final String curIconBlacklist = Settings.Secure.getString(getContext().getContentResolver(),
-                ICON_BLACKLIST);
-
-        if (TextUtils.delimitedStringContains(curIconBlacklist, ',', "clock")) {
-            mStatusBarShowClock.setChecked(false);
-            mStatusBarAmPm.setEnabled(false);
-            mClockSeconds.setEnabled(false);
-            mStatusBarClock.setEnabled(false);
-        }
-        else {
-            mStatusBarShowClock.setChecked(true);
-        }
-
-        if (DateFormat.is24HourFormat(getActivity())) {
+        if (m24HourClock) {
             mStatusBarAmPm.setEnabled(false);
             mStatusBarAmPm.setSummary(R.string.status_bar_am_pm_info);
         }
+
+        final boolean hasNotch = getResources().getBoolean(
+                org.lineageos.platform.internal.R.bool.config_haveNotch);
 
         // Adjust status bar preferences for RTL
         if (getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
@@ -119,43 +113,12 @@ public class StatusBarClockSettings extends SettingsPreferenceFragment implement
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mStatusBarShowClock) {
-            boolean value = (Boolean) newValue;
-            setStatusBarIcon("clock", value);
-            if (!DateFormat.is24HourFormat(getActivity())) {
-                mStatusBarAmPm.setEnabled(value);
+            mClockIcon.setEnabled((Boolean) newValue);
+            if (m24HourClock) {
+                mStatusBarAmPm.setEnabled(false);
             }
-            mClockSeconds.setEnabled(value);
-            mStatusBarClock.setEnabled(value);
             return true;
         }
         return false;
-    }
-
-    private void setStatusBarIcon(String key, boolean value) {
-        ContentResolver contentResolver = getContext().getContentResolver();
-        ArraySet<String> ret = new ArraySet<>();
-        String blackListStr = Settings.Secure.getStringForUser(contentResolver, ICON_BLACKLIST,
-                ActivityManager.getCurrentUser());
-        if (blackListStr == null) {
-            blackListStr = "rotate,headset";
-        }
-        String[] blacklist = blackListStr.split(",");
-        for (String slot : blacklist) {
-            if (!TextUtils.isEmpty(slot)) {
-                ret.add(slot);
-            }
-        }
-        if (value) {
-            if (ret.contains(key)) {
-                ret.remove(key);
-            }
-        }
-        else {
-            if (!ret.contains(key)) {
-                ret.add(key);
-            }
-        }
-        Settings.Secure.putStringForUser(contentResolver, ICON_BLACKLIST,
-                TextUtils.join(",", ret), ActivityManager.getCurrentUser());
     }
 }
