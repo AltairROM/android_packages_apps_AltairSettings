@@ -16,13 +16,20 @@
 
 package com.altair.settings.fragments;
 
+import android.app.ActivityManager;
+import android.content.ContentResolver;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v14.preference.SwitchPreference;
 import android.text.format.DateFormat;
 import android.text.TextUtils;
+import android.util.ArraySet;
+import android.util.AttributeSet;
 import android.view.View;
+
+import java.util.Set;
 
 import lineageos.preference.LineageSystemSettingListPreference;
 import lineageos.preference.SecureSettingSwitchPreference;
@@ -37,6 +44,7 @@ public class StatusBarClockSettings extends SettingsPreferenceFragment implement
 
     private static final String ICON_BLACKLIST = "icon_blacklist";
 
+    private static final String STATUS_BAR_SHOW_CLOCK = "status_bar_show_clock";
     private static final String STATUS_BAR_CLOCK = "status_bar_clock";
     private static final String CLOCK_SECONDS = "clock_seconds";
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
@@ -44,6 +52,7 @@ public class StatusBarClockSettings extends SettingsPreferenceFragment implement
     private LineageSystemSettingListPreference mStatusBarClock;
     private SecureSettingSwitchPreference mClockSeconds;
     private LineageSystemSettingListPreference mStatusBarAmPm;
+    private SwitchPreference mStatusBarShowClock;
 
     @Override
     public int getMetricsCategory() {
@@ -55,6 +64,10 @@ public class StatusBarClockSettings extends SettingsPreferenceFragment implement
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.status_bar_clock_settings);
 
+        mStatusBarShowClock =
+                (SwitchPreference) findPreference(STATUS_BAR_SHOW_CLOCK);
+        mStatusBarShowClock.setOnPreferenceChangeListener(this);
+        
         mStatusBarAmPm =
                 (LineageSystemSettingListPreference) findPreference(STATUS_BAR_AM_PM);
         mClockSeconds =
@@ -74,9 +87,13 @@ public class StatusBarClockSettings extends SettingsPreferenceFragment implement
                 ICON_BLACKLIST);
 
         if (TextUtils.delimitedStringContains(curIconBlacklist, ',', "clock")) {
+            mStatusBarShowClock.setChecked(false);
             mStatusBarAmPm.setEnabled(false);
             mClockSeconds.setEnabled(false);
             mStatusBarClock.setEnabled(false);
+        }
+        else {
+            mStatusBarShowClock.setChecked(true);
         }
 
         if (DateFormat.is24HourFormat(getActivity())) {
@@ -101,6 +118,44 @@ public class StatusBarClockSettings extends SettingsPreferenceFragment implement
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mStatusBarShowClock) {
+            boolean value = (Boolean) newValue;
+            setStatusBarIcon("clock", value);
+            if (!DateFormat.is24HourFormat(getActivity())) {
+                mStatusBarAmPm.setEnabled(value);
+            }
+            mClockSeconds.setEnabled(value);
+            mStatusBarClock.setEnabled(value);
+            return true;
+        }
         return false;
+    }
+
+    private void setStatusBarIcon(String key, boolean value) {
+        ContentResolver contentResolver = getContext().getContentResolver();
+        ArraySet<String> ret = new ArraySet<>();
+        String blackListStr = Settings.Secure.getStringForUser(contentResolver, ICON_BLACKLIST,
+                ActivityManager.getCurrentUser());
+        if (blackListStr == null) {
+            blackListStr = "rotate,headset";
+        }
+        String[] blacklist = blackListStr.split(",");
+        for (String slot : blacklist) {
+            if (!TextUtils.isEmpty(slot)) {
+                ret.add(slot);
+            }
+        }
+        if (value) {
+            if (ret.contains(key)) {
+                ret.remove(key);
+            }
+        }
+        else {
+            if (!ret.contains(key)) {
+                ret.add(key);
+            }
+        }
+        Settings.Secure.putStringForUser(contentResolver, ICON_BLACKLIST,
+                TextUtils.join(",", ret), ActivityManager.getCurrentUser());
     }
 }

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.altair.settings.fragments;
+package com.altair.settings.preference;
 
 import android.app.AlertDialog;
 import android.content.ContentResolver;
@@ -36,7 +36,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.preference.CustomDialogPreference;
+import com.altair.settings.preference.CustomDialogPreference;
 
 import static org.lineageos.internal.util.DeviceKeysConstants.*;
 

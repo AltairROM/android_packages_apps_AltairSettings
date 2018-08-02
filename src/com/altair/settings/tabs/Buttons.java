@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.altair.settings.fragments;
+package com.altair.settings.tabs;
 
 import android.app.ActivityManager;
 import android.content.ComponentName;
@@ -42,10 +42,14 @@ import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.WindowManagerGlobal;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+
+import com.altair.settings.preference.ButtonBacklightBrightness;
 import com.altair.settings.utils.DeviceUtils;
 import com.altair.settings.utils.TelephonyUtils;
+
 import org.lineageos.internal.util.ScreenType;
 
 import static org.lineageos.internal.util.DeviceKeysConstants.*;
@@ -127,7 +131,7 @@ public class Buttons extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.button_settings);
+        addPreferencesFromResource(R.xml.tab_buttons);
 
         final Resources res = getResources();
         final ContentResolver resolver = getActivity().getContentResolver();
@@ -473,6 +477,11 @@ public class Buttons extends SettingsPreferenceFragment implements
             mNavigationAppSwitchLongPressAction.setEntries(actionEntriesGo);
             mNavigationAppSwitchLongPressAction.setEntryValues(actionValuesGo);
         }
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.ALTAIR;
     }
 
     @Override

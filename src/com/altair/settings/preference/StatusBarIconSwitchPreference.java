@@ -74,13 +74,13 @@ public class StatusBarIconSwitchPreference extends SwitchPreference {
     private void setBooleanValue(Boolean value) {
         mBlacklist = getList();
         if (value) {
-            if (mBlacklist.contains(getKey())) {
-                mBlacklist.remove(getKey());
+            if (!mBlacklist.contains(getKey())) {
+                mBlacklist.add(getKey());
             }
         }
         else {
-            if (!mBlacklist.contains(getKey())) {
-                mBlacklist.add(getKey());
+            if (mBlacklist.contains(getKey())) {
+                mBlacklist.remove(getKey());
             }
         }
         setList(mBlacklist);
