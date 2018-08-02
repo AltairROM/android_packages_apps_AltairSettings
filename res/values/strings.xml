@@ -85,6 +85,7 @@
     <string name="status_bar_items_summary">Control which status bar icons are shown</string>
 
     <!-- STATUS BAR: Clock options -->
+    <string name="status_bar_clock_category_title">Clock</string>
     <string name="status_bar_show_clock_title">Show clock</string>
     <string name="status_bar_clock">Show clock</string>
 
@@ -103,6 +104,7 @@
     <string name="status_bar_am_pm_hidden">Hidden</string>
 
     <!-- STATUS BAR: Battery options -->
+    <string name="status_bar_battery_category_title">Battery</string>
     <string name="status_bar_show_battery_title">Show battery</string>
 
     <string name="battery_style_title">Battery icon style</string>
