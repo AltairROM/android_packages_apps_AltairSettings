@@ -17,16 +17,13 @@
 package com.altair.settings.fragments;
 
 import android.content.ContentResolver;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.UserHandle;
-import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v14.preference.SwitchPreference;
 import android.provider.Settings;
 
-import com.altair.settings.preference.CustomSeekBarPreference;
-import com.altair.settings.preference.SystemSettingSwitchPreference;
+import com.altair.settings.StatusBarIcon;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -34,10 +31,12 @@ import com.android.settings.SettingsPreferenceFragment;
 public class StatusBarBatterySettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
-    private static final String BATTERY_STYLE = "battery_style";
+    private static final String STATUS_BAR_SHOW_BATTERY = "status_bar_show_battery";
 
-    private ListPreference mBatteryIconStyle;
+    private SwitchPreference mStatusBarShowBattery;
     private SwitchPreference mBatteryPercentage;
+
+    private StatusBarIcon mBatteryIcon;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,19 +44,25 @@ public class StatusBarBatterySettings extends SettingsPreferenceFragment impleme
         addPreferencesFromResource(R.xml.status_bar_battery_settings);
         final ContentResolver resolver = getActivity().getContentResolver();
 
-        /*int batteryStyle = Settings.Secure.getInt(resolver,
-                Settings.Secure.STATUS_BAR_BATTERY_STYLE, 0);
-        mBatteryIconStyle = (ListPreference) findPreference(BATTERY_STYLE);
-        mBatteryIconStyle.setValue(Integer.toString(batteryStyle));
-        mBatteryIconStyle.setOnPreferenceChangeListener(this);*/
+        mBatteryIcon = new StatusBarIcon(getContext(), "battery");
+
+        mStatusBarShowBattery =
+                (SwitchPreference) findPreference(STATUS_BAR_SHOW_BATTERY);
+        mStatusBarShowBattery.setOnPreferenceChangeListener(this);
 
         boolean show = Settings.System.getInt(resolver,
                 Settings.System.SHOW_BATTERY_PERCENT, 1) == 1;
         mBatteryPercentage = (SwitchPreference) findPreference("show_battery_percent");
         mBatteryPercentage.setChecked(show);
         mBatteryPercentage.setOnPreferenceChangeListener(this);
-        /*boolean hideForcePercentage = batteryStyle == 7 || batteryStyle == 8; // text or hidden style
-        mBatteryPercentage.setEnabled(!hideForcePercentage);*/
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        boolean iconEnabled = mBatteryIcon.isEnabled();
+        mStatusBarShowBattery.setChecked(iconEnabled);
     }
 
     @Override
@@ -66,18 +71,13 @@ public class StatusBarBatterySettings extends SettingsPreferenceFragment impleme
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-       /*if (preference == mBatteryIconStyle) {
-            int value = Integer.valueOf((String) newValue);
-            Settings.Secure.putInt(getContentResolver(),
-                    Settings.Secure.STATUS_BAR_BATTERY_STYLE, value);
-            boolean hideForcePercentage = value == 7 || value == 8; // text or hidden style
-            mBatteryPercentage.setEnabled(!hideForcePercentage);
+        if (preference == mStatusBarShowBattery) {
+            mBatteryIcon.setEnabled((Boolean) newValue);
             return true;
-        } else*/  if (preference == mBatteryPercentage) {
+        } else if (preference == mBatteryPercentage) {
             boolean value = (Boolean) newValue;
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.SHOW_BATTERY_PERCENT, value ? 1 : 0);
-            mBatteryPercentage.setChecked(value);
             return true;
         }
         return false;

@@ -103,6 +103,8 @@
     <string name="status_bar_am_pm_hidden">Hidden</string>
 
     <!-- STATUS BAR: Battery options -->
+    <string name="status_bar_show_battery_title">Show battery</string>
+
     <string name="battery_style_title">Battery icon style</string>
     <string name="battery_style_summary">Change the look of the icon in the status bar</string>
     <string name="battery_style_port">Portrait</string>
