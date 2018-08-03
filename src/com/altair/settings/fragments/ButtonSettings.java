@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.altair.settings.tabs;
+package com.altair.settings.fragments;
 
 import android.app.ActivityManager;
 import android.content.ComponentName;
@@ -43,6 +43,7 @@ import android.view.KeyEvent;
 import android.view.WindowManagerGlobal;
 
 import com.android.internal.logging.nano.MetricsProto;
+
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 

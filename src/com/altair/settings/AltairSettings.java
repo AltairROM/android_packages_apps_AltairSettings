@@ -39,10 +39,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.altair.settings.tabs.Buttons;
-import com.altair.settings.tabs.Navigation;
-import com.altair.settings.tabs.StatusBar;
-import com.altair.settings.tabs.System;
+import com.altair.settings.fragments.ButtonSettings;
+import com.altair.settings.fragments.NavigationSettings;
+import com.altair.settings.fragments.StatusBarSettings;
+import com.altair.settings.fragments.SystemSettings;
 import com.altair.settings.PagerSlidingTabStrip;
 
 import com.android.settings.R;

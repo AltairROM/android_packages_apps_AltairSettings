@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.altair.settings.tabs;
+package com.altair.settings.fragments;
 
 import android.content.Context;
 import android.content.ContentResolver;
@@ -27,6 +27,7 @@ import android.text.format.DateFormat;
 import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto;
+
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -77,7 +78,7 @@ public class StatusBar extends SettingsPreferenceFragment implements
         mStatusBarShowClock =
                 (SwitchPreference) findPreference(STATUS_BAR_SHOW_CLOCK);
         mStatusBarShowClock.setOnPreferenceChangeListener(this);
-        
+
         mStatusBarAmPm =
                 (LineageSystemSettingListPreference) findPreference(STATUS_BAR_AM_PM);
         mStatusBarClock =
