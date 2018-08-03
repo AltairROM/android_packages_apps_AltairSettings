@@ -16,27 +16,19 @@
 
 package com.altair.settings.tabs;
 
-//import android.app.ActivityManager;
 import android.content.Context;
 import android.content.ContentResolver;
-//import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v14.preference.SwitchPreference;
 import android.text.format.DateFormat;
-//import android.text.TextUtils;
-//import android.util.ArraySet;
-//import android.util.AttributeSet;
 import android.view.View;
-
-//import java.util.Set;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-//import com.android.settings.Utils;
 
 import com.altair.settings.preference.CustomSeekBarPreference;
 import com.altair.settings.StatusBarIcon;
@@ -53,6 +45,11 @@ public class StatusBar extends SettingsPreferenceFragment implements
     private static final String CLOCK_SECONDS = "clock_seconds";
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
     private static final String STATUS_BAR_SHOW_BATTERY = "status_bar_show_battery";
+    private static final String STATUS_BAR_QUICK_QS_PULLDOWN = "qs_quick_pulldown";
+
+    private static final int PULLDOWN_DIR_NONE = 0;
+    private static final int PULLDOWN_DIR_RIGHT = 1;
+    private static final int PULLDOWN_DIR_LEFT = 2;
 
     private StatusBarIcon mClockIcon;
     private StatusBarIcon mBatteryIcon;
@@ -63,6 +60,7 @@ public class StatusBar extends SettingsPreferenceFragment implements
     private SwitchPreference mStatusBarShowClock;
     private SwitchPreference mStatusBarShowBattery;
     private SwitchPreference mBatteryPercentage;
+    private LineageSystemSettingListPreference mQuickPulldown;
     private CustomSeekBarPreference mQsRowsPort;
     private CustomSeekBarPreference mQsRowsLand;
     private CustomSeekBarPreference mQsColumnsPort;
@@ -98,6 +96,11 @@ public class StatusBar extends SettingsPreferenceFragment implements
         mBatteryPercentage = (SwitchPreference) findPreference("show_battery_percent");
         mBatteryPercentage.setChecked(show);
         mBatteryPercentage.setOnPreferenceChangeListener(this);
+
+        mQuickPulldown =
+                (LineageSystemSettingListPreference) findPreference(STATUS_BAR_QUICK_QS_PULLDOWN);
+        mQuickPulldown.setOnPreferenceChangeListener(this);
+        updateQuickPulldownSummary(mQuickPulldown.getIntValue(0));
 
         int value = Settings.System.getIntForUser(resolver,
                 Settings.System.QS_ROWS_PORTRAIT, 3, UserHandle.USER_CURRENT);
@@ -153,6 +156,8 @@ public class StatusBar extends SettingsPreferenceFragment implements
                 mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_rtl);
                 mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_rtl);
             }
+            mQuickPulldown.setEntries(R.array.status_bar_quick_qs_pulldown_entries_rtl);
+            mQuickPulldown.setEntryValues(R.array.status_bar_quick_qs_pulldown_values_rtl);
         } else if (hasNotch) {
             mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_notch);
             mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_notch);
@@ -183,6 +188,8 @@ public class StatusBar extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.SHOW_BATTERY_PERCENT, value ? 1 : 0);
             return true;
+        } else if (preference == mQuickPulldown) {
+            updateQuickPulldownSummary(Integer.parseInt((String) newValue));
         } else if (preference == mQsRowsPort) {
             int val = (Integer) newValue;
             Settings.System.putIntForUser(getContentResolver(),
@@ -205,6 +212,26 @@ public class StatusBar extends SettingsPreferenceFragment implements
             return true;
         }
         return true;
+    }
+
+    private void updateQuickPulldownSummary(int value) {
+        String summary="";
+        switch (value) {
+            case PULLDOWN_DIR_NONE:
+                summary = getResources().getString(
+                    R.string.status_bar_quick_qs_pulldown_off);
+                break;
+
+            case PULLDOWN_DIR_LEFT:
+            case PULLDOWN_DIR_RIGHT:
+                summary = getResources().getString(
+                    R.string.status_bar_quick_qs_pulldown_summary,
+                    getResources().getString(value == PULLDOWN_DIR_LEFT
+                        ? R.string.status_bar_quick_qs_pulldown_summary_left
+                        : R.string.status_bar_quick_qs_pulldown_summary_right));
+                break;
+        }
+        mQuickPulldown.setSummary(summary);
     }
 }
 
