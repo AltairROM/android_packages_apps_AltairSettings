@@ -37,7 +37,7 @@ import com.altair.settings.StatusBarIcon;
 import lineageos.preference.LineageSystemSettingListPreference;
 import lineageos.preference.SecureSettingSwitchPreference;
 
-public class StatusBar extends SettingsPreferenceFragment implements
+public class StatusBarSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "StatusBar";
 

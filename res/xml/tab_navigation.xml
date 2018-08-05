@@ -25,16 +25,16 @@
         android:key="navbar_visibility"
         android:title="@string/navbar_visibility" />
 
+    <ListPreference
+        android:key="navbar_mode"
+        android:title="@string/navbar_mode"
+        android:summary="@string/navbar_mode_summary"
+        android:entries="@array/systemui_navbar_mode_entries"
+        android:entryValues="@array/systemui_navbar_mode_values" />
+
     <PreferenceCategory
         android:key="category_navbar_interface"
         android:title="@string/navbar_interface_title" >
-
-        <ListPreference
-            android:key="navbar_mode"
-            android:title="@string/navbar_mode"
-            android:summary="@string/navbar_mode_summary"
-            android:entries="@array/systemui_navbar_mode_entries"
-            android:entryValues="@array/systemui_navbar_mode_values" />
 
         <PreferenceScreen
             android:key="smartbar_settings"
@@ -51,20 +51,21 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="navigation_bar_category"
+        android:key="category_stock_navbar_interface"
         android:title="@string/navigation_bar_category" >
-
-        <lineageos.preference.LineageSystemSettingSwitchPreference
-                android:key="navigation_bar_menu_arrow_keys"
-                android:title="@string/navigation_bar_arrow_keys_title"
-                android:summary="@string/navigation_bar_arrow_keys_summary"
-                android:defaultValue="false" />
 
         <PreferenceScreen
             android:key="navigation_bar"
             android:title="@string/navigation_bar_title">
-            <intent android:action="com.android.settings.action.NAV_BAR_TUNER" />
+            <intent
+                android:action="com.android.settings.action.NAV_BAR_TUNER" />
         </PreferenceScreen>
+
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="navigation_bar_menu_arrow_keys"
+            android:title="@string/navigation_bar_arrow_keys_title"
+            android:summary="@string/navigation_bar_arrow_keys_summary"
+            android:defaultValue="false" />
 
         <ListPreference
             android:key="navigation_home_long_press"

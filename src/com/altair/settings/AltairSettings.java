@@ -103,10 +103,10 @@ public class AltairSettings extends SettingsPreferenceFragment {
 
         public StatusBarAdapter(FragmentManager fm) {
             super(fm);
-            frags[0] = new StatusBar();
-            frags[1] = new Navigation();
-            frags[2] = new Buttons();
-            frags[3] = new System();
+            frags[0] = new StatusBarSettings();
+            frags[1] = new NavigationSettings();
+            frags[2] = new ButtonSettings();
+            frags[3] = new SystemSettings();
         }
 
         @Override
