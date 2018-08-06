@@ -436,6 +436,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                 (incallHomeBehavior == LineageSettings.Secure.RING_HOME_BUTTON_BEHAVIOR_ANSWER);
             mHomeAnswerCall.setChecked(homeButtonAnswersCall);
         }
+
+        updateDisableNavkeysCategories();
     }
 
     private ListPreference initList(String key, Action value) {
