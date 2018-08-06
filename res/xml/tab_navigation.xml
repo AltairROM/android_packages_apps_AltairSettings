@@ -37,6 +37,12 @@
         android:title="@string/navbar_interface_title" >
 
         <PreferenceScreen
+            android:key="stock_navbar_settings"
+            android:title="@string/stock_navbar_settings_title"
+            android:summary="@string/stock_navbar_settings_summary"
+            android:fragment="com.altair.settings.fragments.StockNavbarSettings" />
+
+        <PreferenceScreen
             android:key="smartbar_settings"
             android:title="@string/smartbar_settings_title"
             android:summary="@string/smartbar_settings_summary"
@@ -50,7 +56,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
+    <!--<PreferenceCategory
         android:key="category_stock_navbar_interface"
         android:title="@string/navigation_bar_category" >
 
@@ -91,7 +97,7 @@
             android:entryValues="@array/hardware_keys_action_values"
             android:persistent="false" />
 
-    </PreferenceCategory>
+    </PreferenceCategory>-->
 
     <PreferenceCategory
         android:key="category_navbar_general"
