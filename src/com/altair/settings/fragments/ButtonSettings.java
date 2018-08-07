@@ -17,6 +17,7 @@
 
 package com.altair.settings.fragments;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -25,9 +26,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.ListPreference;
@@ -114,6 +117,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private SwitchPreference mTorchLongPressPowerGesture;
     private ListPreference mTorchLongPressPowerTimeout;
 
+    protected Activity mActivity;
     private Handler mHandler;
     private boolean mHasHardwareNavbar = false;
 
@@ -406,6 +410,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                 mAppSwitchLongPressAction.setEntryValues(actionValuesGo);
             }
         }
+
+        getActivity().getContentResolver().registerContentObserver(Settings.Secure.getUriFor(
+                Settings.Secure.NAVIGATION_BAR_VISIBLE), false, mNavbarObserver, UserHandle.USER_ALL);
     }
 
     @Override
@@ -614,4 +621,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                         ? LineageSettings.Secure.RING_HOME_BUTTON_BEHAVIOR_ANSWER
                         : LineageSettings.Secure.RING_HOME_BUTTON_BEHAVIOR_DO_NOTHING));
     }
+
+    protected final ContentObserver mNavbarObserver = new ContentObserver(mHandler) {
+        @Override
+        public void onChange(boolean selfChange) {
+            updateDisableNavkeysCategories();
+        }
+    };
 }
