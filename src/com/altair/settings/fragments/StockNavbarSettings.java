@@ -31,6 +31,7 @@ import com.android.internal.utils.du.DUActionUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
+import lineageos.preference.LineageSecureSettingSwitchPreference;
 import lineageos.providers.LineageSettings;
 
 import static org.lineageos.internal.util.DeviceKeysConstants.*;
@@ -45,6 +46,7 @@ public class StockNavbarSettings extends SettingsPreferenceFragment implements
     private static final String KEY_NAVIGATION_HOME_DOUBLE_TAP = "navigation_home_double_tap";
     private static final String KEY_NAVIGATION_APP_SWITCH_LONG_PRESS =
             "navigation_app_switch_long_press";
+    private static final String KEY_KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
 
     private static final int NAVBAR_MODE_STOCK = 0;
     private static final int NAVBAR_MODE_SMARTBAR = 1;
@@ -55,6 +57,7 @@ public class StockNavbarSettings extends SettingsPreferenceFragment implements
     private ListPreference mNavigationHomeLongPressAction;
     private ListPreference mNavigationHomeDoubleTapAction;
     private ListPreference mNavigationAppSwitchLongPressAction;
+    private LineageSecureSettingSwitchPreference mKillAppLongpressBack;
 
     private boolean mHasHardwareNavbar = false;
 
@@ -71,6 +74,7 @@ public class StockNavbarSettings extends SettingsPreferenceFragment implements
 
         mStockNavbarSettings = (PreferenceScreen) findPreference(KEY_STOCK_NAVBAR_SETTINGS);
         mNavigationBarMenuArrowKeys = (SwitchPreference) findPreference(KEY_NAVIGATION_BAR_MENU_ARROW_KEYS);
+        mKillAppLongpressBack = (LineageSecureSettingSwitchPreference) findPreference(KEY_KILL_APP_LONGPRESS_BACK);
 
         Action defaultHomeLongPressAction = Action.fromIntSafe(res.getInteger(
                 org.lineageos.platform.internal.R.integer.config_longPressOnHomeBehavior));
@@ -122,7 +126,6 @@ public class StockNavbarSettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        updateNavbarPreferences();
     }
 
     @Override
@@ -149,6 +152,7 @@ public class StockNavbarSettings extends SettingsPreferenceFragment implements
         mNavigationHomeLongPressAction.setEnabled(mode == NAVBAR_MODE_STOCK);
         mNavigationHomeDoubleTapAction.setEnabled(mode == NAVBAR_MODE_STOCK);
         mNavigationAppSwitchLongPressAction.setEnabled(mode == NAVBAR_MODE_STOCK);
+        mKillAppLongpressBack.setEnabled(mode == NAVBAR_MODE_STOCK);
     }
 
     private ListPreference initList(String key, Action value) {
