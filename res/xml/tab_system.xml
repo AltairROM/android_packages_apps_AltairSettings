@@ -28,6 +28,7 @@
         <com.altair.settings.preference.SystemSettingSwitchPreference
             android:key="toast_icon"
             android:title="@string/toast_icon_title"
+            android:icon="@drawable/ic_system_toast_icon"
             android:summary="@string/toast_icon_summary"
             android:defaultValue="true" />
 
@@ -40,12 +41,14 @@
         <com.altair.settings.preference.SystemSettingSwitchPreference
             android:key="show_clear_all_recents"
             android:title="@string/show_clear_all_recents_button_title"
+            android:icon="@drawable/ic_system_recents_clear_all_button"
             android:summary="@string/show_clear_all_recents_button_summary"
             android:defaultValue="true" />
 
         <ListPreference
             android:key="recents_clear_all_location"
             android:title="@string/recents_clear_all_location_title"
+            android:icon="@drawable/ic_system_recents_clear_all_location"
             android:entries="@array/recents_clear_all_location_entries"
             android:entryValues="@array/recents_clear_all_location_values"
             android:defaultValue="3"

@@ -28,6 +28,7 @@
     <ListPreference
         android:key="navbar_mode"
         android:title="@string/navbar_mode"
+        android:icon="@drawable/ic_navbar_navigation_mode"
         android:summary="@string/navbar_mode_summary"
         android:entries="@array/systemui_navbar_mode_entries"
         android:entryValues="@array/systemui_navbar_mode_values" />
@@ -39,18 +40,21 @@
         <PreferenceScreen
             android:key="stock_navbar_settings"
             android:title="@string/stock_navbar_settings_title"
+            android:icon="@drawable/ic_navbar_default_settings"
             android:summary="@string/stock_navbar_settings_summary"
             android:fragment="com.altair.settings.fragments.StockNavbarSettings" />
 
         <PreferenceScreen
             android:key="smartbar_settings"
             android:title="@string/smartbar_settings_title"
+            android:icon="@drawable/ic_navbar_smartbar_settings"
             android:summary="@string/smartbar_settings_summary"
             android:fragment="com.altair.settings.fragments.SmartbarSettings" />
 
         <PreferenceScreen
             android:key="fling_settings"
             android:title="@string/fling_settings"
+            android:icon="@drawable/ic_navbar_fling_settings"
             android:summary="@string/fling_settings_summary"
             android:fragment="com.altair.settings.fragments.FlingSettings" />
 
@@ -127,6 +131,7 @@
         <PreferenceScreen
             android:key="pulse_settings"
             android:title="@string/pulse_settings"
+            android:icon="@drawable/ic_navbar_pulse_settings"
             android:summary="@string/pulse_settings_summary"
             android:fragment="com.altair.settings.fragments.PulseSettings" />
 

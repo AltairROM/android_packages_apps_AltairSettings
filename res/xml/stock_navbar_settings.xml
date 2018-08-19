@@ -31,6 +31,7 @@
     <lineageos.preference.LineageSystemSettingSwitchPreference
         android:key="navigation_bar_menu_arrow_keys"
         android:title="@string/navigation_bar_arrow_keys_title"
+        android:icon="@drawable/ic_navbar_arrow_keys"
         android:summary="@string/navigation_bar_arrow_keys_summary"
         android:defaultValue="false" />
 
@@ -38,6 +39,7 @@
         android:key="navigation_home_long_press"
         android:dialogTitle="@string/navigation_bar_home_long_press_title"
         android:title="@string/navigation_bar_home_long_press_title"
+        android:icon="@drawable/ic_buttons_long_press"
         android:entries="@array/hardware_keys_action_entries"
         android:entryValues="@array/hardware_keys_action_values"
         android:persistent="false" />
@@ -46,6 +48,7 @@
         android:key="navigation_home_double_tap"
         android:dialogTitle="@string/navigation_bar_home_double_tap_title"
         android:title="@string/navigation_bar_home_double_tap_title"
+        android:icon="@drawable/ic_buttons_double_tap"
         android:entries="@array/hardware_keys_action_entries"
         android:entryValues="@array/hardware_keys_action_values"
         android:persistent="false" />
@@ -54,6 +57,7 @@
         android:key="navigation_app_switch_long_press"
         android:dialogTitle="@string/navigation_bar_app_switch_long_press_title"
         android:title="@string/navigation_bar_app_switch_long_press_title"
+        android:icon="@drawable/ic_buttons_long_press"
         android:entries="@array/hardware_keys_action_entries"
         android:entryValues="@array/hardware_keys_action_values"
         android:persistent="false" />
@@ -61,6 +65,7 @@
     <lineageos.preference.LineageSecureSettingSwitchPreference
         android:key="kill_app_longpress_back"
         android:title="@string/navigation_bar_kill_app_longpress_back"
+        android:icon="@drawable/ic_navbar_kill_app"
         android:summary="@string/navigation_bar_kill_app_longpress_back_summary"/>
 
 </PreferenceScreen>
