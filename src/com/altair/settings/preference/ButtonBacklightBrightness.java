@@ -36,13 +36,13 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.altair.settings.preference.CustomDialogPreference;
+import com.android.settings.widget.SettingsDialogPreference;
 
 import static org.lineageos.internal.util.DeviceKeysConstants.*;
 
 import lineageos.providers.LineageSettings;
 
-public class ButtonBacklightBrightness extends CustomDialogPreference<AlertDialog> implements
+public class ButtonBacklightBrightness extends SettingsDialogPreference<AlertDialog> implements
         SeekBar.OnSeekBarChangeListener {
     private static final int DEFAULT_BUTTON_TIMEOUT = 5;
 
@@ -107,6 +107,8 @@ public class ButtonBacklightBrightness extends CustomDialogPreference<AlertDialo
             public void onClick(DialogInterface dialog, int which) {
             }
         });
+        builder.setPositiveButton(android.R.string.ok, null);
+        builder.setNegativeButton(android.R.string.cancel, null);
     }
 
     @Override
