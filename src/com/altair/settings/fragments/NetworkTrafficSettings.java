@@ -96,3 +96,4 @@ public class NetworkTrafficSettings extends SettingsPreferenceFragment
         mNetTrafficShowUnits.setEnabled(enabled);
     }
 }
+

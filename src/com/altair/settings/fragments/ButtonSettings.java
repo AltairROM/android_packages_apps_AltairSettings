@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2016 The CyanogenMod project
- * Copyright (C) 2017 The LineageOS project
+ * Copyright (C) 2013 The CyanogenMod Project
+ *               2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 
 package com.altair.settings.fragments;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -26,7 +25,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
-import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
@@ -46,12 +44,11 @@ import android.view.KeyEvent;
 import android.view.WindowManagerGlobal;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.utils.du.DUActionUtils;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-import com.altair.settings.preference.ButtonBacklightBrightness;
+import com.altair.settings.fragments.ButtonBacklightBrightness;
 import com.altair.settings.utils.DeviceUtils;
 import com.altair.settings.utils.TelephonyUtils;
 
@@ -61,6 +58,7 @@ import static org.lineageos.internal.util.DeviceKeysConstants.*;
 
 import java.util.List;
 
+import lineageos.hardware.LineageHardwareManager;
 import lineageos.providers.LineageSettings;
 
 public class ButtonSettings extends SettingsPreferenceFragment implements
@@ -78,10 +76,15 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String KEY_APP_SWITCH_LONG_PRESS = "hardware_keys_app_switch_long_press";
     private static final String KEY_VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
     private static final String KEY_SWAP_VOLUME_BUTTONS = "swap_volume_buttons";
+    private static final String KEY_VOLUME_PANEL_ON_LEFT = "volume_panel_on_left";
+    private static final String DISABLE_NAV_KEYS = "disable_nav_keys";
+    private static final String KEY_NAVIGATION_HOME_LONG_PRESS = "navigation_home_long_press";
+    private static final String KEY_NAVIGATION_HOME_DOUBLE_TAP = "navigation_home_double_tap";
+    private static final String KEY_NAVIGATION_APP_SWITCH_LONG_PRESS =
+            "navigation_app_switch_long_press";
     private static final String KEY_POWER_END_CALL = "power_end_call";
     private static final String KEY_HOME_ANSWER_CALL = "home_answer_call";
     private static final String KEY_VOLUME_MUSIC_CONTROLS = "volbtn_music_controls";
-    private static final String KEY_VOLUME_CONTROL_RING_STREAM = "volume_keys_control_ring_stream";
     private static final String KEY_TORCH_LONG_PRESS_POWER_GESTURE =
             "torch_long_press_power_gesture";
     private static final String KEY_TORCH_LONG_PRESS_POWER_TIMEOUT =
@@ -96,6 +99,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String CATEGORY_CAMERA = "camera_key";
     private static final String CATEGORY_VOLUME = "volume_keys";
     private static final String CATEGORY_BACKLIGHT = "key_backlight";
+    private static final String CATEGORY_NAVBAR = "navigation_bar_category";
 
     private ListPreference mHomeLongPressAction;
     private ListPreference mHomeDoubleTapAction;
@@ -112,20 +116,20 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private SwitchPreference mVolumeWakeScreen;
     private SwitchPreference mVolumeMusicControls;
     private SwitchPreference mSwapVolumeButtons;
+    private SwitchPreference mVolumePanelOnLeft;
+    private SwitchPreference mDisableNavigationKeys;
     private SwitchPreference mPowerEndCall;
     private SwitchPreference mHomeAnswerCall;
     private SwitchPreference mTorchLongPressPowerGesture;
     private ListPreference mTorchLongPressPowerTimeout;
 
-    protected Activity mActivity;
     private Handler mHandler;
-    private boolean mHasHardwareNavbar = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.tab_buttons);
+        addPreferencesFromResource(R.xml.buttons_settings);
 
         final Resources res = getResources();
         final ContentResolver resolver = getActivity().getContentResolver();
@@ -187,6 +191,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
         mHandler = new Handler();
 
+        // Force Navigation bar related options
+        mDisableNavigationKeys = (SwitchPreference) findPreference(DISABLE_NAV_KEYS);
+
         Action defaultHomeLongPressAction = Action.fromIntSafe(res.getInteger(
                 org.lineageos.platform.internal.R.integer.config_longPressOnHomeBehavior));
         Action defaultHomeDoubleTapAction = Action.fromIntSafe(res.getInteger(
@@ -203,11 +210,24 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                 LineageSettings.System.KEY_APP_SWITCH_LONG_PRESS_ACTION,
                 defaultAppSwitchLongPressAction);
 
-        // Only visible on devices that does not have a navigation bar already,
-        // and don't even try unless the existing keys can be disabled
-        mHasHardwareNavbar = !DUActionUtils.hasNavbarByDefault(getActivity());
-        boolean needsNavigationBar = !mHasHardwareNavbar;
-        updateDisableNavkeysCategories();
+        final LineageHardwareManager hardware = LineageHardwareManager.getInstance(getActivity());
+
+        // Only visible on devices that does not have a navigation bar already
+        boolean hasNavigationBar = true;
+        boolean supportsKeyDisabler = isKeyDisablerSupported(getActivity());
+        try {
+            IWindowManager windowManager = WindowManagerGlobal.getWindowManagerService();
+            hasNavigationBar = windowManager.hasNavigationBar();
+        } catch (RemoteException e) {
+            Log.e(TAG, "Error getting navigation bar status");
+        }
+        if (supportsKeyDisabler) {
+            // Remove keys that can be provided by the navbar
+            updateDisableNavkeysOption();
+            updateDisableNavkeysCategories(mDisableNavigationKeys.isChecked());
+        } else {
+            prefScreen.removePreference(mDisableNavigationKeys);
+        }
 
         if (hasPowerKey) {
             if (!TelephonyUtils.isVoiceCapable(getActivity())) {
@@ -234,7 +254,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
             mHomeLongPressAction = initList(KEY_HOME_LONG_PRESS, homeLongPressAction);
             mHomeDoubleTapAction = initList(KEY_HOME_DOUBLE_TAP, homeDoubleTapAction);
-            if (!isNavbarEnabled()) {
+            if (mDisableNavigationKeys.isChecked()) {
                 mHomeLongPressAction.setEnabled(false);
                 mHomeDoubleTapAction.setEnabled(false);
             }
@@ -346,6 +366,15 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             if (mSwapVolumeButtons != null) {
                 mSwapVolumeButtons.setChecked(swapVolumeKeys > 0);
             }
+
+            final boolean volumePanelOnLeft = LineageSettings.Secure.getIntForUser(
+                    getContentResolver(), LineageSettings.Secure.VOLUME_PANEL_ON_LEFT, 0,
+                    UserHandle.USER_CURRENT) != 0;
+            mVolumePanelOnLeft = (SwitchPreference)
+                    prefScreen.findPreference(KEY_VOLUME_PANEL_ON_LEFT);
+            if (mVolumePanelOnLeft != null) {
+                mVolumePanelOnLeft.setChecked(volumePanelOnLeft);
+            }
         } else {
             prefScreen.removePreference(volumeCategory);
         }
@@ -410,9 +439,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                 mAppSwitchLongPressAction.setEntryValues(actionValuesGo);
             }
         }
-
-        getActivity().getContentResolver().registerContentObserver(Settings.Secure.getUriFor(
-                Settings.Secure.NAVIGATION_BAR_VISIBLE), false, mNavbarObserver, UserHandle.USER_ALL);
     }
 
     @Override
@@ -443,8 +469,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                 (incallHomeBehavior == LineageSettings.Secure.RING_HOME_BUTTON_BEHAVIOR_ANSWER);
             mHomeAnswerCall.setChecked(homeButtonAnswersCall);
         }
-
-        updateDisableNavkeysCategories();
     }
 
     private ListPreference initList(String key, Action value) {
@@ -520,16 +544,20 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         return false;
     }
 
-    private boolean isNavbarEnabled() {
-        boolean hasHardwareNavbar = !DUActionUtils.hasNavbarByDefault(getActivity());
-        return Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.NAVIGATION_BAR_VISIBLE,
-                !mHasHardwareNavbar ? 1 : 0) != 0;
+    private static void writeDisableNavkeysOption(Context context, boolean enabled) {
+        LineageSettings.System.putIntForUser(context.getContentResolver(),
+                LineageSettings.System.FORCE_SHOW_NAVBAR, enabled ? 1 : 0, UserHandle.USER_CURRENT);
     }
 
-    private void updateDisableNavkeysCategories() {
+    private void updateDisableNavkeysOption() {
+        boolean enabled = LineageSettings.System.getIntForUser(getActivity().getContentResolver(),
+                LineageSettings.System.FORCE_SHOW_NAVBAR, 0, UserHandle.USER_CURRENT) != 0;
+
+        mDisableNavigationKeys.setChecked(enabled);
+    }
+
+    private void updateDisableNavkeysCategories(boolean navbarEnabled) {
         final PreferenceScreen prefScreen = getPreferenceScreen();
-        boolean navbarEnabled = isNavbarEnabled();
 
         /* Disable hw-key options if they're disabled */
         final PreferenceCategory homeCategory =
@@ -552,6 +580,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             backlight.updateSummary();
         }
 
+        /* Toggle hardkey control availability depending on navbar state */
         if (homeCategory != null) {
             if (mHomeAnswerCall != null) {
                 mHomeAnswerCall.setEnabled(!navbarEnabled);
@@ -577,6 +606,23 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         }
     }
 
+    private static boolean isKeyDisablerSupported(Context context) {
+        final LineageHardwareManager hardware = LineageHardwareManager.getInstance(context);
+        return hardware.isSupported(LineageHardwareManager.FEATURE_KEY_DISABLE);
+    }
+
+    public static void restoreKeyDisabler(Context context) {
+        if (!isKeyDisablerSupported(context)) {
+            return;
+        }
+
+        boolean enabled = LineageSettings.System.getIntForUser(context.getContentResolver(),
+                LineageSettings.System.FORCE_SHOW_NAVBAR, 0, UserHandle.USER_CURRENT) != 0;
+
+        writeDisableNavkeysOption(context, enabled);
+    }
+
+
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference == mSwapVolumeButtons) {
@@ -597,6 +643,25 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             }
             LineageSettings.System.putInt(getActivity().getContentResolver(),
                     LineageSettings.System.SWAP_VOLUME_KEYS_ON_ROTATION, value);
+        } else if (preference == mVolumePanelOnLeft) {
+            LineageSettings.Secure.putIntForUser(getActivity().getContentResolver(),
+                    LineageSettings.Secure.VOLUME_PANEL_ON_LEFT,
+                    mVolumePanelOnLeft.isChecked() ? 1 : 0, UserHandle.USER_CURRENT);
+            return true;
+        } else if (preference == mDisableNavigationKeys) {
+            mDisableNavigationKeys.setEnabled(false);
+            //mNavigationPreferencesCat.setEnabled(false);
+            writeDisableNavkeysOption(getActivity(), mDisableNavigationKeys.isChecked());
+            updateDisableNavkeysOption();
+            updateDisableNavkeysCategories(true);
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mDisableNavigationKeys.setEnabled(true);
+                    //mNavigationPreferencesCat.setEnabled(mDisableNavigationKeys.isChecked());
+                    updateDisableNavkeysCategories(mDisableNavigationKeys.isChecked());
+                }
+            }, 1000);
         } else if (preference == mPowerEndCall) {
             handleTogglePowerButtonEndsCallPreferenceClick();
             return true;
@@ -621,11 +686,5 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                         ? LineageSettings.Secure.RING_HOME_BUTTON_BEHAVIOR_ANSWER
                         : LineageSettings.Secure.RING_HOME_BUTTON_BEHAVIOR_DO_NOTHING));
     }
-
-    protected final ContentObserver mNavbarObserver = new ContentObserver(mHandler) {
-        @Override
-        public void onChange(boolean selfChange) {
-            updateDisableNavkeysCategories();
-        }
-    };
 }
+

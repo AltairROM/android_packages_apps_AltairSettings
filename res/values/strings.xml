@@ -1,104 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--  Copyright (C) 2016-20..
-
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- General -->
-    <string name="altair_settings_activity">Altair Settings</string>
+    <string name="altair_settings_activity_title">Personalization</string>
     <string name="altair_settings_activity_summary">Customize your device</string>
 
-    <string name="default_string">Default</string>
+    <!-- General -->
     <string name="reset">Reset</string>
-    <string name="menu_cancel">Cancel</string>
-    <string name="picker_activities">Activities</string>
-    <string name="select_custom_app_title">Select custom app</string>
-    <string name="select_custom_activity_title">Select custom activity</string>
-    <string name="profile_applist_title">Applications</string>
 
-    <!-- Tabs -->
-    <string name="tab_system_category">System</string>
-    <string name="tab_status_bar_category">Status bar</string>
-    <string name="tab_navigation_category">Navigation</string>
-    <string name="tab_buttons_category">Buttons</string>
-
-    <!-- Fragments -->
-    <string name="button_title">Buttons</string>
+    <!-- Categories -->
+    <string name="statusbar_title">Status bar</string>
+    <string name="statusbar_summary">Adjust various status bar elements</string>
     <string name="quicksettings_title">Quick settings</string>
-    <string name="powermenu_title">Power menu</string>
-    <string name="navbar_title">Navigation bar</string>
-    <string name="recent_settings_title">Recents</string>
-    <string name="status_bar_clock_title">Clock options</string>
-    <string name="status_bar_battery_title">Battery options</string>
+    <string name="quicksettings_summary">Manage your quick settings tiles</string>
+    <string name="navigation_title">Navigation bar</string>
+    <string name="navigation_summary">Customize navigation bar style and behavior</string>
+    <string name="buttons_title">Buttons</string>
+    <string name="buttons_summary">Tweak the actions of physical buttons on the device</string>
+    <string name="userinterface_title">User interface</string>
+    <string name="userinterface_summary">Adjust various elements of the user interface</string>
 
-    <!-- Color Picker -->
-    <string name="dialog_color_picker">Color Picker</string>
-    <string name="press_color_to_apply">Press on color below to apply</string>
-    <string name="arrow_right">→</string>
-    <string name="arrow_down">↓</string>
-    <string name="hex">Hex:</string>
-    <string name="hex_hint">#ff000000</string>
-    <string name="set">Set</string>
-    <string name="color_default">Default</string>
-
-    <!-- SYSTEM: Toast settings -->
-    <string name="toast_category_title">Toast</string>
-    <string name="toast_icon_title">Toast icon</string>
-    <string name="toast_icon_summary">Display the app icon corresponding with the toast</string>
-
-    <!-- SYSTEM: Recents panel settings -->
-    <string name="recents_category_title">Recents</string>
-    <string name="show_clear_all_recents_button_title">Clear all button</string>
-    <string name="show_clear_all_recents_button_summary">Show clear all button</string>
-    <string name="recents_clear_all_location_title">Clear all location</string>
-    <string name="recents_clear_all_location_top_right">Top right</string>
-    <string name="recents_clear_all_location_top_left">Top left</string>
-    <string name="recents_clear_all_location_top_center">Top center</string>
-    <string name="recents_clear_all_location_bottom_right">Bottom right</string>
-    <string name="recents_clear_all_location_bottom_left">Bottom left</string>
-    <string name="recents_clear_all_location_bottom_center">Bottom center</string>
-
-    <!-- STATUS BAR: Quick settings panel settings -->
-    <string name="qs_category_title">Quick settings</string>
-
-    <string name="status_bar_quick_qs_pulldown_title">Quick pulldown</string>
-    <string name="status_bar_quick_qs_pulldown_summary">%1$s edge of the status bar pulls down Quick Settings</string>
-    <string name="status_bar_quick_qs_pulldown_summary_left">Left</string>
-    <string name="status_bar_quick_qs_pulldown_summary_right">Right</string>
-    <string name="status_bar_quick_qs_pulldown_off">Off</string>
-    <string name="status_bar_quick_qs_pulldown_left">Left</string>
-    <string name="status_bar_quick_qs_pulldown_right">Right</string>
-
-    <string name="qs_rows_portrait_title">Tiles rows on portrait</string>
-    <string name="qs_rows_landscape_title">Tiles rows on landscape</string>
-    <string name="qs_columns_portrait_title">Tiles columns on portrait</string>
-    <string name="qs_columns_landscape_title">Tiles columns on landscape</string>
-
-    <string name="qs_tile_titles_visibility_title">Tile labels</string>
-    <string name="qs_tile_titles_visibility_summaryOn">Labels are shown</string>
-    <string name="qs_tile_titles_visibility_summaryOff">Labels are hidden</string>
-
-    <!-- STATUS BAR: Status bar icons -->
-    <string name="status_bar_icons_title">Status bar icons</string>
+    <!-- STATUS BAR -->
     <string name="status_bar_system_icons_title">System icons</string>
     <string name="status_bar_system_icons_summary">Control which status bar icons are shown</string>
+
+    <string name="network_traffic_settings_title">Network traffic monitor</string>
+    <string name="network_traffic_settings_summary">Show current network traffic levels in the status bar</string>
+
+    <string name="network_traffic_mode_title">Display mode</string>
+    <string name="network_traffic_mode_disable">Disabled</string>
+    <string name="network_traffic_mode_up">Upload only</string>
+    <string name="network_traffic_mode_down">Download only</string>
+    <string name="network_traffic_mode_all">Upload and download</string>
+    <string name="network_traffic_autohide">Auto hide</string>
+    <string name="network_traffic_autohide_summary">Hide the traffic monitor when there is no activity</string>
+    <string name="network_traffic_units_title">Traffic measurement units</string>
+    <string name="network_traffic_units_kilobits">Kilobits per second (kb/s)</string>
+    <string name="network_traffic_units_megabits">Megabits per second (Mb/s)</string>
+    <string name="network_traffic_units_kilobytes">Kilobytes per second (kB/s)</string>
+    <string name="network_traffic_units_megabytes">Megabytes per second (MB/s)</string>
+    <string name="network_traffic_show_units">Show units</string>
+    <string name="network_traffic_show_units_summary">Whether to show traffic measurement units in the statusbar</string>
 
     <string name="data_wifi_activity_arrows_title">Mobile/wifi activity</string>
     <string name="data_wifi_activity_arrows_summary">Display arrows to indicate mobile/wifi data activity</string>
 
-    <!-- STATUS BAR: Clock options -->
     <string name="status_bar_clock_category_title">Clock</string>
     <string name="status_bar_show_clock_title">Show clock</string>
     <string name="status_bar_clock">Show clock</string>
@@ -117,26 +62,20 @@
     <string name="status_bar_am_pm_small">Small</string>
     <string name="status_bar_am_pm_hidden">Hidden</string>
 
-    <!-- STATUS BAR: Battery options -->
     <string name="status_bar_battery_category_title">Battery</string>
     <string name="status_bar_show_battery_title">Show battery</string>
 
-    <string name="battery_style_title">Battery icon style</string>
-    <string name="battery_style_summary">Change the look of the icon in the status bar</string>
-    <string name="battery_style_port">Portrait</string>
-    <string name="battery_style_land">Landscape</string>
-    <string name="battery_style_circle">Circle</string>
-    <string name="battery_style_dotted_circle">Dotted circle</string>
-    <string name="battery_style_big_circle">Big circle</string>
-    <string name="battery_style_big_dotted_circle">Big dotted circle</string>
-    <string name="battery_style_square">Square</string>
-    <string name="battery_style_text">Text</string>
-    <string name="battery_style_hidden">Hidden</string>
-    <string name="show_battery_percent_title">Show battery percentage</string>
-    <string name="show_battery_percent_summary">Show battery level percentage near the icon</string>
-    <string name="battery_style_category_title">Battery level</string>
+    <string name="status_bar_battery_title">Battery indicator</string>
+    <string name="status_bar_battery_style_title">Battery status style</string>
+    <string name="status_bar_battery_style_icon_portrait">Icon portrait</string>
+    <string name="status_bar_battery_style_circle">Circle</string>
+    <string name="status_bar_battery_style_text">Text</string>
 
-    <!-- STATUS BAR: Brightness -->
+    <string name="status_bar_battery_percentage_title">Battery percentage</string>
+    <string name="status_bar_battery_percentage_default">Hidden</string>
+    <string name="status_bar_battery_percentage_text_inside">Inside the icon</string>
+    <string name="status_bar_battery_percentage_text_next">Next to the icon</string>
+
     <string name="status_bar_brightness_category">Brightness</string>
     <string name="status_bar_brightness_slider_title">Brightness slider</string>
     <string name="status_bar_brightness_slider_summary">Adjust brightness from the Quick Settings</string>
@@ -145,25 +84,25 @@
     <string name="status_bar_toggle_brightness">Brightness control</string>
     <string name="status_bar_toggle_brightness_summary">Adjust brightness by sliding across the status bar</string>
 
-    <!-- STATUS BAR: Network Traffic -->
-    <string name="network_traffic_settings_title">Network traffic monitor</string>
-    <string name="network_traffic_settings_summary">Show current network traffic levels in the status bar</string>
-    <string name="network_traffic_mode_title">Display mode</string>
-    <string name="network_traffic_mode_disable">Disabled</string>
-    <string name="network_traffic_mode_up">Upload only</string>
-    <string name="network_traffic_mode_down">Download only</string>
-    <string name="network_traffic_mode_all">Upload and download</string>
-    <string name="network_traffic_autohide">Auto hide</string>
-    <string name="network_traffic_autohide_summary">Hide the traffic monitor when there is no activity</string>
-    <string name="network_traffic_units_title">Traffic measurement units</string>
-    <string name="network_traffic_units_kilobits">Kilobits per second (kb/s)</string>
-    <string name="network_traffic_units_megabits">Megabits per second (Mb/s)</string>
-    <string name="network_traffic_units_kilobytes">Kilobytes per second (kB/s)</string>
-    <string name="network_traffic_units_megabytes">Megabytes per second (MB/s)</string>
-    <string name="network_traffic_show_units">Show units</string>
-    <string name="network_traffic_show_units_summary">Whether to show traffic measurement units in the statusbar</string>
+    <!-- QUICK SETTINGS -->
+    <string name="qs_quick_pulldown_title">Quick pulldown</string>
+    <string name="qs_quick_pulldown_summary">%1$s edge of the status bar pulls down Quick Settings</string>
+    <string name="qs_quick_pulldown_summary_left">Left</string>
+    <string name="qs_quick_pulldown_summary_right">Right</string>
+    <string name="qs_quick_pulldown_off">Off</string>
+    <string name="qs_quick_pulldown_left">Left</string>
+    <string name="qs_quick_pulldown_right">Right</string>
 
-    <!-- BUTTONS: Button settings -->
+    <string name="qs_rows_portrait_title">Tiles rows on portrait</string>
+    <string name="qs_rows_landscape_title">Tiles rows on landscape</string>
+    <string name="qs_columns_portrait_title">Tiles columns on portrait</string>
+    <string name="qs_columns_landscape_title">Tiles columns on landscape</string>
+
+    <string name="qs_tile_titles_visibility_title">Tile labels</string>
+    <string name="qs_tile_titles_visibility_summaryOn">Labels are shown</string>
+    <string name="qs_tile_titles_visibility_summaryOff">Labels are hidden</string>
+
+    <!-- BUTTONS -->
     <string name="hardware_keys_power_key_title">Power button</string>
     <string name="hardware_keys_home_key_title">Home button</string>
     <string name="hardware_keys_back_key_title">Back button</string>
@@ -201,6 +140,8 @@
     <string name="power_end_call_summary">End the current call by pressing the power button</string>
     <string name="swap_volume_buttons_title">Reorient</string>
     <string name="swap_volume_buttons_summary">Swap volume buttons when the screen is rotated</string>
+    <string name="volume_panel_on_left_title">Show panel on left</string>
+    <string name="volume_panel_on_left_summary">Display volume panel on the left side of the screen</string>
     <string name="button_wake_title">Wake device</string>
     <string name="volume_answer_call_title">Answer call</string>
     <string name="volume_answer_call_summary">Answer incoming calls by pressing the volume buttons</string>
@@ -209,7 +150,6 @@
     <string name="extras_title">Extras</string>
     <string name="additional_buttons_title">Additional buttons</string>
 
-    <!-- BUTTONS: Key backlight -->
     <string name="button_backlight_title">Backlight</string>
     <string name="button_backlight_enabled">Illuminate buttons</string>
     <string name="button_backlight_only_when_pressed_title">Illuminate buttons only when pressed</string>
@@ -222,11 +162,9 @@
     <string name="backlight_summary_enabled_with_timeout">Enabled for <xliff:g id="timeout">%s</xliff:g></string>
     <string name="backlight_summary_enabled">Enabled</string>
 
-    <!-- BUTTONS: Enable navbar -->
-    <string name="disable_navkeys_title">Enable on-screen nav bar</string>
-    <string name="disable_navkeys_summary">Enable on-screen navigation bar and disable hardware buttons</string>
+    <string name="disable_navkeys_title">Disable navigation buttons</string>
+    <string name="disable_navkeys_summary">NOTE: Turning off navigation buttons without enabling the on-screen navigation bar is not recommended!</string>
 
-    <!-- BUTTONS: Power menu -->
     <string name="power_menu_title">Power menu</string>
     <string name="power_menu_screenshot_title">Screenshot</string>
     <string name="power_menu_screenshot_summary">Long-press for partial screenshot</string>
@@ -241,8 +179,6 @@
     <string name="volume_keys_control_ring_stream_summary_off">Volume keys control media volume</string>
 
     <string name="camera_double_tap_power_gesture_title">Press power button twice for camera</string>
-
-    <!-- BUTTONS: Description of setting that controls gesture to open camera by double tapping the power button [CHAR LIMIT=NONE] -->
     <string name="camera_double_tap_power_gesture_desc">Quickly open camera without unlocking your screen</string>
 
     <string name="torch_long_press_power_gesture_title">Long press for torch</string>
@@ -255,196 +191,9 @@
     <string name="torch_long_press_power_timeout_5min">5 minutes</string>
     <string name="torch_long_press_power_timeout_10min">10 minutes</string>
 
-    <!-- NAVIGATION: Stock navigation bar -->
-    <string name="stock_navbar_settings_title">Default settings</string>
-    <string name="stock_navbar_settings_summary">Built-in system navigation bar</string>
-    <string name="navigation_bar_category">Stock navigation bar</string>
-    <string name="navigation_bar_title">Buttons and layout</string>
-    <string name="navigation_bar_arrow_keys_title">Show arrow keys while typing</string>
-    <string name="navigation_bar_arrow_keys_summary">Display left and right cursor buttons while typing. Overrides IME switcher.</string>
-    <string name="navigation_bar_home_long_press_title">Home long press action</string>
-    <string name="navigation_bar_home_double_tap_title">Home double tap action</string>
-    <string name="navigation_bar_app_switch_long_press_title">Recents long press action</string>
-    <string name="navigation_bar_kill_app_longpress_back">Kill app back button</string>
-    <string name="navigation_bar_kill_app_longpress_back_summary">Kill the foreground app by long-pressing the back button</string>
-
-    <!-- NAVIGATION: DUI -->
-    <string name="navbar_interface_title">Navigation bar</string>
-    <string name="navbar_size">Bar size</string>
-    <string name="navbar_mode">Navigation mode</string>
-    <string name="navbar_mode_summary">Select which navigation mode to use on your device</string>
-    <string name="navbar_visibility">Allow navigation bar</string>
-    <string name="navigationbar_title">Navigation bar</string>
-    <string name="bottom_nav_navigation_title">Navigation bar</string>
-    <string name="navigationbar_settings_summary">Customize navigation style and behavior</string>
-    <string name="navbar_general_title">Advanced</string>
-    <string name="navigation_bar_left_title">Left-handed mode</string>
-    <string name="navigation_bar_left_summary">Place the navigation bar on the left side of the screen in landscape mode</string>
-    <string name="smartbar_interface">SmartBar</string>
-    <string name="icon_pack_picker_dialog_title">Icon packs</string>
-    <string name="image_exceeds_max_allowed_size">Image must not exceed 512x512</string>
-    <string name="invalid_icon_from_uri">Unable to load image from content provider</string>
-    <string name="default_settings">Stock settings</string>
-    <string name="default_settings_summary">Stock AOSP navigation bar</string>
-
-    <!-- Actions dialog and default task values set in ActionPreference xml-->
-    <string name="choose_action_title">Choose action</string>
-    <string name="action_entry_default_action">Default settings</string>
-    <string name="action_entry_select_app">Select application</string>
-    <string name="action_entry_custom_action">Select custom action</string>
-    <string name="action_value_default_action" translatable="false">default</string>
-    <string name="action_value_select_app" translatable="false">app</string>
-    <string name="action_value_custom_action" translatable="false">custom</string>
-    <string name="action_value_back" translatable="false">task_back</string>
-    <string name="action_value_home" translatable="false">task_home</string>
-    <string name="action_value_search_assist" translatable="false">task_assist</string>
-    <string name="action_value_recent_apps" translatable="false">task_recents</string>
-    <string name="action_value_voice_search" translatable="false">task_voice_search</string>
-    <string name="action_value_menu" translatable="false">task_menu</string>
-
-    <!-- Fling -->
-    <string name="fling_settings">Fling settings</string>
-    <string name="fling_settings_summary">A very unique and fully-customizable gesture-based navigation bar</string>
-    <string name="fling_interface">Fling</string>
-    <string name="fling_enable_title">Enable Fling</string>
-    <string name="fling_back_home_policy">Back and Home are required to be set at all times. To change a Back or Home assignment, set the desired assignment first.\n\nAlso, setting a double tap action will delay single tap a bit.</string>
-    <string name="fling_split_bar_policy">When only a right or left action is assigned, the action applies to the full bar.</string>
-    <string name="fling_def_summary">No action set</string>
-    <string name="fling_swipe_actions">Swipe gestures</string>
-    <string name="fling_tap_actions">Tap gestures</string>
-    <string name="fling_short_swipe_right">Right short swipe</string>
-    <string name="fling_short_swipe_left">Left short swipe</string>
-    <string name="fling_long_swipe_right">Right long swipe</string>
-    <string name="fling_long_swipe_left">Left long swipe</string>
-    <string name="fling_right_up_swipe">Right side swipe up</string>
-    <string name="fling_left_up_swipe">Left side swipe up</string>
-    <string name="fling_single_tap">Single tap right</string>
-    <string name="fling_double_tap">Double tap right</string>
-    <string name="fling_long_press">Long press right</string>
-    <string name="fling_single_left_tap">Single tap left</string>
-    <string name="fling_double_left_tap">Double tap left</string>
-    <string name="fling_long_left_press">Long press left</string>
-    <string name="long_swipe_portrait_title">Portrait</string>
-    <string name="long_swipe_landscape_title">Landscape</string>
-    <string name="portrait_right_swipe_title">Portrait right swipe</string>
-    <string name="portrait_left_swipe_title">Portrait left swipe</string>
-    <string name="landscape_right_swipe_title">Landscape right swipe</string>
-    <string name="landscape_left_swipe_title">Landscape left swipe</string>
-    <string name="vertical_up_swipe_title">Vertical up swipe</string>
-    <string name="vertical_down_swipe_title">Vertical down swipe</string>
-    <string name="up_swipe_title">Up swipe</string>
-    <string name="down_swipe_title">Down swipe</string>
-    <string name="long_swipe_reset">Reset</string>
-    <string name="fling_advanced">Advanced</string>
-    <string name="fling_long_swipe_title">Long swipe thresholds</string>
-    <string name="fling_long_swipe_summary">Fine tune long swipe thresholds based on a percentage of Fling interface width or height</string>
-    <string name="fling_trails_enable_title">Enable gesture trails</string>
-    <string name="fling_trails_enable_summary">Show a trail on swipe gestures</string>
-    <string name="fling_trails_color_title">Trail color</string>
-    <string name="fling_trails_width_title">Trail width</string>
-    <string name="fling_appearance">Appearance</string>
-    <string name="fling_show_logo_title">Show Fling logo</string>
-    <string name="fling_animate_logo_title">Animate logo</string>
-    <string name="fling_animate_logo_summary">Logo animates on touch events</string>
-    <string name="fling_logo_color">Logo color</string>
-    <string name="fling_logo_custom_logo_pick_title">Custom logo icon</string>
-    <string name="fling_logo_custom_logo_image_pick_title">Custom logo image</string>
-    <string name="fling_logo_custom_logo_reset_title">Reset logo icon</string>
-    <string name="fling_show_ripple_title">Show ripple</string>
-    <string name="fling_show_ripple_summary">Ripple effect on touch events</string>
-    <string name="fling_ripple_color">Ripple color</string>
-    <string name="fling_longpress_timeout_label_left">Less delay</string>
-    <string name="fling_longpress_timeout_label_right">More delay</string>
-    <string name="fling_longpress_title">Long press delay</string>
-    <string name="fling_longpress_summary">Increase or decrease the time it takes to execute a long press</string>
-    <string name="fling_keyboard_cursors_title">Dynamic keyboard cursors action</string>
-    <string name="fling_keyboard_cursors_move_summary">When keyboard is showing, long press left or right to move the text cursor to left or right.\nKeep longpressing to keep moving the cursor, single tap on bar to go to home screen.</string>
-    <string name="fling_logo_opacity_title">Fling logo opacity</string>
-
-    <!-- Pulse navigation bar music visualizer -->
-    <string name="pulse_help_policy_notice_summary">Pulse does not work with some audio sources when listening on device speaker</string>
-    <string name="pulse_settings">Pulse</string>
-    <string name="pulse_settings_summary">Navigation bar audio graphic equalizer</string>
-    <string name="fling_show_pulse_title">Allow Pulse</string>
-    <string name="fling_show_pulse_summary">Audio graphic equalizer on the navigation bar</string>
-    <string name="pulse_render_mode_title">Render mode</string>
-    <string name="pulse_render_mode_fading_bars">Fading blocks</string>
-    <string name="pulse_render_mode_solid_lines">Solid lines</string>
-    <string name="fling_pulse_color">Pulse color</string>
-    <string name="fling_pulse_color_summary">Used also as fallback for automatic color</string>
-    <string name="eos_fling_lavalamp_title">Turn on Lava Lamp</string>
-    <string name="eos_fling_lavalamp_summary">Pulse animates a smooth lava lamp style color blend</string>
-    <string name="pulse_advanced_category">Advanced</string>
-    <string name="pulse_legacy_mode_advanced_category">Fading blocks mode settings</string>
-    <string name="pulse_custom_fudge_factor">Sanity level</string>
-    <string name="lavamp_solid_speed_title">Lava Lamp speed</string>
-    <string name="pulse_solid_units_count">Solid lines count</string>
-    <string name="pulse_solid_lines_count">Solid lines count</string>
-    <string name="pulse_solid_units_opacity">Solid lines opacity</string>
-    <string name="pulse_solid_dimen_category">Solid lines mode settings</string>
-    <string name="pulse_custom_buttons_opacity_title">Smartbar buttons opacity on Pulse</string>
-    <string name="pulse_auto_color_title">Automatic Pulse color</string>
-    <string name="pulse_auto_color_summary">Sync color with album arts. Overrides Lava Lamp and lines opacity.</string>
-
-    <!-- Pulse config -->
-    <string name="pulse_custom_dimen">Bar width</string>
-    <string name="pulse_custom_div">Bar spacing</string>
-    <string name="pulse_filled_block_size">Block size</string>
-    <string name="pulse_empty_block_size">Block spacing</string>
-
-    <!-- Navbar height -->
-    <string name="navigation_bar_size_title">Bar size</string>
-    <string name="portrait_title">Portrait height</string>
-    <string name="land_vert_title">Landscape width</string>
-    <string name="land_hor_title">Landscape height</string>
-    <string name="positive_done">Done</string>
-
-    <!-- SmartBar -->
-    <string name="smartbar_category">Smartbar</string>
-    <string name="smartbar_settings_title">Smartbar settings</string>
-    <string name="smartbar_settings_summary">Fully-customizable navigation bar</string>
-    <string name="smartbar_editor_title">Start edit mode</string>
-    <string name="smartbar_editor_summary">Open smartbar buttons editor</string>
-    <string name="smartbar_help_policy_notice_summary">When in editor mode, medium press and drag a button to change its position or long press a button to show the edit menu. Button position may be changed while menu is showing.\n\nSetting a double tap action will delay single tap a bit.</string>
-    <string name="smartbar_context_menu_position_title">Context buttons layout position</string>
-    <string name="smartbar_context_menu_position_summary">Set the position of contextual buttons such as menu and ime selector</string>
-    <string name="smartbar_right">Right</string>
-    <string name="smartbar_left">Left</string>
-    <string name="smartbar_button_animation_title">Button touch animation</string>
-    <string name="smartbar_button_animation_summary">Set the animation style of the primary buttons when they are pressed</string>
-    <string name="smartbar_button_animation_ripple">Ripple</string>
-    <string name="smartbar_button_animation_spring">Spring</string>
-    <string name="smartbar_button_animation_flip">Flip</string>
-    <string name="smartbar_button_animation_pixel">Pixel (all buttons)</string>
-    <string name="smartbar_button_animation_pixel_home">Pixel (Home button only)</string>
-    <string name="smartbar_button_animation_pixel_home_ripple">Pixel (Home button only) and Ripple</string>
-    <string name="smartbar_factory_reset_title">Reset to stock</string>
-    <string name="smartbar_factory_reset_confirm">Are you sure you want to reset Smartbar to stock settings?</string>
-    <string name="smartbar_ime_action_title">Input method and media actions</string>
-    <string name="smartbar_ime_action_summary">Set what buttons to show when a on-screen keyboard is showing or music is playing</string>
-    <string name="smartbar_ime_action_none">None</string>
-    <string name="smartbar_ime_action_arrows">Input arrows</string>
-    <string name="smartbar_ime_action_switcher">Keyboard switcher</string>
-    <string name="smartbar_ime_action_dynamic">Input/media arrows</string>
-    <string name="smartbar_backup_current_config_title">Save profile</string>
-    <string name="smartbar_restore_config_title">Restore profile</string>
-    <string name="smartbar_config_name_edit_dialog_title">Smartbar profile name</string>
-    <string name="smartbar_config_name_edit_dialog_message">Enter name or leave blank</string>
-    <string name="smartbar_config_dialog_title">Smartbar profiles</string>
-    <string name="smartbar_config_backup_success_toast">Smartbar profile successfully saved</string>
-    <string name="smartbar_config_restore_success_toast">Smartbar profile successfully restored</string>
-    <string name="smartbar_config_backup_error_toast">Error saving Smartbar profile</string>
-    <string name="smartbar_config_restore_error_toast">Error restoring Smartbar profile</string>
-    <string name="navbar_buttons_alpha_title">Button transparency</string>
-    <string name="smartbar_longpress_delay_title">Button longpress delay</string>
-    <string name="smartbar_longpress_delay_summary">Set how long the system will wait before triggering a longpress action</string>
-    <string name="smartbar_longpress_delay_default">Default delay (fast)</string>
-    <string name="smartbar_longpress_delay_normal">Normal delay</string>
-    <string name="smartbar_longpress_delay_long">Long delay</string>
-    <string name="smartbar_custom_icon_size_title">Custom icon scaling</string>
-    <string name="one_handed_mode_title">One handed mode</string>
-    <string name="one_handed_mode_summary">Allows swiping on the navigation bar to enable one handed mode</string>
-    <string name="smartbar_double_tap_sleep_title">Double tap to sleep</string>
-    <string name="smartbar_double_tap_sleep_summary">Double tap on empty navbar areas to sleep</string>
+    <!-- USER INTERFACE -->
+    <string name="toast_icon_title">Toast icon</string>
+    <string name="toast_icon_summary">Display the app icon corresponding with the toast</string>
 
 </resources>
+
