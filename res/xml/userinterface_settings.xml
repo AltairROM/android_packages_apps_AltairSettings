@@ -10,5 +10,11 @@
         android:summary="@string/toast_icon_summary"
         android:defaultValue="true" />
 
+    <Preference
+        android:key="smart_pixels"
+        android:title="@string/smart_pixels_title"
+        android:summary="@string/smart_pixels_summary"
+        android:fragment="com.altair.settings.fragments.SmartPixels" />
+
 </PreferenceScreen>
 
