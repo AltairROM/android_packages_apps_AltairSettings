@@ -24,12 +24,14 @@
 
     <com.lineage.support.preferences.SystemSettingSwitchPreference
         android:key="smart_pixels_on_power_save"
+        android:dependency="smart_pixels_enable"
         android:title="@string/smart_pixels_on_power_save_title"
         android:summary="@string/smart_pixels_on_power_save_summary"
         android:defaultValue="false" />
 
     <com.lineage.support.preferences.SystemSettingListPreference
         android:key="smart_pixels_pattern"
+        android:dependency="smart_pixels_enable"
         android:entries="@array/smart_pixels_percent_strings"
         android:entryValues="@array/smart_pixels_percent_values"
         android:defaultValue="3"
@@ -38,6 +40,7 @@
 
     <com.lineage.support.preferences.SystemSettingListPreference
         android:key="smart_pixels_shift_timeout"
+        android:dependency="smart_pixels_enable"
         android:entries="@array/smart_pixels_shift_times"
         android:entryValues="@array/smart_pixels_shift_values"
         android:defaultValue="5"
