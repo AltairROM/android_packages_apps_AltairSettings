@@ -43,5 +43,14 @@
         android:fragment="com.altair.settings.fragments.UserInterfaceSettings"
         android:icon="@drawable/ic_settings_ui"/>
 
+    <!-- Gestures -->
+    <Preference
+        android:key="gesture_settings"
+        android:title="@string/gesture_title"
+        android:summary="@string/gesture_summary"
+        android:icon="@drawable/ic_settings_gestures"
+        android:fragment="com.android.settings.gestures.GestureSettings"
+        settings:controller="com.android.settings.gestures.GesturesSettingPreferenceController"/>
+
 </PreferenceScreen>
 

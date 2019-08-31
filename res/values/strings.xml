@@ -18,6 +18,8 @@
     <string name="buttons_summary">Tweak the actions of physical buttons on the device</string>
     <string name="userinterface_title">User interface</string>
     <string name="userinterface_summary">Adjust various elements of the user interface</string>
+    <string name="gesture_title">Gestures</string>
+    <string name="gesture_summary">Adjust touchscreen gestures and button quick actions</string>
 
     <!-- STATUS BAR -->
     <string name="status_bar_system_icons_title">System icons</string>
