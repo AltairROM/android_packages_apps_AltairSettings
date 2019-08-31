@@ -17,6 +17,14 @@
         android:dialogTitle="@string/button_backlight_title"
         android:persistent="false" />
 
+<!--
+    <lineageos.preference.LineageSecureSettingSwitchPreference
+        android:key="kill_app_longpress_back"
+        android:title="@string/kill_app_longpress_back"
+        android:summary="@string/kill_app_longpress_back_summary"
+        android:defaultValue="false" />
+-->
+
     <PreferenceCategory
         android:key="power_key"
         android:title="@string/hardware_keys_power_key_title" >
