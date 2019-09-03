@@ -46,6 +46,9 @@
     <string name="data_wifi_activity_arrows_title">Mobile/wifi activity</string>
     <string name="data_wifi_activity_arrows_summary">Display arrows to indicate mobile/wifi data activity</string>
 
+    <string name="use_old_mobiletype_title">Use old mobile signal</string>
+    <string name="use_old_mobiletype_summary">Use Oreo-style mobile icons (SystemUI will restart)</string>
+
     <string name="status_bar_clock_category_title">Clock</string>
     <string name="status_bar_show_clock_title">Show clock</string>
     <string name="status_bar_clock">Show clock</string>
