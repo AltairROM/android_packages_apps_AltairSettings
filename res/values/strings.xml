@@ -82,10 +82,6 @@
     <string name="status_bar_battery_percentage_text_next">Next to the icon</string>
 
     <string name="status_bar_brightness_category">Brightness</string>
-    <string name="status_bar_brightness_slider_title">Brightness slider</string>
-    <string name="status_bar_brightness_slider_summary">Adjust brightness from the Quick Settings</string>
-    <string name="status_bar_brightness_slider_auto_title">Auto brightness</string>
-    <string name="status_bar_brightness_slider_auto_summary">Show toggle for adaptive brightness near the slider</string>
     <string name="status_bar_toggle_brightness">Brightness control</string>
     <string name="status_bar_toggle_brightness_summary">Adjust brightness by sliding across the status bar</string>
 
@@ -98,14 +94,21 @@
     <string name="qs_quick_pulldown_left">Left</string>
     <string name="qs_quick_pulldown_right">Right</string>
 
+    <string name="qs_tile_titles_visibility_title">Tile labels</string>
+    <string name="qs_tile_titles_visibility_summaryOn">Labels are shown</string>
+    <string name="qs_tile_titles_visibility_summaryOff">Labels are hidden</string>
+
+    <string name="qs_row_column_category">Rows and columns</string>
     <string name="qs_rows_portrait_title">Tiles rows on portrait</string>
     <string name="qs_rows_landscape_title">Tiles rows on landscape</string>
     <string name="qs_columns_portrait_title">Tiles columns on portrait</string>
     <string name="qs_columns_landscape_title">Tiles columns on landscape</string>
 
-    <string name="qs_tile_titles_visibility_title">Tile labels</string>
-    <string name="qs_tile_titles_visibility_summaryOn">Labels are shown</string>
-    <string name="qs_tile_titles_visibility_summaryOff">Labels are hidden</string>
+    <string name="qs_brightness_category">Brightness</string>
+    <string name="qs_brightness_slider_title">Brightness slider</string>
+    <string name="qs_brightness_slider_summary">Adjust brightness from the Quick Settings</string>
+    <string name="qs_brightness_slider_auto_title">Auto brightness</string>
+    <string name="qs_brightness_slider_auto_summary">Show toggle for adaptive brightness near the slider</string>
 
     <!-- BUTTONS -->
     <string name="hardware_keys_power_key_title">Power button</string>
