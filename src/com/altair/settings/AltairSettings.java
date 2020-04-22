@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Altair ROM
+ * Copyright (C) 2019-2020 Altair ROM
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,13 +26,13 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Surface;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
 public class AltairSettings extends SettingsPreferenceFragment {
 

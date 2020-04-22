@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2016 The CyanogenMod project
  * Copyright (C) 2017 The LineageOS project
+ * Copyright (C) 2019-2020 Altair ROM
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,16 +23,15 @@ import android.content.ContentResolver;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
-import android.support.v14.preference.SwitchPreference;
 import android.text.format.DateFormat;
 import android.view.View;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-
 import com.lineage.support.preferences.CustomSeekBarPreference;
 
 import lineageos.preference.LineageSystemSettingListPreference;

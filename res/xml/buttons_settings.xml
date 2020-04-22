@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2008 The Android Open Source Project
+     Copyright (C) 2019-2020 Altair ROM
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:lineage="http://schemas.android.com/apk/res/lineageos.platform"
@@ -11,19 +27,38 @@
         android:summary="@string/disable_navkeys_summary"
         android:defaultValue="false" />
 
-    <com.altair.settings.fragments.ButtonBacklightBrightness
-        android:key="button_backlight"
-        android:title="@string/button_backlight_title"
-        android:dialogTitle="@string/button_backlight_title"
-        android:persistent="false" />
+    <PreferenceCategory
+        android:key="navkeys_backlight"
+        android:title="@string/navkeys_backlight_title" >
 
-<!--
-    <lineageos.preference.LineageSecureSettingSwitchPreference
-        android:key="kill_app_longpress_back"
-        android:title="@string/kill_app_longpress_back"
-        android:summary="@string/kill_app_longpress_back_summary"
-        android:defaultValue="false" />
--->
+        <SwitchPreference
+            android:key="navkeys_backlight_enable"
+            android:title="@string/navkeys_backlight_enable_title"
+            android:defaultValue="false" />
+
+        <com.lineage.support.preferences.CustomSeekBarPreference
+            android:key="navkeys_backlight_brightness"
+            android:title="@string/navkeys_backlight_brightness_title"
+            android:max="255"
+            settings:min="0"
+            settings:showStatusText="false"
+            android:persistent="false" />
+
+        <com.lineage.support.preferences.CustomSeekBarPreference
+            android:key="navkeys_backlight_timeout"
+            android:title="@string/navkeys_backlight_timeout_title"
+            android:max="35"
+            settings:min="0"
+            settings:showStatusText="false"
+            android:persistent="false" />
+
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="button_backlight_only_when_pressed"
+            android:title="@string/navkeys_backlight_touch_only_title"
+            android:summary="@string/navkeys_backlight_touch_only_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="power_key"

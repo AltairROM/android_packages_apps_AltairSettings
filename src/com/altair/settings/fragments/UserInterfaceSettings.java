@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Altair ROM
+ * Copyright (C) 2019-2020 Altair ROM
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +19,19 @@ package com.altair.settings.fragments;
 import android.content.ContentResolver;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.support.v7.preference.PreferenceScreen;
-import android.support.v14.preference.SwitchPreference;
 import android.provider.Settings;
 
-import com.android.internal.logging.nano.MetricsProto;
-
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.altair.settings.utils.SystemUtils;
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
 public class UserInterfaceSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
@@ -44,11 +43,13 @@ public class UserInterfaceSettings extends SettingsPreferenceFragment implements
 
     private static final int RECENTS_COMPONENT_OREO = 1;
 
+/*
     private ListPreference mRecentsComponentType;
     private ListPreference mRecentsClearAllLocation;
     private SwitchPreference mRecentsClearAll;
     private ListPreference mRecentsType;
     private PreferenceCategory mOreoRecentsCat;
+*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,15 @@ public class UserInterfaceSettings extends SettingsPreferenceFragment implements
         final ContentResolver resolver = getActivity().getContentResolver();
         final PreferenceScreen prefSet = getPreferenceScreen();
 
+        // SmartPixels
+        boolean enableSmartPixels = getContext().getResources().
+                getBoolean(com.android.internal.R.bool.config_enableSmartPixels);
+        Preference SmartPixels = findPreference("smart_pixels");
+        if (!enableSmartPixels) {
+            prefSet.removePreference(SmartPixels);
+        }
+
+/*
         // recents component type
         mRecentsComponentType = (ListPreference) findPreference(RECENTS_COMPONENT_TYPE);
         int type = Settings.System.getInt(resolver,
@@ -82,8 +92,9 @@ public class UserInterfaceSettings extends SettingsPreferenceFragment implements
         mRecentsType.setSummary(mRecentsType.getEntry());
         mRecentsType.setOnPreferenceChangeListener(this);
 
-        mOreoRecentsCat = (PreferenceCategory)findPreference("recents_ui_oreo_recents_category");
+        mOreoRecentsCat = (PreferenceCategory) findPreference("recents_ui_oreo_recents_category");
         mOreoRecentsCat.setEnabled(type == RECENTS_COMPONENT_OREO);
+*/
     }
 
     @Override
@@ -102,6 +113,7 @@ public class UserInterfaceSettings extends SettingsPreferenceFragment implements
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
+/*
         final String key = preference.getKey();
         if (preference == mRecentsComponentType) {
             int type = Integer.valueOf((String) objValue);
@@ -132,6 +144,7 @@ public class UserInterfaceSettings extends SettingsPreferenceFragment implements
             SystemUtils.showSystemUiRestartDialog(getContext());
             return true;
         }
+*/
         return true;
     }
 }

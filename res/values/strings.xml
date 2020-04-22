@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2015 The CyanogenMod Project
+     Copyright (C) 2017-2020 The LineageOS Project
+     Copyright (C) 2019-2020 Altair ROM
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="altair_settings_activity_title">Personalization</string>
@@ -51,7 +68,7 @@
     <string name="data_wifi_activity_arrows_summary">Display arrows to indicate mobile/wifi data activity</string>
 
     <string name="use_old_mobiletype_title">Use old mobile signal</string>
-    <string name="use_old_mobiletype_summary">Use Oreo-style mobile icons (SystemUI will restart)</string>
+    <string name="use_old_mobiletype_summary">Show mobile type on top of the signal icon</string>
 
     <string name="status_bar_clock_category_title">Clock</string>
     <string name="status_bar_show_clock_title">Show clock</string>
@@ -162,20 +179,18 @@
     <string name="extras_title">Extras</string>
     <string name="additional_buttons_title">Additional buttons</string>
 
-    <string name="button_backlight_title">Backlight</string>
-    <string name="button_backlight_enabled">Illuminate buttons</string>
-    <string name="button_backlight_only_when_pressed_title">Illuminate buttons only when pressed</string>
-    <string name="keyboard_backlight_enabled">Illuminate keyboard</string>
-    <string name="button_backlight_seekbar_title">Button brightness</string>
-    <string name="keyboard_backlight_seekbar_title">Keyboard brightness</string>
-    <string name="backlight_timeout_title">Illumination timeout</string>
-    <string name="backlight_timeout_unlimited">Don\'t turn off</string>
-    <string name="backlight_summary_disabled">Disabled</string>
-    <string name="backlight_summary_enabled_with_timeout">Enabled for <xliff:g id="timeout">%s</xliff:g></string>
-    <string name="backlight_summary_enabled">Enabled</string>
+    <string name="disable_navkeys_title">Disable navigation keys</string>
+    <string name="disable_navkeys_summary">NOTE: Turning off navigation keys without enabling the on-screen navigation bar is not recommended!</string>
 
-    <string name="disable_navkeys_title">Disable navigation buttons</string>
-    <string name="disable_navkeys_summary">NOTE: Turning off navigation buttons without enabling the on-screen navigation bar is not recommended!</string>
+    <string name="navkeys_backlight_title">Navigation keys backlight</string>
+    <string name="navkeys_backlight_enable_title">Enable backlight</string>
+    <string name="navkeys_backlight_brightness_title">Backlight brightness</string>
+    <string name="navkeys_backlight_brightness_summary_off">Off</string>
+    <string name="navkeys_backlight_timeout_title">Backlight illumination timeout</string>
+    <string name="navkeys_backlight_timeout_summary_enabled">Enabled for <xliff:g id="timeout">%s</xliff:g></string>
+    <string name="navkeys_backlight_timeout_summary_always_enabled">Always enabled</string>
+    <string name="navkeys_backlight_touch_only_title">Backlight only on touch</string>
+    <string name="navkeys_backlight_touch_only_summary">Illuminate navigation keys only when they are pressed</string>
 
     <string name="power_menu_title">Power menu</string>
     <string name="power_menu_screenshot_title">Screenshot</string>

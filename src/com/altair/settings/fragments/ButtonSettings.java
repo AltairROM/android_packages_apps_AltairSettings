@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2013 The CyanogenMod Project
- *               2017 The LineageOS Project
+ * Copyright (C) 2017 The LineageOS Project
+ * Copyright (C) 2019-2020 Altair ROM
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,11 +31,6 @@ import android.os.Handler;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.Display;
 import android.view.DisplayInfo;
@@ -43,14 +39,18 @@ import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.WindowManagerGlobal;
 
-import com.android.internal.logging.nano.MetricsProto;
+import androidx.preference.SwitchPreference;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-
-import com.altair.settings.fragments.ButtonBacklightBrightness;
 import com.altair.settings.utils.DeviceUtils;
 import com.altair.settings.utils.TelephonyUtils;
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.lineage.support.preferences.CustomSeekBarPreference;
 
 import org.lineageos.internal.util.ScreenType;
 
@@ -65,7 +65,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "SystemSettings";
 
-    private static final String KEY_BUTTON_BACKLIGHT = "button_backlight";
     private static final String KEY_HOME_LONG_PRESS = "hardware_keys_home_long_press";
     private static final String KEY_HOME_DOUBLE_TAP = "hardware_keys_home_double_tap";
     private static final String KEY_MENU_PRESS = "hardware_keys_menu_press";
@@ -89,7 +88,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             "torch_long_press_power_gesture";
     private static final String KEY_TORCH_LONG_PRESS_POWER_TIMEOUT =
             "torch_long_press_power_timeout";
+    private static final String KEY_BACKLIGHT_TIMEOUT = "navkeys_backlight_timeout";
+    private static final String KEY_BACKLIGHT_ENABLE = "navkeys_backlight_enable";
+    private static final String KEY_BACKLIGHT_BRIGHTNESS = "navkeys_backlight_brightness";
 
+    private static final String CATEGORY_BACKLIGHT = "navkeys_backlight";
     private static final String CATEGORY_POWER = "power_key";
     private static final String CATEGORY_HOME = "home_key";
     private static final String CATEGORY_BACK = "back_key";
@@ -98,8 +101,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String CATEGORY_APPSWITCH = "app_switch_key";
     private static final String CATEGORY_CAMERA = "camera_key";
     private static final String CATEGORY_VOLUME = "volume_keys";
-    private static final String CATEGORY_BACKLIGHT = "key_backlight";
     private static final String CATEGORY_NAVBAR = "navigation_bar_category";
+
+    private static final int DEFAULT_BUTTON_TIMEOUT = 5;
 
     private ListPreference mHomeLongPressAction;
     private ListPreference mHomeDoubleTapAction;
@@ -122,14 +126,20 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private SwitchPreference mHomeAnswerCall;
     private SwitchPreference mTorchLongPressPowerGesture;
     private ListPreference mTorchLongPressPowerTimeout;
+    private SwitchPreference mBacklightEnable;
+    private CustomSeekBarPreference mBacklightBrightness;
+    private CustomSeekBarPreference mBacklightTimeout;
 
     private Handler mHandler;
+    private ContentResolver mResolver;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.buttons_settings);
+
+        mResolver = getActivity().getContentResolver();
 
         final Resources res = getResources();
         final ContentResolver resolver = getActivity().getContentResolver();
@@ -158,6 +168,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         final boolean showVolumeWake = (deviceWakeKeys & KEY_MASK_VOLUME) != 0;
 
         boolean hasAnyBindableKey = false;
+        final PreferenceCategory backlightCategory =
+                (PreferenceCategory) prefScreen.findPreference(CATEGORY_BACKLIGHT);
         final PreferenceCategory powerCategory =
                 (PreferenceCategory) prefScreen.findPreference(CATEGORY_POWER);
         final PreferenceCategory homeCategory =
@@ -181,7 +193,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         // Long press power while display is off to activate torchlight
         mTorchLongPressPowerGesture =
                 (SwitchPreference) findPreference(KEY_TORCH_LONG_PRESS_POWER_GESTURE);
-        final int torchLongPressPowerTimeout = LineageSettings.System.getInt(resolver,
+        final int torchLongPressPowerTimeout = LineageSettings.System.getInt(mResolver,
                 LineageSettings.System.TORCH_LONG_PRESS_POWER_TIMEOUT, 0);
         mTorchLongPressPowerTimeout = initList(KEY_TORCH_LONG_PRESS_POWER_TIMEOUT,
                 torchLongPressPowerTimeout);
@@ -200,27 +212,21 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                 org.lineageos.platform.internal.R.integer.config_doubleTapOnHomeBehavior));
         Action defaultAppSwitchLongPressAction = Action.fromIntSafe(res.getInteger(
                 org.lineageos.platform.internal.R.integer.config_longPressOnAppSwitchBehavior));
-        Action homeLongPressAction = Action.fromSettings(resolver,
+        Action homeLongPressAction = Action.fromSettings(mResolver,
                 LineageSettings.System.KEY_HOME_LONG_PRESS_ACTION,
                 defaultHomeLongPressAction);
-        Action homeDoubleTapAction = Action.fromSettings(resolver,
+        Action homeDoubleTapAction = Action.fromSettings(mResolver,
                 LineageSettings.System.KEY_HOME_DOUBLE_TAP_ACTION,
                 defaultHomeDoubleTapAction);
-        Action appSwitchLongPressAction = Action.fromSettings(resolver,
+        Action appSwitchLongPressAction = Action.fromSettings(mResolver,
                 LineageSettings.System.KEY_APP_SWITCH_LONG_PRESS_ACTION,
                 defaultAppSwitchLongPressAction);
 
         final LineageHardwareManager hardware = LineageHardwareManager.getInstance(getActivity());
 
         // Only visible on devices that does not have a navigation bar already
-        boolean hasNavigationBar = true;
-        boolean supportsKeyDisabler = isKeyDisablerSupported(getActivity());
-        try {
-            IWindowManager windowManager = WindowManagerGlobal.getWindowManagerService();
-            hasNavigationBar = windowManager.hasNavigationBar();
-        } catch (RemoteException e) {
-            Log.e(TAG, "Error getting navigation bar status");
-        }
+        // TODO: forced to FALSE - reinstate when Navigation settings supported again
+        boolean supportsKeyDisabler = false; //isKeyDisablerSupported(getActivity());
         if (supportsKeyDisabler) {
             // Remove keys that can be provided by the navbar
             updateDisableNavkeysOption();
@@ -278,11 +284,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                 menuCategory.removePreference(findPreference(LineageSettings.System.MENU_WAKE_SCREEN));
             }
 
-            Action pressAction = Action.fromSettings(resolver,
+            Action pressAction = Action.fromSettings(mResolver,
                     LineageSettings.System.KEY_MENU_ACTION, Action.MENU);
             mMenuPressAction = initList(KEY_MENU_PRESS, pressAction);
 
-            Action longPressAction = Action.fromSettings(resolver,
+            Action longPressAction = Action.fromSettings(mResolver,
                         LineageSettings.System.KEY_MENU_LONG_PRESS_ACTION,
                         hasAssistKey ? Action.NOTHING : Action.APP_SWITCH);
             mMenuLongPressAction = initList(KEY_MENU_LONG_PRESS, longPressAction);
@@ -297,11 +303,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                 assistCategory.removePreference(findPreference(LineageSettings.System.ASSIST_WAKE_SCREEN));
             }
 
-            Action pressAction = Action.fromSettings(resolver,
+            Action pressAction = Action.fromSettings(mResolver,
                     LineageSettings.System.KEY_ASSIST_ACTION, Action.SEARCH);
             mAssistPressAction = initList(KEY_ASSIST_PRESS, pressAction);
 
-            Action longPressAction = Action.fromSettings(resolver,
+            Action longPressAction = Action.fromSettings(mResolver,
                     LineageSettings.System.KEY_ASSIST_LONG_PRESS_ACTION, Action.VOICE_SEARCH);
             mAssistLongPressAction = initList(KEY_ASSIST_LONG_PRESS, longPressAction);
 
@@ -316,7 +322,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                         LineageSettings.System.APP_SWITCH_WAKE_SCREEN));
             }
 
-            Action pressAction = Action.fromSettings(resolver,
+            Action pressAction = Action.fromSettings(mResolver,
                     LineageSettings.System.KEY_APP_SWITCH_ACTION, Action.APP_SWITCH);
             mAppSwitchPressAction = initList(KEY_APP_SWITCH_PRESS, pressAction);
 
@@ -354,7 +360,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                         findPreference(LineageSettings.System.VOLUME_ANSWER_CALL));
             }
 
-            int cursorControlAction = Settings.System.getInt(resolver,
+            int cursorControlAction = Settings.System.getInt(mResolver,
                     Settings.System.VOLUME_KEY_CURSOR_CONTROL, 0);
             mVolumeKeyCursorControl = initList(KEY_VOLUME_KEY_CURSOR_CONTROL,
                     cursorControlAction);
@@ -379,10 +385,36 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             prefScreen.removePreference(volumeCategory);
         }
 
-        final ButtonBacklightBrightness backlight =
-                (ButtonBacklightBrightness) findPreference(KEY_BUTTON_BACKLIGHT);
-        if (!backlight.isButtonSupported() /*&& !backlight.isKeyboardSupported()*/) {
-            prefScreen.removePreference(backlight);
+        mBacklightTimeout = (CustomSeekBarPreference) findPreference(KEY_BACKLIGHT_TIMEOUT);
+        if (mBacklightTimeout != null) {
+            mBacklightTimeout.setOnPreferenceChangeListener(this);
+            int BacklightTimeout = LineageSettings.Secure.getInt(getContentResolver(),
+                    LineageSettings.Secure.BUTTON_BACKLIGHT_TIMEOUT,
+                    DEFAULT_BUTTON_TIMEOUT * 1000) / 1000;
+            mBacklightTimeout.setValue(BacklightTimeout);
+            updateTimeoutSummary();
+        }
+
+        mBacklightEnable = (SwitchPreference) findPreference(KEY_BACKLIGHT_ENABLE);
+        mBacklightBrightness = (CustomSeekBarPreference) findPreference(KEY_BACKLIGHT_BRIGHTNESS);
+        final boolean variableBrightness = getResources().getBoolean(
+                com.android.internal.R.bool.config_deviceHasVariableButtonBrightness);
+        if (variableBrightness) {
+            backlightCategory.removePreference(mBacklightEnable);
+            if (mBacklightBrightness != null) {
+                int ButtonBrightness = LineageSettings.Secure.getInt(getContentResolver(),
+                        LineageSettings.Secure.BUTTON_BRIGHTNESS, 255);
+                mBacklightBrightness.setValue(ButtonBrightness / 1);
+                mBacklightBrightness.setOnPreferenceChangeListener(this);
+                updateBrightnessSummary();
+            }
+        } else {
+            backlightCategory.removePreference(mBacklightBrightness);
+            if (mBacklightEnable != null) {
+                mBacklightEnable.setChecked((LineageSettings.Secure.getInt(getContentResolver(),
+                        LineageSettings.Secure.BUTTON_BRIGHTNESS, 1) != 0));
+                mBacklightEnable.setOnPreferenceChangeListener(this);
+            }
         }
 
         if (mCameraWakeScreen != null) {
@@ -471,6 +503,22 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         }
     }
 
+    private boolean isButtonSupported() {
+        final Resources res = getContext().getResources();
+        final int deviceKeys = res.getInteger(
+                org.lineageos.platform.internal.R.integer.config_deviceHardwareKeys);
+        // All hardware keys besides volume and camera can possibly have a backlight
+        boolean hasBacklightKey = (deviceKeys & KEY_MASK_HOME) != 0
+                || (deviceKeys & KEY_MASK_BACK) != 0
+                || (deviceKeys & KEY_MASK_MENU) != 0
+                || (deviceKeys & KEY_MASK_ASSIST) != 0
+                || (deviceKeys & KEY_MASK_APP_SWITCH) != 0;
+        boolean hasBacklight = res.getInteger(
+                com.android.internal.R.integer.config_buttonBrightnessSettingDefault) > 0;
+
+        return hasBacklightKey && hasBacklight;
+    }
+
     private ListPreference initList(String key, Action value) {
         return initList(key, value.ordinal());
     }
@@ -496,6 +544,47 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         int index = pref.findIndexOfValue(value);
         pref.setSummary(pref.getEntries()[index]);
         Settings.System.putInt(getContentResolver(), setting, Integer.valueOf(value));
+    }
+
+    public void updateBrightnessSummary() {
+        if (mBacklightBrightness != null) {
+            int brightness = getBrightnessValue();
+            if (brightness == 0) {
+                mBacklightBrightness.setSummary(R.string.navkeys_backlight_brightness_summary_off);
+            } else {
+                int percent = (brightness * 100) / 255;
+                if (percent == 0) {
+                    percent = 1;
+                }
+                String BrightnessString = Integer.toString(percent) + "%";
+                mBacklightBrightness.setSummary(BrightnessString);
+            }
+        }
+    }
+
+    private int getBrightnessValue() {
+        return LineageSettings.Secure.getInt(getContentResolver(),
+                LineageSettings.Secure.BUTTON_BRIGHTNESS, 255);
+    }
+
+    public void updateTimeoutSummary() {
+        if (mBacklightTimeout != null) {
+            int timeout = getTimeoutValue();
+            if (timeout == 0) {
+                mBacklightTimeout.setSummary(R.string.navkeys_backlight_timeout_summary_always_enabled);
+            } else {
+                String TimeoutString = getContext().getResources().getQuantityString(
+                        R.plurals.backlight_timeout_time, timeout, timeout);
+                mBacklightTimeout.setSummary(getContext().getString(R.string.navkeys_backlight_timeout_summary_enabled,
+                        TimeoutString));
+            }
+        }
+    }
+
+    private int getTimeoutValue() {
+        return LineageSettings.Secure.getInt(getContentResolver(),
+                LineageSettings.Secure.BUTTON_BACKLIGHT_TIMEOUT,
+                DEFAULT_BUTTON_TIMEOUT * 1000) / 1000;
     }
 
     @Override
@@ -540,6 +629,23 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             handleListChange(mTorchLongPressPowerTimeout, newValue,
                     LineageSettings.System.TORCH_LONG_PRESS_POWER_TIMEOUT);
             return true;
+        } else if (preference == mBacklightTimeout) {
+            int value = (Integer) newValue;
+            LineageSettings.Secure.putInt(getActivity().getContentResolver(),
+                    LineageSettings.Secure.BUTTON_BACKLIGHT_TIMEOUT, value * 1000);
+            updateTimeoutSummary();
+            return true;
+        } else if (preference == mBacklightBrightness) {
+            int value = (Integer) newValue;
+            LineageSettings.Secure.putInt(getActivity().getContentResolver(),
+                    LineageSettings.Secure.BUTTON_BRIGHTNESS, value * 1);
+            updateBrightnessSummary();
+            return true;
+        } else if (preference == mBacklightEnable) {
+            boolean value = (Boolean) newValue;
+            LineageSettings.Secure.putInt(getActivity().getContentResolver(),
+                    LineageSettings.Secure.BUTTON_BRIGHTNESS, value ? 1 : 0);
+            return true;
         }
         return false;
     }
@@ -560,6 +666,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         final PreferenceScreen prefScreen = getPreferenceScreen();
 
         /* Disable hw-key options if they're disabled */
+        final PreferenceCategory backlightCategory =
+                (PreferenceCategory) prefScreen.findPreference(CATEGORY_BACKLIGHT);
         final PreferenceCategory homeCategory =
                 (PreferenceCategory) prefScreen.findPreference(CATEGORY_HOME);
         final PreferenceCategory backCategory =
@@ -570,14 +678,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                 (PreferenceCategory) prefScreen.findPreference(CATEGORY_ASSIST);
         final PreferenceCategory appSwitchCategory =
                 (PreferenceCategory) prefScreen.findPreference(CATEGORY_APPSWITCH);
-        final ButtonBacklightBrightness backlight =
-                (ButtonBacklightBrightness) prefScreen.findPreference(KEY_BUTTON_BACKLIGHT);
 
         /* Toggle backlight control depending on navbar state, force it to
            off if enabling */
-        if (backlight != null) {
-            backlight.setEnabled(!navbarEnabled);
-            backlight.updateSummary();
+        if (backlightCategory != null) {
+            backlightCategory.setEnabled(!navbarEnabled);
         }
 
         /* Toggle hardkey control availability depending on navbar state */
