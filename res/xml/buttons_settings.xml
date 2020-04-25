@@ -21,12 +21,6 @@
     android:title="@string/buttons_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <SwitchPreference
-        android:key="disable_nav_keys"
-        android:title="@string/disable_navkeys_title"
-        android:summary="@string/disable_navkeys_summary"
-        android:defaultValue="false" />
-
     <PreferenceCategory
         android:key="navkeys_backlight"
         android:title="@string/navkeys_backlight_title" >

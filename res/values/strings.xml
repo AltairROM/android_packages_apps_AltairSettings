@@ -106,6 +106,20 @@
     <string name="status_bar_toggle_brightness">Brightness control</string>
     <string name="status_bar_toggle_brightness_summary">Adjust brightness by sliding across the status bar</string>
 
+    <!-- NAVIGATION BAR -->
+    <string name="disable_navkeys_title">Enable on-screen nav bar</string>
+    <string name="disable_navkeys_summary">Enable on-screen navigation bar and disable hardware buttons</string>
+
+    <string name="navigation_bar_category">Navigation bar</string>
+    <string name="navigation_bar_invert_layout_title">Invert layout</string>
+    <string name="navigation_bar_left_summary">Place the navigation bar on the left side of the screen in landscape mode</string>
+    <string name="navigation_bar_arrow_keys_title">Show arrow keys while typing</string>
+    <string name="navigation_bar_arrow_keys_summary">Display left and right cursor buttons while typing. Overrides IME switcher.</string>
+    <string name="navigation_bar_home_long_press_title">Home long press action</string>
+    <string name="navigation_bar_home_double_tap_title">Home double tap action</string>
+    <string name="navigation_bar_app_switch_long_press_title">Recents long press action</string>
+    <string name="navigation_bar_edge_long_swipe_title">Edge long swipe action</string>
+
     <!-- QUICK SETTINGS -->
     <string name="qs_quick_pulldown_title">Quick pulldown</string>
     <string name="qs_quick_pulldown_summary">%1$s edge of the status bar pulls down Quick Settings</string>
@@ -180,9 +194,6 @@
     <string name="home_answer_call_summary">Answer incoming calls by pressing the home button</string>
     <string name="extras_title">Extras</string>
     <string name="additional_buttons_title">Additional buttons</string>
-
-    <string name="disable_navkeys_title">Disable navigation keys</string>
-    <string name="disable_navkeys_summary">NOTE: Turning off navigation keys without enabling the on-screen navigation bar is not recommended!</string>
 
     <string name="navkeys_backlight_title">Navigation keys backlight</string>
     <string name="navkeys_backlight_enable_title">Enable backlight</string>
