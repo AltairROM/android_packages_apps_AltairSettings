@@ -71,7 +71,6 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
     private static final String DISABLE_NAV_KEYS = "disable_nav_keys";
     private static final String KEY_NAVIGATION_SYSTEM_TYPE = "gesture_system_navigation_input_summary";
     private static final String KEY_NAVIGATION_ARROW_KEYS = "navigation_bar_menu_arrow_keys";
-    private static final String KEY_NAVIGATION_INVERT_LAYOUT = "sysui_nav_bar_inverse";
     private static final String KEY_NAVIGATION_HOME_LONG_PRESS = "navigation_home_long_press";
     private static final String KEY_NAVIGATION_HOME_DOUBLE_TAP = "navigation_home_double_tap";
     private static final String KEY_NAVIGATION_APP_SWITCH_LONG_PRESS =
@@ -83,7 +82,6 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
     private SwitchPreference mDisableNavigationKeys;
     private Preference mNavigationSystemType;
     private SwitchPreference mNavigationArrowKeys;
-    private SwitchPreference mNavigationInvertLayout;
     private ListPreference mNavigationHomeLongPressAction;
     private ListPreference mNavigationHomeDoubleTapAction;
     private ListPreference mNavigationAppSwitchLongPressAction;
@@ -149,9 +147,6 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
 
         // Edge long swipe gesture
         mEdgeLongSwipeAction = initList(KEY_EDGE_LONG_SWIPE, edgeLongSwipeAction);
-
-        // Navigation bar invert layout
-        mNavigationInvertLayout = findPreference(KEY_NAVIGATION_INVERT_LAYOUT);
 
         final LineageHardwareManager hardware = LineageHardwareManager.getInstance(getActivity());
 
@@ -259,7 +254,6 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
             if (force || navbarEnabled) {
                 if (DeviceUtils.isEdgeToEdgeEnabled(getContext())) {
                     mNavigationArrowKeys.setEnabled(false);
-                    mNavigationInvertLayout.setEnabled(false);
                     mNavigationHomeLongPressAction.setEnabled(false);
                     mNavigationHomeDoubleTapAction.setEnabled(false);
                     mNavigationAppSwitchLongPressAction.setEnabled(false);
@@ -267,7 +261,6 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
                     updateNavigationSystemTypeSummary(R.string.edge_to_edge_navigation_title);
                 } else if (DeviceUtils.isSwipeUpEnabled(getContext())) {
                     mNavigationArrowKeys.setEnabled(true);
-                    mNavigationInvertLayout.setEnabled(true);
                     mNavigationHomeLongPressAction.setEnabled(true);
                     mNavigationHomeDoubleTapAction.setEnabled(true);
                     mNavigationAppSwitchLongPressAction.setEnabled(false);
@@ -275,7 +268,6 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
                     updateNavigationSystemTypeSummary(R.string.swipe_up_to_switch_apps_title);
                 } else {
                     mNavigationArrowKeys.setEnabled(true);
-                    mNavigationInvertLayout.setEnabled(true);
                     mNavigationHomeLongPressAction.setEnabled(true);
                     mNavigationHomeDoubleTapAction.setEnabled(true);
                     mNavigationAppSwitchLongPressAction.setEnabled(true);
