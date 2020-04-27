@@ -48,7 +48,6 @@
 
     <string name="network_traffic_settings_title">Network traffic monitor</string>
     <string name="network_traffic_settings_summary">Show current network traffic levels in the status bar</string>
-
     <string name="network_traffic_mode_title">Display mode</string>
     <string name="network_traffic_mode_disable">Disabled</string>
     <string name="network_traffic_mode_up">Upload only</string>
@@ -63,6 +62,7 @@
     <string name="network_traffic_units_megabytes">Megabytes per second (MB/s)</string>
     <string name="network_traffic_show_units">Show units</string>
     <string name="network_traffic_show_units_summary">Whether to show traffic measurement units in the statusbar</string>
+    <string name="network_traffic_disabled_clock">Network traffic disabled due to clock position</string>
 
     <string name="data_wifi_activity_arrows_title">Mobile/wifi activity</string>
     <string name="data_wifi_activity_arrows_summary">Display arrows to indicate mobile/wifi data activity</string>

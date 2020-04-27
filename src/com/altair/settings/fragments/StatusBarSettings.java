@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2013 The CyanogenMod Project
- * Copyright (C) 2017 The LineageOS project
+ * Copyright (C) 2017-2020 The LineageOS project
  * Copyright (C) 2019-2020 Altair ROM
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,8 +27,10 @@ import android.text.format.DateFormat;
 import android.view.View;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.altair.settings.utils.DeviceUtils;
 import com.altair.settings.utils.StatusBarIcon;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -56,6 +58,8 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 
     private static final int STATUS_BAR_BATTERY_STYLE_TEXT = 2;
 
+    private static final String NETWORK_TRAFFIC_SETTINGS = "network_traffic_settings";
+
     private StatusBarIcon mClockIcon;
     private StatusBarIcon mBatteryIcon;
 
@@ -67,13 +71,21 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     private LineageSystemSettingListPreference mStatusBarBattery;
     private LineageSystemSettingListPreference mStatusBarBatteryShowPercent;
 
-    private static boolean sHasNotch;
+    private PreferenceScreen mNetworkTrafficPref;
+
+    private boolean mHasNotch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.statusbar_settings);
         ContentResolver resolver = getActivity().getContentResolver();
+
+        mNetworkTrafficPref = findPreference(NETWORK_TRAFFIC_SETTINGS);
+        mHasNotch = DeviceUtils.hasNotch(getActivity());
+        if (mHasNotch) {
+            getPreferenceScreen().removePreference(mNetworkTrafficPref);
+        }
 
         mClockIcon = new StatusBarIcon(getContext(), "clock");
 
@@ -112,7 +124,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
             mStatusBarAmPm.setSummary(R.string.status_bar_am_pm_info);
         }
 
-        final boolean disallowCenteredClock = sHasNotch || getNetworkTrafficStatus() != 0;
+        final boolean disallowCenteredClock = mHasNotch || getNetworkTrafficStatus() != 0;
 
         // Adjust status bar preferences for RTL
         if (getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
@@ -130,6 +142,9 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
             mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries);
             mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values);
         }
+
+        // Disable network traffic preferences if clock is centered in the status bar
+        updateNetworkTrafficStatus(getClockPosition());
 
         iconEnabled = mBatteryIcon.isEnabled();
         mStatusBarShowBattery.setChecked(iconEnabled);
@@ -154,6 +169,9 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
         } else if (key == STATUS_BAR_BATTERY_STYLE) {
             int value = Integer.parseInt((String) newValue);
             enableStatusBarBatteryDependents(value);
+        } else if (key == STATUS_BAR_CLOCK_STYLE) {
+            int value = Integer.parseInt((String) newValue);
+            updateNetworkTrafficStatus(value);
         }
         return true;
     }
@@ -162,9 +180,27 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
         mStatusBarBatteryShowPercent.setEnabled(batteryIconStyle != STATUS_BAR_BATTERY_STYLE_TEXT);
     }
 
+    private void updateNetworkTrafficStatus(int clockPosition) {
+        if (mHasNotch) {
+            // Unconditional no network traffic for you
+            return;
+        }
+        boolean isClockCentered = clockPosition == 1;
+        mNetworkTrafficPref.setEnabled(!isClockCentered);
+        mNetworkTrafficPref.setSummary(getResources().getString(isClockCentered ?
+                R.string.network_traffic_disabled_clock :
+                R.string.network_traffic_settings_summary
+        ));
+    }
+
     private int getNetworkTrafficStatus() {
         return LineageSettings.Secure.getInt(getActivity().getContentResolver(),
                 LineageSettings.Secure.NETWORK_TRAFFIC_MODE, 0);
+    }
+
+    private int getClockPosition() {
+        return LineageSettings.System.getInt(getActivity().getContentResolver(),
+                STATUS_BAR_CLOCK_STYLE, 2);
     }
 }
 
