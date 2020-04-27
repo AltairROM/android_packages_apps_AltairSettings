@@ -47,9 +47,12 @@ import androidx.preference.PreferenceScreen;
 
 import com.altair.settings.utils.DeviceUtils;
 import com.altair.settings.utils.TelephonyUtils;
+
 import com.android.internal.logging.nano.MetricsProto;
+
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+
 import com.lineage.support.preferences.CustomSeekBarPreference;
 
 import org.lineageos.internal.util.ScreenType;
@@ -103,9 +106,9 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
         mHandler = new Handler();
 
         // Force Navigation bar related options
-        mDisableNavigationKeys = (SwitchPreference) findPreference(DISABLE_NAV_KEYS);
+        mDisableNavigationKeys = findPreference(DISABLE_NAV_KEYS);
 
-        mNavigationPreferencesCat = (PreferenceCategory) findPreference(CATEGORY_NAVBAR);
+        mNavigationPreferencesCat = findPreference(CATEGORY_NAVBAR);
 
         Action defaultHomeLongPressAction = Action.fromIntSafe(res.getInteger(
                 org.lineageos.platform.internal.R.integer.config_longPressOnHomeBehavior));
@@ -127,10 +130,10 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
                 Action.NOTHING);
 
         // Navigation bar type
-        mNavigationSystemType = (Preference) findPreference(KEY_NAVIGATION_SYSTEM_TYPE);
+        mNavigationSystemType = findPreference(KEY_NAVIGATION_SYSTEM_TYPE);
 
         // Navigation bar arrow keys while typing
-        mNavigationArrowKeys = (SwitchPreference) findPreference(KEY_NAVIGATION_ARROW_KEYS);
+        mNavigationArrowKeys = findPreference(KEY_NAVIGATION_ARROW_KEYS);
 
         // Navigation bar home long press
         mNavigationHomeLongPressAction = initList(KEY_NAVIGATION_HOME_LONG_PRESS,
@@ -148,7 +151,7 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
         mEdgeLongSwipeAction = initList(KEY_EDGE_LONG_SWIPE, edgeLongSwipeAction);
 
         // Navigation bar invert layout
-        mNavigationInvertLayout = (SwitchPreference) findPreference(KEY_NAVIGATION_INVERT_LAYOUT);
+        mNavigationInvertLayout = findPreference(KEY_NAVIGATION_INVERT_LAYOUT);
 
         final LineageHardwareManager hardware = LineageHardwareManager.getInstance(getActivity());
 
@@ -204,7 +207,7 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
     }
 
     private ListPreference initList(String key, int value) {
-        ListPreference list = (ListPreference) getPreferenceScreen().findPreference(key);
+        ListPreference list = getPreferenceScreen().findPreference(key);
         if (list == null) return null;
         list.setValue(Integer.toString(value));
         list.setSummary(list.getEntry());

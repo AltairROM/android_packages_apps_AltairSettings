@@ -23,13 +23,15 @@ import android.provider.Settings;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.altair.settings.utils.SystemUtils;
+
 import com.android.internal.logging.nano.MetricsProto;
+
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -69,7 +71,7 @@ public class UserInterfaceSettings extends SettingsPreferenceFragment implements
 
 /*
         // recents component type
-        mRecentsComponentType = (ListPreference) findPreference(RECENTS_COMPONENT_TYPE);
+        mRecentsComponentType = findPreference(RECENTS_COMPONENT_TYPE);
         int type = Settings.System.getInt(resolver,
                 Settings.System.RECENTS_COMPONENT, 0);
         mRecentsComponentType.setValue(String.valueOf(type));
@@ -77,7 +79,7 @@ public class UserInterfaceSettings extends SettingsPreferenceFragment implements
         mRecentsComponentType.setOnPreferenceChangeListener(this);
 
         // clear all recents
-        mRecentsClearAllLocation = (ListPreference) findPreference(RECENTS_CLEAR_ALL_LOCATION);
+        mRecentsClearAllLocation = findPreference(RECENTS_CLEAR_ALL_LOCATION);
         int location = Settings.System.getIntForUser(resolver,
                 Settings.System.RECENTS_CLEAR_ALL_LOCATION, 3, UserHandle.USER_CURRENT);
         mRecentsClearAllLocation.setValue(String.valueOf(location));
@@ -85,14 +87,14 @@ public class UserInterfaceSettings extends SettingsPreferenceFragment implements
         mRecentsClearAllLocation.setOnPreferenceChangeListener(this);
 
         // oreo recents type
-        mRecentsType = (ListPreference) findPreference(RECENTS_TYPE);
+        mRecentsType = findPreference(RECENTS_TYPE);
         int style = Settings.System.getIntForUser(resolver,
                 Settings.System.RECENTS_LAYOUT_STYLE, 0, UserHandle.USER_CURRENT);
         mRecentsType.setValue(String.valueOf(style));
         mRecentsType.setSummary(mRecentsType.getEntry());
         mRecentsType.setOnPreferenceChangeListener(this);
 
-        mOreoRecentsCat = (PreferenceCategory) findPreference("recents_ui_oreo_recents_category");
+        mOreoRecentsCat = findPreference("recents_ui_oreo_recents_category");
         mOreoRecentsCat.setEnabled(type == RECENTS_COMPONENT_OREO);
 */
     }

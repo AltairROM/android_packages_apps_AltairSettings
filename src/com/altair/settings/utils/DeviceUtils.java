@@ -121,8 +121,7 @@ public class DeviceUtils {
     }
 
     public static boolean deviceSupportsFlashLight(Context context) {
-        CameraManager cameraManager = (CameraManager) context.getSystemService(
-                Context.CAMERA_SERVICE);
+        CameraManager cameraManager = context.getSystemService(CameraManager.class);
         try {
             String[] ids = cameraManager.getCameraIdList();
             for (String id : ids) {

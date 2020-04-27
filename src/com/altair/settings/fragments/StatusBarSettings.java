@@ -30,9 +30,12 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.altair.settings.utils.StatusBarIcon;
+
 import com.android.internal.logging.nano.MetricsProto;
+
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+
 import com.lineage.support.preferences.CustomSeekBarPreference;
 
 import lineageos.preference.LineageSystemSettingListPreference;
@@ -74,26 +77,20 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 
         mClockIcon = new StatusBarIcon(getContext(), "clock");
 
-        mStatusBarShowClock =
-                (SwitchPreference) findPreference(STATUS_BAR_SHOW_CLOCK);
+        mStatusBarShowClock = findPreference(STATUS_BAR_SHOW_CLOCK);
         mStatusBarShowClock.setOnPreferenceChangeListener(this);
 
-        mStatusBarAmPm =
-                (LineageSystemSettingListPreference) findPreference(STATUS_BAR_AM_PM);
-        mStatusBarClock =
-                (LineageSystemSettingListPreference) findPreference(STATUS_BAR_CLOCK);
+        mStatusBarAmPm = findPreference(STATUS_BAR_AM_PM);
+        mStatusBarClock = findPreference(STATUS_BAR_CLOCK);
         mStatusBarClock.setOnPreferenceChangeListener(this);
 
-        mStatusBarShowBattery =
-                (SwitchPreference) findPreference(STATUS_BAR_SHOW_BATTERY);
+        mStatusBarShowBattery = findPreference(STATUS_BAR_SHOW_BATTERY);
         mStatusBarShowBattery.setOnPreferenceChangeListener(this);
 
         mBatteryIcon = new StatusBarIcon(getContext(), "battery");
 
-        mStatusBarBatteryShowPercent =
-                (LineageSystemSettingListPreference) findPreference(STATUS_BAR_SHOW_BATTERY_PERCENT);
-        mStatusBarBattery =
-                (LineageSystemSettingListPreference) findPreference(STATUS_BAR_BATTERY_STYLE);
+        mStatusBarBatteryShowPercent = findPreference(STATUS_BAR_SHOW_BATTERY_PERCENT);
+        mStatusBarBattery = findPreference(STATUS_BAR_BATTERY_STYLE);
         mStatusBarBattery.setOnPreferenceChangeListener(this);
         enableStatusBarBatteryDependents(mStatusBarBattery.getIntValue(2));
     }

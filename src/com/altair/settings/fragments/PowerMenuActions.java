@@ -29,6 +29,7 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.nano.MetricsProto;
+
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -64,13 +65,13 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
 
         for (String action : mAllActions) {
             if (action.equals(GLOBAL_ACTION_KEY_SCREENSHOT)) {
-                mScreenshotPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_SCREENSHOT);
+                mScreenshotPref = findPreference(GLOBAL_ACTION_KEY_SCREENSHOT);
             } else if (action.equals(GLOBAL_ACTION_KEY_AIRPLANE)) {
-                mAirplanePref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_AIRPLANE);
+                mAirplanePref = findPreference(GLOBAL_ACTION_KEY_AIRPLANE);
             } else if (action.equals(GLOBAL_ACTION_KEY_USERS)) {
-                mUsersPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_USERS);
+                mUsersPref = findPreference(GLOBAL_ACTION_KEY_USERS);
             } else if (action.equals(GLOBAL_ACTION_KEY_LOCKDOWN)) {
-                mLockDownPref = (SwitchPreference) findPreference(GLOBAL_ACTION_KEY_LOCKDOWN);
+                mLockDownPref = findPreference(GLOBAL_ACTION_KEY_LOCKDOWN);
             }
         }
 

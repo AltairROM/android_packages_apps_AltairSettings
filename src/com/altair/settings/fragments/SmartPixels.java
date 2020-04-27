@@ -22,21 +22,21 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.PowerManager;
-import android.preference.ListPreference;
-import android.preference.SwitchPreference;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
+
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-import com.lineage.support.preferences.SystemSettingSwitchPreference;
-
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+
+import com.lineage.support.preferences.SystemSettingSwitchPreference;
 
 public class SmartPixels extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
@@ -56,7 +56,7 @@ public class SmartPixels extends SettingsPreferenceFragment implements
 
         resolver = getActivity().getContentResolver();
 
-        mSmartPixelsOnPowerSave = (SystemSettingSwitchPreference) findPreference(ON_POWER_SAVE);
+        mSmartPixelsOnPowerSave = findPreference(ON_POWER_SAVE);
 
         updateDependency();
     }
