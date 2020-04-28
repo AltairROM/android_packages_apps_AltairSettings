@@ -19,24 +19,19 @@
 package com.altair.settings.fragments;
 
 import android.app.ActivityManager;
-import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.os.UserHandle;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Display;
-import android.view.DisplayInfo;
 import android.view.IWindowManager;
-import android.view.KeyCharacterMap;
-import android.view.KeyEvent;
 import android.view.WindowManagerGlobal;
 
 import androidx.preference.SwitchPreference;
@@ -46,27 +41,26 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.altair.settings.utils.DeviceUtils;
-import com.altair.settings.utils.TelephonyUtils;
-
 import com.android.internal.logging.nano.MetricsProto;
-
 import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.SettingsPreferenceFragment;
-
+import com.android.settingslib.search.SearchIndexable;
 import com.lineage.support.preferences.CustomSeekBarPreference;
 
-import org.lineageos.internal.util.ScreenType;
-
-import static org.lineageos.internal.util.DeviceKeysConstants.*;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import lineageos.hardware.LineageHardwareManager;
 import lineageos.providers.LineageSettings;
 
+import static org.lineageos.internal.util.DeviceKeysConstants.*;
+
+@SearchIndexable
 public class NavigationBarSettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener {
-    private static final String TAG = "SystemSettings";
+        Preference.OnPreferenceChangeListener, Indexable {
+    private static final String TAG = "NavigationSettings";
 
     private static final String DISABLE_NAV_KEYS = "disable_nav_keys";
     private static final String KEY_NAVIGATION_SYSTEM_TYPE = "gesture_system_navigation_input_summary";
@@ -94,7 +88,6 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         addPreferencesFromResource(R.xml.navigation_settings);
 
         final Resources res = getResources();
@@ -320,5 +313,20 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
 
         return super.onPreferenceTreeClick(preference);
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    ArrayList<SearchIndexableResource> result =
+                            new ArrayList<SearchIndexableResource>();
+                    SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.navigation_settings;
+                    result.add(sir);
+
+                    return result;
+                }
+            };
 }
 

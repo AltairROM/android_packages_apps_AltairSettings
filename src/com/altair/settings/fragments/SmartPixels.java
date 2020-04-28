@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 CarbonROM
+ * Copyright (C) 2019-2020 Altair ROM
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,25 +17,18 @@
 
 package com.altair.settings.fragments;
 
-import android.content.Context;
 import android.content.ContentResolver;
-import android.content.res.Resources;
+import android.content.Context;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.os.PowerManager;
+import android.os.UserHandle;
 import android.provider.Settings;
 
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
-
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
 import com.lineage.support.preferences.SystemSettingSwitchPreference;
 
@@ -46,15 +40,14 @@ public class SmartPixels extends SettingsPreferenceFragment implements
 
     private SystemSettingSwitchPreference mSmartPixelsOnPowerSave;
 
-    ContentResolver resolver;
+    ContentResolver mResolver;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         addPreferencesFromResource(R.xml.smart_pixels);
 
-        resolver = getActivity().getContentResolver();
+        mResolver = getActivity().getContentResolver();
 
         mSmartPixelsOnPowerSave = findPreference(ON_POWER_SAVE);
 
@@ -84,7 +77,7 @@ public class SmartPixels extends SettingsPreferenceFragment implements
 
     private void updateDependency() {
         boolean mUseOnPowerSave = (Settings.System.getIntForUser(
-                resolver, Settings.System.SMART_PIXELS_ON_POWER_SAVE,
+                mResolver, Settings.System.SMART_PIXELS_ON_POWER_SAVE,
                 0, UserHandle.USER_CURRENT) == 1);
         PowerManager pm = (PowerManager)getActivity().getSystemService(Context.POWER_SERVICE);
         if (pm.isPowerSaveMode() && mUseOnPowerSave) {

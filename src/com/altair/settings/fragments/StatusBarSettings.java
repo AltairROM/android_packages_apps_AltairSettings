@@ -18,11 +18,10 @@
 
 package com.altair.settings.fragments;
 
-import android.content.Context;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.os.Bundle;
-import android.os.UserHandle;
-import android.provider.Settings;
+import android.provider.SearchIndexableResource;
 import android.text.format.DateFormat;
 import android.view.View;
 
@@ -32,19 +31,23 @@ import androidx.preference.SwitchPreference;
 
 import com.altair.settings.utils.DeviceUtils;
 import com.altair.settings.utils.StatusBarIcon;
-
 import com.android.internal.logging.nano.MetricsProto;
-
 import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settingslib.search.SearchIndexable;
 
-import com.lineage.support.preferences.CustomSeekBarPreference;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import lineageos.preference.LineageSystemSettingListPreference;
 import lineageos.providers.LineageSettings;
 
+@SearchIndexable
 public class StatusBarSettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener, Indexable {
     private static final String TAG = "StatusBar";
 
     private static final String STATUS_BAR_SHOW_CLOCK = "status_bar_show_clock";
@@ -79,6 +82,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.statusbar_settings);
+
         ContentResolver resolver = getActivity().getContentResolver();
 
         mNetworkTrafficPref = findPreference(NETWORK_TRAFFIC_SETTINGS);
@@ -202,5 +206,30 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
         return LineageSettings.System.getInt(getActivity().getContentResolver(),
                 STATUS_BAR_CLOCK_STYLE, 2);
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    ArrayList<SearchIndexableResource> result =
+                            new ArrayList<SearchIndexableResource>();
+                    SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.statusbar_settings;
+                    result.add(sir);
+
+                    return result;
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+
+                    if (DeviceUtils.hasNotch(context)) {
+                        keys.add(NETWORK_TRAFFIC_SETTINGS);
+                    }
+                    return keys;
+                }
+            };
 }
 

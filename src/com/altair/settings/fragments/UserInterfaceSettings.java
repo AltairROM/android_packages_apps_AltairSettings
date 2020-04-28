@@ -17,26 +17,32 @@
 package com.altair.settings.fragments;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.altair.settings.utils.SystemUtils;
-
 import com.android.internal.logging.nano.MetricsProto;
-
 import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settingslib.search.SearchIndexable;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@SearchIndexable
 public class UserInterfaceSettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener, Indexable {
     private static final String TAG = "UserInterface";
 
     private static final String RECENTS_COMPONENT_TYPE = "recents_component";
@@ -149,5 +155,20 @@ public class UserInterfaceSettings extends SettingsPreferenceFragment implements
 */
         return true;
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    ArrayList<SearchIndexableResource> result =
+                            new ArrayList<SearchIndexableResource>();
+                    SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.userinterface_settings;
+                    result.add(sir);
+
+                    return result;
+                }
+            };
 }
 

@@ -18,32 +18,35 @@
 
 package com.altair.settings.fragments;
 
-import android.content.Context;
 import android.content.ContentResolver;
-import android.database.ContentObserver;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.UserHandle;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.text.format.DateFormat;
 import android.view.View;
 
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.nano.MetricsProto;
-
 import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.SettingsPreferenceFragment;
-
+import com.android.settingslib.search.SearchIndexable;
 import com.lineage.support.preferences.CustomSeekBarPreference;
 import com.lineage.support.preferences.SystemSettingSwitchPreference;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lineageos.preference.LineageSystemSettingListPreference;
 
+@SearchIndexable
 public class QuickSettingsPanelSettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener, Indexable {
     private static final String TAG = "QuickSettings";
 
     private static final String QS_QUICK_PULLDOWN = "qs_quick_pulldown";
@@ -73,12 +76,14 @@ public class QuickSettingsPanelSettings extends SettingsPreferenceFragment imple
     private CustomSeekBarPreference mQsQuickBarColumns;
 
     private ContentResolver mContentResolver;
+
     private int mQuickBarColumns = DEFAULT_QS_QUICKBAR_COLUMNS;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.quicksettings_settings);
+
         mContentResolver = getActivity().getContentResolver();
 
         mQuickPulldown = findPreference(QS_QUICK_PULLDOWN);
@@ -214,5 +219,20 @@ public class QuickSettingsPanelSettings extends SettingsPreferenceFragment imple
         }
         mQuickPulldown.setSummary(summary);
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    ArrayList<SearchIndexableResource> result =
+                            new ArrayList<SearchIndexableResource>();
+                    SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.quicksettings_settings;
+                    result.add(sir);
+
+                    return result;
+                }
+            };
 }
 

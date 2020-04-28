@@ -17,11 +17,8 @@
 package com.altair.settings;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.ContentResolver;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -39,7 +36,6 @@ public class AltairSettings extends SettingsPreferenceFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
         addPreferencesFromResource(R.xml.altair_settings);
 
         PreferenceScreen prefSet = getPreferenceScreen();

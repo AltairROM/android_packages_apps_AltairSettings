@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2014-2015 The CyanogenMod Project
  * Copyright (C) 2017 The LineageOS Project
+ * Copyright (C) 2020 Altair ROM
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +30,6 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.nano.MetricsProto;
-
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -51,16 +51,16 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
     private SwitchPreference mLockDownPref;
 
     Context mContext;
+
     private ArrayList<String> mLocalUserConfig = new ArrayList<String>();
     private String[] mAllActions;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         addPreferencesFromResource(R.xml.power_menu_settings);
-        mContext = getActivity().getApplicationContext();
 
+        mContext = getActivity().getApplicationContext();
         mAllActions = PowerMenuConstants.getAllActions();
 
         for (String action : mAllActions) {
