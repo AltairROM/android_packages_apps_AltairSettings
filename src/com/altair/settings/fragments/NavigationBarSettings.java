@@ -62,7 +62,7 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
     private static final String TAG = "NavigationSettings";
 
-    private static final String DISABLE_NAV_KEYS = "disable_nav_keys";
+    private static final String KEY_DISABLE_NAV_KEYS = "disable_nav_keys";
     private static final String KEY_NAVIGATION_SYSTEM_TYPE = "gesture_system_navigation_input_summary";
     private static final String KEY_NAVIGATION_ARROW_KEYS = "navigation_bar_menu_arrow_keys";
     private static final String KEY_NAVIGATION_HOME_LONG_PRESS = "navigation_home_long_press";
@@ -97,7 +97,7 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
         mHandler = new Handler();
 
         // Force Navigation bar related options
-        mDisableNavigationKeys = findPreference(DISABLE_NAV_KEYS);
+        mDisableNavigationKeys = findPreference(KEY_DISABLE_NAV_KEYS);
 
         mNavigationPreferencesCat = findPreference(CATEGORY_NAVBAR);
 
@@ -143,16 +143,8 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
 
         final LineageHardwareManager hardware = LineageHardwareManager.getInstance(getActivity());
 
-        // Only visible on devices that does not have a navigation bar already
-        boolean hasNavigationBar = true;
-        boolean supportsKeyDisabler = isKeyDisablerSupported(getActivity());
-        try {
-            IWindowManager windowManager = WindowManagerGlobal.getWindowManagerService();
-            hasNavigationBar = windowManager.hasNavigationBar(Display.DEFAULT_DISPLAY);
-        } catch (RemoteException e) {
-            Log.e(TAG, "Error getting navigation bar status");
-        }
-        if (supportsKeyDisabler) {
+        // Hardware key disabler
+        if (isKeyDisablerSupported(getActivity())) {
             // Remove keys that can be provided by the navbar
             updateDisableNavkeysOption();
             mNavigationPreferencesCat.setEnabled(mDisableNavigationKeys.isChecked());
@@ -326,6 +318,16 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
                     result.add(sir);
 
                     return result;
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+
+                    if (!isKeyDisablerSupported(context)) {
+                        keys.add(KEY_DISABLE_NAV_KEYS);
+                    }
+                    return keys;
                 }
             };
 }
