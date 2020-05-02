@@ -47,5 +47,19 @@
 
     </PreferenceCategory>
 
+    <!-- Notifications -->
+    <PreferenceCategory
+        android:key="notifications_category"
+        android:title="@string/notifications_category_title">
+
+        <!-- Notification guts kill app button -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="notification_guts_kill_app_button"
+            android:title="@string/notification_guts_kill_app_button_title"
+            android:summary="@string/notification_guts_kill_app_button_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
 

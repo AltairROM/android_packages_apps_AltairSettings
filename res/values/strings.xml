@@ -249,5 +249,9 @@
     <string name="recents_allow_swipe_down_clearall_title">Swipe down to clear all recents</string>
     <string name="recents_allow_swipe_down_clearall_summary">NOTE: Does not work if gesture navigation is enabled</string>
 
+    <string name="notifications_category_title">Notifications</string>
+    <string name="notification_guts_kill_app_button_title">Kill app button</string>
+    <string name="notification_guts_kill_app_button_summary">Show a kill app button in the notification\'s longpress menu</string>
+
 </resources>
 
