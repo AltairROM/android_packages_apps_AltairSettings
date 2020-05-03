@@ -113,6 +113,12 @@
             android:entryValues="@array/status_bar_battery_percentage_values"
             android:defaultValue="0" />
 
+        <com.lineage.support.preferences.SecureSettingSwitchPreference
+            android:key="status_bar_bluetooth_show_battery"
+            android:title="@string/status_bar_bluetooth_battery_title"
+            android:summary="@string/status_bar_bluetooth_battery_summary"
+            android:defaultValue="true"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory
