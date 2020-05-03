@@ -144,11 +144,13 @@
     <string name="qs_columns_quickbar_title">Columns on QuickBar</string>
     <string name="qs_columns_quickbar_auto_title">Automatically set QuickBar columns</string>
 
-    <string name="qs_brightness_category">Brightness</string>
+    <string name="qs_header_category">Header</string>
     <string name="qs_brightness_slider_title">Brightness slider</string>
     <string name="qs_brightness_slider_summary">Adjust brightness from the Quick Settings</string>
     <string name="qs_brightness_slider_auto_title">Auto brightness</string>
     <string name="qs_brightness_slider_auto_summary">Show toggle for adaptive brightness near the slider</string>
+    <string name="qs_bluetooth_battery_title">Bluetooth battery status</string>
+    <string name="qs_bluetooth_battery_summary">Display battery status for the connected bluetooth device, if available</string>
 
     <!-- BUTTONS -->
     <string name="hardware_keys_power_key_title">Power button</string>

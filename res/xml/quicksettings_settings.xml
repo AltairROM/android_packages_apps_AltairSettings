@@ -74,7 +74,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/qs_brightness_category">
+        android:title="@string/qs_header_category">
 
         <lineageos.preference.LineageSecureSettingSwitchPreference
             android:key="qs_show_brightness_slider"
@@ -89,6 +89,12 @@
             android:dependency="qs_show_brightness_slider"
             lineage:requiresConfig="@*android:bool/config_automatic_brightness_available"
             android:defaultValue="true" />
+
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="qs_bluetooth_show_battery"
+            android:title="@string/qs_bluetooth_battery_title"
+            android:summary="@string/qs_bluetooth_battery_summary"
+            android:defaultValue="true"/>
     </PreferenceCategory>
 
 </PreferenceScreen>
