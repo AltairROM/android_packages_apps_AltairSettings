@@ -19,8 +19,10 @@
 package com.altair.settings.fragments;
 
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -29,24 +31,29 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
 import android.view.IWindowManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.WindowManagerGlobal;
 
-import androidx.preference.SwitchPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.altair.settings.utils.DeviceUtils;
+import com.altair.settings.utils.TelephonyUtils;
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settingslib.search.SearchIndexable;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settingslib.search.SearchIndexable;
 import com.lineage.support.preferences.CustomSeekBarPreference;
 
 import java.util.ArrayList;
@@ -62,28 +69,91 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
     private static final String TAG = "NavigationSettings";
 
-    private static final String KEY_DISABLE_NAV_KEYS = "disable_nav_keys";
+    private static final String KEY_NAVIGATION_BAR_ENABLE = "navigation_bar_enable";
     private static final String KEY_NAVIGATION_SYSTEM_TYPE = "gesture_system_navigation_input_summary";
     private static final String KEY_NAVIGATION_ARROW_KEYS = "navigation_bar_menu_arrow_keys";
-    private static final String KEY_NAVIGATION_HOME_LONG_PRESS = "navigation_home_long_press";
-    private static final String KEY_NAVIGATION_HOME_DOUBLE_TAP = "navigation_home_double_tap";
-    private static final String KEY_NAVIGATION_APP_SWITCH_LONG_PRESS =
-            "navigation_app_switch_long_press";
-    private static final String KEY_EDGE_LONG_SWIPE = "navigation_bar_edge_long_swipe";
+    private static final String KEY_NAVIGATION_INVERT_LAYOUT = "sysui_nav_bar_inverse";
+    private static final String KEY_HOME_LONG_PRESS_ACTION = "hardware_keys_home_long_press";
+    private static final String KEY_HOME_LONG_PRESS_CUSTOM_APP = "hardware_keys_home_long_press_custom_app";
+    private static final String KEY_HOME_DOUBLE_TAP_ACTION = "hardware_keys_home_double_tap";
+    private static final String KEY_HOME_DOUBLE_TAP_CUSTOM_APP = "hardware_keys_home_double_tap_custom_app";
+    private static final String KEY_BACK_LONG_PRESS_ACTION = "hardware_keys_back_long_press";
+    private static final String KEY_BACK_LONG_PRESS_CUSTOM_APP = "hardware_keys_back_long_press_custom_app";
+    private static final String KEY_BACK_DOUBLE_TAP_ACTION = "hardware_keys_back_double_tap";
+    private static final String KEY_BACK_DOUBLE_TAP_CUSTOM_APP = "hardware_keys_back_double_tap_custom_app";
+    private static final String KEY_APP_SWITCH_PRESS_ACTION = "hardware_keys_app_switch_press";
+    private static final String KEY_APP_SWITCH_LONG_PRESS_ACTION = "hardware_keys_app_switch_long_press";
+    private static final String KEY_APP_SWITCH_LONG_PRESS_CUSTOM_APP = "hardware_keys_app_switch_long_press_custom_app";
+    private static final String KEY_APP_SWITCH_DOUBLE_TAP_ACTION = "hardware_keys_app_switch_double_tap";
+    private static final String KEY_APP_SWITCH_DOUBLE_TAP_CUSTOM_APP = "hardware_keys_app_switch_double_tap_custom_app";
+    private static final String KEY_MENU_PRESS_ACTION = "hardware_keys_menu_press";
+    private static final String KEY_MENU_LONG_PRESS_ACTION = "hardware_keys_menu_long_press";
+    private static final String KEY_MENU_DOUBLE_TAP_ACTION = "hardware_keys_menu_double_tap";
+    private static final String KEY_ASSIST_PRESS_ACTION = "hardware_keys_assist_press";
+    private static final String KEY_ASSIST_LONG_PRESS_ACTION = "hardware_keys_assist_long_press";
+    private static final String KEY_ASSIST_DOUBLE_TAP_ACTION = "hardware_keys_assist_double_tap";
+    private static final String KEY_EDGE_LONG_SWIPE_ACTION = "navigation_bar_edge_long_swipe";
 
-    private static final String CATEGORY_NAVBAR = "navigation_bar_category";
+    private static final String CATEGORY_NAVBAR_OPTIONS = "navigation_bar_options_category";
+    private static final String CATEGORY_HOME_KEY = "navigation_home_key";
+    private static final String CATEGORY_BACK_KEY = "navigation_back_key";
+    private static final String CATEGORY_APP_SWITCH_KEY = "navigation_app_switch_key";
+    private static final String CATEGORY_MENU_KEY = "navigation_menu_key";
+    private static final String CATEGORY_ASSIST_KEY = "navigation_assist_key";
 
-    private SwitchPreference mDisableNavigationKeys;
+    private static final int MENU_RESET = Menu.FIRST;
+
+    private SwitchPreference mEnableNavigationBar;
+
     private Preference mNavigationSystemType;
     private SwitchPreference mNavigationArrowKeys;
-    private ListPreference mNavigationHomeLongPressAction;
-    private ListPreference mNavigationHomeDoubleTapAction;
-    private ListPreference mNavigationAppSwitchLongPressAction;
+    private SwitchPreference mNavigationInvertLayout;
     private ListPreference mEdgeLongSwipeAction;
 
-    private PreferenceCategory mNavigationPreferencesCat;
+    private ListPreference mHomeLongPressAction;
+    private ListPreference mHomeDoubleTapAction;
+    private ListPreference mBackLongPressAction;
+    private ListPreference mBackDoubleTapAction;
+    private ListPreference mAppSwitchShortPressAction;
+    private ListPreference mAppSwitchLongPressAction;
+    private ListPreference mAppSwitchDoubleTapAction;
+    private ListPreference mMenuShortPressAction;
+    private ListPreference mMenuLongPressAction;
+    private ListPreference mMenuDoubleTapAction;
+    private ListPreference mAssistShortPressAction;
+    private ListPreference mAssistLongPressAction;
+    private ListPreference mAssistDoubleTapAction;
+
+    private Preference mHomeLongPressCustomApp;
+    private Preference mHomeDoubleTapCustomApp;
+    private Preference mBackLongPressCustomApp;
+    private Preference mBackDoubleTapCustomApp;
+    private Preference mAppSwitchLongPressCustomApp;
+    private Preference mAppSwitchDoubleTapCustomApp;
+
+    private PreferenceCategory mNavigationBarOptionsCategory;
+    private PreferenceCategory mNavigationHomeKeyCategory;
+    private PreferenceCategory mNavigationBackKeyCategory;
+    private PreferenceCategory mNavigationAppSwitchKeyCategory;
+    private PreferenceCategory mNavigationMenuKeyCategory;
+    private PreferenceCategory mNavigationAssistKeyCategory;
 
     private Handler mHandler;
+
+    Action mDefaultHomeLongPressAction;
+    Action mDefaultHomeDoubleTapAction;
+    Action mDefaultBackLongPressAction;
+    Action mDefaultBackDoubleTapAction;
+    Action mDefaultAppSwitchShortPressAction;
+    Action mDefaultAppSwitchLongPressAction;
+    Action mDefaultAppSwitchDoubleTapAction;
+    Action mDefaultMenuShortPressAction;
+    Action mDefaultMenuLongPressAction;
+    Action mDefaultMenuDoubleTapAction;
+    Action mDefaultAssistShortPressAction;
+    Action mDefaultAssistLongPressAction;
+    Action mDefaultAssistDoubleTapAction;
+    Action mDefaultEdgeLongSwipeAction;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,80 +166,115 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
 
         mHandler = new Handler();
 
-        // Force Navigation bar related options
-        mDisableNavigationKeys = findPreference(KEY_DISABLE_NAV_KEYS);
+        final boolean hasMenuKey = DeviceUtils.hasMenuKey(getActivity());
+        final boolean hasAssistKey = DeviceUtils.hasAssistKey(getActivity());
 
-        mNavigationPreferencesCat = findPreference(CATEGORY_NAVBAR);
+        mDefaultHomeLongPressAction = Action.fromIntSafe(res.getInteger(org.lineageos.platform.internal.R.integer.config_longPressOnHomeBehavior));
+        mDefaultHomeDoubleTapAction = Action.fromIntSafe(res.getInteger(org.lineageos.platform.internal.R.integer.config_doubleTapOnHomeBehavior));
+        mDefaultBackLongPressAction = Action.fromIntSafe(res.getInteger(org.lineageos.platform.internal.R.integer.config_longPressOnBackBehavior));
+        mDefaultBackDoubleTapAction = Action.fromIntSafe(res.getInteger(org.lineageos.platform.internal.R.integer.config_doubleTapOnBackBehavior));
+        mDefaultAppSwitchShortPressAction = Action.APP_SWITCH;
+        mDefaultAppSwitchLongPressAction = Action.fromIntSafe(res.getInteger(org.lineageos.platform.internal.R.integer.config_longPressOnAppSwitchBehavior));
+        mDefaultAppSwitchDoubleTapAction = Action.fromIntSafe(res.getInteger(org.lineageos.platform.internal.R.integer.config_doubleTapOnAppSwitchBehavior));
+        mDefaultMenuShortPressAction = Action.MENU;
+        mDefaultMenuLongPressAction = Action.fromIntSafe(res.getInteger(org.lineageos.platform.internal.R.integer.config_longPressOnMenuBehavior));
+        mDefaultMenuDoubleTapAction = Action.fromIntSafe(res.getInteger(org.lineageos.platform.internal.R.integer.config_doubleTapOnMenuBehavior));
+        mDefaultAssistShortPressAction = Action.SEARCH;
+        mDefaultAssistLongPressAction = Action.fromIntSafe(res.getInteger(org.lineageos.platform.internal.R.integer.config_longPressOnAssistBehavior));
+        mDefaultAssistDoubleTapAction = Action.fromIntSafe(res.getInteger(org.lineageos.platform.internal.R.integer.config_doubleTapOnAssistBehavior));
+        mDefaultEdgeLongSwipeAction = Action.NOTHING;
 
-        Action defaultHomeLongPressAction = Action.fromIntSafe(res.getInteger(
-                org.lineageos.platform.internal.R.integer.config_longPressOnHomeBehavior));
-        Action defaultHomeDoubleTapAction = Action.fromIntSafe(res.getInteger(
-                org.lineageos.platform.internal.R.integer.config_doubleTapOnHomeBehavior));
-        Action defaultAppSwitchLongPressAction = Action.fromIntSafe(res.getInteger(
-                org.lineageos.platform.internal.R.integer.config_longPressOnAppSwitchBehavior));
-        Action homeLongPressAction = Action.fromSettings(resolver,
-                LineageSettings.System.KEY_HOME_LONG_PRESS_ACTION,
-                defaultHomeLongPressAction);
-        Action homeDoubleTapAction = Action.fromSettings(resolver,
-                LineageSettings.System.KEY_HOME_DOUBLE_TAP_ACTION,
-                defaultHomeDoubleTapAction);
-        Action appSwitchLongPressAction = Action.fromSettings(resolver,
-                LineageSettings.System.KEY_APP_SWITCH_LONG_PRESS_ACTION,
-                defaultAppSwitchLongPressAction);
-        Action edgeLongSwipeAction = Action.fromSettings(resolver,
-                LineageSettings.System.KEY_EDGE_LONG_SWIPE_ACTION,
-                Action.NOTHING);
+        Action homeLongPressAction = Action.fromSettings(resolver, LineageSettings.System.KEY_HOME_LONG_PRESS_ACTION, mDefaultHomeLongPressAction);
+        Action homeDoubleTapAction = Action.fromSettings(resolver, LineageSettings.System.KEY_HOME_DOUBLE_TAP_ACTION, mDefaultHomeDoubleTapAction);
+        Action backLongPressAction = Action.fromSettings(resolver, LineageSettings.System.KEY_BACK_LONG_PRESS_ACTION, mDefaultBackLongPressAction);
+        Action backDoubleTapAction = Action.fromSettings(resolver, LineageSettings.System.KEY_BACK_DOUBLE_TAP_ACTION, mDefaultBackDoubleTapAction);
+        Action appSwitchShortPressAction = Action.fromSettings(resolver, LineageSettings.System.KEY_APP_SWITCH_ACTION, mDefaultAppSwitchShortPressAction);
+        Action appSwitchLongPressAction = Action.fromSettings(resolver, LineageSettings.System.KEY_APP_SWITCH_LONG_PRESS_ACTION, mDefaultAppSwitchLongPressAction);
+        Action appSwitchDoubleTapAction = Action.fromSettings(resolver, LineageSettings.System.KEY_APP_SWITCH_DOUBLE_TAP_ACTION, mDefaultAppSwitchDoubleTapAction);
+        Action menuShortPressAction = Action.fromSettings(resolver, LineageSettings.System.KEY_MENU_ACTION, mDefaultMenuShortPressAction);
+        Action menuLongPressAction = Action.fromSettings(resolver, LineageSettings.System.KEY_MENU_LONG_PRESS_ACTION, mDefaultMenuLongPressAction);
+        Action menuDoubleTapAction = Action.fromSettings(resolver, LineageSettings.System.KEY_MENU_DOUBLE_TAP_ACTION, mDefaultMenuDoubleTapAction);
+        Action assistShortPressAction = Action.fromSettings(resolver, LineageSettings.System.KEY_ASSIST_ACTION, mDefaultAssistShortPressAction);
+        Action assistLongPressAction = Action.fromSettings(resolver, LineageSettings.System.KEY_ASSIST_LONG_PRESS_ACTION, mDefaultAssistLongPressAction);
+        Action assistDoubleTapAction = Action.fromSettings(resolver, LineageSettings.System.KEY_ASSIST_DOUBLE_TAP_ACTION, mDefaultAssistDoubleTapAction);
 
-        // Navigation bar type
+        Action edgeLongSwipeAction = Action.fromSettings(resolver, LineageSettings.System.KEY_EDGE_LONG_SWIPE_ACTION, Action.NOTHING);
+
+        mNavigationBarOptionsCategory = findPreference(CATEGORY_NAVBAR_OPTIONS);
+        mNavigationHomeKeyCategory = findPreference(CATEGORY_HOME_KEY);
+        mNavigationBackKeyCategory = findPreference(CATEGORY_BACK_KEY);
+        mNavigationAppSwitchKeyCategory = findPreference(CATEGORY_APP_SWITCH_KEY);
+        mNavigationMenuKeyCategory = findPreference(CATEGORY_MENU_KEY);
+        mNavigationAssistKeyCategory = findPreference(CATEGORY_ASSIST_KEY);
+
+        mEnableNavigationBar = findPreference(KEY_NAVIGATION_BAR_ENABLE);
         mNavigationSystemType = findPreference(KEY_NAVIGATION_SYSTEM_TYPE);
-
-        // Navigation bar arrow keys while typing
         mNavigationArrowKeys = findPreference(KEY_NAVIGATION_ARROW_KEYS);
+        mNavigationInvertLayout = findPreference(KEY_NAVIGATION_INVERT_LAYOUT);
+        mEdgeLongSwipeAction = initList(KEY_EDGE_LONG_SWIPE_ACTION, edgeLongSwipeAction);
 
-        // Navigation bar home long press
-        mNavigationHomeLongPressAction = initList(KEY_NAVIGATION_HOME_LONG_PRESS,
-                homeLongPressAction);
+        mHomeLongPressAction = initList(KEY_HOME_LONG_PRESS_ACTION, homeLongPressAction);
+        mHomeDoubleTapAction = initList(KEY_HOME_DOUBLE_TAP_ACTION, homeDoubleTapAction);
+        mBackLongPressAction = initList(KEY_BACK_LONG_PRESS_ACTION, backLongPressAction);
+        mBackDoubleTapAction = initList(KEY_BACK_DOUBLE_TAP_ACTION, backDoubleTapAction);
+        mAppSwitchShortPressAction = initList(KEY_APP_SWITCH_PRESS_ACTION, appSwitchShortPressAction);
+        mAppSwitchLongPressAction = initList(KEY_APP_SWITCH_LONG_PRESS_ACTION, appSwitchLongPressAction);
+        mAppSwitchDoubleTapAction = initList(KEY_APP_SWITCH_DOUBLE_TAP_ACTION, appSwitchDoubleTapAction);
+        mMenuShortPressAction = initList(KEY_MENU_PRESS_ACTION, menuShortPressAction);
+        mMenuLongPressAction = initList(KEY_MENU_LONG_PRESS_ACTION, menuLongPressAction);
+        mMenuDoubleTapAction = initList(KEY_MENU_DOUBLE_TAP_ACTION, menuDoubleTapAction);
+        mAssistShortPressAction = initList(KEY_ASSIST_PRESS_ACTION, assistShortPressAction);
+        mAssistLongPressAction = initList(KEY_ASSIST_LONG_PRESS_ACTION, assistLongPressAction);
+        mAssistDoubleTapAction = initList(KEY_ASSIST_DOUBLE_TAP_ACTION, assistDoubleTapAction);
 
-        // Navigation bar home double tap
-        mNavigationHomeDoubleTapAction = initList(KEY_NAVIGATION_HOME_DOUBLE_TAP,
-                homeDoubleTapAction);
-
-        // Navigation bar app switch long press
-        mNavigationAppSwitchLongPressAction = initList(KEY_NAVIGATION_APP_SWITCH_LONG_PRESS,
-                appSwitchLongPressAction);
-
-        // Edge long swipe gesture
-        mEdgeLongSwipeAction = initList(KEY_EDGE_LONG_SWIPE, edgeLongSwipeAction);
+        mHomeLongPressCustomApp = findPreference(KEY_HOME_LONG_PRESS_CUSTOM_APP);
+        mHomeDoubleTapCustomApp = findPreference(KEY_HOME_DOUBLE_TAP_CUSTOM_APP);
+        mBackLongPressCustomApp = findPreference(KEY_BACK_LONG_PRESS_CUSTOM_APP);
+        mBackDoubleTapCustomApp = findPreference(KEY_BACK_DOUBLE_TAP_CUSTOM_APP);
+        mAppSwitchLongPressCustomApp = findPreference(KEY_APP_SWITCH_LONG_PRESS_CUSTOM_APP);
+        mAppSwitchDoubleTapCustomApp = findPreference(KEY_APP_SWITCH_DOUBLE_TAP_CUSTOM_APP);
 
         final LineageHardwareManager hardware = LineageHardwareManager.getInstance(getActivity());
 
         // Hardware key disabler
         if (isKeyDisablerSupported(getActivity())) {
-            // Remove keys that can be provided by the navbar
-            updateDisableNavkeysOption();
-            mNavigationPreferencesCat.setEnabled(mDisableNavigationKeys.isChecked());
+            updateEnableNavigationBarOption();
         } else {
-            prefScreen.removePreference(mDisableNavigationKeys);
+            // Remove enable navbar option if no hardware keys
+            prefScreen.removePreference(mEnableNavigationBar);
         }
-        updateDisableNavkeysCategories(mDisableNavigationKeys.isChecked(), /* force */ true);
+
+        if (!hasMenuKey) {
+            prefScreen.removePreference(mNavigationMenuKeyCategory);
+        }
+
+        if (!hasAssistKey) {
+            prefScreen.removePreference(mNavigationAssistKeyCategory);
+        }
 
         // Override key actions on Go devices in order to hide any unsupported features
         if (ActivityManager.isLowRamDeviceStatic()) {
             String[] actionEntriesGo = res.getStringArray(R.array.hardware_keys_action_entries_go);
             String[] actionValuesGo = res.getStringArray(R.array.hardware_keys_action_values_go);
 
-            mNavigationHomeLongPressAction.setEntries(actionEntriesGo);
-            mNavigationHomeLongPressAction.setEntryValues(actionValuesGo);
-
-            mNavigationHomeDoubleTapAction.setEntries(actionEntriesGo);
-            mNavigationHomeDoubleTapAction.setEntryValues(actionValuesGo);
-
-            mNavigationAppSwitchLongPressAction.setEntries(actionEntriesGo);
-            mNavigationAppSwitchLongPressAction.setEntryValues(actionValuesGo);
-
-            mEdgeLongSwipeAction.setEntries(actionEntriesGo);
-            mEdgeLongSwipeAction.setEntryValues(actionValuesGo);
+            setListGoEntries(mHomeLongPressAction, actionEntriesGo, actionValuesGo);
+            setListGoEntries(mHomeDoubleTapAction, actionEntriesGo, actionValuesGo);
+            setListGoEntries(mBackLongPressAction, actionEntriesGo, actionValuesGo);
+            setListGoEntries(mBackDoubleTapAction, actionEntriesGo, actionValuesGo);
+            setListGoEntries(mAppSwitchShortPressAction, actionEntriesGo, actionValuesGo);
+            setListGoEntries(mAppSwitchLongPressAction, actionEntriesGo, actionValuesGo);
+            setListGoEntries(mAppSwitchDoubleTapAction, actionEntriesGo, actionValuesGo);
+            setListGoEntries(mMenuShortPressAction, actionEntriesGo, actionValuesGo);
+            setListGoEntries(mMenuLongPressAction, actionEntriesGo, actionValuesGo);
+            setListGoEntries(mMenuDoubleTapAction, actionEntriesGo, actionValuesGo);
+            setListGoEntries(mAssistShortPressAction, actionEntriesGo, actionValuesGo);
+            setListGoEntries(mAssistLongPressAction, actionEntriesGo, actionValuesGo);
+            setListGoEntries(mAssistDoubleTapAction, actionEntriesGo, actionValuesGo);
+            setListGoEntries(mEdgeLongSwipeAction, actionEntriesGo, actionValuesGo);
         }
+
+        updatePreferences(mEnableNavigationBar.isChecked());
+        updateCustomAppSummaries();
     }
 
     @Override
@@ -180,6 +285,44 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
+        updatePreferences(mEnableNavigationBar.isChecked());
+        updateCustomAppSummaries();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.add(0, MENU_RESET, 0, R.string.navigation_reset_button_settings_title)
+                .setAlphabeticShortcut('r')
+                .setEnabled(true)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case MENU_RESET:
+                resetAll();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void resetAll() {
+        new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.navigation_reset_button_settings_title)
+                .setIconAttribute(android.R.attr.alertDialogIcon)
+                .setMessage(R.string.navigation_reset_button_settings_message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        resetButtonsToDefaults();
+                        dialog.dismiss();
+
+                    }
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
     }
 
     private ListPreference initList(String key, Action value) {
@@ -202,26 +345,70 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
         LineageSettings.System.putInt(getContentResolver(), setting, Integer.valueOf(value));
     }
 
-    private void handleSystemListChange(ListPreference pref, Object newValue, String setting) {
-        String value = (String) newValue;
-        int index = pref.findIndexOfValue(value);
-        pref.setSummary(pref.getEntries()[index]);
-        Settings.System.putInt(getContentResolver(), setting, Integer.valueOf(value));
+    private void setListGoEntries(ListPreference listPref, String[] entries, String[] values) {
+        listPref.setEntries(entries);
+        listPref.setEntryValues(values);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mNavigationHomeLongPressAction) {
+        if (preference == mHomeLongPressAction) {
             handleListChange((ListPreference) preference, newValue,
                     LineageSettings.System.KEY_HOME_LONG_PRESS_ACTION);
+            updateCustomAppSummaries();
             return true;
-        } else if (preference == mNavigationHomeDoubleTapAction) {
+        } else if (preference == mHomeDoubleTapAction) {
             handleListChange((ListPreference) preference, newValue,
                     LineageSettings.System.KEY_HOME_DOUBLE_TAP_ACTION);
+            updateCustomAppSummaries();
             return true;
-        } else if (preference == mNavigationAppSwitchLongPressAction) {
+        } else if (preference == mBackLongPressAction) {
+            handleListChange((ListPreference) preference, newValue,
+                    LineageSettings.System.KEY_BACK_LONG_PRESS_ACTION);
+            updateCustomAppSummaries();
+            return true;
+        } else if (preference == mBackDoubleTapAction) {
+            handleListChange((ListPreference) preference, newValue,
+                    LineageSettings.System.KEY_BACK_DOUBLE_TAP_ACTION);
+            updateCustomAppSummaries();
+            return true;
+        } else if (preference == mAppSwitchShortPressAction) {
+            handleListChange((ListPreference) preference, newValue,
+                    LineageSettings.System.KEY_APP_SWITCH_ACTION);
+            return true;
+        } else if (preference == mAppSwitchLongPressAction) {
             handleListChange((ListPreference) preference, newValue,
                     LineageSettings.System.KEY_APP_SWITCH_LONG_PRESS_ACTION);
+            updateCustomAppSummaries();
+            return true;
+        } else if (preference == mAppSwitchDoubleTapAction) {
+            handleListChange((ListPreference) preference, newValue,
+                    LineageSettings.System.KEY_APP_SWITCH_DOUBLE_TAP_ACTION);
+            updateCustomAppSummaries();
+            return true;
+        } else if (preference == mMenuShortPressAction) {
+            handleListChange((ListPreference) preference, newValue,
+                    LineageSettings.System.KEY_MENU_ACTION);
+            return true;
+        } else if (preference == mMenuLongPressAction) {
+            handleListChange((ListPreference) preference, newValue,
+                    LineageSettings.System.KEY_MENU_LONG_PRESS_ACTION);
+            return true;
+        } else if (preference == mMenuDoubleTapAction) {
+            handleListChange((ListPreference) preference, newValue,
+                    LineageSettings.System.KEY_MENU_DOUBLE_TAP_ACTION);
+            return true;
+        } else if (preference == mAssistShortPressAction) {
+            handleListChange((ListPreference) preference, newValue,
+                    LineageSettings.System.KEY_ASSIST_ACTION);
+            return true;
+        } else if (preference == mAssistLongPressAction) {
+            handleListChange((ListPreference) preference, newValue,
+                    LineageSettings.System.KEY_ASSIST_LONG_PRESS_ACTION);
+            return true;
+        } else if (preference == mAssistDoubleTapAction) {
+            handleListChange((ListPreference) preference, newValue,
+                    LineageSettings.System.KEY_ASSIST_DOUBLE_TAP_ACTION);
             return true;
         } else if (preference == mEdgeLongSwipeAction) {
             handleListChange(mEdgeLongSwipeAction, newValue,
@@ -231,48 +418,147 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
         return false;
     }
 
-    private static void writeDisableNavkeysOption(Context context, boolean enabled) {
+    private void resetButtonsToDefaults() {
+        resetListPreference(mHomeLongPressAction, mDefaultHomeLongPressAction,
+                LineageSettings.System.KEY_HOME_LONG_PRESS_ACTION);
+        resetListPreference(mHomeDoubleTapAction, mDefaultHomeDoubleTapAction,
+                LineageSettings.System.KEY_HOME_DOUBLE_TAP_ACTION);
+        resetListPreference(mBackLongPressAction, mDefaultBackLongPressAction,
+                LineageSettings.System.KEY_BACK_LONG_PRESS_ACTION);
+        resetListPreference(mBackDoubleTapAction, mDefaultBackDoubleTapAction,
+                LineageSettings.System.KEY_BACK_DOUBLE_TAP_ACTION);
+        resetListPreference(mAppSwitchShortPressAction, mDefaultAppSwitchShortPressAction,
+                LineageSettings.System.KEY_APP_SWITCH_ACTION);
+        resetListPreference(mAppSwitchLongPressAction, mDefaultAppSwitchLongPressAction,
+                LineageSettings.System.KEY_APP_SWITCH_LONG_PRESS_ACTION);
+        resetListPreference(mAppSwitchDoubleTapAction, mDefaultAppSwitchDoubleTapAction,
+                LineageSettings.System.KEY_APP_SWITCH_DOUBLE_TAP_ACTION);
+        resetListPreference(mMenuShortPressAction, mDefaultMenuShortPressAction,
+                LineageSettings.System.KEY_MENU_ACTION);
+        resetListPreference(mMenuLongPressAction, mDefaultMenuLongPressAction,
+                LineageSettings.System.KEY_MENU_LONG_PRESS_ACTION);
+        resetListPreference(mMenuDoubleTapAction, mDefaultMenuDoubleTapAction,
+                LineageSettings.System.KEY_MENU_DOUBLE_TAP_ACTION);
+        resetListPreference(mAssistShortPressAction, mDefaultAssistShortPressAction,
+                LineageSettings.System.KEY_ASSIST_ACTION);
+        resetListPreference(mAssistLongPressAction, mDefaultAssistLongPressAction,
+                LineageSettings.System.KEY_ASSIST_LONG_PRESS_ACTION);
+        resetListPreference(mAssistDoubleTapAction, mDefaultAssistDoubleTapAction,
+                LineageSettings.System.KEY_ASSIST_DOUBLE_TAP_ACTION);
+        resetListPreference(mEdgeLongSwipeAction, mDefaultEdgeLongSwipeAction,
+                LineageSettings.System.KEY_EDGE_LONG_SWIPE_ACTION);
+
+        resetCustomAppSettings(
+                LineageSettings.System.KEY_HOME_LONG_PRESS_CUSTOM_APP,
+                LineageSettings.System.KEY_HOME_LONG_PRESS_CUSTOM_APP_FR_NAME,
+                LineageSettings.System.KEY_HOME_LONG_PRESS_CUSTOM_ACTIVITY);
+        resetCustomAppSettings(
+                LineageSettings.System.KEY_HOME_DOUBLE_TAP_CUSTOM_APP,
+                LineageSettings.System.KEY_HOME_DOUBLE_TAP_CUSTOM_APP_FR_NAME,
+                LineageSettings.System.KEY_HOME_DOUBLE_TAP_CUSTOM_ACTIVITY);
+        resetCustomAppSettings(
+                LineageSettings.System.KEY_BACK_LONG_PRESS_CUSTOM_APP,
+                LineageSettings.System.KEY_BACK_LONG_PRESS_CUSTOM_APP_FR_NAME,
+                LineageSettings.System.KEY_BACK_LONG_PRESS_CUSTOM_ACTIVITY);
+        resetCustomAppSettings(
+                LineageSettings.System.KEY_BACK_DOUBLE_TAP_CUSTOM_APP,
+                LineageSettings.System.KEY_BACK_DOUBLE_TAP_CUSTOM_APP_FR_NAME,
+                LineageSettings.System.KEY_BACK_DOUBLE_TAP_CUSTOM_ACTIVITY);
+        resetCustomAppSettings(
+                LineageSettings.System.KEY_APP_SWITCH_LONG_PRESS_CUSTOM_APP,
+                LineageSettings.System.KEY_APP_SWITCH_LONG_PRESS_CUSTOM_APP_FR_NAME,
+                LineageSettings.System.KEY_APP_SWITCH_LONG_PRESS_CUSTOM_ACTIVITY);
+        resetCustomAppSettings(
+                LineageSettings.System.KEY_APP_SWITCH_DOUBLE_TAP_CUSTOM_APP,
+                LineageSettings.System.KEY_APP_SWITCH_DOUBLE_TAP_CUSTOM_APP_FR_NAME,
+                LineageSettings.System.KEY_APP_SWITCH_DOUBLE_TAP_CUSTOM_ACTIVITY);
+        updateCustomAppSummaries();
+    }
+
+    private void resetListPreference(ListPreference pref, Action defaultAction, String setting) {
+        String action = Integer.toString(defaultAction.ordinal());
+        handleListChange(pref, action, setting);
+        pref.setValue(action);
+    }
+
+    private void resetCustomAppSettings(String customAppPref, String customAppFrNamePref, String customActivityPref) {
+        LineageSettings.System.putStringForUser(getActivity().getContentResolver(),
+                customAppPref, "", UserHandle.USER_CURRENT);
+        LineageSettings.System.putStringForUser(getActivity().getContentResolver(),
+                customAppFrNamePref, "", UserHandle.USER_CURRENT);
+        LineageSettings.System.putStringForUser(getActivity().getContentResolver(),
+                customActivityPref, "NONE", UserHandle.USER_CURRENT);
+    }
+
+    private static void writeForceShowNavbarSetting(Context context, boolean enabled) {
         LineageSettings.System.putIntForUser(context.getContentResolver(),
                 LineageSettings.System.FORCE_SHOW_NAVBAR, enabled ? 1 : 0, UserHandle.USER_CURRENT);
     }
 
-    private void updateDisableNavkeysOption() {
+    private void updateEnableNavigationBarOption() {
         boolean enabled = LineageSettings.System.getIntForUser(getActivity().getContentResolver(),
                 LineageSettings.System.FORCE_SHOW_NAVBAR, 0, UserHandle.USER_CURRENT) != 0;
 
-        mDisableNavigationKeys.setChecked(enabled);
+        mEnableNavigationBar.setChecked(enabled);
     }
 
-    private void updateDisableNavkeysCategories(boolean navbarEnabled, boolean force) {
-        final PreferenceScreen prefScreen = getPreferenceScreen();
+    private void updatePreferences(boolean navbarEnabled) {
+        final boolean gestureNavBar = DeviceUtils.isEdgeToEdgeEnabled(getContext());
+        final boolean twoButtonNavBar = DeviceUtils.isSwipeUpEnabled(getContext());
+        final boolean legacyNavBar = !gestureNavBar && !twoButtonNavBar;
 
-        /* Toggle hardkey control availability depending on navbar state */
-        if (mNavigationPreferencesCat != null) {
-            if (force || navbarEnabled) {
-                if (DeviceUtils.isEdgeToEdgeEnabled(getContext())) {
-                    mNavigationArrowKeys.setEnabled(false);
-                    mNavigationHomeLongPressAction.setEnabled(false);
-                    mNavigationHomeDoubleTapAction.setEnabled(false);
-                    mNavigationAppSwitchLongPressAction.setEnabled(false);
-                    mEdgeLongSwipeAction.setEnabled(true);
-                    updateNavigationSystemTypeSummary(R.string.edge_to_edge_navigation_title);
-                } else if (DeviceUtils.isSwipeUpEnabled(getContext())) {
-                    mNavigationArrowKeys.setEnabled(true);
-                    mNavigationHomeLongPressAction.setEnabled(true);
-                    mNavigationHomeDoubleTapAction.setEnabled(true);
-                    mNavigationAppSwitchLongPressAction.setEnabled(false);
-                    mEdgeLongSwipeAction.setEnabled(false);
-                    updateNavigationSystemTypeSummary(R.string.swipe_up_to_switch_apps_title);
-                } else {
-                    mNavigationArrowKeys.setEnabled(true);
-                    mNavigationHomeLongPressAction.setEnabled(true);
-                    mNavigationHomeDoubleTapAction.setEnabled(true);
-                    mNavigationAppSwitchLongPressAction.setEnabled(true);
-                    mEdgeLongSwipeAction.setEnabled(false);
-                    updateNavigationSystemTypeSummary(R.string.legacy_navigation_title);
-                }
-            }
+        mNavigationSystemType.setEnabled(navbarEnabled);
+        if (gestureNavBar) {
+            updateNavigationSystemTypeSummary(R.string.edge_to_edge_navigation_title);
+        } else if (twoButtonNavBar) {
+            updateNavigationSystemTypeSummary(R.string.swipe_up_to_switch_apps_title);
+        } else {
+            updateNavigationSystemTypeSummary(R.string.legacy_navigation_title);
         }
+        mNavigationArrowKeys.setEnabled(navbarEnabled && !gestureNavBar);
+        mNavigationInvertLayout.setEnabled(navbarEnabled && !gestureNavBar);
+        mEdgeLongSwipeAction.setEnabled(navbarEnabled && gestureNavBar);
+
+        mNavigationHomeKeyCategory.setEnabled(!navbarEnabled || !gestureNavBar);
+        mNavigationBackKeyCategory.setEnabled(!navbarEnabled || !gestureNavBar);
+        mNavigationAppSwitchKeyCategory.setEnabled(!navbarEnabled || legacyNavBar);
+    }
+
+    private void updateCustomAppSummaries() {
+        mHomeLongPressCustomApp.setEnabled(isCustomAppAction(
+                LineageSettings.System.KEY_HOME_LONG_PRESS_ACTION, mDefaultHomeLongPressAction));
+        mHomeDoubleTapCustomApp.setEnabled(isCustomAppAction(
+                LineageSettings.System.KEY_HOME_DOUBLE_TAP_ACTION, mDefaultHomeDoubleTapAction));
+        mBackLongPressCustomApp.setEnabled(isCustomAppAction(
+                LineageSettings.System.KEY_BACK_LONG_PRESS_ACTION, mDefaultBackLongPressAction));
+        mBackDoubleTapCustomApp.setEnabled(isCustomAppAction(
+                LineageSettings.System.KEY_BACK_DOUBLE_TAP_ACTION, mDefaultBackDoubleTapAction));
+        mAppSwitchLongPressCustomApp.setEnabled(isCustomAppAction(
+                LineageSettings.System.KEY_APP_SWITCH_LONG_PRESS_ACTION, mDefaultAppSwitchLongPressAction));
+        mAppSwitchDoubleTapCustomApp.setEnabled(isCustomAppAction(
+                LineageSettings.System.KEY_APP_SWITCH_DOUBLE_TAP_ACTION, mDefaultAppSwitchDoubleTapAction));
+
+        setCustomAppSummary(mHomeLongPressCustomApp, LineageSettings.System.KEY_HOME_LONG_PRESS_CUSTOM_APP_FR_NAME);
+        setCustomAppSummary(mBackLongPressCustomApp, LineageSettings.System.KEY_BACK_LONG_PRESS_CUSTOM_APP_FR_NAME);
+        setCustomAppSummary(mAppSwitchLongPressCustomApp, LineageSettings.System.KEY_APP_SWITCH_LONG_PRESS_CUSTOM_APP_FR_NAME);
+        setCustomAppSummary(mHomeDoubleTapCustomApp, LineageSettings.System.KEY_HOME_DOUBLE_TAP_CUSTOM_APP_FR_NAME);
+        setCustomAppSummary(mBackDoubleTapCustomApp, LineageSettings.System.KEY_BACK_DOUBLE_TAP_CUSTOM_APP_FR_NAME);
+        setCustomAppSummary(mAppSwitchDoubleTapCustomApp, LineageSettings.System.KEY_APP_SWITCH_DOUBLE_TAP_CUSTOM_APP_FR_NAME);
+    }
+
+    private boolean isCustomAppAction(String key, Action def) {
+        int action = LineageSettings.System.getIntForUser(getContentResolver(),
+                key, def.ordinal(), UserHandle.USER_CURRENT);
+        return (action == Action.CUSTOM_APP.ordinal());
+    }
+
+    private void setCustomAppSummary(Preference pref, String key) {
+        String summary = LineageSettings.System.getStringForUser(getActivity().getContentResolver(),
+                key, UserHandle.USER_CURRENT);
+        if (TextUtils.isEmpty(summary)) {
+            summary = getString(R.string.none);
+        }
+        pref.setSummary(summary);
     }
 
     private void updateNavigationSystemTypeSummary(int systemType) {
@@ -294,23 +580,21 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
         boolean enabled = LineageSettings.System.getIntForUser(context.getContentResolver(),
                 LineageSettings.System.FORCE_SHOW_NAVBAR, 0, UserHandle.USER_CURRENT) != 0;
 
-        writeDisableNavkeysOption(context, enabled);
+        writeForceShowNavbarSetting(context, enabled);
     }
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (preference == mDisableNavigationKeys) {
-            mDisableNavigationKeys.setEnabled(false);
-            mNavigationPreferencesCat.setEnabled(false);
-            writeDisableNavkeysOption(getActivity(), mDisableNavigationKeys.isChecked());
-            updateDisableNavkeysOption();
-            updateDisableNavkeysCategories(true, false);
+        if (preference == mEnableNavigationBar) {
+            mEnableNavigationBar.setEnabled(false);
+            writeForceShowNavbarSetting(getActivity(), mEnableNavigationBar.isChecked());
+            updateEnableNavigationBarOption();
+            updatePreferences(false);
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    mDisableNavigationKeys.setEnabled(true);
-                    mNavigationPreferencesCat.setEnabled(mDisableNavigationKeys.isChecked());
-                    updateDisableNavkeysCategories(mDisableNavigationKeys.isChecked(), false);
+                    mEnableNavigationBar.setEnabled(true);
+                    updatePreferences(mEnableNavigationBar.isChecked());
                 }
             }, 1000);
         }
@@ -337,8 +621,23 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
                     List<String> keys = super.getNonIndexableKeys(context);
 
                     if (!isKeyDisablerSupported(context)) {
-                        keys.add(KEY_DISABLE_NAV_KEYS);
+                        keys.add(KEY_NAVIGATION_BAR_ENABLE);
                     }
+
+                    if (!DeviceUtils.hasMenuKey(context)) {
+                        keys.add(CATEGORY_MENU_KEY);
+                        keys.add(KEY_MENU_PRESS_ACTION);
+                        keys.add(KEY_MENU_LONG_PRESS_ACTION);
+                        keys.add(KEY_MENU_DOUBLE_TAP_ACTION);
+                    }
+
+                    if (!DeviceUtils.hasAssistKey(context)) {
+                        keys.add(CATEGORY_ASSIST_KEY);
+                        keys.add(KEY_ASSIST_PRESS_ACTION);
+                        keys.add(KEY_ASSIST_LONG_PRESS_ACTION);
+                        keys.add(KEY_ASSIST_DOUBLE_TAP_ACTION);
+                    }
+
                     return keys;
                 }
             };

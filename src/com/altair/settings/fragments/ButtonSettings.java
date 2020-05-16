@@ -62,17 +62,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String KEY_CAMERA_LAUNCH = "camera_launch";
     private static final String KEY_CAMERA_SLEEP_ON_RELEASE = "camera_sleep_on_release";
     private static final String KEY_CAMERA_WAKE_SCREEN = "camera_wake_screen";
-    private static final String KEY_HOME_LONG_PRESS = "hardware_keys_home_long_press";
-    private static final String KEY_HOME_DOUBLE_TAP = "hardware_keys_home_double_tap";
     private static final String KEY_HOME_WAKE_SCREEN = "home_wake_screen";
-    private static final String KEY_MENU_PRESS = "hardware_keys_menu_press";
-    private static final String KEY_MENU_LONG_PRESS = "hardware_keys_menu_long_press";
     private static final String KEY_MENU_WAKE_SCREEN = "menu_wake_screen";
-    private static final String KEY_ASSIST_PRESS = "hardware_keys_assist_press";
-    private static final String KEY_ASSIST_LONG_PRESS = "hardware_keys_assist_long_press";
     private static final String KEY_ASSIST_WAKE_SCREEN = "assist_wake_screen";
-    private static final String KEY_APP_SWITCH_PRESS = "hardware_keys_app_switch_press";
-    private static final String KEY_APP_SWITCH_LONG_PRESS = "hardware_keys_app_switch_long_press";
     private static final String KEY_APP_SWITCH_WAKE_SCREEN = "app_switch_wake_screen";
     private static final String KEY_VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
     private static final String KEY_SWAP_VOLUME_BUTTONS = "swap_volume_buttons";
@@ -91,30 +83,24 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String KEY_BACKLIGHT_BRIGHTNESS = "navkeys_backlight_brightness";
 
     private static final String CATEGORY_BACKLIGHT = "navkeys_backlight";
+    private static final String CATEGORY_WAKE_SCREEN = "wake_screen";
     private static final String CATEGORY_POWER = "power_key";
     private static final String CATEGORY_HOME = "home_key";
-    private static final String CATEGORY_BACK = "back_key";
-    private static final String CATEGORY_MENU = "menu_key";
-    private static final String CATEGORY_ASSIST = "assist_key";
-    private static final String CATEGORY_APPSWITCH = "app_switch_key";
-    private static final String CATEGORY_CAMERA = "camera_key";
     private static final String CATEGORY_VOLUME = "volume_keys";
+    private static final String CATEGORY_CAMERA = "camera_key";
 
     private static final int DEFAULT_BUTTON_TIMEOUT = 5;
 
-    private ListPreference mHomeLongPressAction;
-    private ListPreference mHomeDoubleTapAction;
-    private ListPreference mMenuPressAction;
-    private ListPreference mMenuLongPressAction;
-    private ListPreference mAssistPressAction;
-    private ListPreference mAssistLongPressAction;
-    private ListPreference mAppSwitchPressAction;
-    private ListPreference mAppSwitchLongPressAction;
+    private SwitchPreference mHomeWakeScreen;
+    private SwitchPreference mBackWakeScreen;
+    private SwitchPreference mAppSwitchWakeScreen;
+    private SwitchPreference mMenuWakeScreen;
+    private SwitchPreference mAssistWakeScreen;
     private SwitchPreference mCameraWakeScreen;
     private SwitchPreference mCameraSleepOnRelease;
+    private SwitchPreference mVolumeWakeScreen;
     private SwitchPreference mCameraLaunch;
     private ListPreference mVolumeKeyCursorControl;
-    private SwitchPreference mVolumeWakeScreen;
     private SwitchPreference mVolumeMusicControls;
     private SwitchPreference mSwapVolumeButtons;
     private SwitchPreference mVolumePanelOnLeft;
@@ -157,14 +143,10 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         final boolean showCameraWake = DeviceUtils.canWakeUsingCameraKey(getActivity());
         final boolean showVolumeWake = DeviceUtils.canWakeUsingVolumeKeys(getActivity());
 
-        boolean hasAnyBindableKey = false;
         final PreferenceCategory backlightCategory = prefScreen.findPreference(CATEGORY_BACKLIGHT);
+        final PreferenceCategory wakeScreenCategory = prefScreen.findPreference(CATEGORY_WAKE_SCREEN);
         final PreferenceCategory powerCategory = prefScreen.findPreference(CATEGORY_POWER);
         final PreferenceCategory homeCategory = prefScreen.findPreference(CATEGORY_HOME);
-        final PreferenceCategory backCategory = prefScreen.findPreference(CATEGORY_BACK);
-        final PreferenceCategory menuCategory = prefScreen.findPreference(CATEGORY_MENU);
-        final PreferenceCategory assistCategory = prefScreen.findPreference(CATEGORY_ASSIST);
-        final PreferenceCategory appSwitchCategory = prefScreen.findPreference(CATEGORY_APPSWITCH);
         final PreferenceCategory volumeCategory = prefScreen.findPreference(CATEGORY_VOLUME);
         final PreferenceCategory cameraCategory = prefScreen.findPreference(CATEGORY_CAMERA);
 
@@ -182,22 +164,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         mHomeAnswerCall = findPreference(KEY_HOME_ANSWER_CALL);
 
         mHandler = new Handler();
-
-        Action defaultHomeLongPressAction = Action.fromIntSafe(res.getInteger(
-                org.lineageos.platform.internal.R.integer.config_longPressOnHomeBehavior));
-        Action defaultHomeDoubleTapAction = Action.fromIntSafe(res.getInteger(
-                org.lineageos.platform.internal.R.integer.config_doubleTapOnHomeBehavior));
-        Action defaultAppSwitchLongPressAction = Action.fromIntSafe(res.getInteger(
-                org.lineageos.platform.internal.R.integer.config_longPressOnAppSwitchBehavior));
-        Action homeLongPressAction = Action.fromSettings(mResolver,
-                LineageSettings.System.KEY_HOME_LONG_PRESS_ACTION,
-                defaultHomeLongPressAction);
-        Action homeDoubleTapAction = Action.fromSettings(mResolver,
-                LineageSettings.System.KEY_HOME_DOUBLE_TAP_ACTION,
-                defaultHomeDoubleTapAction);
-        Action appSwitchLongPressAction = Action.fromSettings(mResolver,
-                LineageSettings.System.KEY_APP_SWITCH_LONG_PRESS_ACTION,
-                defaultAppSwitchLongPressAction);
 
         final LineageHardwareManager hardware = LineageHardwareManager.getInstance(getActivity());
 
@@ -217,98 +183,17 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             prefScreen.removePreference(powerCategory);
         }
 
-        if (hasHomeKey) {
-            if (!showHomeWake) {
-                homeCategory.removePreference(findPreference(KEY_HOME_WAKE_SCREEN));
-            }
-
-            if (!TelephonyUtils.isVoiceCapable(getActivity())) {
-                homeCategory.removePreference(mHomeAnswerCall);
-                mHomeAnswerCall = null;
-            }
-
-            mHomeLongPressAction = initList(KEY_HOME_LONG_PRESS, homeLongPressAction);
-            mHomeDoubleTapAction = initList(KEY_HOME_DOUBLE_TAP, homeDoubleTapAction);
-            if (navKeysEnabled) {
-                mHomeLongPressAction.setEnabled(false);
-                mHomeDoubleTapAction.setEnabled(false);
-            }
-
-            hasAnyBindableKey = true;
-        } else {
+        if (!hasHomeKey || !TelephonyUtils.isVoiceCapable(getActivity())) {
             prefScreen.removePreference(homeCategory);
+            mHomeAnswerCall = null;
         }
 
-        if (hasBackKey) {
-            if (!showBackWake) {
-                backCategory.removePreference(findPreference(KEY_BACK_WAKE_SCREEN));
-                prefScreen.removePreference(backCategory);
-            }
-        } else {
-            prefScreen.removePreference(backCategory);
-        }
-
-        if (hasMenuKey) {
-            if (!showMenuWake) {
-                menuCategory.removePreference(findPreference(KEY_MENU_WAKE_SCREEN));
-            }
-
-            Action pressAction = Action.fromSettings(mResolver,
-                    LineageSettings.System.KEY_MENU_ACTION, Action.MENU);
-            mMenuPressAction = initList(KEY_MENU_PRESS, pressAction);
-
-            Action longPressAction = Action.fromSettings(mResolver,
-                        LineageSettings.System.KEY_MENU_LONG_PRESS_ACTION,
-                        hasAssistKey ? Action.NOTHING : Action.APP_SWITCH);
-            mMenuLongPressAction = initList(KEY_MENU_LONG_PRESS, longPressAction);
-
-            hasAnyBindableKey = true;
-        } else {
-            prefScreen.removePreference(menuCategory);
-        }
-
-        if (hasAssistKey) {
-            if (!showAssistWake) {
-                assistCategory.removePreference(findPreference(KEY_ASSIST_WAKE_SCREEN));
-            }
-
-            Action pressAction = Action.fromSettings(mResolver,
-                    LineageSettings.System.KEY_ASSIST_ACTION, Action.SEARCH);
-            mAssistPressAction = initList(KEY_ASSIST_PRESS, pressAction);
-
-            Action longPressAction = Action.fromSettings(mResolver,
-                    LineageSettings.System.KEY_ASSIST_LONG_PRESS_ACTION, Action.VOICE_SEARCH);
-            mAssistLongPressAction = initList(KEY_ASSIST_LONG_PRESS, longPressAction);
-
-            hasAnyBindableKey = true;
-        } else {
-            prefScreen.removePreference(assistCategory);
-        }
-
-        if (hasAppSwitchKey) {
-            if (!showAppSwitchWake) {
-                appSwitchCategory.removePreference(findPreference(KEY_APP_SWITCH_WAKE_SCREEN));
-            }
-
-            Action pressAction = Action.fromSettings(mResolver,
-                    LineageSettings.System.KEY_APP_SWITCH_ACTION, Action.APP_SWITCH);
-            mAppSwitchPressAction = initList(KEY_APP_SWITCH_PRESS, pressAction);
-
-            mAppSwitchLongPressAction = initList(KEY_APP_SWITCH_LONG_PRESS, appSwitchLongPressAction);
-
-            hasAnyBindableKey = true;
-        } else {
-            prefScreen.removePreference(appSwitchCategory);
-        }
+        mCameraWakeScreen = findPreference(KEY_CAMERA_WAKE_SCREEN);
 
         if (hasCameraKey) {
-            mCameraWakeScreen = findPreference(KEY_CAMERA_WAKE_SCREEN);
             mCameraSleepOnRelease = findPreference(KEY_CAMERA_SLEEP_ON_RELEASE);
             mCameraLaunch = findPreference(KEY_CAMERA_LAUNCH);
 
-            if (!showCameraWake) {
-                prefScreen.removePreference(mCameraWakeScreen);
-            }
             // Only show 'Camera sleep on release' if the device has a focus key
             if (res.getBoolean(org.lineageos.platform.internal.R.bool.config_singleStageCameraKey)) {
                 prefScreen.removePreference(mCameraSleepOnRelease);
@@ -318,10 +203,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         }
 
         if (hasVolumeKeys) {
-            if (!showVolumeWake) {
-                volumeCategory.removePreference(findPreference(KEY_VOLUME_WAKE_SCREEN));
-            }
-
             if (!TelephonyUtils.isVoiceCapable(getActivity())) {
                 volumeCategory.removePreference(findPreference(KEY_VOLUME_ANSWER_CALL));
             }
@@ -349,6 +230,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             }
         } else {
             prefScreen.removePreference(volumeCategory);
+            prefScreen.removePreference(mVolumeWakeScreen);
         }
 
         mBacklightTimeout = findPreference(KEY_BACKLIGHT_TIMEOUT);
@@ -400,42 +282,39 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             }
         }
 
-        // Override key actions on Go devices in order to hide any unsupported features
-        if (ActivityManager.isLowRamDeviceStatic()) {
-            String[] actionEntriesGo = res.getStringArray(R.array.hardware_keys_action_entries_go);
-            String[] actionValuesGo = res.getStringArray(R.array.hardware_keys_action_values_go);
+        int wakeKeyTotal = 7;
 
-            if (hasHomeKey) {
-                mHomeLongPressAction.setEntries(actionEntriesGo);
-                mHomeLongPressAction.setEntryValues(actionValuesGo);
+        if (!hasHomeKey || !showHomeWake) {
+            wakeScreenCategory.removePreference(findPreference(KEY_HOME_WAKE_SCREEN));
+            wakeKeyTotal -= 1;
+        }
+        if (!hasBackKey || !showBackWake) {
+            wakeScreenCategory.removePreference(findPreference(KEY_BACK_WAKE_SCREEN));
+            wakeKeyTotal -= 1;
+        }
+        if (!hasAppSwitchKey || !showAppSwitchWake) {
+            wakeScreenCategory.removePreference(findPreference(KEY_APP_SWITCH_WAKE_SCREEN));
+            wakeKeyTotal -= 1;
+        }
+        if (!hasMenuKey || !showMenuWake) {
+            wakeScreenCategory.removePreference(findPreference(KEY_MENU_WAKE_SCREEN));
+            wakeKeyTotal -= 1;
+        }
+        if (!hasAssistKey || !showAssistWake) {
+            wakeScreenCategory.removePreference(findPreference(KEY_ASSIST_WAKE_SCREEN));
+            wakeKeyTotal -= 1;
+        }
+        if (!hasCameraKey || !showCameraWake) {
+            wakeScreenCategory.removePreference(findPreference(KEY_CAMERA_WAKE_SCREEN));
+            wakeKeyTotal -= 1;
+        }
+        if (!hasVolumeKeys || !showVolumeWake) {
+            wakeScreenCategory.removePreference(findPreference(KEY_VOLUME_WAKE_SCREEN));
+            wakeKeyTotal -= 1;
+        }
 
-                mHomeDoubleTapAction.setEntries(actionEntriesGo);
-                mHomeDoubleTapAction.setEntryValues(actionValuesGo);
-            }
-
-            if (hasMenuKey) {
-                mMenuPressAction.setEntries(actionEntriesGo);
-                mMenuPressAction.setEntryValues(actionValuesGo);
-
-                mMenuLongPressAction.setEntries(actionEntriesGo);
-                mMenuLongPressAction.setEntryValues(actionValuesGo);
-            }
-
-            if (hasAssistKey) {
-                mAssistPressAction.setEntries(actionEntriesGo);
-                mAssistPressAction.setEntryValues(actionValuesGo);
-
-                mAssistLongPressAction.setEntries(actionEntriesGo);
-                mAssistLongPressAction.setEntryValues(actionValuesGo);
-            }
-
-            if (hasAppSwitchKey) {
-                mAppSwitchPressAction.setEntries(actionEntriesGo);
-                mAppSwitchPressAction.setEntryValues(actionValuesGo);
-
-                mAppSwitchLongPressAction.setEntries(actionEntriesGo);
-                mAppSwitchLongPressAction.setEntryValues(actionValuesGo);
-            }
+        if (wakeKeyTotal == 0) {
+            prefScreen.removePreference(wakeScreenCategory);
         }
     }
 
@@ -496,6 +375,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         Settings.System.putInt(getContentResolver(), setting, Integer.valueOf(value));
     }
 
+    private void setListGoEntries(ListPreference listPref, String[] entries, String[] values) {
+        listPref.setEntries(entries);
+        listPref.setEntryValues(values);
+    }
+
     public void updateBrightnessSummary() {
         if (mBacklightBrightness != null) {
             int brightness = getBrightnessValue();
@@ -539,39 +423,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mHomeLongPressAction) {
-            handleListChange((ListPreference) preference, newValue,
-                    LineageSettings.System.KEY_HOME_LONG_PRESS_ACTION);
-            return true;
-        } else if (preference == mHomeDoubleTapAction) {
-            handleListChange((ListPreference) preference, newValue,
-                    LineageSettings.System.KEY_HOME_DOUBLE_TAP_ACTION);
-            return true;
-        } else if (preference == mMenuPressAction) {
-            handleListChange(mMenuPressAction, newValue,
-                    LineageSettings.System.KEY_MENU_ACTION);
-            return true;
-        } else if (preference == mMenuLongPressAction) {
-            handleListChange(mMenuLongPressAction, newValue,
-                    LineageSettings.System.KEY_MENU_LONG_PRESS_ACTION);
-            return true;
-        } else if (preference == mAssistPressAction) {
-            handleListChange(mAssistPressAction, newValue,
-                    LineageSettings.System.KEY_ASSIST_ACTION);
-            return true;
-        } else if (preference == mAssistLongPressAction) {
-            handleListChange(mAssistLongPressAction, newValue,
-                    LineageSettings.System.KEY_ASSIST_LONG_PRESS_ACTION);
-            return true;
-        } else if (preference == mAppSwitchPressAction) {
-            handleListChange(mAppSwitchPressAction, newValue,
-                    LineageSettings.System.KEY_APP_SWITCH_ACTION);
-            return true;
-        } else if (preference == mAppSwitchLongPressAction) {
-            handleListChange((ListPreference) preference, newValue,
-                    LineageSettings.System.KEY_APP_SWITCH_LONG_PRESS_ACTION);
-            return true;
-        } else if (preference == mVolumeKeyCursorControl) {
+        if (preference == mVolumeKeyCursorControl) {
             handleSystemListChange(mVolumeKeyCursorControl, newValue,
                     Settings.System.VOLUME_KEY_CURSOR_CONTROL);
             return true;
@@ -674,48 +526,12 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                         keys.add(KEY_VOLUME_ANSWER_CALL);
                     }
 
-                    if (!DeviceUtils.hasBackKey(context)) {
-                        keys.add(CATEGORY_BACK);
-                        keys.add(KEY_BACK_WAKE_SCREEN);
-                    } else if (!DeviceUtils.canWakeUsingHomeKey(context)) {
-                        keys.add(KEY_BACK_WAKE_SCREEN);
-                    }
-
                     if (!DeviceUtils.hasHomeKey(context)) {
                         keys.add(CATEGORY_HOME);
-                        keys.add(KEY_HOME_LONG_PRESS);
-                        keys.add(KEY_HOME_DOUBLE_TAP);
                         keys.add(KEY_HOME_ANSWER_CALL);
                         keys.add(KEY_HOME_WAKE_SCREEN);
                     } else if (!DeviceUtils.canWakeUsingHomeKey(context)) {
                         keys.add(KEY_HOME_WAKE_SCREEN);
-                    }
-
-                    if (!DeviceUtils.hasMenuKey(context)) {
-                        keys.add(CATEGORY_MENU);
-                        keys.add(KEY_MENU_PRESS);
-                        keys.add(KEY_MENU_LONG_PRESS);
-                        keys.add(KEY_MENU_WAKE_SCREEN);
-                    } else if (!DeviceUtils.canWakeUsingMenuKey(context)) {
-                        keys.add(KEY_MENU_WAKE_SCREEN);
-                    }
-
-                    if (!DeviceUtils.hasAssistKey(context)) {
-                        keys.add(CATEGORY_ASSIST);
-                        keys.add(KEY_ASSIST_PRESS);
-                        keys.add(KEY_ASSIST_LONG_PRESS);
-                        keys.add(KEY_ASSIST_WAKE_SCREEN);
-                    } else if (!DeviceUtils.canWakeUsingAssistKey(context)) {
-                        keys.add(KEY_ASSIST_WAKE_SCREEN);
-                    }
-
-                    if (!DeviceUtils.hasAppSwitchKey(context)) {
-                        keys.add(CATEGORY_APPSWITCH);
-                        keys.add(KEY_APP_SWITCH_PRESS);
-                        keys.add(KEY_APP_SWITCH_LONG_PRESS);
-                        keys.add(KEY_APP_SWITCH_WAKE_SCREEN);
-                    } else if (!DeviceUtils.canWakeUsingAppSwitchKey(context)) {
-                        keys.add(KEY_APP_SWITCH_WAKE_SCREEN);
                     }
 
                     if (!DeviceUtils.hasCameraKey(context)) {
