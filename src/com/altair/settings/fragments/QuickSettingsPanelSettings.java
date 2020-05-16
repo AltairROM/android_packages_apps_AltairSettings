@@ -82,7 +82,7 @@ public class QuickSettingsPanelSettings extends SettingsPreferenceFragment imple
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.quicksettings_settings);
+        addPreferencesFromResource(R.xml.quick_settings_settings);
 
         mContentResolver = getActivity().getContentResolver();
 
@@ -228,7 +228,7 @@ public class QuickSettingsPanelSettings extends SettingsPreferenceFragment imple
                     ArrayList<SearchIndexableResource> result =
                             new ArrayList<SearchIndexableResource>();
                     SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.quicksettings_settings;
+                    sir.xmlResId = R.xml.quick_settings_settings;
                     result.add(sir);
 
                     return result;

@@ -132,7 +132,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.buttons_settings);
+        addPreferencesFromResource(R.xml.button_settings);
 
         mResolver = getActivity().getContentResolver();
 
@@ -658,7 +658,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                     ArrayList<SearchIndexableResource> result =
                             new ArrayList<SearchIndexableResource>();
                     SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.buttons_settings;
+                    sir.xmlResId = R.xml.button_settings;
                     result.add(sir);
 
                     return result;

@@ -81,7 +81,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.statusbar_settings);
+        addPreferencesFromResource(R.xml.status_bar_settings);
 
         ContentResolver resolver = getActivity().getContentResolver();
 
@@ -215,7 +215,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
                     ArrayList<SearchIndexableResource> result =
                             new ArrayList<SearchIndexableResource>();
                     SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.statusbar_settings;
+                    sir.xmlResId = R.xml.status_bar_settings;
                     result.add(sir);
 
                     return result;
