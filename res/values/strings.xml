@@ -46,6 +46,8 @@
     <string name="userinterface_summary">Adjust various elements of the user interface</string>
     <string name="gesture_title">Gestures</string>
     <string name="gesture_summary">Adjust touchscreen gestures and button quick actions</string>
+    <string name="themes_title">Themes</string>
+    <string name="themes_summary">Change accent color, wallpaper, etc.</string>
 
     <!-- STATUS BAR -->
     <string name="status_bar_system_icons_title">System icons</string>
@@ -279,6 +281,30 @@
     <string name="notifications_category_title">Notifications</string>
     <string name="notification_guts_kill_app_button_title">Kill app button</string>
     <string name="notification_guts_kill_app_button_summary">Show a kill app button in the notification\'s longpress menu</string>
+
+    <!-- THEMES -->
+    <string name="theme_styles_category_title">Styles &amp; wallpapers</string>
+    <string name="theme_select_title">Themes</string>
+    <string name="theme_select_summary">Browse and select installed themes</string>
+
+    <string name="theme_elements_category_title">Colors &amp; elements</string>
+    <string name="theme_elements_accent_color_title">Accent color</string>
+    <string name="theme_elements_primary_color_title">Dark mode background</string>
+    <string name="theme_elements_font_title">Headline &amp; body font</string>
+    <string name="theme_elements_icon_shape_title">Icon shape</string>
+    <string name="theme_elements_sysui_icon_title">Status bar icons</string>
+
+    <string name="theme_accent_color_default">Device default</string>
+    <string name="theme_accent_color_blue">Blue</string>
+    <string name="theme_accent_color_brown">Brown</string>
+    <string name="theme_accent_color_holo_blue">Holo blue</string>
+    <string name="theme_accent_color_green">Green</string>
+    <string name="theme_accent_color_orange">Orange</string>
+    <string name="theme_accent_color_pink">Pink</string>
+    <string name="theme_accent_color_pixel_blue">Pixel blue</string>
+    <string name="theme_accent_color_purple">Purple</string>
+    <string name="theme_accent_color_red">Red</string>
+    <string name="theme_accent_color_yellow">Yellow</string>
 
 </resources>
 

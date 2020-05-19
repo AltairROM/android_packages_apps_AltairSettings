@@ -59,6 +59,14 @@
         android:fragment="com.altair.settings.fragments.StatusBarSettings"
         android:icon="@drawable/ic_settings_statusbar"/>
 
+    <!-- Themes -->
+    <Preference
+        android:key="themes_category"
+        android:title="@string/themes_title"
+        android:summary="@string/themes_summary"
+        android:fragment="com.altair.settings.fragments.ThemeSettings"
+        android:icon="@drawable/ic_settings_themes"/>
+
     <!-- User interface -->
     <Preference
         android:key="user_interface_category"
