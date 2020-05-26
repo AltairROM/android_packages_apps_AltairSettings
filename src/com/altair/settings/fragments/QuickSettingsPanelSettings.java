@@ -32,9 +32,9 @@ import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.search.SearchIndexable;
 import com.lineage.support.preferences.CustomSeekBarPreference;
 import com.lineage.support.preferences.SystemSettingSwitchPreference;
@@ -45,7 +45,7 @@ import java.util.List;
 import lineageos.preference.LineageSystemSettingListPreference;
 
 @SearchIndexable
-public class QuickSettingsPanelSettings extends SettingsPreferenceFragment implements
+public class QuickSettingsPanelSettings extends DashboardFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
     private static final String TAG = "QuickSettings";
 
@@ -80,9 +80,13 @@ public class QuickSettingsPanelSettings extends SettingsPreferenceFragment imple
     private int mQuickBarColumns = DEFAULT_QS_QUICKBAR_COLUMNS;
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.quick_settings_settings;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.quick_settings_settings);
 
         mContentResolver = getActivity().getContentResolver();
 
@@ -137,6 +141,11 @@ public class QuickSettingsPanelSettings extends SettingsPreferenceFragment imple
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.ALTAIR;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override

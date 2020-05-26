@@ -39,9 +39,9 @@ import com.altair.settings.utils.DeviceUtils;
 import com.altair.settings.utils.TelephonyUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.search.SearchIndexable;
 import com.lineage.support.preferences.CustomSeekBarPreference;
 
@@ -54,7 +54,7 @@ import lineageos.providers.LineageSettings;
 import static org.lineageos.internal.util.DeviceKeysConstants.*;
 
 @SearchIndexable
-public class ButtonSettings extends SettingsPreferenceFragment implements
+public class ButtonSettings extends DashboardFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
     private static final String TAG = "ButtonSettings";
 
@@ -116,9 +116,13 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private ContentResolver mResolver;
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.button_settings;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.button_settings);
 
         mResolver = getActivity().getContentResolver();
 
@@ -321,6 +325,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.ALTAIR;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override

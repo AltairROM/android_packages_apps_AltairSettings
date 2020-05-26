@@ -51,9 +51,9 @@ import com.altair.settings.utils.TelephonyUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settings.R;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.SettingsPreferenceFragment;
 import com.lineage.support.preferences.CustomSeekBarPreference;
 
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ import lineageos.providers.LineageSettings;
 import static org.lineageos.internal.util.DeviceKeysConstants.*;
 
 @SearchIndexable
-public class NavigationBarSettings extends SettingsPreferenceFragment implements
+public class NavigationBarSettings extends DashboardFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
     private static final String TAG = "NavigationSettings";
 
@@ -156,9 +156,13 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
     Action mDefaultEdgeLongSwipeAction;
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.navigation_settings;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.navigation_settings);
 
         final Resources res = getResources();
         final ContentResolver resolver = getActivity().getContentResolver();
@@ -280,6 +284,11 @@ public class NavigationBarSettings extends SettingsPreferenceFragment implements
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.ALTAIR;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override

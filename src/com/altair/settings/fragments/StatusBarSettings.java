@@ -33,9 +33,9 @@ import com.altair.settings.utils.DeviceUtils;
 import com.altair.settings.utils.StatusBarIcon;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ import lineageos.preference.LineageSystemSettingListPreference;
 import lineageos.providers.LineageSettings;
 
 @SearchIndexable
-public class StatusBarSettings extends SettingsPreferenceFragment implements
+public class StatusBarSettings extends DashboardFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
     private static final String TAG = "StatusBar";
 
@@ -79,9 +79,13 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     private boolean mHasNotch;
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.status_bar_settings;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.status_bar_settings);
 
         ContentResolver resolver = getActivity().getContentResolver();
 
@@ -114,6 +118,11 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.ALTAIR;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override

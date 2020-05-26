@@ -32,16 +32,16 @@ import androidx.preference.SwitchPreference;
 import com.altair.settings.utils.SystemUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class UserInterfaceSettings extends SettingsPreferenceFragment implements
+public class UserInterfaceSettings extends DashboardFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
     private static final String TAG = "UserInterface";
 
@@ -52,9 +52,13 @@ public class UserInterfaceSettings extends SettingsPreferenceFragment implements
     private static final int RECENTS_COMPONENT_OREO = 1;
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.user_interface_settings;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.user_interface_settings);
 
         final ContentResolver resolver = getActivity().getContentResolver();
         final PreferenceScreen prefSet = getPreferenceScreen();
@@ -71,6 +75,11 @@ public class UserInterfaceSettings extends SettingsPreferenceFragment implements
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.ALTAIR;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override
