@@ -306,5 +306,7 @@
     <string name="theme_accent_color_red">Red</string>
     <string name="theme_accent_color_yellow">Yellow</string>
 
+    <string name="theme_substratum_warning">If you have elected to theme \"Android System\" using a Substratum theme, the settings for that theme will override the custom colors and elements configured here.</string>
+
 </resources>
 

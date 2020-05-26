@@ -88,6 +88,8 @@ public class ThemeSettings extends DashboardFragment implements
         mThemeAccentColor.saveValue(mAccentColor);
         mThemeAccentColor.setOnPreferenceChangeListener(this);
         setAccentColorSummary();
+
+        mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.theme_substratum_warning);
     }
 
     @Override
