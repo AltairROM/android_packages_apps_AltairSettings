@@ -155,6 +155,8 @@ public class NavigationBarSettings extends DashboardFragment implements
     Action mDefaultAssistDoubleTapAction;
     Action mDefaultEdgeLongSwipeAction;
 
+    private boolean mHardwareKeys;
+
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.navigation_settings;
@@ -241,7 +243,8 @@ public class NavigationBarSettings extends DashboardFragment implements
         final LineageHardwareManager hardware = LineageHardwareManager.getInstance(getActivity());
 
         // Hardware key disabler
-        if (isKeyDisablerSupported(getActivity())) {
+        mHardwareKeys = isKeyDisablerSupported(getActivity());
+        if (mHardwareKeys) {
             updateEnableNavigationBarOption();
         } else {
             // Remove enable navbar option if no hardware keys
@@ -512,11 +515,12 @@ public class NavigationBarSettings extends DashboardFragment implements
     }
 
     private void updatePreferences(boolean navbarEnabled) {
+        final boolean hasNavbar = navbarEnabled || !mHardwareKeys;
         final boolean gestureNavBar = DeviceUtils.isEdgeToEdgeEnabled(getContext());
         final boolean twoButtonNavBar = DeviceUtils.isSwipeUpEnabled(getContext());
         final boolean legacyNavBar = !gestureNavBar && !twoButtonNavBar;
 
-        mNavigationSystemType.setEnabled(navbarEnabled);
+        mNavigationSystemType.setEnabled(hasNavbar);
         if (gestureNavBar) {
             updateNavigationSystemTypeSummary(R.string.edge_to_edge_navigation_title);
         } else if (twoButtonNavBar) {
@@ -524,13 +528,13 @@ public class NavigationBarSettings extends DashboardFragment implements
         } else {
             updateNavigationSystemTypeSummary(R.string.legacy_navigation_title);
         }
-        mNavigationArrowKeys.setEnabled(navbarEnabled && !gestureNavBar);
-        mNavigationInvertLayout.setEnabled(navbarEnabled && !gestureNavBar);
-        mEdgeLongSwipeAction.setEnabled(navbarEnabled && gestureNavBar);
+        mNavigationArrowKeys.setEnabled(hasNavbar && !gestureNavBar);
+        mNavigationInvertLayout.setEnabled(hasNavbar && !gestureNavBar);
+        mEdgeLongSwipeAction.setEnabled(hasNavbar && gestureNavBar);
 
-        mNavigationHomeKeyCategory.setEnabled(!navbarEnabled || !gestureNavBar);
-        mNavigationBackKeyCategory.setEnabled(!navbarEnabled || !gestureNavBar);
-        mNavigationAppSwitchKeyCategory.setEnabled(!navbarEnabled || legacyNavBar);
+        mNavigationHomeKeyCategory.setEnabled(!hasNavbar || !gestureNavBar);
+        mNavigationBackKeyCategory.setEnabled(!hasNavbar || !gestureNavBar);
+        mNavigationAppSwitchKeyCategory.setEnabled(!hasNavbar || legacyNavBar);
     }
 
     private void updateCustomAppSummaries() {
