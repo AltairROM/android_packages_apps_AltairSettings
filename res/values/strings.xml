@@ -157,6 +157,9 @@
     <string name="qs_brightness_slider_summary">Adjust brightness from the Quick Settings</string>
     <string name="qs_brightness_slider_auto_title">Auto brightness</string>
     <string name="qs_brightness_slider_auto_summary">Show toggle for adaptive brightness near the slider</string>
+    <string name="qs_brightness_slider_show_never">Never show</string>
+    <string name="qs_brightness_slider_show_expanded">Show when expanded</string>
+    <string name="qs_brightness_slider_show_always">Show always</string>
     <string name="qs_bluetooth_battery_title">Bluetooth battery status</string>
     <string name="qs_bluetooth_battery_summary">Display battery status for the connected bluetooth device, if available</string>
 
