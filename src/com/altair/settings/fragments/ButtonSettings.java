@@ -237,36 +237,40 @@ public class ButtonSettings extends DashboardFragment implements
             prefScreen.removePreference(mVolumeWakeScreen);
         }
 
-        mBacklightTimeout = findPreference(KEY_BACKLIGHT_TIMEOUT);
-        if (mBacklightTimeout != null) {
-            mBacklightTimeout.setOnPreferenceChangeListener(this);
-            int BacklightTimeout = LineageSettings.Secure.getInt(getContentResolver(),
-                    LineageSettings.Secure.BUTTON_BACKLIGHT_TIMEOUT,
-                    DEFAULT_BUTTON_TIMEOUT * 1000) / 1000;
-            mBacklightTimeout.setValue(BacklightTimeout);
-            updateTimeoutSummary();
-        }
+        if (isBacklightSupported(getContext())) {
+            mBacklightTimeout = findPreference(KEY_BACKLIGHT_TIMEOUT);
+            if (mBacklightTimeout != null) {
+                mBacklightTimeout.setOnPreferenceChangeListener(this);
+                int BacklightTimeout = LineageSettings.Secure.getInt(getContentResolver(),
+                        LineageSettings.Secure.BUTTON_BACKLIGHT_TIMEOUT,
+                        DEFAULT_BUTTON_TIMEOUT * 1000) / 1000;
+                mBacklightTimeout.setValue(BacklightTimeout);
+                updateTimeoutSummary();
+            }
 
-        mBacklightEnable = findPreference(KEY_BACKLIGHT_ENABLE);
-        mBacklightBrightness = findPreference(KEY_BACKLIGHT_BRIGHTNESS);
-        final boolean variableBrightness = getResources().getBoolean(
-                com.android.internal.R.bool.config_deviceHasVariableButtonBrightness);
-        if (variableBrightness) {
-            backlightCategory.removePreference(mBacklightEnable);
-            if (mBacklightBrightness != null) {
-                int ButtonBrightness = LineageSettings.Secure.getInt(getContentResolver(),
-                        LineageSettings.Secure.BUTTON_BRIGHTNESS, 255);
-                mBacklightBrightness.setValue(ButtonBrightness / 1);
-                mBacklightBrightness.setOnPreferenceChangeListener(this);
-                updateBrightnessSummary();
+            mBacklightEnable = findPreference(KEY_BACKLIGHT_ENABLE);
+            mBacklightBrightness = findPreference(KEY_BACKLIGHT_BRIGHTNESS);
+            final boolean variableBrightness = getResources().getBoolean(
+                    com.android.internal.R.bool.config_deviceHasVariableButtonBrightness);
+            if (variableBrightness) {
+                backlightCategory.removePreference(mBacklightEnable);
+                if (mBacklightBrightness != null) {
+                    int ButtonBrightness = LineageSettings.Secure.getInt(getContentResolver(),
+                            LineageSettings.Secure.BUTTON_BRIGHTNESS, 255);
+                    mBacklightBrightness.setValue(ButtonBrightness / 1);
+                    mBacklightBrightness.setOnPreferenceChangeListener(this);
+                    updateBrightnessSummary();
+                }
+            } else {
+                backlightCategory.removePreference(mBacklightBrightness);
+                if (mBacklightEnable != null) {
+                    mBacklightEnable.setChecked((LineageSettings.Secure.getInt(getContentResolver(),
+                            LineageSettings.Secure.BUTTON_BRIGHTNESS, 1) != 0));
+                    mBacklightEnable.setOnPreferenceChangeListener(this);
+                }
             }
         } else {
-            backlightCategory.removePreference(mBacklightBrightness);
-            if (mBacklightEnable != null) {
-                mBacklightEnable.setChecked((LineageSettings.Secure.getInt(getContentResolver(),
-                        LineageSettings.Secure.BUTTON_BRIGHTNESS, 1) != 0));
-                mBacklightEnable.setOnPreferenceChangeListener(this);
-            }
+            prefScreen.removePreference(backlightCategory);
         }
 
         if (mCameraWakeScreen != null) {
@@ -428,6 +432,20 @@ public class ButtonSettings extends DashboardFragment implements
         return LineageSettings.Secure.getInt(getContentResolver(),
                 LineageSettings.Secure.BUTTON_BACKLIGHT_TIMEOUT,
                 DEFAULT_BUTTON_TIMEOUT * 1000) / 1000;
+    }
+
+    private boolean isBacklightSupported(Context context) {
+        final Resources res = context.getResources();
+        // All hardware keys besides volume and camera can possibly have a backlight
+        boolean hasBacklightKey = DeviceUtils.hasHomeKey(context)
+                || DeviceUtils.hasBackKey(context)
+                || DeviceUtils.hasMenuKey(context)
+                || DeviceUtils.hasAssistKey(context)
+                || DeviceUtils.hasAppSwitchKey(context);
+        boolean hasBacklight = res.getInteger(
+                com.android.internal.R.integer.config_buttonBrightnessSettingDefault) > 0;
+
+        return hasBacklightKey && hasBacklight;
     }
 
     @Override
