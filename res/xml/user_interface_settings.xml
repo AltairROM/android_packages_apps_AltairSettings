@@ -16,6 +16,7 @@
 -->
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lineage="http://schemas.android.com/apk/res/lineageos.platform"
     android:title="@string/userinterface_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
@@ -32,6 +33,13 @@
         android:title="@string/smart_pixels_title"
         android:summary="@string/smart_pixels_summary"
         android:fragment="com.altair.settings.fragments.SmartPixels" />
+
+    <!-- Ambient display -->
+    <lineageos.preference.RemotePreference
+        android:key="doze_device_settings"
+        android:title="@string/ambient_display_screen_title">
+        <intent android:action="org.lineageos.settings.device.DOZE_SETTINGS" />
+    </lineageos.preference.RemotePreference>
 
     <!-- Recents -->
     <PreferenceCategory
