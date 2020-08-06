@@ -26,6 +26,14 @@
         android:fragment="com.altair.settings.fragments.ButtonSettings"
         android:icon="@drawable/ic_settings_buttons"/>
 
+    <!-- Display -->
+    <Preference
+        android:key="display_extra_settings"
+        android:title="@string/display_extra_title"
+        android:summary="@string/display_extra_summary"
+        android:fragment="com.altair.settings.fragments.DisplayExtraSettings"
+        android:icon="@drawable/ic_settings_display_extra"/>
+
     <!-- Gestures -->
     <Preference
         android:key="gesture_settings"

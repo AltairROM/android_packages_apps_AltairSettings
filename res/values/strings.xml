@@ -26,6 +26,8 @@
     <string name="cancel">Cancel</string>
     <string name="none">None</string>
 
+    <string name="miscellaneous_category_title">Miscellaneous</string>
+
     <!-- App picker -->
     <string name="app_picker_dialog_title">Select an app</string>
 
@@ -48,6 +50,8 @@
     <string name="gesture_summary">Adjust touchscreen gestures and button quick actions</string>
     <string name="themes_title">Themes</string>
     <string name="themes_summary">Change accent color, wallpaper, etc.</string>
+    <string name="display_extra_title">Display</string>
+    <string name="display_extra_summary">Adjust various elements of the display screen</string>
 
     <!-- STATUS BAR -->
     <string name="status_bar_system_icons_title">System icons</string>
@@ -269,15 +273,6 @@
     <string name="toast_icon_title">Toast icon</string>
     <string name="toast_icon_summary">Display the app icon corresponding with the toast</string>
 
-    <string name="smart_pixels_title">Smart Pixels</string>
-    <string name="smart_pixels_summary">Save battery by shutting off extra pixels</string>
-    <string name="smart_pixels_enable_title">Enable Smart Pixels</string>
-    <string name="smart_pixels_enable_summary">Shut off pixels to reduce power consumption</string>
-    <string name="smart_pixels_on_power_save_title">Auto-enable on battery saver</string>
-    <string name="smart_pixels_on_power_save_summary">Enable Smart Pixels when battery saver is enabled</string>
-    <string name="smart_pixels_percent">Percent of pixels to disable</string>
-    <string name="smart_pixels_shift">Prevent burn-in by shifting pixels every</string>
-
     <string name="recents_category_title">Recents</string>
     <string name="recents_allow_swipe_down_clearall_title">Swipe down to clear all recents</string>
     <string name="recents_allow_swipe_down_clearall_summary">NOTE: Does not work if gesture navigation is enabled</string>
@@ -311,6 +306,16 @@
     <string name="theme_accent_color_yellow">Yellow</string>
 
     <string name="theme_substratum_warning">If you have elected to theme \"Android System\" using a Substratum theme, the settings for that theme will override the custom colors and elements configured here.</string>
+
+    <!-- DISPLAY -->
+    <string name="smart_pixels_title">Smart Pixels</string>
+    <string name="smart_pixels_summary">Save battery by shutting off extra pixels</string>
+    <string name="smart_pixels_enable_title">Enable Smart Pixels</string>
+    <string name="smart_pixels_enable_summary">Shut off pixels to reduce power consumption</string>
+    <string name="smart_pixels_on_power_save_title">Auto-enable on battery saver</string>
+    <string name="smart_pixels_on_power_save_summary">Enable Smart Pixels when battery saver is enabled</string>
+    <string name="smart_pixels_percent">Percent of pixels to disable</string>
+    <string name="smart_pixels_shift">Prevent burn-in by shifting pixels every</string>
 
 </resources>
 
