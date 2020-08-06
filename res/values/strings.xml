@@ -317,5 +317,10 @@
     <string name="smart_pixels_percent">Percent of pixels to disable</string>
     <string name="smart_pixels_shift">Prevent burn-in by shifting pixels every</string>
 
+    <string name="refresh_rate_title">Screen refresh rate</string>
+    <string name="refresh_rate_auto">Auto</string>
+    <string name="refresh_rate_60Hz">60Hz</string>
+    <string name="refresh_rate_90Hz">90Hz (may increase battery usage)</string>
+
 </resources>
 

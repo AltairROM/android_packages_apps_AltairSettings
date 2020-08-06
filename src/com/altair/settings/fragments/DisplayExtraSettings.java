@@ -46,6 +46,10 @@ public class DisplayExtraSettings extends DashboardFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
     private static final String TAG = "DisplayExtra";
 
+    private static final String KEY_REFRESH_RATE_SETTING = "refresh_rate_setting";
+
+    private GlobalSettingListPreference mVariableRefreshRate;
+
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.display_extra_settings;
@@ -57,6 +61,20 @@ public class DisplayExtraSettings extends DashboardFragment implements
 
         final ContentResolver resolver = getActivity().getContentResolver();
         final PreferenceScreen prefScreen = getPreferenceScreen();
+
+        mVariableRefreshRate = prefScreen.findPreference(KEY_REFRESH_RATE_SETTING);
+        boolean hasVariableRefreshRate =
+            getContext().getResources().getBoolean(com.android.internal.R.bool.config_hasVariableRefreshRate);
+
+        if (!hasVariableRefreshRate) {
+            prefScreen.removePreference(mVariableRefreshRate);
+        } else {
+            int defVarRateSetting = getContext().getResources().getInteger(
+                 com.android.internal.R.integer.config_defaultVariableRefreshRateSetting);
+            int mVarRateSetting = Settings.Global.getInt(getContext().getContentResolver(),
+                 Settings.Global.REFRESH_RATE_SETTING, defVarRateSetting);
+            mVariableRefreshRate.setValue(String.valueOf(mVarRateSetting));
+        }
     }
 
     @Override
@@ -95,6 +113,18 @@ public class DisplayExtraSettings extends DashboardFragment implements
                     result.add(sir);
 
                     return result;
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    boolean hasVariableRefreshRate =
+                        context.getResources().getBoolean(com.android.internal.R.bool.config_hasVariableRefreshRate);
+                    if (!hasVariableRefreshRate) {
+                        keys.add(KEY_REFRESH_RATE_SETTING);
+                    }
+
+                    return keys;
                 }
             };
 }
