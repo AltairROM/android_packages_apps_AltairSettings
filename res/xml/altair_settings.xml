@@ -25,7 +25,7 @@
         android:title="@string/menu_button_settings_title"
         android:summary="@string/menu_button_settings_summary"
         android:fragment="com.altair.settings.fragments.CustomButtonSettings"
-        android:icon="@drawable/ic_settings_buttons"/>
+        android:icon="@drawable/ic_settings_menu_buttons"/>
 
     <!-- Display -->
     <Preference
@@ -33,7 +33,7 @@
         android:title="@string/menu_display_settings_title"
         android:summary="@string/menu_display_settings_summary"
         android:fragment="com.altair.settings.fragments.CustomDisplaySettings"
-        android:icon="@drawable/ic_settings_display_extra"/>
+        android:icon="@drawable/ic_settings_menu_display"/>
 
     <!-- Gestures -->
     <Preference
@@ -50,7 +50,7 @@
         android:title="@string/menu_navigation_settings_title"
         android:summary="@string/menu_navigation_settings_summary"
         android:fragment="com.altair.settings.fragments.CustomNavigationSettings"
-        android:icon="@drawable/ic_settings_navigation" />
+        android:icon="@drawable/ic_settings_menu_navigation" />
 
     <!-- Quick settings panel -->
     <Preference
@@ -58,7 +58,7 @@
         android:title="@string/menu_qs_settings_title"
         android:summary="@string/menu_qs_settings_summary"
         android:fragment="com.altair.settings.fragments.CustomQSSettings"
-        android:icon="@drawable/ic_settings_quicksettings"/>
+        android:icon="@drawable/ic_settings_menu_qs"/>
 
     <!-- Status bar -->
     <Preference
@@ -66,7 +66,7 @@
         android:title="@string/menu_status_bar_settings_title"
         android:summary="@string/menu_status_bar_settings_summary"
         android:fragment="com.altair.settings.fragments.CustomStatusBarSettings"
-        android:icon="@drawable/ic_settings_statusbar"/>
+        android:icon="@drawable/ic_settings_menu_status_bar"/>
 
     <!-- Themes -->
     <Preference
@@ -74,7 +74,7 @@
         android:title="@string/menu_theme_settings_title"
         android:summary="@string/menu_theme_settings_summary"
         android:fragment="com.altair.settings.fragments.CustomThemeSettings"
-        android:icon="@drawable/ic_settings_themes"/>
+        android:icon="@drawable/ic_settings_menu_themes"/>
 
     <!-- User interface -->
     <Preference
@@ -82,7 +82,6 @@
         android:title="@string/menu_user_interface_settings_title"
         android:summary="@string/menu_user_interface_settings_summary"
         android:fragment="com.altair.settings.fragments.CustomUserInterfaceSettings"
-        android:icon="@drawable/ic_settings_ui"/>
+        android:icon="@drawable/ic_settings_menu_ui"/>
 
 </PreferenceScreen>
-
