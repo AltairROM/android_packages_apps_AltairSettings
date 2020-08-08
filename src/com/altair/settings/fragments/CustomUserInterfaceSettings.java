@@ -41,9 +41,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class UserInterfaceSettings extends DashboardFragment implements
+public class CustomUserInterfaceSettings extends DashboardFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
-    private static final String TAG = "UserInterface";
+    private static final String TAG = "CustomUserInterfaceSettings";
 
     private static final String RECENTS_COMPONENT_TYPE = "recents_component";
     private static final String RECENTS_TYPE = "recents_layout_style";
@@ -53,7 +53,7 @@ public class UserInterfaceSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.user_interface_settings;
+        return R.xml.menu_user_interface_settings;
     }
 
     @Override
@@ -104,7 +104,7 @@ public class UserInterfaceSettings extends DashboardFragment implements
                     ArrayList<SearchIndexableResource> result =
                             new ArrayList<SearchIndexableResource>();
                     SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.user_interface_settings;
+                    sir.xmlResId = R.xml.menu_user_interface_settings;
                     result.add(sir);
 
                     return result;

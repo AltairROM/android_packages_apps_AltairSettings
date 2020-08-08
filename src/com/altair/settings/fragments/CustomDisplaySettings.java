@@ -42,9 +42,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class DisplayExtraSettings extends DashboardFragment implements
+public class CustomDisplaySettings extends DashboardFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
-    private static final String TAG = "DisplayExtra";
+    private static final String TAG = "CustomDisplaySettings";
 
     private static final String KEY_REFRESH_RATE_SETTING = "refresh_rate_setting";
 
@@ -52,7 +52,7 @@ public class DisplayExtraSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.display_extra_settings;
+        return R.xml.menu_display_settings;
     }
 
     @Override
@@ -109,7 +109,7 @@ public class DisplayExtraSettings extends DashboardFragment implements
                     ArrayList<SearchIndexableResource> result =
                             new ArrayList<SearchIndexableResource>();
                     SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.display_extra_settings;
+                    sir.xmlResId = R.xml.menu_display_settings;
                     result.add(sir);
 
                     return result;

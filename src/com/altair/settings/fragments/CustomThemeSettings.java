@@ -45,9 +45,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class ThemeSettings extends DashboardFragment implements
+public class CustomThemeSettings extends DashboardFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
-    private static final String TAG = "ThemeSettings";
+    private static final String TAG = "CustomThemeSettings";
 
     private static final String KEY_THEME_DARK_UI_MODE = "theme_dark_ui_mode";
     private static final String KEY_THEME_ACCENT_COLOR = "theme_accent_color";
@@ -66,7 +66,7 @@ public class ThemeSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.theme_settings;
+        return R.xml.menu_theme_settings;
     }
 
     @Override
@@ -166,7 +166,7 @@ public class ThemeSettings extends DashboardFragment implements
                     ArrayList<SearchIndexableResource> result =
                             new ArrayList<SearchIndexableResource>();
                     SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.theme_settings;
+                    sir.xmlResId = R.xml.menu_theme_settings;
                     result.add(sir);
 
                     return result;

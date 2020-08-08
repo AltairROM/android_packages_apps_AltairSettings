@@ -46,9 +46,9 @@ import lineageos.preference.LineageSystemSettingListPreference;
 import lineageos.providers.LineageSettings;
 
 @SearchIndexable
-public class StatusBarSettings extends DashboardFragment implements
+public class CustomStatusBarSettings extends DashboardFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
-    private static final String TAG = "StatusBar";
+    private static final String TAG = "CustomStatusBarSettings";
 
     private static final String STATUS_BAR_SHOW_CLOCK = "status_bar_show_clock";
     private static final String STATUS_BAR_CLOCK = "status_bar_clock";
@@ -80,7 +80,7 @@ public class StatusBarSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.status_bar_settings;
+        return R.xml.menu_status_bar_settings;
     }
 
     @Override
@@ -224,7 +224,7 @@ public class StatusBarSettings extends DashboardFragment implements
                     ArrayList<SearchIndexableResource> result =
                             new ArrayList<SearchIndexableResource>();
                     SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.status_bar_settings;
+                    sir.xmlResId = R.xml.menu_status_bar_settings;
                     result.add(sir);
 
                     return result;

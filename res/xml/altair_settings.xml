@@ -14,31 +14,32 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/altair_settings_activity_title" >
 
     <!-- Buttons -->
     <Preference
         android:key="buttons_category"
-        android:title="@string/buttons_title"
-        android:summary="@string/buttons_summary"
-        android:fragment="com.altair.settings.fragments.ButtonSettings"
+        android:title="@string/menu_button_settings_title"
+        android:summary="@string/menu_button_settings_summary"
+        android:fragment="com.altair.settings.fragments.CustomButtonSettings"
         android:icon="@drawable/ic_settings_buttons"/>
 
     <!-- Display -->
     <Preference
         android:key="display_extra_settings"
-        android:title="@string/display_extra_title"
-        android:summary="@string/display_extra_summary"
-        android:fragment="com.altair.settings.fragments.DisplayExtraSettings"
+        android:title="@string/menu_display_settings_title"
+        android:summary="@string/menu_display_settings_summary"
+        android:fragment="com.altair.settings.fragments.CustomDisplaySettings"
         android:icon="@drawable/ic_settings_display_extra"/>
 
     <!-- Gestures -->
     <Preference
         android:key="gesture_settings"
-        android:title="@string/gesture_title"
-        android:summary="@string/gesture_summary"
+        android:title="@string/menu_gesture_settings_title"
+        android:summary="@string/menu_gesture_settings_summary"
         android:icon="@drawable/ic_settings_gestures"
         android:fragment="com.android.settings.gestures.GestureSettings"
         settings:controller="com.android.settings.gestures.GesturesSettingPreferenceController"/>
@@ -46,41 +47,41 @@
     <!-- Navigation -->
     <PreferenceScreen
         android:key="navigation_category"
-        android:title="@string/navigation_title"
-        android:summary="@string/navigation_summary"
-        android:fragment="com.altair.settings.fragments.NavigationBarSettings"
+        android:title="@string/menu_navigation_settings_title"
+        android:summary="@string/menu_navigation_settings_summary"
+        android:fragment="com.altair.settings.fragments.CustomNavigationSettings"
         android:icon="@drawable/ic_settings_navigation" />
 
     <!-- Quick settings panel -->
     <Preference
         android:key="quicksettings_category"
-        android:title="@string/quicksettings_title"
-        android:summary="@string/quicksettings_summary"
-        android:fragment="com.altair.settings.fragments.QuickSettingsPanelSettings"
+        android:title="@string/menu_qs_settings_title"
+        android:summary="@string/menu_qs_settings_summary"
+        android:fragment="com.altair.settings.fragments.CustomQSSettings"
         android:icon="@drawable/ic_settings_quicksettings"/>
 
     <!-- Status bar -->
     <Preference
         android:key="statusbar_category"
-        android:title="@string/statusbar_title"
-        android:summary="@string/statusbar_summary"
-        android:fragment="com.altair.settings.fragments.StatusBarSettings"
+        android:title="@string/menu_status_bar_settings_title"
+        android:summary="@string/menu_status_bar_settings_summary"
+        android:fragment="com.altair.settings.fragments.CustomStatusBarSettings"
         android:icon="@drawable/ic_settings_statusbar"/>
 
     <!-- Themes -->
     <Preference
         android:key="themes_category"
-        android:title="@string/themes_title"
-        android:summary="@string/themes_summary"
-        android:fragment="com.altair.settings.fragments.ThemeSettings"
+        android:title="@string/menu_theme_settings_title"
+        android:summary="@string/menu_theme_settings_summary"
+        android:fragment="com.altair.settings.fragments.CustomThemeSettings"
         android:icon="@drawable/ic_settings_themes"/>
 
     <!-- User interface -->
     <Preference
         android:key="user_interface_category"
-        android:title="@string/userinterface_title"
-        android:summary="@string/userinterface_summary"
-        android:fragment="com.altair.settings.fragments.UserInterfaceSettings"
+        android:title="@string/menu_user_interface_settings_title"
+        android:summary="@string/menu_user_interface_settings_summary"
+        android:fragment="com.altair.settings.fragments.CustomUserInterfaceSettings"
         android:icon="@drawable/ic_settings_ui"/>
 
 </PreferenceScreen>

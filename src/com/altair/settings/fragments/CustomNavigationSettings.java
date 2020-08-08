@@ -65,9 +65,9 @@ import lineageos.providers.LineageSettings;
 import static org.lineageos.internal.util.DeviceKeysConstants.*;
 
 @SearchIndexable
-public class NavigationBarSettings extends DashboardFragment implements
+public class CustomNavigationSettings extends DashboardFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
-    private static final String TAG = "NavigationSettings";
+    private static final String TAG = "CustomNavigationSettings";
 
     private static final String KEY_NAVIGATION_BAR_ENABLE = "navigation_bar_enable";
     private static final String KEY_NAVIGATION_SYSTEM_TYPE = "gesture_system_navigation_input_summary";
@@ -159,7 +159,7 @@ public class NavigationBarSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.navigation_settings;
+        return R.xml.menu_navigation_settings;
     }
 
     @Override
@@ -623,7 +623,7 @@ public class NavigationBarSettings extends DashboardFragment implements
                     ArrayList<SearchIndexableResource> result =
                             new ArrayList<SearchIndexableResource>();
                     SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.navigation_settings;
+                    sir.xmlResId = R.xml.menu_navigation_settings;
                     result.add(sir);
 
                     return result;

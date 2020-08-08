@@ -54,9 +54,9 @@ import lineageos.providers.LineageSettings;
 import static org.lineageos.internal.util.DeviceKeysConstants.*;
 
 @SearchIndexable
-public class ButtonSettings extends DashboardFragment implements
+public class CustomButtonSettings extends DashboardFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
-    private static final String TAG = "ButtonSettings";
+    private static final String TAG = "CustomButtonSettings";
 
     private static final String KEY_BACK_WAKE_SCREEN = "back_wake_screen";
     private static final String KEY_CAMERA_LAUNCH = "camera_launch";
@@ -117,7 +117,7 @@ public class ButtonSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.button_settings;
+        return R.xml.menu_button_settings;
     }
 
     @Override
@@ -537,7 +537,7 @@ public class ButtonSettings extends DashboardFragment implements
                     ArrayList<SearchIndexableResource> result =
                             new ArrayList<SearchIndexableResource>();
                     SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.button_settings;
+                    sir.xmlResId = R.xml.menu_button_settings;
                     result.add(sir);
 
                     return result;

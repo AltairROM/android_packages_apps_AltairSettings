@@ -45,9 +45,9 @@ import java.util.List;
 import lineageos.preference.LineageSystemSettingListPreference;
 
 @SearchIndexable
-public class QuickSettingsPanelSettings extends DashboardFragment implements
+public class CustomQSSettings extends DashboardFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
-    private static final String TAG = "QuickSettings";
+    private static final String TAG = "CustomQSSettings";
 
     private static final String QS_QUICK_PULLDOWN = "qs_quick_pulldown";
     private static final String QS_ROWS_PORTRAIT = "qs_rows_portrait";
@@ -81,7 +81,7 @@ public class QuickSettingsPanelSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.quick_settings_settings;
+        return R.xml.menu_qs_settings;
     }
 
     @Override
@@ -237,7 +237,7 @@ public class QuickSettingsPanelSettings extends DashboardFragment implements
                     ArrayList<SearchIndexableResource> result =
                             new ArrayList<SearchIndexableResource>();
                     SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.quick_settings_settings;
+                    sir.xmlResId = R.xml.menu_qs_settings;
                     result.add(sir);
 
                     return result;
