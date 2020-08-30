@@ -397,7 +397,6 @@
     <!--  Volume Panel  -->
     <string-array name="volume_panel_entries">
         <item>@string/volume_panel_default</item>
-        <item>@string/volume_panel_aosp</item>
         <item>@string/volume_panel_compact</item>
         <item>@string/volume_panel_oreo</item>
         <item>@string/volume_panel_tiled</item>
@@ -405,7 +404,6 @@
 
     <string-array name="volume_panel_values" translatable="false">
         <item>@string/volume_panel_default_val</item>
-        <item>@string/volume_panel_aosp_val</item>
         <item>@string/volume_panel_compact_val</item>
         <item>@string/volume_panel_oreo_val</item>
         <item>@string/volume_panel_tiled_val</item>
