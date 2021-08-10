@@ -2,7 +2,7 @@
 <!--
      Copyright (C) 2012-2015 The CyanogenMod Project
      Copyright (C) 2017-2018 The LineageOS Project
-     Copyright (C) 2019-2020 Altair ROM
+     Copyright (C) 2019-2021 Altair ROM Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -351,62 +351,6 @@
         <item>6</item>
         <item>7</item>
         <item>8</item>
-    </string-array>
-
-    <!-- Accent color picker preset colors -->
-    <integer-array name="accent_color_picker_values">
-        <item>0xff008577</item> <!-- default - material_deep_teal_500 -->
-        <item>0xff0032a0</item> <!-- Blue -->
-        <item>0xff3368bf</item> <!-- Pixel blue -->
-        <item>0xff0099cc</item> <!-- Holo blue -->
-        <item>0xff00873e</item> <!-- Green -->
-        <item>0xff963cbd</item> <!-- Purple -->
-        <item>0xffe10600</item> <!-- Red -->
-        <item>0xffda1984</item> <!-- Pink -->
-        <item>0xffde7c00</item> <!-- Orange -->
-        <item>0xfff1c400</item> <!-- Yellow -->
-    </integer-array>
-
-    <string-array name="accent_color_picker_names">
-        <item>@string/theme_accent_color_default</item>
-        <item>@string/theme_accent_color_blue</item>
-        <item>@string/theme_accent_color_pixel_blue</item>
-        <item>@string/theme_accent_color_holo_blue</item>
-        <item>@string/theme_accent_color_green</item>
-        <item>@string/theme_accent_color_purple</item>
-        <item>@string/theme_accent_color_red</item>
-        <item>@string/theme_accent_color_pink</item>
-        <item>@string/theme_accent_color_orange</item>
-        <item>@string/theme_accent_color_yellow</item>
-    </string-array>
-
-    <!-- Refresh rate -->
-    <string-array name="refresh_rate_entries">
-        <item>@string/refresh_rate_auto</item>
-        <item>@string/refresh_rate_60Hz</item>
-        <item>@string/refresh_rate_90Hz</item>
-    </string-array>
-
-    <string-array name="refresh_rate_values">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-
-
-    <!--  Volume Panel  -->
-    <string-array name="volume_panel_entries">
-        <item>@string/volume_panel_default</item>
-        <item>@string/volume_panel_compact</item>
-        <item>@string/volume_panel_oreo</item>
-        <item>@string/volume_panel_tiled</item>
-    </string-array>
-
-    <string-array name="volume_panel_values" translatable="false">
-        <item>@string/volume_panel_default_val</item>
-        <item>@string/volume_panel_compact_val</item>
-        <item>@string/volume_panel_oreo_val</item>
-        <item>@string/volume_panel_tiled_val</item>
     </string-array>
 
 </resources>

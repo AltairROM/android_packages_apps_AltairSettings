@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2019-2020 AltairROM
+     Copyright (C) 2019-2021 AltairROM
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/menu_qs_settings_title">
 
+    <!-- Quick Settings quick pulldown -->
     <lineageos.preference.LineageSystemSettingListPreference
         android:key="qs_quick_pulldown"
         android:title="@string/qs_quick_pulldown_title"
@@ -27,6 +28,7 @@
         android:entryValues="@array/qs_quick_pulldown_values"
         android:defaultValue="0" />
 
+    <!-- Quick Settings tile title visibility -->
     <com.lineage.support.preferences.SystemSettingSwitchPreference
         android:key="qs_tile_title_visibility"
         android:title="@string/qs_tile_titles_visibility_title"
@@ -34,6 +36,14 @@
         android:summaryOff="@string/qs_tile_titles_visibility_summaryOff"
         android:defaultValue="true" />
 
+    <!-- Quick Settings tile haptic feedback -->
+    <com.lineage.support.preferences.SystemSettingSwitchPreference
+        android:key="quick_settings_vibrate"
+        android:title="@string/qs_vibrate_title"
+        android:summary="@string/qs_vibrate_summary"
+        android:defaultValue="false"/>
+
+    <!-- Quick Settings rows and columns -->
     <PreferenceCategory
         android:title="@string/qs_row_column_category">
 
@@ -61,6 +71,7 @@
             settings:min="3"
             android:max="8" />
 
+        <!--
         <com.lineage.support.preferences.SystemSettingSwitchPreference
             android:key="qs_columns_quickbar_auto"
             android:title="@string/qs_columns_quickbar_auto_title"
@@ -71,8 +82,11 @@
             android:title="@string/qs_columns_quickbar_title"
             settings:min="6"
             android:max="8" />
+        -->
+
     </PreferenceCategory>
 
+    <!-- Quick Settings header -->
     <PreferenceCategory
         android:title="@string/qs_header_category">
 
@@ -98,6 +112,7 @@
             android:title="@string/qs_bluetooth_battery_title"
             android:summary="@string/qs_bluetooth_battery_summary"
             android:defaultValue="true"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

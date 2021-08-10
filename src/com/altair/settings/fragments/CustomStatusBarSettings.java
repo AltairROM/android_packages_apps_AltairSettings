@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2013 The CyanogenMod Project
  * Copyright (C) 2017-2020 The LineageOS project
- * Copyright (C) 2019-2020 Altair ROM
+ * Copyright (C) 2019-2021 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,10 +35,9 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -47,12 +46,11 @@ import lineageos.providers.LineageSettings;
 
 @SearchIndexable
 public class CustomStatusBarSettings extends DashboardFragment implements
-        Preference.OnPreferenceChangeListener, Indexable {
+        Preference.OnPreferenceChangeListener {
     private static final String TAG = "CustomStatusBarSettings";
 
     private static final String STATUS_BAR_SHOW_CLOCK = "status_bar_show_clock";
     private static final String STATUS_BAR_CLOCK = "status_bar_clock";
-    private static final String CLOCK_SECONDS = "clock_seconds";
     private static final String STATUS_BAR_CLOCK_STYLE = "status_bar_clock";
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
     private static final String STATUS_BAR_SHOW_BATTERY = "status_bar_show_battery";
@@ -216,18 +214,14 @@ public class CustomStatusBarSettings extends DashboardFragment implements
                 STATUS_BAR_CLOCK_STYLE, 2);
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    ArrayList<SearchIndexableResource> result =
-                            new ArrayList<SearchIndexableResource>();
-                    SearchIndexableResource sir = new SearchIndexableResource(context);
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.menu_status_bar_settings;
-                    result.add(sir);
-
-                    return result;
+                    return Arrays.asList(sir);
                 }
 
                 @Override
@@ -237,6 +231,7 @@ public class CustomStatusBarSettings extends DashboardFragment implements
                     if (DeviceUtils.hasNotch(context)) {
                         keys.add(NETWORK_TRAFFIC_SETTINGS);
                     }
+
                     return keys;
                 }
             };

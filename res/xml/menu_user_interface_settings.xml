@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2019-2020 AltairROM
+     Copyright (C) 2019-2021 Altair ROM Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -20,47 +20,30 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/menu_user_interface_settings_title">
 
-    <!-- Recents -->
-    <PreferenceCategory
-        android:key="recents_category"
-        android:title="@string/recents_category_title">
+    <!-- Swipe down to clear all recents -->
+    <!--
+    <com.lineage.support.preferences.SystemSettingSwitchPreference
+        android:key="swipe_down_to_clear_all_recents"
+        android:title="@string/recents_allow_swipe_down_clearall_title"
+        android:summary="@string/recents_allow_swipe_down_clearall_summary"
+        android:defaultValue="true" />
+    -->
 
-        <!-- Allow swipe down to clear all recents -->
-        <com.lineage.support.preferences.SystemSettingSwitchPreference
-            android:key="swipe_down_to_clear_all_recents"
-            android:title="@string/recents_allow_swipe_down_clearall_title"
-            android:summary="@string/recents_allow_swipe_down_clearall_summary"
-            android:defaultValue="true" />
+    <!-- Notification kill app button -->
+    <!--
+    <com.lineage.support.preferences.SystemSettingSwitchPreference
+        android:key="notification_guts_kill_app_button"
+        android:title="@string/notification_guts_kill_app_button_title"
+        android:summary="@string/notification_guts_kill_app_button_summary"
+        android:defaultValue="false" />
+    -->
 
-    </PreferenceCategory>
-
-    <!-- Notifications -->
-    <PreferenceCategory
-        android:key="notifications_category"
-        android:title="@string/notifications_category_title">
-
-        <!-- Notification guts kill app button -->
-        <com.lineage.support.preferences.SystemSettingSwitchPreference
-            android:key="notification_guts_kill_app_button"
-            android:title="@string/notification_guts_kill_app_button_title"
-            android:summary="@string/notification_guts_kill_app_button_summary"
-            android:defaultValue="false" />
-
-    </PreferenceCategory>
-
-    <!-- Miscellaneous -->
-    <PreferenceCategory
-        android:key="miscellaneous"
-        android:title="@string/miscellaneous_category_title">
-
-        <!-- Show app icon on Toast popup -->
-        <com.lineage.support.preferences.SystemSettingSwitchPreference
-            android:key="toast_icon"
-            android:title="@string/toast_icon_title"
-            android:summary="@string/toast_icon_summary"
-            android:defaultValue="true" />
-
-    </PreferenceCategory>
+    <!-- Toast icon -->
+    <com.lineage.support.preferences.SystemSettingSwitchPreference
+        android:key="toast_icon"
+        android:title="@string/toast_icon_title"
+        android:summary="@string/toast_icon_summary"
+        android:defaultValue="true" />
 
 </PreferenceScreen>
 

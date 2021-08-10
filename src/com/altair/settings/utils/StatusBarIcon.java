@@ -84,3 +84,4 @@ public class StatusBarIcon {
                 TextUtils.join(",", blacklist), ActivityManager.getCurrentUser());
     }
 }
+

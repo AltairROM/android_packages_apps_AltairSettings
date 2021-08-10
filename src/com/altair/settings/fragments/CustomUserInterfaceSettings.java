@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2020 Altair ROM
+ * Copyright (C) 2019-2021 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,27 +29,19 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.altair.settings.utils.SystemUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
 public class CustomUserInterfaceSettings extends DashboardFragment implements
-        Preference.OnPreferenceChangeListener, Indexable {
+        Preference.OnPreferenceChangeListener {
     private static final String TAG = "CustomUserInterfaceSettings";
-
-    private static final String RECENTS_COMPONENT_TYPE = "recents_component";
-    private static final String RECENTS_TYPE = "recents_layout_style";
-    private static final String RECENTS_CLEAR_ALL_LOCATION = "recents_clear_all_location";
-
-    private static final int RECENTS_COMPONENT_OREO = 1;
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -62,14 +54,6 @@ public class CustomUserInterfaceSettings extends DashboardFragment implements
 
         final ContentResolver resolver = getActivity().getContentResolver();
         final PreferenceScreen prefSet = getPreferenceScreen();
-
-        // SmartPixels
-        boolean enableSmartPixels = getContext().getResources().
-                getBoolean(com.android.internal.R.bool.config_enableSmartPixels);
-        Preference SmartPixels = findPreference("smart_pixels");
-        if (!enableSmartPixels) {
-            prefSet.removePreference(SmartPixels);
-        }
     }
 
     @Override
@@ -96,18 +80,14 @@ public class CustomUserInterfaceSettings extends DashboardFragment implements
         return true;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    ArrayList<SearchIndexableResource> result =
-                            new ArrayList<SearchIndexableResource>();
-                    SearchIndexableResource sir = new SearchIndexableResource(context);
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.menu_user_interface_settings;
-                    result.add(sir);
-
-                    return result;
+                    return Arrays.asList(sir);
                 }
             };
 }

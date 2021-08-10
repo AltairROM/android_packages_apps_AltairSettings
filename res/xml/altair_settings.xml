@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2019-2020 AltairROM
+     Copyright (C) 2019-2021 Altair ROM Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -45,12 +45,12 @@
         settings:controller="com.android.settings.gestures.GesturesSettingPreferenceController"/>
 
     <!-- Navigation -->
-    <PreferenceScreen
+    <!--<PreferenceScreen
         android:key="navigation_category"
         android:title="@string/menu_navigation_settings_title"
         android:summary="@string/menu_navigation_settings_summary"
         android:fragment="com.altair.settings.fragments.CustomNavigationSettings"
-        android:icon="@drawable/ic_settings_menu_navigation" />
+        android:icon="@drawable/ic_settings_menu_navigation" />-->
 
     <!-- Quick settings panel -->
     <Preference

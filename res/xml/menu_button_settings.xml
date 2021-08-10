@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2008 The Android Open Source Project
-     Copyright (C) 2019-2020 Altair ROM
+     Copyright (C) 2019-2021 Altair ROM Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -21,39 +21,15 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/menu_button_settings_title">
 
-    <PreferenceCategory
-        android:key="navkeys_backlight"
-        android:title="@string/navkeys_backlight_title" >
+    <!-- Button backlight brightness -->
+    <com.altair.settings.fragments.ButtonBacklightBrightness
+        android:key="navkeys_button_backlight"
+        android:title="@string/navkeys_button_backlight_title"
+        android:summary="@string/navkeys_button_backlight_summary"
+        android:dialogTitle="@string/navkeys_button_backlight_title"
+        android:persistent="false" />
 
-        <SwitchPreference
-            android:key="navkeys_backlight_enable"
-            android:title="@string/navkeys_backlight_enable_title"
-            android:defaultValue="false" />
-
-        <com.lineage.support.preferences.CustomSeekBarPreference
-            android:key="navkeys_backlight_brightness"
-            android:title="@string/navkeys_backlight_brightness_title"
-            android:max="255"
-            settings:min="0"
-            settings:showStatusText="false"
-            android:persistent="false" />
-
-        <com.lineage.support.preferences.CustomSeekBarPreference
-            android:key="navkeys_backlight_timeout"
-            android:title="@string/navkeys_backlight_timeout_title"
-            android:max="35"
-            settings:min="0"
-            settings:showStatusText="false"
-            android:persistent="false" />
-
-        <lineageos.preference.LineageSystemSettingSwitchPreference
-            android:key="button_backlight_only_when_pressed"
-            android:title="@string/navkeys_backlight_touch_only_title"
-            android:summary="@string/navkeys_backlight_touch_only_summary"
-            android:defaultValue="false" />
-
-    </PreferenceCategory>
-
+    <!-- Wake device screen -->
     <PreferenceCategory
         android:key="wake_screen"
         android:title="@string/hardware_keys_button_wake_title" >
@@ -95,6 +71,7 @@
 
     </PreferenceCategory>
 
+    <!-- Power button -->
     <PreferenceCategory
         android:key="power_key"
         android:title="@string/hardware_keys_power_key_title" >
@@ -134,6 +111,7 @@
 
     </PreferenceCategory>
 
+    <!-- Home button -->
     <PreferenceCategory
         android:key="home_key"
         android:title="@string/hardware_keys_home_key_title" >
@@ -146,6 +124,7 @@
 
     </PreferenceCategory>
 
+    <!-- Volume buttons -->
     <PreferenceCategory
         android:key="volume_keys"
         android:title="@string/hardware_keys_volume_keys_title" >
@@ -180,14 +159,9 @@
             android:title="@string/volume_panel_on_left_title"
             android:summary="@string/volume_panel_on_left_summary" />
 
-        <com.lineage.support.preferences.SystemSettingListPreference
-            android:key="systemui_plugin_volume"
-            android:title="@string/volume_panel"
-            android:entries="@array/volume_panel_entries"
-            android:entryValues="@array/volume_panel_values"
-            android:defaultValue="@string/volume_panel_default_val" />
     </PreferenceCategory>
 
+    <!-- Camera button -->
     <PreferenceCategory
         android:key="camera_key"
         android:title="@string/hardware_keys_camera_key_title">
@@ -206,6 +180,7 @@
 
     </PreferenceCategory>
 
+    <!-- Extra buttons -->
     <PreferenceCategory
         android:key="extras_category"
         android:title="@string/extras_title" >
@@ -217,6 +192,12 @@
             <intent
                 android:action="org.lineageos.settings.device.ADDITIONAL_BUTTONS_SETTINGS" />
         </lineageos.preference.RemotePreference>
+
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="click_partial_screenshot"
+            android:title="@string/click_partial_screenshot_title"
+            android:summary="@string/click_partial_screenshot_summary"
+            android:defaultValue="false" />
 
     </PreferenceCategory>
 

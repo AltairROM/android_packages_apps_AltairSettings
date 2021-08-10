@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2020 Altair ROM
+ * Copyright (C) 2019-2021 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.altair.settings.fragments;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.hardware.display.AmbientDisplayConfiguration;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
@@ -29,26 +30,30 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.altair.settings.utils.SystemUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController;
+import com.android.settings.display.AmbientDisplayNotificationsPreferenceController;
+import com.android.settings.gestures.DoubleTapScreenPreferenceController;
+import com.android.settings.gestures.PickupGesturePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 import com.lineage.support.preferences.GlobalSettingListPreference;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-@SearchIndexable
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class CustomDisplaySettings extends DashboardFragment implements
-        Preference.OnPreferenceChangeListener, Indexable {
+        Preference.OnPreferenceChangeListener {
     private static final String TAG = "CustomDisplaySettings";
 
-    private static final String KEY_REFRESH_RATE_SETTING = "refresh_rate_setting";
+    public static final String KEY_SMART_PIXELS = "smart_pixels";
 
-    private GlobalSettingListPreference mVariableRefreshRate;
+    private AmbientDisplayConfiguration mConfig;
+
+    private boolean mEnableSmartPixels;
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -62,18 +67,12 @@ public class CustomDisplaySettings extends DashboardFragment implements
         final ContentResolver resolver = getActivity().getContentResolver();
         final PreferenceScreen prefScreen = getPreferenceScreen();
 
-        mVariableRefreshRate = prefScreen.findPreference(KEY_REFRESH_RATE_SETTING);
-        boolean hasVariableRefreshRate =
-            getContext().getResources().getBoolean(com.android.internal.R.bool.config_hasVariableRefreshRate);
-
-        if (!hasVariableRefreshRate) {
-            prefScreen.removePreference(mVariableRefreshRate);
-        } else {
-            int defVarRateSetting = getContext().getResources().getInteger(
-                 com.android.internal.R.integer.config_defaultVariableRefreshRateSetting);
-            int mVarRateSetting = Settings.Global.getInt(getContext().getContentResolver(),
-                 Settings.Global.REFRESH_RATE_SETTING, defVarRateSetting);
-            mVariableRefreshRate.setValue(String.valueOf(mVarRateSetting));
+        // Smart Pixels
+        boolean enableSmartPixels = getContext().getResources().
+                getBoolean(com.android.internal.R.bool.config_supportSmartPixels);
+        Preference SmartPixels = findPreference(KEY_SMART_PIXELS);
+        if (!enableSmartPixels) {
+            prefScreen.removePreference(SmartPixels);
         }
     }
 
@@ -97,31 +96,44 @@ public class CustomDisplaySettings extends DashboardFragment implements
         super.onPause();
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(AmbientDisplayAlwaysOnPreferenceController.class).setConfig(getConfig(context));
+        use(AmbientDisplayNotificationsPreferenceController.class).setConfig(getConfig(context));
+        use(DoubleTapScreenPreferenceController.class).setConfig(getConfig(context));
+        use(PickupGesturePreferenceController.class).setConfig(getConfig(context));
+    }
+
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         return true;
     }
 
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+    private AmbientDisplayConfiguration getConfig(Context context) {
+        if (mConfig == null) {
+            mConfig = new AmbientDisplayConfiguration(context);
+        }
+        return mConfig;
+    }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    ArrayList<SearchIndexableResource> result =
-                            new ArrayList<SearchIndexableResource>();
-                    SearchIndexableResource sir = new SearchIndexableResource(context);
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.menu_display_settings;
-                    result.add(sir);
-
-                    return result;
+                    return Arrays.asList(sir);
                 }
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
-                    boolean hasVariableRefreshRate =
-                        context.getResources().getBoolean(com.android.internal.R.bool.config_hasVariableRefreshRate);
-                    if (!hasVariableRefreshRate) {
-                        keys.add(KEY_REFRESH_RATE_SETTING);
+
+                    boolean enableSmartPixels = context.getResources().
+                            getBoolean(com.android.internal.R.bool.config_supportSmartPixels);
+                    if (!enableSmartPixels) {
+                        keys.add(KEY_SMART_PIXELS);
                     }
 
                     return keys;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2008 The Android Open Source Project
-     Copyright (C) 2020 Altair ROM
+     Copyright (C) 2020-2021 Altair ROM Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -20,10 +20,12 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/menu_theme_settings_title">
 
+    <!-- Styles & wallpapers -->
     <PreferenceCategory
         android:key="theme_styles"
         android:title="@string/theme_styles_category_title">
 
+        <!--
         <Preference
             android:key="theme_select_activity"
             android:title="@string/theme_select_title"
@@ -33,6 +35,15 @@
                     android:targetPackage="com.android.customization"
                     android:targetClass="com.android.customization.picker.CustomizationPickerActivity" />
         </Preference>
+        -->
+
+        <com.android.settingslib.RestrictedPreference
+            android:key="wallpaper"
+            android:title="@string/wallpaper_settings_title"
+            settings:keywords="@string/keywords_display_wallpaper"
+            settings:useAdminDisabledSummary="true"
+            settings:controller="com.android.settings.display.WallpaperPreferenceController">
+        </com.android.settingslib.RestrictedPreference>
 
         <com.android.settings.display.darkmode.DarkModePreference
             android:key="theme_dark_ui_mode"
@@ -45,10 +56,12 @@
 
     </PreferenceCategory>
 
+    <!-- Colors & elements -->
     <PreferenceCategory
         android:key="theme_elements"
         android:title="@string/theme_elements_category_title">
 
+        <!--
         <com.lineage.support.colorpicker.ColorPreference
             android:key="theme_accent_color"
             android:title="@string/theme_elements_accent_color_title"
@@ -56,10 +69,16 @@
             settings:cpv_colorPresets="@array/accent_color_picker_values"
             settings:cpv_allowCustom="false"
             settings:cpv_showColorShades="false" />
+        -->
 
+        <ListPreference
+            android:key="android.theme.customization.accent_color"
+            android:title="@string/theme_elements_accent_color_title"/>
+        <!--
         <ListPreference
             android:key="android.theme.customization.primary_color"
             android:title="@string/theme_elements_primary_color_title"/>
+        -->
         <ListPreference
             android:key="android.theme.customization.font"
             android:title="@string/theme_elements_font_title"/>
@@ -71,6 +90,13 @@
             android:title="@string/theme_elements_sysui_icon_title"/>
 
     </PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference
+            android:key="theme_footer"
+            android:title="@string/theme_substratum_warning"
+            android:selectable="false"
+            settings:searchable="false"
+            settings:allowDividerAbove="true"/>
 
 </PreferenceScreen>
 

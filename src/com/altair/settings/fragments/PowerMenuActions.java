@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2014-2015 The CyanogenMod Project
  * Copyright (C) 2017 The LineageOS Project
- * Copyright (C) 2020 Altair ROM
+ * Copyright (C) 2021 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@
 package com.altair.settings.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -29,16 +28,19 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.widget.LockPatternUtils;
+
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+
+import org.lineageos.internal.util.PowerMenuConstants;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import lineageos.app.LineageGlobalActions;
 import lineageos.providers.LineageSettings;
-
-import org.lineageos.internal.util.PowerMenuConstants;
 
 import static org.lineageos.internal.util.PowerMenuConstants.*;
 
@@ -49,21 +51,26 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
     private SwitchPreference mAirplanePref;
     private SwitchPreference mUsersPref;
     private SwitchPreference mLockDownPref;
+    private SwitchPreference mEmergencyPref;
+
+    private LineageGlobalActions mLineageGlobalActions;
 
     Context mContext;
-
-    private ArrayList<String> mLocalUserConfig = new ArrayList<String>();
-    private String[] mAllActions;
+    private LockPatternUtils mLockPatternUtils;
+    private UserManager mUserManager;
+    private List<String> mLocalUserConfig = new ArrayList<String>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         addPreferencesFromResource(R.xml.power_menu_settings);
-
         mContext = getActivity().getApplicationContext();
-        mAllActions = PowerMenuConstants.getAllActions();
+        mLockPatternUtils = new LockPatternUtils(mContext);
+        mUserManager = UserManager.get(mContext);
+        mLineageGlobalActions = LineageGlobalActions.getInstance(mContext);
 
-        for (String action : mAllActions) {
+        for (String action : PowerMenuConstants.getAllActions()) {
             if (action.equals(GLOBAL_ACTION_KEY_SCREENSHOT)) {
                 mScreenshotPref = findPreference(GLOBAL_ACTION_KEY_SCREENSHOT);
             } else if (action.equals(GLOBAL_ACTION_KEY_AIRPLANE)) {
@@ -72,15 +79,12 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
                 mUsersPref = findPreference(GLOBAL_ACTION_KEY_USERS);
             } else if (action.equals(GLOBAL_ACTION_KEY_LOCKDOWN)) {
                 mLockDownPref = findPreference(GLOBAL_ACTION_KEY_LOCKDOWN);
+            } else if (action.equals(GLOBAL_ACTION_KEY_EMERGENCY)) {
+                mEmergencyPref = findPreference(GLOBAL_ACTION_KEY_EMERGENCY);
             }
         }
 
-        getUserConfig();
-    }
-
-    @Override
-    public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.ALTAIR;
+        mLocalUserConfig = mLineageGlobalActions.getLocalUserConfig();
     }
 
     @Override
@@ -88,11 +92,13 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
         super.onStart();
 
         if (mScreenshotPref != null) {
-            mScreenshotPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_SCREENSHOT));
+            mScreenshotPref.setChecked(mLineageGlobalActions.userConfigContains(
+                    GLOBAL_ACTION_KEY_SCREENSHOT));
         }
 
         if (mAirplanePref != null) {
-            mAirplanePref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_AIRPLANE));
+            mAirplanePref.setChecked(mLineageGlobalActions.userConfigContains(
+                    GLOBAL_ACTION_KEY_AIRPLANE));
         }
 
         if (mUsersPref != null) {
@@ -100,12 +106,17 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
                 getPreferenceScreen().removePreference(findPreference(GLOBAL_ACTION_KEY_USERS));
                 mUsersPref = null;
             } else {
-                List<UserInfo> users = ((UserManager) mContext.getSystemService(
-                        Context.USER_SERVICE)).getUsers();
+                List<UserInfo> users = mUserManager.getUsers();
                 boolean enabled = (users.size() > 1);
-                mUsersPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_USERS) && enabled);
+                mUsersPref.setChecked(mLineageGlobalActions.userConfigContains(
+                        GLOBAL_ACTION_KEY_USERS) && enabled);
                 mUsersPref.setEnabled(enabled);
             }
+        }
+
+        if (mEmergencyPref != null) {
+            mEmergencyPref.setChecked(mLineageGlobalActions.userConfigContains(
+                    GLOBAL_ACTION_KEY_EMERGENCY));
         }
 
         updatePreferences();
@@ -118,26 +129,35 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
     }
 
     @Override
+    public int getMetricsCategory() {
+        return MetricsEvent.ALTAIR;
+    }
+
+    @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         boolean value;
 
         if (preference == mScreenshotPref) {
             value = mScreenshotPref.isChecked();
-            updateUserConfig(value, GLOBAL_ACTION_KEY_SCREENSHOT);
+            mLineageGlobalActions.updateUserConfig(value, GLOBAL_ACTION_KEY_SCREENSHOT);
 
         } else if (preference == mAirplanePref) {
             value = mAirplanePref.isChecked();
-            updateUserConfig(value, GLOBAL_ACTION_KEY_AIRPLANE);
+            mLineageGlobalActions.updateUserConfig(value, GLOBAL_ACTION_KEY_AIRPLANE);
 
         } else if (preference == mUsersPref) {
             value = mUsersPref.isChecked();
-            updateUserConfig(value, GLOBAL_ACTION_KEY_USERS);
+            mLineageGlobalActions.updateUserConfig(value, GLOBAL_ACTION_KEY_USERS);
 
         } else if (preference == mLockDownPref) {
             value = mLockDownPref.isChecked();
-            updateUserConfig(value, GLOBAL_ACTION_KEY_LOCKDOWN);
-            Settings.Secure.putInt(getContentResolver(),
-                    Settings.Secure.LOCKDOWN_IN_POWER_MENU, value ? 1 : 0);
+            mLineageGlobalActions.updateUserConfig(value, GLOBAL_ACTION_KEY_LOCKDOWN);
+            Settings.Secure.putIntForUser(getContentResolver(),
+                    Settings.Secure.LOCKDOWN_IN_POWER_MENU, value ? 1 : 0, UserHandle.USER_CURRENT);
+
+        } else if (preference == mEmergencyPref) {
+            value = mEmergencyPref.isChecked();
+            mLineageGlobalActions.updateUserConfig(value, GLOBAL_ACTION_KEY_EMERGENCY);
 
         } else {
             return super.onPreferenceTreeClick(preference);
@@ -145,73 +165,21 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
         return true;
     }
 
-    private boolean settingsArrayContains(String preference) {
-        return mLocalUserConfig.contains(preference);
-    }
-
-    private void updateUserConfig(boolean enabled, String action) {
-        if (enabled) {
-            if (!settingsArrayContains(action)) {
-                mLocalUserConfig.add(action);
-            }
-        } else {
-            if (settingsArrayContains(action)) {
-                mLocalUserConfig.remove(action);
-            }
-        }
-        saveUserConfig();
-    }
-
     private void updatePreferences() {
-    }
-
-    private void getUserConfig() {
-        mLocalUserConfig.clear();
-        String[] defaultActions;
-        String savedActions = LineageSettings.Secure.getStringForUser(mContext.getContentResolver(),
-                LineageSettings.Secure.POWER_MENU_ACTIONS, UserHandle.USER_CURRENT);
-
-        if (savedActions == null) {
-            defaultActions = mContext.getResources().getStringArray(
-                    com.android.internal.R.array.config_globalActionsList);
-            for (String action : defaultActions) {
-                mLocalUserConfig.add(action);
-            }
-        } else {
-            for (String action : savedActions.split("\\|")) {
-                mLocalUserConfig.add(action);
-            }
-        }
-    }
-
-    private void saveUserConfig() {
-        StringBuilder s = new StringBuilder();
-
-        ArrayList<String> setactions = new ArrayList<String>();
-        for (String action : mAllActions) {
-            if (settingsArrayContains(action)) {
-                setactions.add(action);
+        boolean isKeyguardSecure = mLockPatternUtils.isSecure(UserHandle.myUserId());
+        boolean lockdown = Settings.Secure.getIntForUser(
+                getContentResolver(), Settings.Secure.LOCKDOWN_IN_POWER_MENU, 0,
+                UserHandle.USER_CURRENT) == 1;
+        if (mLockDownPref != null) {
+            mLockDownPref.setEnabled(isKeyguardSecure);
+            if (isKeyguardSecure) {
+                mLockDownPref.setChecked(lockdown);
+                mLockDownPref.setSummary(null);
             } else {
-                continue;
+                mLockDownPref.setChecked(false);
+                mLockDownPref.setSummary(R.string.power_menu_lockdown_unavailable);
             }
         }
-
-        for (int i = 0; i < setactions.size(); i++) {
-            s.append(setactions.get(i).toString());
-            if (i != setactions.size() - 1) {
-                s.append("|");
-            }
-        }
-
-        LineageSettings.Secure.putStringForUser(getContentResolver(),
-                LineageSettings.Secure.POWER_MENU_ACTIONS, s.toString(), UserHandle.USER_CURRENT);
-        updatePowerMenuDialog();
-    }
-
-    private void updatePowerMenuDialog() {
-        Intent u = new Intent();
-        u.setAction(lineageos.content.Intent.ACTION_UPDATE_POWER_MENU);
-        mContext.sendBroadcastAsUser(u, UserHandle.ALL);
     }
 }
 
