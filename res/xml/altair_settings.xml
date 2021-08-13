@@ -45,12 +45,12 @@
         settings:controller="com.android.settings.gestures.GesturesSettingPreferenceController"/>
 
     <!-- Navigation -->
-    <!--<PreferenceScreen
+    <PreferenceScreen
         android:key="navigation_category"
         android:title="@string/menu_navigation_settings_title"
         android:summary="@string/menu_navigation_settings_summary"
         android:fragment="com.altair.settings.fragments.CustomNavigationSettings"
-        android:icon="@drawable/ic_settings_menu_navigation" />-->
+        android:icon="@drawable/ic_settings_menu_navigation" />
 
     <!-- Quick settings panel -->
     <Preference
