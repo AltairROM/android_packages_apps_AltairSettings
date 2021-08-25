@@ -51,7 +51,6 @@
                 android:defaultValue="false" />
 
         <!-- Swipe on long edge -->
-        <!--
         <ListPreference
             android:key="navigation_bar_edge_long_swipe"
             android:dialogTitle="@string/navigation_bar_edge_long_swipe_title"
@@ -59,12 +58,10 @@
             android:entries="@array/hardware_keys_action_entries"
             android:entryValues="@array/hardware_keys_action_values"
             android:persistent="false" />
-        -->
 
     </PreferenceCategory>
 
     <!-- Home key -->
-    <!--
     <PreferenceCategory
         android:key="navigation_home_key"
         android:title="@string/hardware_keys_home_key_title" >
@@ -110,10 +107,8 @@
         </Preference>
 
     </PreferenceCategory>
-    -->
 
     <!-- Back key -->
-    <!--
     <PreferenceCategory
         android:key="navigation_back_key"
         android:title="@string/hardware_keys_back_key_title" >
@@ -153,10 +148,8 @@
         </Preference>
 
     </PreferenceCategory>
-    -->
 
     <!-- Recents key -->
-    <!--
     <PreferenceCategory
         android:key="navigation_app_switch_key"
         android:title="@string/hardware_keys_appswitch_key_title" >
@@ -204,10 +197,8 @@
         </Preference>
 
     </PreferenceCategory>
-    -->
 
     <!-- Menu key -->
-    <!--
     <PreferenceCategory
         android:key="navigation_menu_key"
         android:title="@string/hardware_keys_menu_key_title" >
@@ -237,10 +228,8 @@
             android:persistent="false" />
 
     </PreferenceCategory>
-    -->
 
     <!-- Assistance key -->
-    <!--
     <PreferenceCategory
         android:key="navigation_assist_key"
         android:title="@string/hardware_keys_assist_key_title" >
@@ -270,6 +259,5 @@
             android:persistent="false" />
 
     </PreferenceCategory>
-    -->
 
 </PreferenceScreen>

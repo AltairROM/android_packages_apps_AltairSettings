@@ -76,7 +76,6 @@ public class CustomNavigationSettings extends DashboardFragment implements
     private static final String KEY_NAVIGATION_SYSTEM_TYPE = "gesture_system_navigation_input_summary";
     private static final String KEY_NAVIGATION_ARROW_KEYS = "navigation_bar_menu_arrow_keys";
     private static final String KEY_NAVIGATION_INVERT_LAYOUT = "sysui_nav_bar_inverse";
-    /*
     private static final String KEY_HOME_LONG_PRESS_ACTION = "hardware_keys_home_long_press";
     private static final String KEY_HOME_LONG_PRESS_CUSTOM_APP = "hardware_keys_home_long_press_custom_app";
     private static final String KEY_HOME_DOUBLE_TAP_ACTION = "hardware_keys_home_double_tap";
@@ -97,14 +96,13 @@ public class CustomNavigationSettings extends DashboardFragment implements
     private static final String KEY_ASSIST_LONG_PRESS_ACTION = "hardware_keys_assist_long_press";
     private static final String KEY_ASSIST_DOUBLE_TAP_ACTION = "hardware_keys_assist_double_tap";
     private static final String KEY_EDGE_LONG_SWIPE_ACTION = "navigation_bar_edge_long_swipe";
-    */
 
     private static final String CATEGORY_NAVBAR_OPTIONS = "navigation_bar_options_category";
-    //private static final String CATEGORY_HOME_KEY = "navigation_home_key";
-    //private static final String CATEGORY_BACK_KEY = "navigation_back_key";
-    //private static final String CATEGORY_APP_SWITCH_KEY = "navigation_app_switch_key";
-    //private static final String CATEGORY_MENU_KEY = "navigation_menu_key";
-    //private static final String CATEGORY_ASSIST_KEY = "navigation_assist_key";
+    private static final String CATEGORY_HOME_KEY = "navigation_home_key";
+    private static final String CATEGORY_BACK_KEY = "navigation_back_key";
+    private static final String CATEGORY_APP_SWITCH_KEY = "navigation_app_switch_key";
+    private static final String CATEGORY_MENU_KEY = "navigation_menu_key";
+    private static final String CATEGORY_ASSIST_KEY = "navigation_assist_key";
 
     private static final int MENU_RESET = Menu.FIRST;
 
@@ -113,9 +111,8 @@ public class CustomNavigationSettings extends DashboardFragment implements
     private Preference mNavigationSystemType;
     private SwitchPreference mNavigationArrowKeys;
     private SwitchPreference mNavigationInvertLayout;
-    //private ListPreference mEdgeLongSwipeAction;
+    private ListPreference mEdgeLongSwipeAction;
 
-    /*
     private ListPreference mHomeLongPressAction;
     private ListPreference mHomeDoubleTapAction;
     private ListPreference mBackLongPressAction;
@@ -136,18 +133,16 @@ public class CustomNavigationSettings extends DashboardFragment implements
     private Preference mBackDoubleTapCustomApp;
     private Preference mAppSwitchLongPressCustomApp;
     private Preference mAppSwitchDoubleTapCustomApp;
-    */
 
     private PreferenceCategory mNavigationBarOptionsCategory;
-    //private PreferenceCategory mNavigationHomeKeyCategory;
-    //private PreferenceCategory mNavigationBackKeyCategory;
-    //private PreferenceCategory mNavigationAppSwitchKeyCategory;
-    //private PreferenceCategory mNavigationMenuKeyCategory;
-    //private PreferenceCategory mNavigationAssistKeyCategory;
+    private PreferenceCategory mNavigationHomeKeyCategory;
+    private PreferenceCategory mNavigationBackKeyCategory;
+    private PreferenceCategory mNavigationAppSwitchKeyCategory;
+    private PreferenceCategory mNavigationMenuKeyCategory;
+    private PreferenceCategory mNavigationAssistKeyCategory;
 
     private Handler mHandler;
 
-    /*
     Action mDefaultHomeLongPressAction;
     Action mDefaultHomeDoubleTapAction;
     Action mDefaultBackLongPressAction;
@@ -162,7 +157,6 @@ public class CustomNavigationSettings extends DashboardFragment implements
     Action mDefaultAssistLongPressAction;
     Action mDefaultAssistDoubleTapAction;
     Action mDefaultEdgeLongSwipeAction;
-    */
 
     private boolean mHardwareKeys;
 
@@ -181,10 +175,9 @@ public class CustomNavigationSettings extends DashboardFragment implements
 
         mHandler = new Handler();
 
-        //final boolean hasMenuKey = DeviceUtils.hasMenuKey(getActivity());
-        //final boolean hasAssistKey = DeviceUtils.hasAssistKey(getActivity());
+        final boolean hasMenuKey = DeviceUtils.hasMenuKey(getActivity());
+        final boolean hasAssistKey = DeviceUtils.hasAssistKey(getActivity());
 
-        /*
         mDefaultHomeLongPressAction = Action.fromIntSafe(res.getInteger(org.lineageos.platform.internal.R.integer.config_longPressOnHomeBehavior));
         mDefaultHomeDoubleTapAction = Action.fromIntSafe(res.getInteger(org.lineageos.platform.internal.R.integer.config_doubleTapOnHomeBehavior));
         mDefaultBackLongPressAction = Action.fromIntSafe(res.getInteger(org.lineageos.platform.internal.R.integer.config_longPressOnBackBehavior));
@@ -215,22 +208,20 @@ public class CustomNavigationSettings extends DashboardFragment implements
         Action assistDoubleTapAction = Action.fromSettings(resolver, LineageSettings.System.KEY_ASSIST_DOUBLE_TAP_ACTION, mDefaultAssistDoubleTapAction);
 
         Action edgeLongSwipeAction = Action.fromSettings(resolver, LineageSettings.System.KEY_EDGE_LONG_SWIPE_ACTION, Action.NOTHING);
-        */
 
         mNavigationBarOptionsCategory = findPreference(CATEGORY_NAVBAR_OPTIONS);
-        //mNavigationHomeKeyCategory = findPreference(CATEGORY_HOME_KEY);
-        //mNavigationBackKeyCategory = findPreference(CATEGORY_BACK_KEY);
-        //mNavigationAppSwitchKeyCategory = findPreference(CATEGORY_APP_SWITCH_KEY);
-        //mNavigationMenuKeyCategory = findPreference(CATEGORY_MENU_KEY);
-        //mNavigationAssistKeyCategory = findPreference(CATEGORY_ASSIST_KEY);
+        mNavigationHomeKeyCategory = findPreference(CATEGORY_HOME_KEY);
+        mNavigationBackKeyCategory = findPreference(CATEGORY_BACK_KEY);
+        mNavigationAppSwitchKeyCategory = findPreference(CATEGORY_APP_SWITCH_KEY);
+        mNavigationMenuKeyCategory = findPreference(CATEGORY_MENU_KEY);
+        mNavigationAssistKeyCategory = findPreference(CATEGORY_ASSIST_KEY);
 
         mEnableNavigationBar = findPreference(KEY_NAVIGATION_BAR_ENABLE);
         mNavigationSystemType = findPreference(KEY_NAVIGATION_SYSTEM_TYPE);
         mNavigationArrowKeys = findPreference(KEY_NAVIGATION_ARROW_KEYS);
         mNavigationInvertLayout = findPreference(KEY_NAVIGATION_INVERT_LAYOUT);
-        //mEdgeLongSwipeAction = initList(KEY_EDGE_LONG_SWIPE_ACTION, edgeLongSwipeAction);
+        mEdgeLongSwipeAction = initList(KEY_EDGE_LONG_SWIPE_ACTION, edgeLongSwipeAction);
 
-        /*
         mHomeLongPressAction = initList(KEY_HOME_LONG_PRESS_ACTION, homeLongPressAction);
         mHomeDoubleTapAction = initList(KEY_HOME_DOUBLE_TAP_ACTION, homeDoubleTapAction);
         mBackLongPressAction = initList(KEY_BACK_LONG_PRESS_ACTION, backLongPressAction);
@@ -251,7 +242,6 @@ public class CustomNavigationSettings extends DashboardFragment implements
         mBackDoubleTapCustomApp = findPreference(KEY_BACK_DOUBLE_TAP_CUSTOM_APP);
         mAppSwitchLongPressCustomApp = findPreference(KEY_APP_SWITCH_LONG_PRESS_CUSTOM_APP);
         mAppSwitchDoubleTapCustomApp = findPreference(KEY_APP_SWITCH_DOUBLE_TAP_CUSTOM_APP);
-        */
 
         final LineageHardwareManager hardware = LineageHardwareManager.getInstance(getActivity());
 
@@ -264,7 +254,6 @@ public class CustomNavigationSettings extends DashboardFragment implements
             prefScreen.removePreference(mEnableNavigationBar);
         }
 
-        /*
         if (!hasMenuKey) {
             prefScreen.removePreference(mNavigationMenuKeyCategory);
         }
@@ -293,10 +282,9 @@ public class CustomNavigationSettings extends DashboardFragment implements
             setListGoEntries(mAssistDoubleTapAction, actionEntriesGo, actionValuesGo);
             setListGoEntries(mEdgeLongSwipeAction, actionEntriesGo, actionValuesGo);
         }
-        */
 
         updatePreferences(mEnableNavigationBar.isChecked());
-        //updateCustomAppSummaries();
+        updateCustomAppSummaries();
     }
 
     @Override
@@ -313,10 +301,9 @@ public class CustomNavigationSettings extends DashboardFragment implements
     public void onResume() {
         super.onResume();
         updatePreferences(mEnableNavigationBar.isChecked());
-        //updateCustomAppSummaries();
+        updateCustomAppSummaries();
     }
 
-    /*
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -486,11 +473,9 @@ public class CustomNavigationSettings extends DashboardFragment implements
         }
         pref.setSummary(summary);
     }
-    */
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        /*
         if (preference == mHomeLongPressAction) {
             handleListChange((ListPreference) preference, newValue,
                     LineageSettings.System.KEY_HOME_LONG_PRESS_ACTION);
@@ -554,7 +539,6 @@ public class CustomNavigationSettings extends DashboardFragment implements
                     LineageSettings.System.KEY_EDGE_LONG_SWIPE_ACTION);
             return true;
         }
-        */
         return false;
     }
 
@@ -586,11 +570,11 @@ public class CustomNavigationSettings extends DashboardFragment implements
         }
         mNavigationArrowKeys.setEnabled(hasNavbar && !gestureNavBar);
         mNavigationInvertLayout.setEnabled(hasNavbar && !gestureNavBar);
-        //mEdgeLongSwipeAction.setEnabled(hasNavbar && gestureNavBar);
+        mEdgeLongSwipeAction.setEnabled(hasNavbar && gestureNavBar);
 
-        //mNavigationHomeKeyCategory.setEnabled(!hasNavbar || !gestureNavBar);
-        //mNavigationBackKeyCategory.setEnabled(!hasNavbar || !gestureNavBar);
-        //mNavigationAppSwitchKeyCategory.setEnabled(!hasNavbar || legacyNavBar);
+        mNavigationHomeKeyCategory.setEnabled(!hasNavbar || !gestureNavBar);
+        mNavigationBackKeyCategory.setEnabled(!hasNavbar || !gestureNavBar);
+        mNavigationAppSwitchKeyCategory.setEnabled(!hasNavbar || legacyNavBar);
     }
 
     private void updateNavigationSystemTypeSummary(int systemType) {
@@ -652,7 +636,6 @@ public class CustomNavigationSettings extends DashboardFragment implements
                         keys.add(KEY_NAVIGATION_BAR_ENABLE);
                     }
 
-                    /*
                     if (!DeviceUtils.hasMenuKey(context)) {
                         keys.add(CATEGORY_MENU_KEY);
                         keys.add(KEY_MENU_PRESS_ACTION);
@@ -666,7 +649,6 @@ public class CustomNavigationSettings extends DashboardFragment implements
                         keys.add(KEY_ASSIST_LONG_PRESS_ACTION);
                         keys.add(KEY_ASSIST_DOUBLE_TAP_ACTION);
                     }
-                    */
 
                     return keys;
                 }
