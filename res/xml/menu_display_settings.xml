@@ -27,6 +27,12 @@
         android:summary="@string/smart_pixels_summary"
         android:fragment="com.altair.settings.fragments.SmartPixels" />
 
+    <!-- Enable blurs on windows -->
+    <SwitchPreference
+        android:key="enable_blurs_on_windows"
+        android:title="@string/enable_blurs_on_windows_title"
+        android:summary="@string/enable_blurs_on_windows_summary" />
+
     <!-- Ambient display -->>
     <PreferenceCategory
         android:key="ambient_display_category_when_to_show"

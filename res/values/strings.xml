@@ -101,6 +101,7 @@
     <string name="volbtn_cursor_control_on">Volume up/down moves cursor left/right</string>
     <string name="volbtn_cursor_control_on_reverse">Volume up/down moves cursor right/left</string>
 
+    <string name="power_menu_background_alpha_title">Background transparency (%)</string>
     <string name="power_end_call_title">End call</string>
     <string name="power_end_call_summary">End the current call by pressing the power button</string>
 
@@ -170,6 +171,9 @@
     <string name="smart_pixels_on_power_save_summary">Enable Smart Pixels when battery saver is enabled</string>
     <string name="smart_pixels_percent">Percent of pixels to disable</string>
     <string name="smart_pixels_shift">Prevent burn-in by shifting pixels every</string>
+
+    <string name="enable_blurs_on_windows_title">Enable blurs</string>
+    <string name="enable_blurs_on_windows_summary">Enables blurs in some UI elements (NOTE: requires device reboot)</string>
 
     <!-- NAVIGATION -->
     <string name="navigation_bar_enable_title">Enable navigation bar</string>

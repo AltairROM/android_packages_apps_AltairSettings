@@ -20,6 +20,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.hardware.display.AmbientDisplayConfiguration;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
@@ -38,6 +39,7 @@ import com.android.settings.display.AmbientDisplayNotificationsPreferenceControl
 import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.PickupGesturePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.development.SystemPropPoker;
 import com.android.settingslib.search.SearchIndexable;
 import com.lineage.support.preferences.GlobalSettingListPreference;
 
@@ -50,10 +52,19 @@ public class CustomDisplaySettings extends DashboardFragment implements
     private static final String TAG = "CustomDisplaySettings";
 
     public static final String KEY_SMART_PIXELS = "smart_pixels";
+    public static final String KEY_ENABLE_BLURS_ON_WINDOWS = "enable_blurs_on_windows";
+
+    static final String SUPPORTS_BACKGROUND_BLUR_SYSPROP = "ro.surface_flinger.supports_background_blur";
+    static final String DISABLE_BLURS_SYSPROP = "persist.sys.sf.disable_blurs";
+    private boolean mBlurSupported;
 
     private AmbientDisplayConfiguration mConfig;
 
     private boolean mEnableSmartPixels;
+
+    private SwitchPreference mEnableBlursOnWindows;
+
+    private ContentResolver mContentResolver;
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -64,7 +75,8 @@ public class CustomDisplaySettings extends DashboardFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final ContentResolver resolver = getActivity().getContentResolver();
+        mContentResolver = getActivity().getContentResolver();
+
         final PreferenceScreen prefScreen = getPreferenceScreen();
 
         // Smart Pixels
@@ -73,6 +85,18 @@ public class CustomDisplaySettings extends DashboardFragment implements
         Preference SmartPixels = findPreference(KEY_SMART_PIXELS);
         if (!enableSmartPixels) {
             prefScreen.removePreference(SmartPixels);
+        }
+
+        // Blur
+        mBlurSupported = SystemProperties.getBoolean(SUPPORTS_BACKGROUND_BLUR_SYSPROP, false);
+        mEnableBlursOnWindows = findPreference(KEY_ENABLE_BLURS_ON_WINDOWS);
+        if (mBlurSupported) {
+            boolean isEnabled = !SystemProperties.getBoolean(
+                    DISABLE_BLURS_SYSPROP, false /* default */);
+            mEnableBlursOnWindows.setChecked(isEnabled);
+            mEnableBlursOnWindows.setOnPreferenceChangeListener(this);
+        } else {
+            prefScreen.removePreference(mEnableBlursOnWindows);
         }
     }
 
@@ -105,8 +129,14 @@ public class CustomDisplaySettings extends DashboardFragment implements
         use(PickupGesturePreferenceController.class).setConfig(getConfig(context));
     }
 
-    public boolean onPreferenceChange(Preference preference, Object objValue) {
-        return true;
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mEnableBlursOnWindows) {
+            final boolean isDisabled = !(Boolean) newValue;
+            SystemProperties.set(DISABLE_BLURS_SYSPROP, isDisabled ? "1" : "0");
+            SystemPropPoker.getInstance().poke();
+            return true;
+        }
+        return false;
     }
 
     private AmbientDisplayConfiguration getConfig(Context context) {
