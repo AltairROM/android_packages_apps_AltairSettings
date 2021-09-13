@@ -64,7 +64,7 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.power_menu_settings);
+        addPreferencesFromResource(R.xml.power_menu_actions);
         mContext = getActivity().getApplicationContext();
         mLockPatternUtils = new LockPatternUtils(mContext);
         mUserManager = UserManager.get(mContext);
