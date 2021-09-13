@@ -47,8 +47,6 @@ import com.android.settings.search.BaseSearchIndexProvider;
 
 import com.android.settingslib.search.SearchIndexable;
 
-import com.lineage.support.preferences.CustomSeekBarPreference;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -76,7 +74,6 @@ public class CustomButtonSettings extends DashboardFragment implements
     private static final String KEY_VOLUME_PANEL_ON_LEFT = "volume_panel_on_left";
     private static final String KEY_VOLUME_WAKE_SCREEN = "volume_wake_screen";
     private static final String KEY_VOLUME_ANSWER_CALL = "volume_answer_call";
-    private static final String KEY_POWER_MENU_BACKGROUND_ALPHA = "power_menu_background_alpha";
     private static final String KEY_POWER_END_CALL = "power_end_call";
     private static final String KEY_HOME_ANSWER_CALL = "home_answer_call";
     private static final String KEY_VOLUME_MUSIC_CONTROLS = "volbtn_music_controls";
@@ -107,7 +104,6 @@ public class CustomButtonSettings extends DashboardFragment implements
     private SwitchPreference mVolumeMusicControls;
     private SwitchPreference mSwapVolumeButtons;
     private SwitchPreference mVolumePanelOnLeft;
-    private CustomSeekBarPreference mPowerMenuBackgroundAlpha;
     private SwitchPreference mPowerEndCall;
     private SwitchPreference mHomeAnswerCall;
     private SwitchPreference mTorchLongPressPowerGesture;
@@ -185,11 +181,6 @@ public class CustomButtonSettings extends DashboardFragment implements
                 powerCategory.removePreference(mTorchLongPressPowerGesture);
                 powerCategory.removePreference(mTorchLongPressPowerTimeout);
             }
-            mPowerMenuBackgroundAlpha = findPreference(KEY_POWER_MENU_BACKGROUND_ALPHA);
-            final int alphaValue = Settings.System.getIntForUser(getActivity().getContentResolver(),
-                    Settings.System.POWER_MENU_BACKGROUND_ALPHA, 50, UserHandle.USER_CURRENT);
-            mPowerMenuBackgroundAlpha.setValue(100 - alphaValue);
-            mPowerMenuBackgroundAlpha.setOnPreferenceChangeListener(this);
         } else {
             prefScreen.removePreference(powerCategory);
         }
@@ -397,12 +388,6 @@ public class CustomButtonSettings extends DashboardFragment implements
             handleListChange(mTorchLongPressPowerTimeout, newValue,
                     LineageSettings.System.TORCH_LONG_PRESS_POWER_TIMEOUT);
             return true;
-        } else if (preference == mPowerMenuBackgroundAlpha) {
-            int val = (Integer) newValue;
-            Settings.System.putIntForUser(mResolver,
-                    Settings.System.POWER_MENU_BACKGROUND_ALPHA, 100 - val,
-                        UserHandle.USER_CURRENT);
-            return true;
         }
         return false;
     }
@@ -475,10 +460,6 @@ public class CustomButtonSettings extends DashboardFragment implements
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
-
-                    if (!DeviceUtils.hasPowerKey()) {
-                        keys.add(KEY_POWER_MENU_BACKGROUND_ALPHA);
-                    }
 
                     if (!TelephonyUtils.isVoiceCapable(context)) {
                         keys.add(KEY_POWER_END_CALL);

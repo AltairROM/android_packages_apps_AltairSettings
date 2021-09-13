@@ -76,7 +76,7 @@ public class CustomUserInterfaceSettings extends DashboardFragment implements
         super.onPause();
     }
 
-    public boolean onPreferenceChange(Preference preference, Object objValue) {
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
         return true;
     }
 

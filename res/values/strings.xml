@@ -134,7 +134,6 @@
     <string name="navkeys_backlight_summary_enabled_with_timeout">Enabled for <xliff:g id="timeout">%s</xliff:g></string>
     <string name="navkeys_backlight_summary_enabled">Enabled</string>
 
-    <string name="power_menu_title">Power menu</string>
     <string name="power_menu_screenshot_title">Screenshot</string>
     <string name="power_menu_screenshot_summary">Long-press for partial screenshot</string>
     <string name="power_menu_airplane_title">Airplane mode</string>
@@ -299,5 +298,10 @@
     <!-- USER INTERFACE -->
     <string name="toast_icon_title">Toast icon</string>
     <string name="toast_icon_summary">Display the app icon corresponding with the toast</string>
+
+    <string name="power_menu_settings_title">Power menu settings</string>
+    <string name="power_menu_actions_title">Power menu actions</string>
+    <string name="power_menu_actions_summary">Select actions available on the power menu</string>
+    <string name="power_menu_lock_screen_privacy">Lock screen sensitive content</string>
 
 </resources>

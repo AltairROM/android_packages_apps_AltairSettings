@@ -45,5 +45,11 @@
         android:summary="@string/toast_icon_summary"
         android:defaultValue="true" />
 
+    <!-- Power menu settings -->
+    <PreferenceScreen
+        android:key="power_menu_settings"
+        android:title="@string/power_menu_settings_title"
+        android:fragment="com.altair.settings.fragments.CustomPowerMenuSettings" />
+
 </PreferenceScreen>
 
