@@ -204,7 +204,7 @@ public class CustomPowerMenuSettings extends SettingsPreferenceFragment implemen
                         UserHandle.USER_CURRENT);
             return true;
         }
-        return false;
+        return true;
     }
 
     @Override
