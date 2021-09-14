@@ -37,6 +37,7 @@ public class SmartPixels extends SettingsPreferenceFragment implements
     private static final String TAG = "SmartPixels";
 
     private static final String ON_POWER_SAVE = "smart_pixels_on_power_save";
+    private static final String SMART_PIXELS_FOOTER = "smart_pixels_footer";
 
     private SystemSettingSwitchPreference mSmartPixelsOnPowerSave;
 
@@ -50,6 +51,8 @@ public class SmartPixels extends SettingsPreferenceFragment implements
         mResolver = getActivity().getContentResolver();
 
         mSmartPixelsOnPowerSave = findPreference(ON_POWER_SAVE);
+
+        findPreference(SMART_PIXELS_FOOTER).setTitle(R.string.smart_pixels_warning_text);
 
         updateDependency();
     }
