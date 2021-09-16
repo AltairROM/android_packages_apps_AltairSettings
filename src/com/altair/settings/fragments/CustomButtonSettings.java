@@ -113,6 +113,9 @@ public class CustomButtonSettings extends DashboardFragment implements
     private Handler mHandler;
     private ContentResolver mResolver;
 
+    private boolean mIsVoiceCapable;
+    private boolean mSupportsFlashlight;
+
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.menu_button_settings;
@@ -172,12 +175,15 @@ public class CustomButtonSettings extends DashboardFragment implements
         boolean navKeysEnabled = LineageSettings.System.getIntForUser(getActivity().getContentResolver(),
                 LineageSettings.System.FORCE_SHOW_NAVBAR, 0, UserHandle.USER_CURRENT) != 0;
 
-        if (hasPowerKey) {
-            if (!TelephonyUtils.isVoiceCapable(getActivity())) {
+        mIsVoiceCapable = TelephonyUtils.isVoiceCapable(getActivity());
+        mSupportsFlashlight = DeviceUtils.deviceSupportsFlashLight(getActivity());
+
+        if (hasPowerKey && (mIsVoiceCapable || mSupportsFlashlight)) {
+            if (!mIsVoiceCapable) {
                 powerCategory.removePreference(mPowerEndCall);
                 mPowerEndCall = null;
             }
-            if (!DeviceUtils.deviceSupportsFlashLight(getActivity())) {
+            if (!mSupportsFlashlight) {
                 powerCategory.removePreference(mTorchLongPressPowerGesture);
                 powerCategory.removePreference(mTorchLongPressPowerTimeout);
             }
@@ -185,7 +191,7 @@ public class CustomButtonSettings extends DashboardFragment implements
             prefScreen.removePreference(powerCategory);
         }
 
-        if (!hasHomeKey || !TelephonyUtils.isVoiceCapable(getActivity())) {
+        if (!hasHomeKey || !mIsVoiceCapable) {
             prefScreen.removePreference(homeCategory);
             mHomeAnswerCall = null;
         }
@@ -205,7 +211,7 @@ public class CustomButtonSettings extends DashboardFragment implements
         }
 
         if (hasVolumeKeys) {
-            if (!TelephonyUtils.isVoiceCapable(getActivity())) {
+            if (!mIsVoiceCapable) {
                 volumeCategory.removePreference(findPreference(KEY_VOLUME_ANSWER_CALL));
             }
 
