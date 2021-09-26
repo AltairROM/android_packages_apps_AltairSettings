@@ -31,11 +31,14 @@ import androidx.preference.SwitchPreference;
 
 import com.altair.settings.utils.DeviceUtils;
 import com.altair.settings.utils.StatusBarIcon;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
+
+import com.lineage.support.preferences.SystemSettingSwitchPreference;
 
 import java.util.Arrays;
 import java.util.List;
@@ -48,6 +51,8 @@ import lineageos.providers.LineageSettings;
 public class CustomStatusBarSettings extends DashboardFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "CustomStatusBarSettings";
+
+    private static final String USE_OLD_MOBILETYPE = "use_old_mobiletype";
 
     private static final String STATUS_BAR_SHOW_CLOCK = "status_bar_show_clock";
     private static final String STATUS_BAR_CLOCK = "status_bar_clock";
@@ -85,6 +90,7 @@ public class CustomStatusBarSettings extends DashboardFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Context context = getContext();
         ContentResolver resolver = getActivity().getContentResolver();
 
         mNetworkTrafficPref = findPreference(NETWORK_TRAFFIC_SETTINGS);
@@ -93,7 +99,12 @@ public class CustomStatusBarSettings extends DashboardFragment implements
             getPreferenceScreen().removePreference(mNetworkTrafficPref);
         }
 
-        mClockIcon = new StatusBarIcon(getContext(), "clock");
+        boolean configUseOldMobileType = context.getResources().
+                getBoolean(com.android.internal.R.bool.config_useOldMobileIcons);
+        SystemSettingSwitchPreference useOldMobileType = findPreference(USE_OLD_MOBILETYPE);
+        useOldMobileType.setDefaultValue(configUseOldMobileType);
+
+        mClockIcon = new StatusBarIcon(context, "clock");
 
         mStatusBarShowClock = findPreference(STATUS_BAR_SHOW_CLOCK);
         mStatusBarShowClock.setOnPreferenceChangeListener(this);
@@ -105,7 +116,7 @@ public class CustomStatusBarSettings extends DashboardFragment implements
         mStatusBarShowBattery = findPreference(STATUS_BAR_SHOW_BATTERY);
         mStatusBarShowBattery.setOnPreferenceChangeListener(this);
 
-        mBatteryIcon = new StatusBarIcon(getContext(), "battery");
+        mBatteryIcon = new StatusBarIcon(context, "battery");
 
         mStatusBarBatteryShowPercent = findPreference(STATUS_BAR_SHOW_BATTERY_PERCENT);
         mStatusBarBattery = findPreference(STATUS_BAR_BATTERY_STYLE);
@@ -236,4 +247,3 @@ public class CustomStatusBarSettings extends DashboardFragment implements
                 }
             };
 }
-
