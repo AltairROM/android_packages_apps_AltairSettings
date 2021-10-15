@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2016 The CyanogenMod project
  * Copyright (C) 2017 The LineageOS project
- * Copyright (C) 2019-2021 Altair ROM
+ * Copyright (C) 2019-2021 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -214,4 +214,3 @@ public class CustomQSSettings extends DashboardFragment implements
                 }
             };
 }
-
