@@ -81,7 +81,7 @@ public class CustomDisplaySettings extends DashboardFragment implements
 
         // Smart Pixels
         boolean enableSmartPixels = getContext().getResources().
-                getBoolean(com.android.internal.R.bool.config_supportSmartPixels);
+                getBoolean(com.android.internal.R.bool.config_enableSmartPixels);
         Preference SmartPixels = findPreference(KEY_SMART_PIXELS);
         if (!enableSmartPixels) {
             prefScreen.removePreference(SmartPixels);
@@ -161,7 +161,7 @@ public class CustomDisplaySettings extends DashboardFragment implements
                     List<String> keys = super.getNonIndexableKeys(context);
 
                     boolean enableSmartPixels = context.getResources().
-                            getBoolean(com.android.internal.R.bool.config_supportSmartPixels);
+                            getBoolean(com.android.internal.R.bool.config_enableSmartPixels);
                     if (!enableSmartPixels) {
                         keys.add(KEY_SMART_PIXELS);
                     }
