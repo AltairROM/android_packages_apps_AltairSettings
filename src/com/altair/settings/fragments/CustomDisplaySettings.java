@@ -51,16 +51,15 @@ public class CustomDisplaySettings extends DashboardFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "CustomDisplaySettings";
 
-    public static final String KEY_SMART_PIXELS = "smart_pixels";
-    public static final String KEY_ENABLE_BLURS_ON_WINDOWS = "enable_blurs_on_windows";
+    private static final String KEY_SMART_PIXELS = "smart_pixels";
+    private static final String KEY_ENABLE_BLURS_ON_WINDOWS = "enable_blurs_on_windows";
 
-    static final String SUPPORTS_BACKGROUND_BLUR_SYSPROP = "ro.surface_flinger.supports_background_blur";
-    static final String DISABLE_BLURS_SYSPROP = "persist.sys.sf.disable_blurs";
-    private boolean mBlurSupported;
+    private static final String CATEGORY_MISCELLANEOUS = "miscellaneous";
+
+    private static final String SUPPORTS_BACKGROUND_BLUR_SYSPROP = "ro.surface_flinger.supports_background_blur";
+    private static final String DISABLE_BLURS_SYSPROP = "persist.sys.sf.disable_blurs";
 
     private AmbientDisplayConfiguration mConfig;
-
-    private boolean mEnableSmartPixels;
 
     private SwitchPreference mEnableBlursOnWindows;
 
@@ -78,25 +77,30 @@ public class CustomDisplaySettings extends DashboardFragment implements
         mContentResolver = getActivity().getContentResolver();
 
         final PreferenceScreen prefScreen = getPreferenceScreen();
+        final PreferenceCategory miscCategory = prefScreen.findPreference(CATEGORY_MISCELLANEOUS);
 
         // Smart Pixels
         boolean enableSmartPixels = getContext().getResources().
                 getBoolean(com.android.internal.R.bool.config_enableSmartPixels);
-        Preference SmartPixels = findPreference(KEY_SMART_PIXELS);
+        Preference smartPixels = findPreference(KEY_SMART_PIXELS);
         if (!enableSmartPixels) {
-            prefScreen.removePreference(SmartPixels);
+            miscCategory.removePreference(smartPixels);
         }
 
         // Blur
-        mBlurSupported = SystemProperties.getBoolean(SUPPORTS_BACKGROUND_BLUR_SYSPROP, false);
+        final boolean blurSupported = SystemProperties.getBoolean(SUPPORTS_BACKGROUND_BLUR_SYSPROP, false);
         mEnableBlursOnWindows = findPreference(KEY_ENABLE_BLURS_ON_WINDOWS);
-        if (mBlurSupported) {
+        if (blurSupported) {
             boolean isEnabled = !SystemProperties.getBoolean(
                     DISABLE_BLURS_SYSPROP, false /* default */);
             mEnableBlursOnWindows.setChecked(isEnabled);
             mEnableBlursOnWindows.setOnPreferenceChangeListener(this);
         } else {
-            prefScreen.removePreference(mEnableBlursOnWindows);
+            miscCategory.removePreference(mEnableBlursOnWindows);
+        }
+
+        if (!enableSmartPixels && !blurSupported) {
+            prefScreen.removePreference(miscCategory);
         }
     }
 
@@ -166,8 +170,12 @@ public class CustomDisplaySettings extends DashboardFragment implements
                         keys.add(KEY_SMART_PIXELS);
                     }
 
+                    boolean blurSupported = SystemProperties.getBoolean(SUPPORTS_BACKGROUND_BLUR_SYSPROP, false);
+                    if (!blurSupported) {
+                        keys.add(KEY_ENABLE_BLURS_ON_WINDOWS);
+                    }
+
                     return keys;
                 }
             };
 }
-

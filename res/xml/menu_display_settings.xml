@@ -20,24 +20,10 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/menu_display_settings_title">
 
-    <!-- Smart Pixels -->
-    <Preference
-        android:key="smart_pixels"
-        android:title="@string/smart_pixels_title"
-        android:summary="@string/smart_pixels_summary"
-        android:fragment="com.altair.settings.fragments.SmartPixels" />
-
-    <!-- Enable blurs on windows -->
-    <SwitchPreference
-        android:key="enable_blurs_on_windows"
-        android:title="@string/enable_blurs_on_windows_title"
-        android:summary="@string/enable_blurs_on_windows_summary" />
-
     <!-- Ambient display -->>
     <PreferenceCategory
         android:key="ambient_display_category_when_to_show"
-        android:title="@string/ambient_display_screen_title"
-        android:order="1000">
+        android:title="@string/ambient_display_screen_title">
 
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="ambient_display_always_on"
@@ -76,11 +62,31 @@
         <lineageos.preference.RemotePreference
             android:key="doze_device_settings"
             android:title="@string/ambient_display_screen_title"
+            android:summary="@string/doze_summary"
             lineage:replacesKey="ambient_display_always_on|ambient_display_notification">
             <intent android:action="org.lineageos.settings.device.DOZE_SETTINGS" />
         </lineageos.preference.RemotePreference>
 
     </PreferenceCategory>
 
-</PreferenceScreen>
+    <!-- Miscellaneous -->
+    <PreferenceCategory
+        android:key="miscellaneous"
+        android:title="@string/miscellaneous_category_title">
 
+        <!-- Smart Pixels -->
+        <Preference
+            android:key="smart_pixels"
+            android:title="@string/smart_pixels_title"
+            android:summary="@string/smart_pixels_summary"
+            android:fragment="com.altair.settings.fragments.SmartPixels" />
+
+        <!-- Enable blurs on windows -->
+        <SwitchPreference
+            android:key="enable_blurs_on_windows"
+            android:title="@string/enable_blurs_on_windows_title"
+            android:summary="@string/enable_blurs_on_windows_summary" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

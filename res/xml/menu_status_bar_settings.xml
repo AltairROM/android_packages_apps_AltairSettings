@@ -119,7 +119,7 @@
             android:dialogTitle="@string/status_bar_battery_percentage_title"
             android:entries="@array/status_bar_battery_percentage_entries"
             android:entryValues="@array/status_bar_battery_percentage_values"
-            android:defaultValue="0" />
+            android:defaultValue="2" />
 
         <com.lineage.support.preferences.SystemSettingSwitchPreference
             android:key="bluetooth_show_battery"
@@ -142,4 +142,3 @@
     </PreferenceCategory>
 
 </PreferenceScreen>
-

@@ -20,36 +20,31 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/menu_user_interface_settings_title">
 
-    <!-- Swipe down to clear all recents -->
-    <!--
-    <com.lineage.support.preferences.SystemSettingSwitchPreference
-        android:key="swipe_down_to_clear_all_recents"
-        android:title="@string/recents_allow_swipe_down_clearall_title"
-        android:summary="@string/recents_allow_swipe_down_clearall_summary"
-        android:defaultValue="true" />
-    -->
+    <!-- Power menu -->
+    <PreferenceCategory
+        android:key="power_menu_category"
+        android:title="@string/power_menu_title">
 
-    <!-- Notification kill app button -->
-    <!--
-    <com.lineage.support.preferences.SystemSettingSwitchPreference
-        android:key="notification_guts_kill_app_button"
-        android:title="@string/notification_guts_kill_app_button_title"
-        android:summary="@string/notification_guts_kill_app_button_summary"
-        android:defaultValue="false" />
-    -->
+        <!-- Power menu settings -->
+        <PreferenceScreen
+            android:key="power_menu_settings"
+            android:title="@string/power_menu_settings_title"
+            android:fragment="com.altair.settings.fragments.CustomPowerMenuSettings" />
 
-    <!-- Toast icon -->
-    <com.lineage.support.preferences.SystemSettingSwitchPreference
-        android:key="toast_icon"
-        android:title="@string/toast_icon_title"
-        android:summary="@string/toast_icon_summary"
-        android:defaultValue="true" />
+    </PreferenceCategory>
 
-    <!-- Power menu settings -->
-    <PreferenceScreen
-        android:key="power_menu_settings"
-        android:title="@string/power_menu_settings_title"
-        android:fragment="com.altair.settings.fragments.CustomPowerMenuSettings" />
+    <!-- Miscellaneous -->
+    <PreferenceCategory
+        android:key="miscellaneous"
+        android:title="@string/miscellaneous_category_title">
+
+        <!-- Toast icon -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="toast_icon"
+            android:title="@string/toast_icon_title"
+            android:summary="@string/toast_icon_summary"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
-

@@ -16,18 +16,12 @@
 
 package com.altair.settings.fragments;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -51,9 +45,6 @@ public class CustomUserInterfaceSettings extends DashboardFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        final ContentResolver resolver = getActivity().getContentResolver();
-        final PreferenceScreen prefSet = getPreferenceScreen();
     }
 
     @Override
@@ -91,4 +82,3 @@ public class CustomUserInterfaceSettings extends DashboardFragment implements
                 }
             };
 }
-
