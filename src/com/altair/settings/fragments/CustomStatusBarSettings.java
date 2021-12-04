@@ -26,11 +26,13 @@ import android.text.format.DateFormat;
 import android.view.View;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.altair.settings.utils.DeviceUtils;
 import com.altair.settings.utils.StatusBarIcon;
+import com.altair.settings.utils.TelephonyUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -66,6 +68,8 @@ public class CustomStatusBarSettings extends DashboardFragment implements
 
     private static final String NETWORK_TRAFFIC_SETTINGS = "network_traffic_settings";
 
+    private static final String CATEGORY_NETWORK = "network_category";
+
     private StatusBarIcon mClockIcon;
     private StatusBarIcon mBatteryIcon;
 
@@ -93,16 +97,24 @@ public class CustomStatusBarSettings extends DashboardFragment implements
         Context context = getContext();
         ContentResolver resolver = getActivity().getContentResolver();
 
+        final PreferenceScreen prefScreen = getPreferenceScreen();
+        final PreferenceCategory networkCategory = prefScreen.findPreference(CATEGORY_NETWORK);
+
+        SystemSettingSwitchPreference useOldMobileType = findPreference(USE_OLD_MOBILETYPE);
+
+        if (!TelephonyUtils.isVoiceCapable(getActivity())) {
+            networkCategory.removePreference(useOldMobileType);
+        } else {
+            boolean configUseOldMobileType = context.getResources().
+                    getBoolean(com.android.internal.R.bool.config_useOldMobileIcons);
+            useOldMobileType.setDefaultValue(configUseOldMobileType);
+        }
+
         mNetworkTrafficPref = findPreference(NETWORK_TRAFFIC_SETTINGS);
         mHasNotch = DeviceUtils.hasNotch(getActivity());
         if (mHasNotch) {
-            getPreferenceScreen().removePreference(mNetworkTrafficPref);
+            networkCategory.removePreference(mNetworkTrafficPref);
         }
-
-        boolean configUseOldMobileType = context.getResources().
-                getBoolean(com.android.internal.R.bool.config_useOldMobileIcons);
-        SystemSettingSwitchPreference useOldMobileType = findPreference(USE_OLD_MOBILETYPE);
-        useOldMobileType.setDefaultValue(configUseOldMobileType);
 
         mClockIcon = new StatusBarIcon(context, "clock");
 
