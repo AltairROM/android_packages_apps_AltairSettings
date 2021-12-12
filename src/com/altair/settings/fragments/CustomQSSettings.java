@@ -20,6 +20,7 @@ package com.altair.settings.fragments;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -84,47 +85,43 @@ public class CustomQSSettings extends DashboardFragment implements
         updateQuickPulldownSummary(mQuickPulldown.getIntValue(0));
 
         Resources res = null;
-        Context ctx = getContext();
+        Context context = getContext();
 
         try {
-            res = ctx.getPackageManager().getResourcesForApplication("com.android.systemui");
+            res = context.getPackageManager().getResourcesForApplication("com.android.systemui");
         } catch (NameNotFoundException e) {
             e.printStackTrace();
         }
 
-        int defQsRowsPortrait = res.getInteger(res.getIdentifier(
+        int row_portrait = res.getInteger(res.getIdentifier(
                 "com.android.systemui:integer/config_qs_rows_portrait", null, null));
-        int defQsRowsLandscape = res.getInteger(res.getIdentifier(
-                "com.android.systemui:integer/config_qs_rows_landscape", null, null));
-        int defQsColumnsPortrait = res.getInteger(res.getIdentifier(
+        int col_portrait = res.getInteger(res.getIdentifier(
                 "com.android.systemui:integer/config_qs_columns_portrait", null, null));
-        int defQsColumnsLandscape = res.getInteger(res.getIdentifier(
+        int row_landscape = res.getInteger(res.getIdentifier(
+                "com.android.systemui:integer/config_qs_rows_landscape", null, null));
+        int col_landscape = res.getInteger(res.getIdentifier(
                 "com.android.systemui:integer/config_qs_columns_landscape", null, null));
 
         int value = Settings.System.getIntForUser(mContentResolver,
-                Settings.System.QS_ROWS_PORTRAIT, defQsRowsPortrait,
-                UserHandle.USER_CURRENT);
+                Settings.System.QS_ROWS_PORTRAIT, row_portrait, UserHandle.USER_CURRENT);
         mQsRowsPortrait = findPreference(QS_ROWS_PORTRAIT);
         mQsRowsPortrait.setValue(value);
         mQsRowsPortrait.setOnPreferenceChangeListener(this);
 
         value = Settings.System.getIntForUser(mContentResolver,
-                Settings.System.QS_ROWS_LANDSCAPE, defQsRowsLandscape,
-                UserHandle.USER_CURRENT);
-        mQsRowsLandscape = findPreference(QS_ROWS_LANDSCAPE);
-        mQsRowsLandscape.setValue(value);
-        mQsRowsLandscape.setOnPreferenceChangeListener(this);
-
-        value = Settings.System.getIntForUser(mContentResolver,
-                Settings.System.QS_COLUMNS_PORTRAIT, defQsColumnsPortrait,
-                UserHandle.USER_CURRENT);
+                Settings.System.QS_COLUMNS_PORTRAIT, col_portrait, UserHandle.USER_CURRENT);
         mQsColumnsPortrait = findPreference(QS_COLUMNS_PORTRAIT);
         mQsColumnsPortrait.setValue(value);
         mQsColumnsPortrait.setOnPreferenceChangeListener(this);
 
         value = Settings.System.getIntForUser(mContentResolver,
-                Settings.System.QS_COLUMNS_LANDSCAPE, defQsColumnsLandscape,
-                UserHandle.USER_CURRENT);
+                Settings.System.QS_ROWS_LANDSCAPE, row_landscape, UserHandle.USER_CURRENT);
+        mQsRowsLandscape = findPreference(QS_ROWS_LANDSCAPE);
+        mQsRowsLandscape.setValue(value);
+        mQsRowsLandscape.setOnPreferenceChangeListener(this);
+
+        value = Settings.System.getIntForUser(mContentResolver,
+                Settings.System.QS_COLUMNS_LANDSCAPE, col_landscape, UserHandle.USER_CURRENT);
         mQsColumnsLandscape = findPreference(QS_COLUMNS_LANDSCAPE);
         mQsColumnsLandscape.setValue(value);
         mQsColumnsLandscape.setOnPreferenceChangeListener(this);
@@ -164,15 +161,15 @@ public class CustomQSSettings extends DashboardFragment implements
             Settings.System.putIntForUser(mContentResolver,
                     Settings.System.QS_ROWS_PORTRAIT, val, UserHandle.USER_CURRENT);
             return true;
-        } else if (preference == mQsRowsLandscape) {
-            int val = (Integer) newValue;
-            Settings.System.putIntForUser(mContentResolver,
-                    Settings.System.QS_ROWS_LANDSCAPE, val, UserHandle.USER_CURRENT);
-            return true;
         } else if (preference == mQsColumnsPortrait) {
             int val = (Integer) newValue;
             Settings.System.putIntForUser(mContentResolver,
                     Settings.System.QS_COLUMNS_PORTRAIT, val, UserHandle.USER_CURRENT);
+            return true;
+        } else if (preference == mQsRowsLandscape) {
+            int val = (Integer) newValue;
+            Settings.System.putIntForUser(mContentResolver,
+                    Settings.System.QS_ROWS_LANDSCAPE, val, UserHandle.USER_CURRENT);
             return true;
         } else if (preference == mQsColumnsLandscape) {
             int val = (Integer) newValue;
