@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2014-2015 The CyanogenMod Project
- * Copyright (C) 2017 The LineageOS Project
- * Copyright (C) 2021 Altair ROM Project
+ * Copyright (C) 2017-2022 The LineageOS Project
+ * Copyright (C) 2021-2022 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,8 @@ import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
+
+import com.altair.settings.utils.TelephonyUtils;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
@@ -82,6 +84,11 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
             } else if (action.equals(GLOBAL_ACTION_KEY_EMERGENCY)) {
                 mEmergencyPref = findPreference(GLOBAL_ACTION_KEY_EMERGENCY);
             }
+        }
+
+        if (!TelephonyUtils.isVoiceCapable(getActivity())) {
+            getPreferenceScreen().removePreference(mEmergencyPref);
+            mEmergencyPref = null;
         }
 
         mLocalUserConfig = mLineageGlobalActions.getLocalUserConfig();
@@ -182,4 +189,3 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
         }
     }
 }
-
