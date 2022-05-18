@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: CarbonROM
+     SPDX-FileCopyrightText: Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/smart_pixels_title" >
+
+    <!-- Enable Smart Pixels -->
+    <lineageos.preference.SecureSettingMainSwitchPreference
+        android:key="smart_pixel_filter_enabled"
+        android:title="@string/enable" />
+
+    <!-- Percent of pixels to disable -->
+    <com.lineage.support.preferences.SecureSettingSeekBarPreference
+        android:key="smart_pixel_filter_percent"
+        android:title="@string/smart_pixels_percent"
+        android:defaultValue="25"
+        android:max="75"
+        settings:min="10"
+        settings:units="%"
+        settings:interval="1"
+        android:dependency="smart_pixel_filter_enabled" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="smart_pixels_footer"
+        android:title="@string/smart_pixels_warning_text"
+        android:selectable="false"
+        settings:searchable="false" />
+
+</PreferenceScreen>
