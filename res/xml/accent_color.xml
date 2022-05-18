@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2020-2025 Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lineage="http://schemas.android.com/apk/res/lineageos.platform"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/theme_accent_color_title">
+
+    <!-- Current accent color -->
+    <Preference
+        android:key="theme_colors_accent_color"
+        android:title="@string/theme_colors_current_accent_color_title"
+        android:fragment="com.altair.settings.fragments.theme.AccentColorPicker" />
+
+    <!-- Monet settings -->
+    <PreferenceCategory
+        android:key="theme_colors_monet"
+        android:title="@string/theme_colors_monet_category">
+
+        <!-- Richer accent colors -->
+        <SwitchPreferenceCompat
+            android:key="theme_colors_richer_colors"
+            android:title="@string/theme_colors_richer_colors_title"
+            android:summary="@string/theme_colors_richer_colors_summary"
+            android:defaultValue="false" />
+
+        <!-- Chroma factor -->
+        <com.lineage.support.preferences.CustomSeekBarPreference
+            android:key="theme_colors_chroma_factor"
+            android:title="@string/theme_colors_chroma_factor_title"
+            android:summary="@string/theme_colors_chroma_factor_summary"
+            android:defaultValue="0"
+            android:max="100"
+            settings:min="-95"
+            settings:interval="5"
+            settings:units="%"
+            settings:showSign="true" />
+
+        <!-- Luminance factor -->
+        <com.lineage.support.preferences.CustomSeekBarPreference
+            android:key="theme_colors_luminance_factor"
+            android:title="@string/theme_colors_luminance_factor_title"
+            android:summary="@string/theme_colors_luminance_factor_summary"
+            android:defaultValue="0"
+            android:max="100"
+            settings:min="-95"
+            settings:interval="5"
+            settings:units="%"
+            settings:showSign="true" />
+
+        <!-- Whole palette -->
+        <SwitchPreferenceCompat
+            android:key="theme_colors_whole_palette"
+            android:title="@string/theme_colors_whole_palette_title"
+            android:summary="@string/theme_colors_whole_palette_summary"
+            android:defaultValue="false" />
+
+        <!-- Tint background with accent color -->
+        <SwitchPreferenceCompat
+            android:key="theme_colors_tint_background"
+            android:title="@string/theme_colors_tint_background_title"
+            android:summary="@string/theme_colors_tint_background_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

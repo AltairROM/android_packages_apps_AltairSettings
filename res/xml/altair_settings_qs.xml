@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2019-2025 Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lineage="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/altair_settings_qs_title">
+
+    <!-- Quick Settings quick pulldown -->
+    <lineageos.preference.LineageSystemSettingListPreference
+        android:key="qs_quick_pulldown"
+        android:title="@string/qs_quick_pulldown_title"
+        android:entries="@array/qs_quick_pulldown_entries"
+        android:entryValues="@array/qs_quick_pulldown_values"
+        android:defaultValue="0" />
+
+    <!-- QS dual tone background -->
+    <com.lineage.support.preferences.SystemSettingSwitchPreference
+        android:key="qs_dual_tone"
+        android:title="@string/qs_dual_tone_title"
+        android:summary="@string/qs_dual_tone_summary"
+        android:defaultValue="true" />
+
+    <!-- QS background transparency -->
+    <com.lineage.support.preferences.SystemSettingSeekBarPreference
+        android:key="qs_transparency"
+        android:title="@string/qs_transparency_title"
+        android:summary="@string/qs_transparency_summary"
+        android:defaultValue="100"
+        settings:interval="1"
+        settings:units="%"
+        android:max="100"
+        android:min="1" />
+
+    <!-- Quick Settings tiles layout -->
+    <PreferenceCategory
+        android:key="qs_layout_category"
+        android:title="@string/qs_layout_category">
+
+        <!-- Tile UI style -->
+        <ListPreference
+            android:key="qs_tile_ui_style"
+            android:title="@string/qs_tile_ui_style_title"
+            android:entries="@array/qs_tile_ui_style_entries"
+            android:entryValues="@array/qs_tile_ui_style_values"
+            android:defaultValue="0" />
+
+        <!-- Panel style -->
+        <ListPreference
+            android:key="qs_panel_style"
+            android:title="@string/qs_panel_style_title"
+            android:entries="@array/qs_panel_style_entries"
+            android:entryValues="@array/qs_panel_style_values"
+            android:defaultValue="0" />
+
+        <!-- Hide labels -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="qs_tile_label_hide"
+            android:title="@string/qs_tile_label_hide_title"
+            android:summary="@string/qs_tile_label_hide_summary"
+            android:defaultValue="false" />
+
+        <!-- Label text size -->
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="qs_tile_label_size"
+            android:title="@string/qs_tile_label_size_title"
+            android:max="15"
+            settings:min="10"
+            settings:interval="1"
+            settings:units="sp"
+            android:defaultValue="14" />
+
+        <!-- Use vertical layout for labels -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="qs_tile_vertical_layout"
+            android:title="@string/qs_tile_layout_title"
+            android:summary="@string/qs_tile_layout_summary"
+            android:defaultValue="false" />
+
+        <!-- Number of columns (portrait) -->
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="qs_layout_columns"
+            android:title="@string/qs_columns_portrait_title"
+            android:max="5"
+            settings:min="2"
+            settings:interval="1"
+            android:defaultValue="2" />
+
+        <!-- Number of columns (landscape) -->
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="qs_layout_columns_landscape"
+            android:title="@string/qs_columns_landscape_title"
+            android:max="6"
+            settings:min="2"
+            settings:interval="1"
+            android:defaultValue="4" />
+
+        <!-- Number of rows (portrait) -->
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="qs_layout_rows"
+            android:title="@string/qs_rows_portrait_title"
+            android:max="5"
+            settings:min="2"
+            settings:interval="1"
+            android:defaultValue="4" />
+
+        <!-- Number of rows (landscape) -->
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="qs_layout_rows_landscape"
+            android:title="@string/qs_rows_landscape_title"
+            android:max="3"
+            settings:min="1"
+            settings:interval="1"
+            android:defaultValue="2" />
+
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="qqs_layout_rows"
+            android:title="@string/qqs_rows_portrait_title"
+            android:max="3"
+            settings:min="1"
+            settings:interval="1"
+            android:defaultValue="2" />
+
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="qqs_layout_rows_landscape"
+            android:title="@string/qqs_rows_landscape_title"
+            android:max="3"
+            settings:min="1"
+            settings:interval="1"
+            android:defaultValue="2" />
+
+    </PreferenceCategory>
+
+    <!-- Quick Settings tiles animation -->
+    <PreferenceCategory
+        android:key="qs_tile_animation_category"
+        android:title="@string/qs_tile_animation_category">
+
+        <com.lineage.support.preferences.SystemSettingListPreference
+            android:key="qs_tile_animation_style"
+            android:title="@string/qs_tile_animation_style_title"
+            android:entries="@array/qs_tile_animation_style_entries"
+            android:entryValues="@array/qs_tile_animation_style_values"
+            android:defaultValue="0" />
+
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="qs_tile_animation_duration"
+            android:title="@string/qs_tile_animation_duration_title"
+            android:defaultValue="1"
+            settings:interval="1"
+            settings:units="@string/unit_seconds"
+            android:max="5"
+            android:min="1" />
+
+        <com.lineage.support.preferences.SystemSettingListPreference
+            android:key="qs_tile_animation_interpolator"
+            android:title="@string/qs_tile_animation_interpolator_title"
+            android:entries="@array/qs_tile_animation_interpolator_entries"
+            android:entryValues="@array/qs_tile_animation_interpolator_values"
+            android:defaultValue="0" />
+
+    </PreferenceCategory>
+
+    <!-- Quick Settings header -->
+    <PreferenceCategory
+        android:title="@string/qs_header_category">
+
+        <!-- Enable brightness slider -->
+        <lineageos.preference.LineageSecureSettingSwitchPreference
+            android:key="qs_show_brightness_slider"
+            android:title="@string/qs_brightness_slider_title"
+            android:summary="@string/qs_brightness_slider_summary"
+            android:defaultValue="true" />
+
+        <!-- Brightness slider position -->
+        <lineageos.preference.LineageSecureSettingListPreference
+            android:key="qs_brightness_slider_position"
+            android:title="@string/qs_brightness_slider_position_title"
+            android:entries="@array/qs_brightness_slider_position_entries"
+            android:entryValues="@array/qs_brightness_slider_position_values"
+            android:defaultValue="0" />
+
+        <!-- Brightness slider haptic feedback -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="qs_brightness_slider_haptic"
+            android:title="@string/qs_brightness_slider_haptic_title"
+            android:summary="@string/qs_brightness_slider_haptic_summary"/>
+
+        <!-- Show auto-brightness button -->
+        <lineageos.preference.LineageSecureSettingSwitchPreference
+            android:key="qs_show_auto_brightness"
+            android:title="@string/qs_brightness_slider_auto_title"
+            android:summary="@string/qs_brightness_slider_auto_summary"
+            android:dependency="qs_show_brightness_slider"
+            lineage:requiresConfig="@*android:bool/config_automatic_brightness_available"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+    <!-- Quick Settings footer -->
+    <PreferenceCategory
+        android:title="@string/qs_footer_category">
+
+        <!-- Show data usage in footer -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="qs_show_data_usage"
+            android:title="@string/qs_footer_datausage_title"
+            android:summary="@string/qs_footer_datausage_summary" />
+
+        <!-- Show network monitoring alerts in footer -->
+        <!--<com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="qs_footer_warnings"
+            android:title="@string/qs_footer_warnings_title"
+            android:summary="@string/qs_footer_warnings_summary"
+            android:defaultValue="true"/>-->
+
+        <!-- QS footer transparency -->
+        <!--<com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="qs_footer_transparency"
+            android:title="@string/qs_footer_opacity_title"
+            android:summary="@string/qs_footer_opacity_summary"
+            android:defaultValue="100"
+            settings:interval="1"
+            settings:units="%"
+            android:max="100"
+            android:min="1" />-->
+
+    </PreferenceCategory>
+
+    <!-- Quick Settings tile actions -->
+    <PreferenceCategory
+        android:title="@string/qs_tile_actions_category">
+
+        <!-- QS bluetooth dialog -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="qs_bt_show_dialog"
+            android:title="@string/qs_bt_show_dialog_title"
+            android:summary="@string/qs_bt_show_dialog_summary"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

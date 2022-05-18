@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019-2024 Altair ROM Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Statusbar Clock options -->
+    <string-array name="status_bar_clock_position_entries" translatable="false">
+        <item>@string/status_bar_clock_position_right</item>
+        <item>@string/status_bar_clock_position_center</item>
+        <item>@string/status_bar_clock_position_left</item>
+        <item>@string/status_bar_clock_position_hidden</item>
+    </string-array>
+
+    <string-array name="status_bar_clock_position_entries_rtl" translatable="false">
+        <item>@string/status_bar_clock_position_left</item>
+        <item>@string/status_bar_clock_position_center</item>
+        <item>@string/status_bar_clock_position_right</item>
+        <item>@string/status_bar_clock_position_hidden</item>
+    </string-array>
+
+    <string-array name="status_bar_clock_position_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="status_bar_clock_position_entries_notch" translatable="false">
+        <item>@string/status_bar_clock_position_right</item>
+        <item>@string/status_bar_clock_position_left</item>
+        <item>@string/status_bar_clock_position_hidden</item>
+    </string-array>
+
+    <string-array name="status_bar_clock_position_entries_notch_rtl" translatable="false">
+        <item>@string/status_bar_clock_position_left</item>
+        <item>@string/status_bar_clock_position_right</item>
+        <item>@string/status_bar_clock_position_hidden</item>
+    </string-array>
+
+    <string-array name="status_bar_clock_position_values_notch" translatable="false">
+        <item>0</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="status_bar_am_pm_entries" translatable="false">
+        <item>@string/status_bar_am_pm_normal</item>
+        <item>@string/status_bar_am_pm_small</item>
+        <item>@string/status_bar_am_pm_hidden</item>
+    </string-array>
+
+    <string-array name="status_bar_am_pm_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="status_bar_battery_style_entries" translatable="false">
+        <item>@string/status_bar_battery_style_icon_portrait</item>
+        <item>@string/status_bar_battery_style_two_tone_icon_portrait</item>
+        <item>@string/status_bar_battery_style_circle</item>
+        <item>@string/status_bar_battery_style_text</item>
+    </string-array>
+
+    <string-array name="status_bar_battery_style_values" translatable="false">
+        <item>0</item>
+        <item>3</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="status_bar_battery_percentage_entries" translatable="false">
+        <item>@string/status_bar_battery_percentage_default</item>
+        <item>@string/status_bar_battery_percentage_text_inside</item>
+        <item>@string/status_bar_battery_percentage_text_next</item>
+    </string-array>
+
+    <string-array name="status_bar_battery_percentage_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Network Traffic -->
+    <string-array name="network_traffic_position_entries" translatable="false">
+        <item>@string/network_traffic_position_left</item>
+        <item>@string/network_traffic_position_center</item>
+        <item>@string/network_traffic_position_right</item>
+    </string-array>
+
+    <string-array name="network_traffic_position_entries_rtl" translatable="false">
+        <item>@string/network_traffic_position_right</item>
+        <item>@string/network_traffic_position_center</item>
+        <item>@string/network_traffic_position_left</item>
+    </string-array>
+
+    <string-array name="network_traffic_position_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="network_traffic_position_entries_notch" translatable="false">
+        <item>@string/network_traffic_position_left</item>
+        <item>@string/network_traffic_position_right</item>
+    </string-array>
+
+    <string-array name="network_traffic_position_entries_notch_rtl" translatable="false">
+        <item>@string/network_traffic_position_right</item>
+        <item>@string/network_traffic_position_left</item>
+    </string-array>
+
+    <string-array name="network_traffic_position_values_notch" translatable="false">
+        <item>0</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="network_traffic_mode_entries" translatable="false">
+        <item>@string/network_traffic_mode_disable</item>
+        <item>@string/network_traffic_mode_up</item>
+        <item>@string/network_traffic_mode_down</item>
+        <item>@string/network_traffic_mode_all</item>
+    </string-array>
+
+    <string-array name="network_traffic_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="network_traffic_units_entries" translatable="false">
+        <item>@string/network_traffic_units_bits</item>
+        <item>@string/network_traffic_units_bytes</item>
+    </string-array>
+
+    <string-array name="network_traffic_units_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Quick pulldown -->
+    <string-array name="qs_quick_pulldown_entries" translatable="false">
+        <item>@string/qs_quick_pulldown_off</item>
+        <item>@string/qs_quick_pulldown_right</item>
+        <item>@string/qs_quick_pulldown_left</item>
+        <item>@string/qs_quick_pulldown_always</item>
+    </string-array>
+
+    <string-array name="qs_quick_pulldown_entries_rtl" translatable="false">
+        <item>@string/qs_quick_pulldown_off</item>
+        <item>@string/qs_quick_pulldown_left</item>
+        <item>@string/qs_quick_pulldown_right</item>
+        <item>@string/qs_quick_pulldown_always</item>
+    </string-array>
+
+    <string-array name="qs_quick_pulldown_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Brightness slider position -->
+    <string-array name="qs_brightness_slider_position_entries" translatable="false">
+        <item>@string/qs_brightness_slider_position_top</item>
+        <item>@string/qs_brightness_slider_position_bottom</item>
+    </string-array>
+
+    <string-array name="qs_brightness_slider_position_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- Smart Pixels -->
+    <string-array name="smart_pixels_percent_strings" translatable="false">
+        <item>12</item>
+        <item>25</item>
+        <item>38</item>
+        <item>50</item>
+        <item>62</item>
+        <item>75</item>
+        <item>88</item>
+    </string-array>
+
+    <string-array name="smart_pixels_percent_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <string-array name="smart_pixels_shift_times">
+        <item>15 seconds</item>
+        <item>30 seconds</item>
+        <item>1 minute</item>
+        <item>2 minutes</item>
+        <item>5 minutes</item>
+        <item>10 minutes</item>
+        <item>20 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+    </string-array>
+
+    <string-array name="smart_pixels_shift_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <!-- Navbar key rebinding -->
+    <string-array name="navbar_key_action_entries" translatable="false">
+        <item>@string/navbar_key_action_nothing</item>
+        <item>@string/navbar_key_action_menu</item>
+        <item>@string/navbar_key_action_app_switch</item>
+        <item>@string/navbar_key_action_search</item>
+        <item>@string/navbar_key_action_voice_search</item>
+        <item>@string/navbar_key_action_in_app_search</item>
+        <item>@string/navbar_key_action_launch_camera</item>
+        <item>@string/navbar_key_action_sleep</item>
+        <item>@string/navbar_key_action_last_app</item>
+        <item>@string/navbar_key_action_split_screen</item>
+        <item>@string/navbar_key_action_kill_app</item>
+        <item>@string/navbar_key_action_play_pause_music</item>
+        <item>@string/navbar_key_action_torch</item>
+        <item>@string/navbar_key_action_screenshot</item>
+        <item>@string/navbar_key_action_volume_panel</item>
+        <item>@string/navbar_key_action_clear_all_notifications</item>
+        <item>@string/navbar_key_action_notifications_panel</item>
+        <item>@string/navbar_key_action_expand_qs_panel</item>
+        <item>@string/navbar_key_action_ringer_modes</item>
+    </string-array>
+
+    <string-array name="navbar_key_action_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+    </string-array>
+
+    <!-- Torch long press power timeout -->
+    <string-array name="torch_long_press_power_timeout_entries" translatable="false">
+        <item>@string/torch_long_press_power_timeout_never</item>
+        <item>@string/torch_long_press_power_timeout_1min</item>
+        <item>@string/torch_long_press_power_timeout_2min</item>
+        <item>@string/torch_long_press_power_timeout_5min</item>
+        <item>@string/torch_long_press_power_timeout_10min</item>
+    </string-array>
+
+    <string-array name="torch_long_press_power_timeout_values" translatable="false">
+        <item>0</item>
+        <item>60</item>
+        <item>120</item>
+        <item>300</item>
+        <item>600</item>
+    </string-array>
+
+    <!-- Volume key cursor control -->
+    <string-array name="volbtn_cursor_control_entries" translatable="false">
+        <item>@string/volbtn_cursor_control_off</item>
+        <item>@string/volbtn_cursor_control_on</item>
+        <item>@string/volbtn_cursor_control_on_reverse</item>
+    </string-array>
+
+    <string-array name="volbtn_cursor_control_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Predefined theme accent colors -->
+    <!-- Base accent colors derived from system_accent1_500 -->
+    <string-array name="theme_accent_color_values">
+        <item>#1a73e8</item> <!-- Google Blue -->
+        <item>#ffb300</item> <!-- Material Amber -->
+        <item>#1e88e5</item> <!-- Material Blue -->
+        <item>#6d4c41</item> <!-- Material Brown -->
+        <item>#00acc1</item> <!-- Material Cyan -->
+        <item>#f4511e</item> <!-- Material Deep Orange -->
+        <item>#5e35b1</item> <!-- Material Deep Purple -->
+        <item>#43a047</item> <!-- Material Green -->
+        <item>#3949ab</item> <!-- Material Indigo -->
+        <item>#039be5</item> <!-- Material Light Blue -->
+        <item>#7cb342</item> <!-- Material Light Green -->
+        <item>#c0ca33</item> <!-- Material Lime -->
+        <item>#fb8c00</item> <!-- Material Orange -->
+        <item>#d81b60</item> <!-- Material Pink -->
+        <item>#8e24aa</item> <!-- Material Purple -->
+        <item>#e53935</item> <!-- Material Red -->
+        <item>#00897b</item> <!-- Material Teal -->
+        <item>#fdd835</item> <!-- Material Yellow -->
+    </string-array>
+
+    <!-- Dark mode colors derived from system_accent1_200 -->
+    <string-array name="theme_accent_color_values_dark">
+        <item>#8d9bf4</item> <!-- Google Blue -->
+        <item>#ffe082</item> <!-- Material Amber -->
+        <item>#90caf9</item> <!-- Material Blue -->
+        <item>#bcaaa4</item> <!-- Material Brown -->
+        <item>#80deea</item> <!-- Material Cyan -->
+        <item>#ffccbc</item> <!-- Material Deep Orange -->
+        <item>#d1c4e9</item> <!-- Material Deep Purple -->
+        <item>#c8e6c9</item> <!-- Material Green -->
+        <item>#c5cae9</item> <!-- Material Indigo -->
+        <item>#b3e5fc</item> <!-- Material Light Blue -->
+        <item>#dcedc8</item> <!-- Material Light Green -->
+        <item>#f0f4c3</item> <!-- Material Lime -->
+        <item>#ffe0b2</item> <!-- Material Orange -->
+        <item>#f8bbd0</item> <!-- Material Pink -->
+        <item>#e1bee7</item> <!-- Material Purple -->
+        <item>#ffcdd2</item> <!-- Material Red -->
+        <item>#b2dfdb</item> <!-- Material Teal -->
+        <item>#fff9c4</item> <!-- Material Yellow -->
+    </string-array>
+
+    <!-- Dark mode (rich) colors derived from system_accent1_300 -->
+    <string-array name="theme_accent_color_values_dark_rich">
+        <item>#5f9def</item> <!-- Google Blue -->
+        <item>#ffd54f</item> <!-- Material Amber -->
+        <item>#64b5f6</item> <!-- Material Blue -->
+        <item>#a1887f</item> <!-- Material Brown -->
+        <item>#4dd0e1</item> <!-- Material Cyan -->
+        <item>#ff8a65</item> <!-- Material Deep Orange -->
+        <item>#9575cd</item> <!-- Material Deep Purple -->
+        <item>#81c784</item> <!-- Material Green -->
+        <item>#7986cb</item> <!-- Material Indigo -->
+        <item>#4fc3f7</item> <!-- Material Light Blue -->
+        <item>#aed581</item> <!-- Material Light Green -->
+        <item>#dce775</item> <!-- Material Lime -->
+        <item>#ffb74d</item> <!-- Material Orange -->
+        <item>#f06292</item> <!-- Material Pink -->
+        <item>#ba68c8</item> <!-- Material Purple -->
+        <item>#e57373</item> <!-- Material Red -->
+        <item>#4db6ac</item> <!-- Material Teal -->
+        <item>#fff176</item> <!-- Material Yellow -->
+    </string-array>
+
+    <string-array name="theme_accent_color_names" translatable="false">
+        <item>@string/theme_accent_color_google_blue</item>
+        <item>@string/theme_accent_color_material_amber</item>
+        <item>@string/theme_accent_color_material_blue</item>
+        <item>@string/theme_accent_color_material_brown</item>
+        <item>@string/theme_accent_color_material_cyan</item>
+        <item>@string/theme_accent_color_material_deep_orange</item>
+        <item>@string/theme_accent_color_material_deep_purple</item>
+        <item>@string/theme_accent_color_material_green</item>
+        <item>@string/theme_accent_color_material_indigo</item>
+        <item>@string/theme_accent_color_material_light_blue</item>
+        <item>@string/theme_accent_color_material_light_green</item>
+        <item>@string/theme_accent_color_material_lime</item>
+        <item>@string/theme_accent_color_material_orange</item>
+        <item>@string/theme_accent_color_material_pink</item>
+        <item>@string/theme_accent_color_material_purple</item>
+        <item>@string/theme_accent_color_material_red</item>
+        <item>@string/theme_accent_color_material_teal</item>
+        <item>@string/theme_accent_color_material_yellow</item>
+    </string-array>
+
+    <!-- QS Tiles Style -->
+    <string-array name="qs_tile_ui_style_entries">
+        <item>@string/sys_default</item>
+        <item>@string/qs_tile_ui_style_a11_circle</item>
+        <item>@string/qs_tile_ui_style_a11_square</item>
+        <item>@string/qs_tile_ui_style_a11_mix</item>
+    </string-array>
+
+    <string-array name="qs_tile_ui_style_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- QS Panel Style -->
+    <string-array name="qs_panel_style_entries" translatable="false">
+        <item>@string/sys_default</item>
+        <item>@string/qs_panel_style_outline</item>
+        <item>@string/qs_panel_style_two_tone</item>
+        <item>@string/qs_panel_style_color_pop</item>
+        <item>@string/qs_panel_style_shaded</item>
+        <item>@string/qs_panel_style_cyberpunk</item>
+        <item>@string/qs_panel_style_neumorph</item>
+        <item>@string/qs_panel_style_reflected</item>
+        <item>@string/qs_panel_style_surround</item>
+        <item>@string/qs_panel_style_thin</item>
+    </string-array>
+
+    <string-array name="qs_panel_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+
+    <!-- QS Tiles animation style -->
+    <string-array name="qs_tile_animation_style_entries" translatable="false">
+        <item>@string/qs_tile_animation_style_off</item>
+        <item>@string/qs_tile_animation_style_rotate</item>
+        <item>@string/qs_tile_animation_style_flipx</item>
+        <item>@string/qs_tile_animation_style_flipy</item>
+    </string-array>
+
+    <string-array name="qs_tile_animation_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- QS Tiles animation interpolator -->
+    <string-array name="qs_tile_animation_interpolator_entries" translatable="false">
+        <item>@string/qs_tile_animation_interpolator_linearInterpolator</item>
+        <item>@string/qs_tile_animation_interpolator_accelerateInterpolator</item>
+        <item>@string/qs_tile_animation_interpolator_decelerateInterpolator</item>
+        <item>@string/qs_tile_animation_interpolator_accelerateDecelerateInterpolator</item>
+        <item>@string/qs_tile_animation_interpolator_bounceInterpolator</item>
+        <item>@string/qs_tile_animation_interpolator_overshootInterpolator</item>
+        <item>@string/qs_tile_animation_interpolator_anticipateInterpolator</item>
+        <item>@string/qs_tile_animation_interpolator_anticipateOvershootInterpolator</item>
+    </string-array>
+
+    <string-array name="qs_tile_animation_interpolator_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
+    <!-- Lockscreen album art filter -->
+    <string-array name="lockscreen_albumart_filter_entries">
+        <item>@string/lockscreen_albumart_filter_none</item>
+        <item>@string/lockscreen_albumart_filter_grayscale</item>
+        <item>@string/lockscreen_albumart_filter_tint</item>
+        <item>@string/lockscreen_albumart_filter_blur</item>
+        <item>@string/lockscreen_albumart_filter_grayblur</item>
+    </string-array>
+
+    <string-array name="lockscreen_albumart_filter_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+</resources>

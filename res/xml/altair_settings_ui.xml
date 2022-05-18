@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2019-2025 Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lineage="http://schemas.android.com/apk/res/lineageos.platform"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/altair_settings_ui_title">
+
+    <!-- Power menu -->
+    <PreferenceCategory
+        android:key="power_menu_category"
+        android:title="@string/power_menu_category">
+
+        <!-- Power menu items -->
+        <Preference
+            android:key="power_menu_items"
+            android:title="@string/power_menu_items_title"
+            android:fragment="com.altair.settings.fragments.ui.PowerMenuActions" />
+
+        <!-- Advanced restart -->
+        <lineageos.preference.LineageSecureSettingSwitchPreference
+            android:key="advanced_reboot"
+            android:title="@string/power_menu_advanced_restart_title"
+            android:summary="@string/power_menu_advanced_restart_summary"
+            android:defaultValue="true" />
+
+        <!-- Allow advanced restart on secure lockscreen -->
+        <lineageos.preference.LineageSecureSettingSwitchPreference
+            android:key="advanced_reboot_secured"
+            android:title="@string/power_menu_advanced_restart_secured_title"
+            android:summary="@string/power_menu_advanced_restart_secured_summary"
+            android:dependency="advanced_reboot"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+    <!-- Launcher -->
+    <PreferenceCategory
+        android:key="launcher"
+        android:title="@string/launcher_category">
+
+        <!-- Recents -->
+        <Preference
+            android:key="laucher_recents_settings"
+            android:title="@string/launcher_recents_settings_title"
+            android:summary="@string/launcher_recents_settings_summary">
+            <intent
+                android:action="android.settings.APPLICATION_DETAILS_SETTINGS"
+                android:targetPackage="com.android.launcher3"
+                android:targetClass="com.android.launcher3.settings.SettingsRecents" />
+        </Preference>
+
+    </PreferenceCategory>
+
+    <!-- Miscellaneous -->
+    <PreferenceCategory
+        android:key="miscellaneous"
+        android:title="@string/miscellaneous_category">
+
+        <!-- Toast icon -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="toast_icon"
+            android:title="@string/toast_icon_title"
+            android:summary="@string/toast_icon_summary"
+            android:defaultValue="true" />
+
+        <!-- Charging animation -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="charging_animation"
+            android:title="@string/charging_animation_title"
+            android:summary="@string/charging_animation_summary"
+            android:defaultValue="true" />
+
+        <!-- Three-fingers-swipe to screenshot -->
+        <!--<com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="three_finger_gesture"
+            android:title="@string/three_finger_gesture"
+            android:summary="@string/three_finger_gesture_summary"
+            android:defaultValue="false" />-->
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

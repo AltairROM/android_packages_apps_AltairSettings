@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2019-2025 Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/altair_settings_activity_title" >
+
+    <!-- Buttons -->
+    <Preference
+        android:key="buttons_category"
+        android:title="@string/altair_settings_buttons_title"
+        android:summary="@string/altair_settings_buttons_summary"
+        android:fragment="com.altair.settings.fragments.AltairSettingsButtons"
+        android:icon="@drawable/ic_settings_menu_buttons"/>
+
+    <!-- Display -->
+    <Preference
+        android:key="display_extra_settings"
+        android:title="@string/altair_settings_display_title"
+        android:summary="@string/altair_settings_display_summary"
+        android:fragment="com.altair.settings.fragments.AltairSettingsDisplay"
+        android:icon="@drawable/ic_settings_menu_display"/>
+
+    <!-- Gestures -->
+    <Preference
+        android:key="gesture_settings"
+        android:title="@string/altair_settings_gestures_title"
+        android:summary="@string/altair_settings_gestures_summary"
+        android:icon="@drawable/ic_settings_gestures"
+        android:fragment="com.android.settings.gestures.GestureSettings"
+        settings:controller="com.android.settings.gestures.GesturesSettingPreferenceController"/>
+
+    <!-- Lockscreen -->
+    <Preference
+        android:key="lockscreen_category"
+        android:title="@string/altair_settings_lockscreen_title"
+        android:summary="@string/altair_settings_lockscreen_summary"
+        android:fragment="com.altair.settings.fragments.AltairSettingsLockscreen"
+        android:icon="@drawable/ic_settings_menu_lockscreen" />
+
+    <!-- Navigation -->
+    <Preference
+        android:key="navigation_category"
+        android:title="@string/altair_settings_navigation_title"
+        android:summary="@string/altair_settings_navigation_summary"
+        android:fragment="com.altair.settings.fragments.AltairSettingsNavigation"
+        android:icon="@drawable/ic_settings_menu_navigation" />
+
+    <!-- Notifications -->
+    <Preference
+        android:key="notification_category"
+        android:title="@string/altair_settings_notifications_title"
+        android:summary="@string/altair_settings_notifications_summary"
+        android:fragment="com.altair.settings.fragments.AltairSettingsNotifications"
+        android:icon="@drawable/ic_settings_menu_notification" />
+
+    <!-- Quick settings panel -->
+    <Preference
+        android:key="quicksettings_category"
+        android:title="@string/altair_settings_qs_title"
+        android:summary="@string/altair_settings_qs_summary"
+        android:fragment="com.altair.settings.fragments.AltairSettingsQS"
+        android:icon="@drawable/ic_settings_menu_qs"/>
+
+    <!-- Sound -->
+    <Preference
+        android:key="sound_category"
+        android:title="@string/altair_settings_sound_title"
+        android:summary="@string/altair_settings_sound_summary"
+        android:fragment="com.altair.settings.fragments.AltairSettingsSound"
+        android:icon="@drawable/ic_settings_menu_sound"/>
+
+    <!-- Status bar -->
+    <Preference
+        android:key="statusbar_category"
+        android:title="@string/altair_settings_status_bar_title"
+        android:summary="@string/altair_settings_status_bar_summary"
+        android:fragment="com.altair.settings.fragments.AltairSettingsStatusBar"
+        android:icon="@drawable/ic_settings_menu_status_bar"/>
+
+    <!-- Themes -->
+    <Preference
+        android:key="themes_category"
+        android:title="@string/altair_settings_themes_title"
+        android:summary="@string/altair_settings_themes_summary"
+        android:fragment="com.altair.settings.fragments.AltairSettingsThemes"
+        android:icon="@drawable/ic_settings_menu_themes"/>
+
+    <!-- User interface -->
+    <Preference
+        android:key="user_interface_category"
+        android:title="@string/altair_settings_ui_title"
+        android:summary="@string/altair_settings_ui_summary"
+        android:fragment="com.altair.settings.fragments.AltairSettingsUI"
+        android:icon="@drawable/ic_settings_menu_ui"/>
+
+</PreferenceScreen>

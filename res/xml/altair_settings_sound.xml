@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2019-2025 Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lineage="http://schemas.android.com/apk/res/lineageos.platform"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/altair_settings_sound_title">
+
+    <!-- Volume panel -->
+    <PreferenceCategory
+        android:key="volume_panel_category"
+        android:title="@string/volume_panel_title" >
+
+        <!-- Show volume panel on left side of screen -->
+        <lineageos.preference.LineageSecureSettingSwitchPreference
+            android:key="volume_panel_on_left"
+            android:title="@string/volume_panel_on_left_title"
+            android:summary="@string/volume_panel_on_left_summary" />
+
+        <!-- Volume panel timeout -->
+        <!--<com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="volume_dialog_timeout"
+            android:title="@string/volume_dialog_timeout_title"
+            android:defaultValue="3"
+            android:max="10"
+            settings:min="1"
+            settings:units="@string/unit_seconds" />-->
+
+        <!-- Show per-app volume button in volume dialog -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="show_app_volume"
+            android:title="@string/app_volume_title"
+            android:summary="@string/app_volume_summary"
+            android:defaultValue="false" />
+    </PreferenceCategory>
+
+    <!-- Volume steps -->
+    <PreferenceCategory
+        android:key="volume_steps_category"
+        android:title="@string/volume_steps_title" >
+
+        <com.lineage.support.preferences.CustomSeekBarPreference
+            android:key="max_music_volume"
+            android:title="@string/max_music_volume_title"
+            android:max="100"
+            settings:min="15"
+            settings:interval="5"
+            settings:units="@string/unit_steps" />
+
+        <com.lineage.support.preferences.CustomSeekBarPreference
+            android:key="max_call_volume"
+            android:title="@string/max_call_volume_title"
+            android:max="30"
+            settings:min="5"
+            settings:interval="1"
+            settings:units="@string/unit_steps" />
+
+        <com.lineage.support.preferences.CustomSeekBarPreference
+            android:key="max_alarm_volume"
+            android:title="@string/max_alarm_volume_title"
+            android:max="30"
+            settings:min="7"
+            settings:interval="1"
+            settings:units="@string/unit_steps" />
+    </PreferenceCategory>
+
+    <!-- Miscellaneous -->
+    <PreferenceCategory
+        android:key="miscellaneous"
+        android:title="@string/miscellaneous_category">
+
+        <!-- Screenshot shutter sound  -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="screenshot_shutter_sound"
+            android:title="@string/screenshot_shutter_sound_title"
+            android:summary="@string/screenshot_shutter_sound_summary"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2020-2025 Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lineage="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/altair_settings_buttons_title">
+
+    <!-- Swap capacitive keys -->
+    <SwitchPreferenceCompat
+        android:key="swap_capacitive_keys"
+        android:title="@string/swap_capacitive_keys_title"
+        android:summary="@string/swap_capacitive_keys_summary"
+        android:defaultValue="false" />
+
+    <!-- Button backlight settings -->
+    <com.altair.settings.fragments.button.ButtonBacklightBrightness
+        android:key="button_backlight"
+        android:title="@string/button_backlight_title"
+        android:dialogTitle="@string/button_backlight_title"
+        android:persistent="false" />
+
+    <!-- Power button -->
+    <PreferenceCategory
+        android:key="power_key"
+        android:title="@string/hardware_keys_power_key_title" >
+
+        <!-- End call by pressing power button -->
+        <SwitchPreferenceCompat
+            android:key="power_end_call"
+            android:title="@string/power_end_call_title"
+            android:summary="@string/power_end_call_summary"
+            android:persistent="false"/>
+
+        <!-- Long press for flashlight -->
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="torch_long_press_power_gesture"
+            android:title="@string/torch_long_press_power_gesture_title"
+            android:summary="@string/torch_long_press_power_gesture_desc"
+            android:defaultValue="false"
+            lineage:requiresConfig="@*android:bool/config_supportLongPressPowerWhenNonInteractive" />
+
+        <!-- Flashlight timeout -->
+        <ListPreference
+            android:key="torch_long_press_power_timeout"
+            android:dialogTitle="@string/torch_long_press_power_timeout_title"
+            android:title="@string/torch_long_press_power_timeout_title"
+            android:entries="@array/torch_long_press_power_timeout_entries"
+            android:entryValues="@array/torch_long_press_power_timeout_values"
+            android:dependency="torch_long_press_power_gesture"
+            android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <!-- Home button -->
+    <PreferenceCategory
+        android:key="home_key"
+        android:title="@string/hardware_keys_home_key_title" >
+
+        <!-- Wake screen by pressing home button -->
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="home_wake_screen"
+            android:title="@string/button_wake_title"
+            android:defaultValue="true" />
+
+        <!-- Answer call by pressing power button -->
+        <SwitchPreferenceCompat
+            android:key="home_answer_call"
+            android:title="@string/home_answer_call_title"
+            android:summary="@string/home_answer_call_summary"
+            android:persistent="false"/>
+
+        <!-- Home button long press action -->
+        <ListPreference
+            android:key="hardware_keys_home_long_press"
+            android:dialogTitle="@string/hardware_keys_long_press_title"
+            android:title="@string/hardware_keys_long_press_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />
+
+        <!-- Home button double tap action -->
+        <ListPreference
+            android:key="hardware_keys_home_double_tap"
+            android:dialogTitle="@string/hardware_keys_double_tap_title"
+            android:title="@string/hardware_keys_double_tap_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <!-- Back button -->
+    <PreferenceCategory
+        android:key="back_key"
+        android:title="@string/hardware_keys_back_key_title" >
+
+        <!-- Wake screen by pressing back button -->
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="back_wake_screen"
+            android:title="@string/button_wake_title"
+            android:defaultValue="false" />
+
+        <!-- Back button long press action -->
+        <ListPreference
+            android:key="hardware_keys_back_long_press"
+            android:dialogTitle="@string/hardware_keys_long_press_title"
+            android:title="@string/hardware_keys_long_press_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />
+
+        <!-- Back button double tap action -->
+        <!--<ListPreference
+            android:key="hardware_keys_back_double_tap"
+            android:dialogTitle="@string/hardware_keys_double_tap_title"
+            android:title="@string/hardware_keys_double_tap_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />-->
+
+    </PreferenceCategory>
+
+    <!-- Menu button -->
+    <PreferenceCategory
+        android:key="menu_key"
+        android:title="@string/hardware_keys_menu_key_title" >
+
+        <!-- Wake screen by pressing menu button -->
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="menu_wake_screen"
+            android:title="@string/button_wake_title"
+            android:defaultValue="false" />
+
+        <!-- Menu button press action -->
+        <ListPreference
+            android:key="hardware_keys_menu_press"
+            android:dialogTitle="@string/hardware_keys_short_press_title"
+            android:title="@string/hardware_keys_short_press_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />
+
+        <!-- Menu button long press action -->
+        <ListPreference
+            android:key="hardware_keys_menu_long_press"
+            android:dialogTitle="@string/hardware_keys_long_press_title"
+            android:title="@string/hardware_keys_long_press_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />
+
+        <!-- Menu button double tap action -->
+        <!--<ListPreference
+            android:key="hardware_keys_menu_double_tap"
+            android:dialogTitle="@string/hardware_keys_double_tap_title"
+            android:title="@string/hardware_keys_double_tap_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />-->
+
+    </PreferenceCategory>
+
+    <!-- Assist button -->
+    <PreferenceCategory
+        android:key="assist_key"
+        android:title="@string/hardware_keys_assist_key_title" >
+
+        <!-- Wake screen by pressing assist button -->
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="assist_wake_screen"
+            android:title="@string/button_wake_title"
+            android:defaultValue="false" />
+
+        <!-- Assist button press action -->
+        <ListPreference
+            android:key="hardware_keys_assist_press"
+            android:dialogTitle="@string/hardware_keys_short_press_title"
+            android:title="@string/hardware_keys_short_press_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />
+
+        <!-- Assist button long press action -->
+        <ListPreference
+            android:key="hardware_keys_assist_long_press"
+            android:dialogTitle="@string/hardware_keys_long_press_title"
+            android:title="@string/hardware_keys_long_press_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />
+
+        <!-- Assist button double tap action -->
+        <!--<ListPreference
+            android:key="hardware_keys_assist_double_tap"
+            android:dialogTitle="@string/hardware_keys_double_tap_title"
+            android:title="@string/hardware_keys_double_tap_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />-->
+
+    </PreferenceCategory>
+
+    <!-- Recents button -->
+    <PreferenceCategory
+        android:key="app_switch_key"
+        android:title="@string/hardware_keys_appswitch_key_title" >
+
+        <!-- Wake screen by pressing recents button -->
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="app_switch_wake_screen"
+            android:title="@string/button_wake_title"
+            android:defaultValue="false" />
+
+        <!-- Recents button press action -->
+        <ListPreference
+            android:key="hardware_keys_app_switch_press"
+            android:dialogTitle="@string/hardware_keys_short_press_title"
+            android:title="@string/hardware_keys_short_press_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />
+
+        <!-- Recents button long press action -->
+        <ListPreference
+            android:key="hardware_keys_app_switch_long_press"
+            android:dialogTitle="@string/hardware_keys_long_press_title"
+            android:title="@string/hardware_keys_long_press_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />
+
+        <!-- Recents button double tap action -->
+        <ListPreference
+            android:key="hardware_keys_app_switch_double_tap"
+            android:dialogTitle="@string/hardware_keys_double_tap_title"
+            android:title="@string/hardware_keys_double_tap_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <!-- Camera button -->
+    <PreferenceCategory
+        android:key="camera_key"
+        android:title="@string/hardware_keys_camera_key_title">
+
+        <!-- Wake screen by pressing camera button -->
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="camera_wake_screen"
+            android:title="@string/button_wake_title"
+            android:defaultValue="false" />
+
+        <!-- Screen peek with camera button half-press -->
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="camera_sleep_on_release"
+            android:title="@string/camera_sleep_on_release_title"
+            android:summary="@string/camera_sleep_on_release_summary"
+            android:defaultValue="false" />
+
+        <!-- Long press button to launch camera -->
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="camera_launch"
+            android:title="@string/camera_launch_title"
+            android:summary="@string/camera_launch_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+    <!-- Volume buttons -->
+    <PreferenceCategory
+        android:key="volume_keys"
+        android:title="@string/hardware_keys_volume_keys_title" >
+
+        <!-- Wake screen by pressing volume buttons -->
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="volume_wake_screen"
+            android:title="@string/button_wake_title"
+            android:defaultValue="false" />
+
+        <!-- Answer call by pressing volume buttons -->
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="volume_answer_call"
+            android:title="@string/volume_answer_call_title"
+            android:summary="@string/volume_answer_call_summary"
+            android:defaultValue="false" />
+
+        <!-- Seek music tracks with volume buttons -->
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="volbtn_music_controls"
+            android:title="@string/volbtn_music_controls_title"
+            android:summary="@string/volbtn_music_controls_summary"
+            android:defaultValue="true" />
+
+        <!-- Use volume buttons to move keyboard cursor -->
+        <ListPreference
+            android:key="volume_key_cursor_control"
+            android:dialogTitle="@string/volbtn_cursor_control_title"
+            android:title="@string/volbtn_cursor_control_title"
+            android:entries="@array/volbtn_cursor_control_entries"
+            android:entryValues="@array/volbtn_cursor_control_values"
+            android:persistent="false" />
+
+        <!-- Swap volume buttons when screen rotated -->
+        <SwitchPreferenceCompat
+            android:key="swap_volume_buttons"
+            android:title="@string/swap_volume_buttons_title"
+            android:summary="@string/swap_volume_buttons_summary" />
+    </PreferenceCategory>
+
+    <!-- Extras -->
+    <PreferenceCategory
+        android:key="extras_category"
+        android:title="@string/extras_title" >
+
+        <!-- Launch additional button settings -->
+        <lineageos.preference.RemotePreference
+            android:key="additional_buttons"
+            android:title="@string/additional_buttons_title"
+            lineage:requiresAction="org.lineageos.settings.device.ADDITIONAL_BUTTONS_SETTINGS">
+            <intent
+                android:action="org.lineageos.settings.device.ADDITIONAL_BUTTONS_SETTINGS" />
+        </lineageos.preference.RemotePreference>
+
+        <!-- Short press volume down and power buttons for partial screenshot -->
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="click_partial_screenshot"
+            android:title="@string/click_partial_screenshot_title"
+            android:summary="@string/click_partial_screenshot_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

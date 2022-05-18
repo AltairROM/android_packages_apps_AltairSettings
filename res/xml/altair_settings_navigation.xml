@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2020-2025 Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lineage="http://schemas.android.com/apk/res/lineageos.platform"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/altair_settings_navigation_title">
+
+    <!-- Enable on-screen navigation bar -->
+    <SwitchPreferenceCompat
+        android:key="disable_nav_keys"
+        android:title="@string/disable_navkeys_title"
+        android:summary="@string/disable_navkeys_summary"
+        android:defaultValue="false" />
+
+    <!-- Navigation bar options -->
+    <PreferenceCategory
+        android:key="navigation_bar_options_category"
+        android:title="@string/navigation_bar_options_category" >
+
+        <!-- Enable taskbar -->
+        <SwitchPreferenceCompat
+            android:key="enable_taskbar"
+            android:title="@string/navigation_bar_enable_taskbar_title" />
+
+        <!-- Navigation bar style -->
+        <Preference
+            android:key="gesture_system_navigation_input_summary"
+            android:title="@string/system_navigation_title"
+            android:fragment="com.android.settings.gestures.SystemNavigationGestureSettings"
+            settings:controller="com.android.settings.gestures.SystemNavigationPreferenceController"
+            settings:keywords="@string/keywords_system_navigation" />
+
+        <!-- Show arrow keys while typing -->
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="navigation_bar_menu_arrow_keys"
+            android:title="@string/navigation_bar_arrow_keys_title"
+            android:summary="@string/navigation_bar_arrow_keys_summary"
+            android:defaultValue="false" />
+
+        <!-- Invert navigation bar layout -->
+        <lineageos.preference.SecureSettingSwitchPreference
+            android:key="sysui_nav_bar_inverse"
+            android:title="@string/navigation_bar_invert_layout_title"
+            android:summary="@string/navigation_bar_invert_layout_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+    <!-- Navigation bar actions -->
+    <PreferenceCategory
+        android:key="navigation_bar_actions_category"
+        android:title="@string/navigation_bar_actions_category" >
+
+        <!-- Back button long press action -->
+        <ListPreference
+            android:key="navigation_back_long_press"
+            android:dialogTitle="@string/navigation_bar_back_long_press_title"
+            android:title="@string/navigation_bar_back_long_press_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />
+
+        <!-- Back button double tap action -->
+        <!--<ListPreference
+            android:key="navigation_back_double_tap"
+            android:dialogTitle="@string/navigation_bar_back_double_tap_title"
+            android:title="@string/navigation_bar_back_double_tap_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />-->
+
+        <!-- Home button long press action -->
+        <ListPreference
+            android:key="navigation_home_long_press"
+            android:dialogTitle="@string/navigation_bar_home_long_press_title"
+            android:title="@string/navigation_bar_home_long_press_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />
+
+        <!-- Home button double tap action -->
+        <ListPreference
+            android:key="navigation_home_double_tap"
+            android:dialogTitle="@string/navigation_bar_home_double_tap_title"
+            android:title="@string/navigation_bar_home_double_tap_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />
+
+        <!-- Recnets button press action -->
+        <!--<ListPreference
+            android:key="navigation_app_switch_press"
+            android:dialogTitle="@string/navigation_bar_app_switch_press_title"
+            android:title="@string/navigation_bar_app_switch_press_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />-->
+
+        <!-- Recents button long press action -->
+        <ListPreference
+            android:key="navigation_app_switch_long_press"
+            android:dialogTitle="@string/navigation_bar_app_switch_long_press_title"
+            android:title="@string/navigation_bar_app_switch_long_press_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />
+
+        <!-- Recents button double tap action -->
+        <ListPreference
+            android:key="navigation_app_switch_double_tap"
+            android:dialogTitle="@string/navigation_bar_app_switch_double_tap_title"
+            android:title="@string/navigation_bar_app_switch_double_tap_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />
+
+        <!-- Edge long swipe action -->
+        <ListPreference
+            android:key="navigation_bar_edge_long_swipe"
+            android:dialogTitle="@string/navigation_bar_edge_long_swipe_title"
+            android:title="@string/navigation_bar_edge_long_swipe_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

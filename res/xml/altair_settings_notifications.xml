@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2019-2025 Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lineage="http://schemas.android.com/apk/res/lineageos.platform"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/altair_settings_notifications_title">
+
+    <!-- Notification sound and vibration when screen on -->
+    <com.lineage.support.preferences.SystemSettingSwitchPreference
+        android:key="notification_sound_vib_screen_on"
+        android:title="@string/notification_sound_vib_screen_on_title"
+        android:summary="@string/notification_sound_vib_screen_on_summary"
+        android:defaultValue="true" />
+
+    <!-- Notification guts kill app button -->
+    <com.lineage.support.preferences.SystemSettingSwitchPreference
+        android:key="notification_guts_kill_app_button"
+        android:title="@string/notification_guts_kill_app_button_title"
+        android:summary="@string/notification_guts_kill_app_button_summary"
+        android:defaultValue="false" />
+
+    <!-- Show clipboard overlay -->
+    <com.lineage.support.preferences.SecureSettingSwitchPreference
+        android:key="show_clipboard_overlay"
+        android:title="@string/show_clipboard_overlay_title"
+        android:summary="@string/show_clipboard_overlay_summary"
+        android:defaultValue="true" />
+
+    <!-- Heads up -->
+    <PreferenceCategory
+        android:key="notification_heads_up_category"
+        android:title="@string/notification_heads_up_category" >
+
+        <!-- Enable heads up -->
+        <com.lineage.support.preferences.GlobalSettingSwitchPreference
+            android:key="heads_up_notifications_enabled"
+            android:title="@string/heads_up_notifications_enabled_title"
+            android:summary="@string/heads_up_notifications_enabled_summary"
+            android:defaultValue="true" />
+
+        <!-- Less boring heads up -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="less_boring_heads_up"
+            android:title="@string/less_boring_heads_up_title"
+            android:summary="@string/less_boring_heads_up_summary"
+            android:defaultValue="false"
+            android:dependency="heads_up_notifications_enabled" />
+
+        <!-- Heads up timeout -->
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="heads_up_timeout"
+            android:title="@string/notification_heads_up_timeout_title"
+            android:summary="@string/notification_heads_up_timeout_summary"
+            settings:units="@string/unit_seconds"
+            android:defaultValue="5"
+            settings:min="1"
+            android:max="10"
+            android:dependency="heads_up_notifications_enabled" />
+
+    </PreferenceCategory>
+
+    <!-- reTicker -->
+    <!--<PreferenceCategory
+        android:key="notification_reticker_category"
+        android:title="@string/notification_reticker_category" >-->
+
+        <!-- Enable reTicker -->
+        <!--<com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="reticker_status"
+            android:title="@string/reticker_title"
+            android:summary="@string/reticker_summary"
+            android:dependency="heads_up_notifications_enabled" />-->
+
+        <!-- Use app colored background for reTicker -->
+        <!--<com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="reticker_colored"
+            android:title="@string/reticker_colored_title"
+            android:summary="@string/reticker_colored_summary"
+            android:dependency="reticker_status" />-->
+
+    <!--</PreferenceCategory>-->
+
+</PreferenceScreen>
