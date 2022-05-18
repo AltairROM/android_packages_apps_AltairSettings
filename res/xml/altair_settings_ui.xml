@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lineage="http://schemas.android.com/apk/res/lineageos.platform"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/altair_settings_ui_title">
+
+    <!-- Power menu -->
+    <PreferenceCategory
+        android:key="power_menu_category"
+        android:title="@string/power_menu_category">
+
+        <!-- Power menu items -->
+        <Preference
+            android:key="power_menu_items"
+            android:title="@string/power_menu_items_title"
+            android:fragment="com.altair.settings.fragments.ui.PowerMenuActions" />
+
+        <!-- Advanced restart -->
+        <lineageos.preference.LineageSecureSettingSwitchPreference
+            android:key="advanced_reboot"
+            android:title="@string/power_menu_advanced_restart_title"
+            android:summary="@string/power_menu_advanced_restart_summary"
+            android:defaultValue="true" />
+
+        <!-- Allow advanced restart on secure lockscreen -->
+        <lineageos.preference.LineageSecureSettingSwitchPreference
+            android:key="advanced_reboot_secured"
+            android:title="@string/power_menu_advanced_restart_secured_title"
+            android:summary="@string/power_menu_advanced_restart_secured_summary"
+            android:dependency="advanced_reboot"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+    <!-- Launcher -->
+    <PreferenceCategory
+        android:key="launcher"
+        android:title="@string/launcher_category">
+
+        <!-- Recents -->
+        <Preference
+            android:key="laucher_recents_settings"
+            android:title="@string/launcher_recents_settings_title"
+            android:summary="@string/launcher_recents_settings_summary">
+            <intent
+                android:action="android.settings.APPLICATION_DETAILS_SETTINGS"
+                android:targetPackage="com.android.launcher3"
+                android:targetClass="com.android.launcher3.settings.SettingsRecents" />
+        </Preference>
+
+    </PreferenceCategory>
+
+    <!-- Ambient display -->
+    <PreferenceCategory
+        android:key="launcher"
+        android:title="@string/ambient_display_category">
+
+        <!-- Ambient Display settings -->
+        <Preference
+            android:key="doze_fragment"
+            android:title="@string/doze_display_title"
+            android:summary="@string/doze_display_summary"
+            android:fragment="com.altair.settings.fragments.ui.DozeSettings" />
+
+        <!-- Ambient Wallpaper -->
+        <com.lineage.support.preferences.SecureSettingSwitchPreference
+            android:key="doze_always_on_wallpaper_enabled"
+            android:title="@string/doze_always_on_wallpaper_title"
+            android:summary="@string/doze_always_on_wallpaper_summary"
+            android:defaultValue="@*android:bool/config_dozeSupportsAodWallpaper" />
+
+        <!-- Ambient Music Ticker -->
+        <com.lineage.support.preferences.SecureSettingSwitchPreference
+            android:key="pulse_on_new_tracks"
+            android:title="@string/pulse_on_new_tracks_title"
+            android:summary="@string/pulse_on_new_tracks_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+    <!-- Miscellaneous -->
+    <PreferenceCategory
+        android:key="miscellaneous"
+        android:title="@string/miscellaneous_category">
+
+        <!-- Toast icon -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="toast_icon"
+            android:title="@string/toast_icon_title"
+            android:summary="@string/toast_icon_summary"
+            android:defaultValue="true" />
+
+        <!-- Show clipboard overlay -->
+        <com.lineage.support.preferences.SecureSettingSwitchPreference
+            android:key="show_clipboard_overlay"
+            android:title="@string/show_clipboard_overlay_title"
+            android:summary="@string/show_clipboard_overlay_summary"
+            android:defaultValue="true" />
+
+        <!-- Gradient Customization -->
+        <Preference
+            android:key="gradient_settings"
+            android:title="@string/gradient_settings_title"
+            android:summary="@string/gradient_settings_summary"
+            android:fragment="com.altair.settings.fragments.ui.GradientSettings" />
+
+        <!-- Three fingers swipe action -->
+        <ListPreference
+            android:key="three_fingers_swipe"
+            android:title="@string/three_fingers_swipe_title"
+            android:dialogTitle="@string/three_fingers_swipe_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />
+
+        <!-- Sensor block per package -->
+        <Preference
+            android:key="sensor_block_settings"
+            android:title="@string/sensor_block_title"
+            android:summary="@string/sensor_block_summary"
+            android:fragment="com.altair.settings.fragments.ui.SensorBlock" />
+
+        <!-- Pocket Judge -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="pocket_judge"
+            android:title="@string/pocket_judge_title"
+            android:summary="@string/pocket_judge_summary"
+            android:defaultValue="false" />
+
+        <!-- Floating rotation button -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="enable_rotation_button"
+            android:title="@string/floating_rotation_button_title"
+            android:summary="@string/floating_rotation_button_summary"
+            android:defaultValue="true" />
+
+        <!-- Settings icon -->
+        <Preference
+            android:key="settings_icon"
+            android:title="@string/settings_icon_title"
+            android:summary="@string/settings_icon_summary"
+            android:fragment="com.altair.settings.fragments.ui.SettingsIcon" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

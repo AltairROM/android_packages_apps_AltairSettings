@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: crDroid Android Project
+     SPDX-FileCopyrightText: Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+ <PreferenceScreen
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+     android:title="@string/settings_icon_title">
+
+     <!-- Combined icon style -->
+     <com.lineage.support.preferences.SystemSettingListPreference
+         android:key="settings_icon_style"
+         android:title="@string/settings_icon_style_title"
+         android:entries="@array/settings_icon_style_entries"
+         android:entryValues="@array/settings_icon_style_values"
+         android:defaultValue="0" />
+
+     <!-- Random colors -->
+     <com.lineage.support.preferences.SystemSettingSwitchPreference
+         android:key="settings_icon_random_colors"
+         android:title="@string/settings_icon_random_colors_title"
+         android:summary="@string/settings_icon_random_colors_summary"
+         android:defaultValue="false" />
+
+     <!-- Corner style -->
+     <com.lineage.support.preferences.SystemSettingListPreference
+         android:key="settings_icon_corner_style"
+         android:title="@string/settings_icon_corner_style_title"
+         android:entries="@array/settings_corner_style_entries"
+         android:entryValues="@array/settings_corner_style_values"
+         android:defaultValue="0" />
+
+ </PreferenceScreen>

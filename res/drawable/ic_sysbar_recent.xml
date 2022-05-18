@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="28dp"
+        android:height="28dp"
+        android:viewportWidth="96"
+        android:viewportHeight="96">
+
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M16.097,22.441C15.799,18.961 18.885,15.801 22.386,16.099C38.742,16.003 55.099,16.131 71.455,16.035C73.764,16.077 76.457,15.918 78.159,17.78C80.075,19.483 79.947,22.207 80,24.548C79.968,40.521 79.99,56.505 80,72.489C79.926,74.149 79.798,75.852 79.213,77.416C77.404,79.151 75.031,80.14 72.498,79.938C56.163,79.906 39.817,79.906 23.482,79.938C20.918,80.151 18.566,79.098 16.735,77.352C15.958,74.734 15.98,71.978 16.012,69.286C16.118,53.675 15.937,38.053 16.097,22.441Z" />
+</vector>

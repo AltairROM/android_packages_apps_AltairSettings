@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/reset_button"
+        android:title="@string/reset"
+        android:icon="@drawable/ic_reset_24dp"
+        android:showAsAction="always" />
+</menu>

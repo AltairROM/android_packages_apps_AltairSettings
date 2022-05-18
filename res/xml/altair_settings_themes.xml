@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lineage="http://schemas.android.com/apk/res/lineageos.platform"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/altair_settings_themes_title">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="theme_settings_header"
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/lottie_theme_settings" />
+
+    <!-- Accent color -->
+    <com.altair.settings.preferences.AccentColorPreference
+        android:key="theme_accent_color"
+        android:title="@string/theme_accent_color_title" />
+
+    <!-- Enhanced colors -->
+    <SwitchPreferenceCompat
+        android:key="theme_enhanced_colors"
+        android:title="@string/theme_enhanced_colors_title"
+        android:summary="@string/theme_enhanced_colors_summary"
+        android:defaultValue="false" />
+
+    <!-- Theme color style -->
+    <ListPreference
+        android:key="theme_color_style"
+        android:title="@string/theme_color_style_title"
+        android:entries="@array/theme_color_style_entries"
+        android:entryValues="@array/theme_color_style_values"
+        android:defaultValue="0" />
+
+    <!-- Dark mode -->
+    <com.android.settings.display.darkmode.DarkModePreference
+        android:key="theme_dark_ui_mode"
+        android:title="@string/dark_ui_mode"
+        android:fragment="com.android.settings.display.darkmode.DarkModeSettingsFragment"
+        android:widgetLayout="@null"
+        settings:widgetLayout="@null"
+        settings:controller="com.android.settings.display.DarkUIPreferenceController"
+        settings:searchable="false" />
+
+    <!-- Theme elements -->
+    <PreferenceCategory
+        android:key="theme_elements"
+        android:title="@string/theme_elements_category">
+
+        <!-- Themes -->
+        <Preference
+            android:key="custom_system_theme"
+            android:title="@string/custom_system_theme_title"
+            android:summary="@string/custom_system_theme_summary">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.axion.axthemestore"
+                android:targetClass="com.android.axion.axthemestore.MainActivity" />
+        </Preference>
+
+        <!-- Font -->
+        <com.altair.settings.preferences.FontsPickerPreference
+            android:key="system_font"
+            android:title="@string/theme_elements_font_title"
+            android:summary="theme_customization_font_summary" />
+
+        <!-- Icon shape -->
+        <com.altair.settings.preferences.IconShapePreference
+            android:key="icon_shape"
+            android:title="@string/theme_elements_icon_shape_title" />
+
+        <!-- Navigation bar style -->
+        <com.altair.settings.preferences.NavigationBarStylePreference
+            android:key="navigation_bar_style"
+            android:title="@string/theme_elements_navbar_title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

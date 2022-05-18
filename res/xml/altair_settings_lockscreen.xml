@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lineage="http://schemas.android.com/apk/res/lineageos.platform"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/altair_settings_lockscreen_title">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="lockscreen_settings_header"
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/unlock_illustration"/>
+
+    <!-- Clock -->
+    <PreferenceCategory
+        android:key="lockscreen_clock"
+        android:title="@string/lockscreen_clock_category">
+
+        <!-- Lockscreen Clock Font style -->
+        <com.altair.settings.preferences.LockClockFontsPreference
+            android:key="lock_clock_font"
+            android:title="@string/lockscreen_clock_font_title"
+            android:summary="theme_customization_lock_clock_summary" />
+
+        <!-- Lockscreen clock color style -->
+        <ListPreference
+            android:key="lock_clock_color_style"
+            android:title="@string/lock_clock_color_style_title"
+            android:entries="@array/lock_clock_color_style_entries"
+            android:entryValues="@array/lock_clock_color_style_values"
+            android:defaultValue="0" />
+
+    </PreferenceCategory>
+
+    <!-- Interface -->
+    <PreferenceCategory
+        android:key="lockscreen_interface"
+        android:title="@string/lockscreen_interface_category">
+
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="lockscreen_show_carrier"
+            android:title="@string/lockscreen_show_carrier_title"
+            android:summary="@string/lockscreen_show_carrier_summary"
+            android:defaultValue="true" />
+
+        <!-- Battery charging info -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="lockscreen_battery_info"
+            android:title="@string/lockscreen_battery_info_title"
+            android:summary="@string/lockscreen_battery_info_summary"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+    <!-- Media -->
+    <PreferenceCategory
+        android:key="lockscreen_media"
+        android:title="@string/lockscreen_media_category">
+
+        <!-- Pulse music visualizer -->
+        <Preference
+            android:key="pulse_settings"
+            android:title="@string/pulse_settings_title"
+            android:summary="@string/pulse_settings_summary"
+            android:fragment="com.altair.settings.fragments.lockscreen.PulseSettings" />
+
+        <!-- Media cover art -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="ls_media_art_enabled"
+            android:title="@string/ls_media_art_title"
+            android:summary="@string/ls_media_art_summary"
+            android:defaultValue="false" />
+
+        <!-- Media cover art on ambient display -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="ambient_media_art_enabled"
+            android:title="@string/ambient_media_art_title"
+            android:summary="@string/ambient_media_art_summary"
+            android:dependency="ls_media_art_enabled"
+            android:defaultValue="true" />
+
+        <!-- Media cover art filter -->
+        <com.lineage.support.preferences.SystemSettingListPreference
+            android:key="ls_media_art_filter"
+            android:title="@string/ls_media_art_filter_title"
+            android:entries="@array/ls_media_art_filter_entries"
+            android:entryValues="@array/ls_media_art_filter_values"
+            android:dependency="ls_media_art_enabled"
+            android:defaultValue="0" />
+
+        <!-- Media cover art fade level -->
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="ls_media_art_fade_level"
+            android:title="@string/ls_media_art_fade_level_title"
+            android:summary="@string/ls_media_art_fade_level_summary"
+            android:defaultValue="40"
+            settings:interval="1"
+            settings:units="%"
+            android:max="100"
+            android:min="0"
+            android:dependency="ls_media_art_enabled" />
+
+        <!-- Media cover art blur level -->
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="ls_media_art_blur_level"
+            android:title="@string/ls_media_art_blur_level_title"
+            android:summary="@string/ls_media_art_blur_level_summary"
+            android:max="600"
+            android:min="0"
+            android:defaultValue="200"
+            android:dependency="ls_media_art_enabled" />
+
+    </PreferenceCategory>
+
+    <!-- Gestures -->
+    <PreferenceCategory
+        android:key="lockscreen_gestures"
+        android:title="@string/lockscreen_gestures_category">
+
+        <!-- Double tap to sleep -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="double_tap_sleep_lockscreen"
+            android:title="@string/lockscreen_doubletap_sleep_title"
+            android:summary="@string/lockscreen_doubletap_sleep_summary"
+            android:defaultValue="true" />
+
+        <!-- Vibrate when FP authentication successful -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="fp_success_vibrate"
+            android:title="@string/fp_success_vibrate_title"
+            android:summary="@string/fp_success_vibrate_summary"
+            android:defaultValue="true" />
+
+        <!-- Vibrate when FP authentication fails -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="fp_error_vibrate"
+            android:title="@string/fp_error_vibrate_title"
+            android:summary="@string/fp_error_vibrate_summary"
+            android:defaultValue="true" />
+
+        <!-- Fingerprint ripple effect -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="enable_ripple_effect"
+            android:title="@string/enable_fingerprint_ripple_effect_title"
+            android:summary="@string/enable_fingerprint_ripple_effect_summary"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+    <!-- Miscellaneous -->
+    <PreferenceCategory
+        android:key="lockscreen_misc"
+        android:title="@string/miscellaneous_category">
+
+        <!-- Disable Quick Settings on secure lockscreen -->
+        <com.lineage.support.preferences.SecureSettingSwitchPreference
+            android:key="enable_lockscreen_quick_settings"
+            android:title="@string/lockscreen_quick_settings_title"
+            android:summary="@string/lockscreen_quick_settings_summary"
+            android:defaultValue="true" />
+
+        <!-- Enable power menu on secure lockscreen -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+               android:key="lockscreen_enable_power_menu"
+               android:title="@string/lockscreen_enable_power_menu_title"
+               android:summary="@string/lockscreen_enable_power_menu_summary"
+               android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
