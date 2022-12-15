@@ -305,6 +305,7 @@
 
     <string name="theme_accent_color_wallpaper">Wallpaper (default)</string>
     <string name="theme_accent_color_google_blue">Google Blue</string>
+    <string name="theme_accent_color_grayscale">Grayscale</string>
     <string name="theme_accent_color_material_amber">Material Amber</string>
     <string name="theme_accent_color_material_blue">Material Blue</string>
     <string name="theme_accent_color_material_brown">Material Brown</string>
