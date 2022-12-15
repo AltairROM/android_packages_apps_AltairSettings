@@ -35,11 +35,9 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.display.darkmode.DarkModePreference;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.utils.MonetUtils;
 import com.android.settings.utils.ThemeUtils;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,7 +47,6 @@ public class CustomThemeSettings extends DashboardFragment implements
     private static final String TAG = "CustomThemeSettings";
 
     private static final String KEY_THEME_DARK_UI_MODE = "theme_dark_ui_mode";
-    private static final String KEY_THEME_ACCENT_COLOR = "theme_element_accent_color";
     private static final String KEY_THEME_FONT = ThemeUtils.FONT_KEY;
     private static final String KEY_THEME_ICON_SHAPE = ThemeUtils.ICON_SHAPE_KEY;
     private static final String KEY_THEME_SIGNAL_ICON = ThemeUtils.SIGNAL_ICON_KEY;
@@ -61,14 +58,8 @@ public class CustomThemeSettings extends DashboardFragment implements
 
     private UiModeManager mUiModeManager;
     private ThemeUtils mThemeUtils;
-    private MonetUtils mMonetUtils;
-
-    private List<String> mAccentColorValues;
-    private List<String> mAccentColorNames;
 
     private DarkModePreference mDarkMode;
-
-    private Preference mAccentColorPreference;
 
     private Preference mFontPreference;
     private Preference mIconShapePreference;
@@ -92,18 +83,9 @@ public class CustomThemeSettings extends DashboardFragment implements
 
         mUiModeManager = getContext().getSystemService(UiModeManager.class);
         mThemeUtils = new ThemeUtils(mContext);
-        mMonetUtils = new MonetUtils(mContext);
-
-        mAccentColorValues = Arrays.asList(mResources.getStringArray(
-                R.array.theme_accent_color_values));
-        mAccentColorNames = Arrays.asList(mResources.getStringArray(
-                R.array.theme_accent_color_names));
 
         mDarkMode = findPreference(KEY_THEME_DARK_UI_MODE);
         mDarkMode.setOnPreferenceChangeListener(this);
-
-        mAccentColorPreference = prefScreen.findPreference(KEY_THEME_ACCENT_COLOR);
-        updateAccentColorSummary();
 
         mFontPreference = prefScreen.findPreference(KEY_THEME_FONT);
         updateSummary(mFontPreference, "android");
@@ -149,9 +131,6 @@ public class CustomThemeSettings extends DashboardFragment implements
             case KEY_THEME_DARK_UI_MODE:
                 mUiModeManager.setNightModeActivated((boolean) newValue);
                 break;
-            case KEY_THEME_ACCENT_COLOR:
-                updateAccentColorSummary();
-                break;
             case KEY_THEME_FONT:
                 updateSummary(mFontPreference, "android");
                 break;
@@ -181,20 +160,6 @@ public class CustomThemeSettings extends DashboardFragment implements
 
         preference.setSummary(target.equals(currentPackageName) ? "Default"
                 : labels.get(pkgs.indexOf(currentPackageName)));
-    }
-
-    public void updateAccentColorSummary() {
-        if (mMonetUtils.isAccentColorSet()) {
-            final String color = String.format("#%06X", (0xFFFFFF & mMonetUtils.getAccentColor()));
-            final int index = mAccentColorValues.indexOf(color.toLowerCase());
-            if (index < 0) {
-                return;
-            }
-            mAccentColorPreference.setSummary(mAccentColorNames.get(index));
-        } else {
-            mAccentColorPreference.setSummary(mResources.getString(
-                    R.string.theme_accent_color_wallpaper));
-        }
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

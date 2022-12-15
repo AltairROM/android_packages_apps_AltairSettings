@@ -282,6 +282,7 @@
 
     <string name="theme_elements_category_title">Theme elements</string>
     <string name="theme_elements_accent_color_title">Accent color</string>
+    <string name="theme_elements_accent_color_summary">Change system accent color and Monet engine settings</string>
     <string name="theme_elements_font_title">Font</string>
     <string name="theme_elements_icon_shape_title">Icon shape</string>
     <string name="theme_elements_signal_icon_title">Signal icon style</string>

@@ -45,6 +45,7 @@
         <Preference
             android:key="theme_element_accent_color"
             android:title="@string/theme_elements_accent_color_title"
+            android:summary="@string/theme_elements_accent_color_summary"
             android:fragment="com.altair.settings.fragments.theme.AccentColorFragment" />
 
     </PreferenceCategory>
