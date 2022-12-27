@@ -138,7 +138,7 @@ public class AccentColorPicker extends SettingsPreferenceFragment {
                 holder.image.setBackgroundTintList(ColorStateList.valueOf(viewColor));
                 holder.itemView.setActivated(selectedColor == currentColor);
             } else {
-                holder.image.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+                holder.image.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
                 holder.itemView.setActivated(!mMonetUtils.isAccentColorSet());
             }
             holder.name.setText(mAccentColorNames.get(position));
