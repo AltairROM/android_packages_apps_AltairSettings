@@ -25,14 +25,12 @@
         android:key="theme_styles"
         android:title="@string/theme_styles_category">
 
-        <!-- Change wallpaper -->
-        <com.android.settingslib.RestrictedPreference
-            android:key="wallpaper"
-            android:title="@string/wallpaper_settings_title"
-            settings:keywords="@string/keywords_display_wallpaper"
-            settings:useAdminDisabledSummary="true"
-            settings:controller="com.android.settings.display.WallpaperPreferenceController">
-        </com.android.settingslib.RestrictedPreference>
+        <!-- Accent color -->
+        <Preference
+            android:key="theme_accent_color"
+            android:title="@string/theme_accent_color_title"
+            android:summary="@string/theme_accent_color_summary"
+            android:fragment="com.altair.settings.fragments.theme.AccentColorFragment" />
 
         <!-- Dark mode -->
         <com.android.settings.display.darkmode.DarkModePreference
@@ -44,12 +42,14 @@
             settings:controller="com.android.settings.display.DarkUIPreferenceController"
             settings:searchable="false" />
 
-        <!-- Accent color -->
-        <Preference
-            android:key="theme_accent_color"
-            android:title="@string/theme_accent_color_title"
-            android:summary="@string/theme_accent_color_summary"
-            android:fragment="com.altair.settings.fragments.theme.AccentColorFragment" />
+        <!-- Change wallpaper -->
+        <com.android.settingslib.RestrictedPreference
+            android:key="wallpaper"
+            android:title="@string/wallpaper_settings_title"
+            settings:keywords="@string/keywords_display_wallpaper"
+            settings:useAdminDisabledSummary="true"
+            settings:controller="com.android.settings.display.WallpaperPreferenceController">
+        </com.android.settingslib.RestrictedPreference>
 
     </PreferenceCategory>
 
