@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2014-2015 The CyanogenMod Project
  *               2017-2023 The LineageOS Project
+ *               2020-2024 ALtair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +29,7 @@ import android.service.controls.ControlsProviderService;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.altair.settings.utils.TelephonyUtils;
 
@@ -54,11 +55,11 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
 
     private PreferenceScreen mPowerMenuItems;
 
-    private SwitchPreference mScreenshotPref;
-    private SwitchPreference mAirplanePref;
-    private SwitchPreference mUsersPref;
-    private SwitchPreference mEmergencyPref;
-    private SwitchPreference mDeviceControlsPref;
+    private SwitchPreferenceCompat mScreenshotPref;
+    private SwitchPreferenceCompat mAirplanePref;
+    private SwitchPreferenceCompat mUsersPref;
+    private SwitchPreferenceCompat mEmergencyPref;
+    private SwitchPreferenceCompat mDeviceControlsPref;
 
     private LineageGlobalActions mLineageGlobalActions;
 

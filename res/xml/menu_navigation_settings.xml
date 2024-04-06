@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2020-2023 Altair ROM Project
+     Copyright (C) 2020-2024 Altair ROM Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
     android:title="@string/menu_navigation_settings_title">
 
     <!-- Enable on-screen navigation bar -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="disable_nav_keys"
         android:title="@string/disable_navkeys_title"
         android:summary="@string/disable_navkeys_summary"
@@ -33,7 +33,7 @@
         android:title="@string/navigation_bar_options_category" >
 
         <!-- Enable taskbar -->
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="enable_taskbar"
             android:title="@string/navigation_bar_enable_taskbar_title" />
 

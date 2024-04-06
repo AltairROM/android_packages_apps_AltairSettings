@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2023 Altair ROM Project
+ * Copyright (C) 2019-2024 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +42,8 @@ import com.lineage.support.preferences.CustomSeekBarPreference;
 import java.util.Arrays;
 import java.util.List;
 
+import lineageos.preference.LineageSecureSettingListPreference;
+import lineageos.preference.LineageSecureSettingSwitchPreference;
 import lineageos.preference.LineageSystemSettingListPreference;
 import lineageos.providers.LineageSettings;
 
@@ -66,9 +68,9 @@ public class CustomQSSettings extends DashboardFragment implements
     private static final int PULLDOWN_DIR_ALWAYS = 3;
 
     private LineageSystemSettingListPreference mQuickPulldown;
-    private SwitchPreference mShowBrightnessSlider;
-    private ListPreference mBrightnessSliderPosition;
-    private SwitchPreference mShowAutoBrightness;
+    private LineageSecureSettingSwitchPreference mShowBrightnessSlider;
+    private LineageSecureSettingListPreference mBrightnessSliderPosition;
+    private LineageSecureSettingSwitchPreference mShowAutoBrightness;
     private ListPreference mQsUI;
     private ListPreference mQsPanelStyle;
     private ListPreference mTileAnimationStyle;

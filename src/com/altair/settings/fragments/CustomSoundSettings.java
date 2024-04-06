@@ -40,6 +40,7 @@ import com.lineage.support.preferences.CustomSeekBarPreference;
 import java.util.Arrays;
 import java.util.List;
 
+import lineageos.preference.LineageSecureSettingSwitchPreference;
 import lineageos.providers.LineageSettings;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -51,7 +52,7 @@ public class CustomSoundSettings extends DashboardFragment implements
 
     private ContentResolver mResolver;
 
-    private SwitchPreference mVolumePanelOnLeft;
+    private LineageSecureSettingSwitchPreference mVolumePanelOnLeft;
 
     @Override
     protected int getPreferenceScreenResId() {

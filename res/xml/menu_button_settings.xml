@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2019-2023 Altair ROM Project
+     Copyright (C) 2020-2024 Altair ROM Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
     android:title="@string/menu_button_settings_title">
 
     <!-- Swap capacitive keys -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="swap_capacitive_keys"
         android:title="@string/swap_capacitive_keys_title"
         android:summary="@string/swap_capacitive_keys_summary"
@@ -40,7 +40,7 @@
         android:title="@string/hardware_keys_power_key_title" >
 
         <!-- End call by pressing power button -->
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="power_end_call"
             android:title="@string/power_end_call_title"
             android:summary="@string/power_end_call_summary"
@@ -78,7 +78,7 @@
             android:defaultValue="true" />
 
         <!-- Answer call by pressing power button -->
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="home_answer_call"
             android:title="@string/home_answer_call_title"
             android:summary="@string/home_answer_call_summary"
@@ -317,7 +317,7 @@
             android:persistent="false" />
 
         <!-- Swap volume buttons when screen rotated -->
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="swap_volume_buttons"
             android:title="@string/swap_volume_buttons_title"
             android:summary="@string/swap_volume_buttons_summary" />

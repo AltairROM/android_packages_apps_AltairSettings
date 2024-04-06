@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2023 Altair ROM Project
+ * Copyright (C) 2019-2024 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import android.view.View;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.altair.settings.utils.DeviceUtils;
 import com.altair.settings.utils.StatusBarIcon;
@@ -88,7 +88,7 @@ public class CustomStatusBarSettings extends DashboardFragment implements
     private LineageSystemSettingListPreference mStatusBarClock;
     private LineageSystemSettingListPreference mStatusBarAmPm;
 
-    private SwitchPreference mStatusBarShowBattery;
+    private SwitchPreferenceCompat mStatusBarShowBattery;
     private LineageSystemSettingListPreference mStatusBarBatteryShowPercent;
 
     private PreferenceCategory mStatusBarBatteryCategory;

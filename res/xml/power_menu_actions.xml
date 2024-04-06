@@ -2,6 +2,7 @@
 <!--
      Copyright (C) 2014-2015 The CyanogenMod Project
                    2017-2018,2020-2022 The LineageOS Project
+                   2020-2024 Altair ROM Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -20,32 +21,32 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Enable screenshot button -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="screenshot"
         android:title="@string/power_menu_screenshot_title"
         android:summary="@string/power_menu_screenshot_summary"
         android:defaultValue="false" />
 
     <!-- Enable airplane mode toggle -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="airplane"
         android:title="@string/power_menu_airplane_title"
         android:defaultValue="false" />
 
     <!-- Enable user selection button -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="users"
         android:title="@string/power_menu_users_title"
         android:defaultValue="false" />
 
     <!-- Enable emergency button -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="emergency"
         android:title="@string/power_menu_emergency_title"
         android:defaultValue="false" />
 
     <!-- Enable device controls button -->
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="devicecontrols"
         android:title="@string/power_menu_devicecontrols_title"
         android:defaultValue="false"

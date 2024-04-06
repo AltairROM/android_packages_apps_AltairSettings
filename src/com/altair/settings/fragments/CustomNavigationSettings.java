@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2023 Altair ROM Project
+ * Copyright (C) 2019-2024 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.altair.settings.utils.DeviceUtils;
 
@@ -91,10 +91,10 @@ public class CustomNavigationSettings extends DashboardFragment implements
     private Handler mHandler;
     private ContentResolver mResolver;
 
-    private SwitchPreference mDisableNavigationKeys;
-    private SwitchPreference mEnableTaskbar;
-    private SwitchPreference mNavigationArrowKeys;
-    private SwitchPreference mNavBarInverse;
+    private SwitchPreferenceCompat mDisableNavigationKeys;
+    private SwitchPreferenceCompat mEnableTaskbar;
+    private SwitchPreferenceCompat mNavigationArrowKeys;
+    private SwitchPreferenceCompat mNavBarInverse;
     private ListPreference mNavigationBackLongPressAction;
     private ListPreference mNavigationBackDoubleTapAction;
     private ListPreference mNavigationHomeLongPressAction;

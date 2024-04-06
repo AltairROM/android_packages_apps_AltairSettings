@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2023 Altair ROM Project
+ * Copyright (C) 2019-2024 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.altair.settings.fragments.button.ButtonBacklightBrightness;
 import com.altair.settings.utils.DeviceUtils;
@@ -127,14 +127,14 @@ public class CustomButtonSettings extends DashboardFragment implements
     private ListPreference mAppSwitchPressAction;
     private ListPreference mAppSwitchLongPressAction;
     private ListPreference mAppSwitchDoubleTapAction;
-    private SwitchPreference mCameraWakeScreen;
-    private SwitchPreference mCameraSleepOnRelease;
+    private SwitchPreferenceCompat mCameraWakeScreen;
+    private SwitchPreferenceCompat mCameraSleepOnRelease;
     private ListPreference mVolumeKeyCursorControl;
-    private SwitchPreference mSwapVolumeButtons;
-    private SwitchPreference mPowerEndCall;
-    private SwitchPreference mHomeAnswerCall;
+    private SwitchPreferenceCompat mSwapVolumeButtons;
+    private SwitchPreferenceCompat mPowerEndCall;
+    private SwitchPreferenceCompat mHomeAnswerCall;
     private ListPreference mTorchLongPressPowerTimeout;
-    private SwitchPreference mSwapCapacitiveKeys;
+    private SwitchPreferenceCompat mSwapCapacitiveKeys;
 
     private LineageHardwareManager mHardware;
 
@@ -185,7 +185,7 @@ public class CustomButtonSettings extends DashboardFragment implements
         mPowerEndCall = findPreference(KEY_POWER_END_CALL);
 
         // Long press power while display is off to activate torchlight
-        SwitchPreference torchLongPressPowerGesture =
+        SwitchPreferenceCompat torchLongPressPowerGesture =
                 findPreference(KEY_TORCH_LONG_PRESS_POWER_GESTURE);
         final int torchLongPressPowerTimeout = LineageSettings.System.getInt(mResolver,
                 LineageSettings.System.TORCH_LONG_PRESS_POWER_TIMEOUT, 0);
@@ -404,8 +404,8 @@ public class CustomButtonSettings extends DashboardFragment implements
             }
         }
 
-        SwitchPreference volumeWakeScreen = findPreference(KEY_VOLUME_WAKE_SCREEN);
-        SwitchPreference volumeMusicControls = findPreference(KEY_VOLUME_MUSIC_CONTROLS);
+        SwitchPreferenceCompat volumeWakeScreen = findPreference(KEY_VOLUME_WAKE_SCREEN);
+        SwitchPreferenceCompat volumeMusicControls = findPreference(KEY_VOLUME_MUSIC_CONTROLS);
 
         if (volumeWakeScreen != null) {
             if (volumeMusicControls != null) {
