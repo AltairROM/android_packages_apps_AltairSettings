@@ -255,8 +255,6 @@
     <!-- Heads up -->
     <string name="notification_heads_up_category">Heads up</string>
 
-    <string name="heads_up_notifications_title">Enable heads up</string>
-    <string name="heads_up_notifications_summary">Allow pop up notifications</string>
     <string name="less_boring_heads_up_title">Limited heads up</string>
     <string name="less_boring_heads_up_summary">Display popup notifications only for alarm, dialer and messaging app</string>
     <string name="notification_heads_up_timeout_title">Timeout</string>
