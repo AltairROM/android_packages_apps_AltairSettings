@@ -352,6 +352,12 @@
     <string name="qs_footer_opacity_title">Footer opacity</string>
     <string name="qs_footer_opacity_summary">Set opacity level for QS footer</string>
 
+    <!-- QS tile actions -->
+    <string name="qs_tile_actions_category">Tile actions</string>
+
+    <string name="qs_bt_auto_on_title">Automatic Bluetooth on</string>
+    <string name="qs_bt_auto_on_summary">Always turn on Bluetooth when pressing the Bluetooth QS tile</string>
+
     <!-- SOUND -->
 
     <!-- Volume panel -->

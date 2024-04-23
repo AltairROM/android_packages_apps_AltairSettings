@@ -223,4 +223,17 @@
 
     </PreferenceCategory>
 
+    <!-- Quick Settings tile actions -->
+    <PreferenceCategory
+        android:title="@string/qs_tile_actions_category">
+
+        <!-- QS Bluetooth auto on -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="qs_bt_auto_on"
+            android:title="@string/qs_bt_auto_on_title"
+            android:summary="@string/qs_bt_auto_on_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
