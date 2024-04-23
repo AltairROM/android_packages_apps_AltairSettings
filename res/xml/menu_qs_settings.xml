@@ -46,7 +46,7 @@
         android:max="100"
         android:min="1" />
 
-    <!-- Quick Settings layout -->
+    <!-- Quick Settings tiles layout -->
     <PreferenceCategory
         android:key="qs_layout_category"
         android:title="@string/qs_layout_category">
@@ -127,7 +127,7 @@
 
     </PreferenceCategory>
 
-    <!-- Quick Settings layout -->
+    <!-- Quick Settings tiles animation -->
     <PreferenceCategory
         android:key="qs_tile_animation_category"
         android:title="@string/qs_tile_animation_category">
