@@ -31,19 +31,19 @@
         android:key="theme_colors_monet"
         android:title="@string/theme_colors_monet_category">
 
-        <!-- Richer accent colors for dark mode -->
-        <com.lineage.support.preferences.SecureSettingSwitchPreference
-            android:key="monet_engine_richer_colors"
-            android:title="@string/theme_colors_monet_richer_colors_title"
-            android:summary="@string/theme_colors_monet_richer_colors_summary"
-            android:defaultValue="false" />
-
         <!-- Tint background with accent color -->
         <com.lineage.support.preferences.SecureSettingSwitchPreference
             android:key="monet_engine_tint_background"
             android:title="@string/theme_colors_monet_tint_background_title"
             android:summary="@string/theme_colors_monet_tint_background_summary"
             android:defaultValue="true" />
+
+        <!-- Richer accent colors -->
+        <com.lineage.support.preferences.SecureSettingSwitchPreference
+            android:key="monet_engine_richer_colors"
+            android:title="@string/theme_colors_monet_richer_colors_title"
+            android:summary="@string/theme_colors_monet_richer_colors_summary"
+            android:defaultValue="false" />
 
         <!-- Chroma factor -->
         <com.lineage.support.preferences.SecureSettingSeekBarPreference
