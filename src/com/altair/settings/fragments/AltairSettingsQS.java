@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2024 Altair ROM Project
+ * Copyright (C) 2019-2025 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,9 +48,9 @@ import lineageos.preference.LineageSystemSettingListPreference;
 import lineageos.providers.LineageSettings;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class CustomQSSettings extends DashboardFragment implements
+public class AltairSettingsQS extends DashboardFragment implements
         Preference.OnPreferenceChangeListener {
-    private static final String TAG = "CustomQSSettings";
+    private static final String TAG = "AltairSettingsQS";
 
     private static final String KEY_QUICK_PULLDOWN = "qs_quick_pulldown";
     private static final String KEY_SHOW_BRIGHTNESS_SLIDER = "qs_show_brightness_slider";
@@ -81,7 +81,7 @@ public class CustomQSSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.menu_qs_settings;
+        return R.xml.altair_settings_qs;
     }
 
     @Override
@@ -355,7 +355,7 @@ public class CustomQSSettings extends DashboardFragment implements
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.menu_qs_settings;
+                    sir.xmlResId = R.xml.altair_settings_qs;
                     return Arrays.asList(sir);
                 }
 

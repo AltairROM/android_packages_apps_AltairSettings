@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2024 Altair ROM Project
+ * Copyright (C) 2019-2025 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,9 +60,9 @@ import lineageos.hardware.LineageHardwareManager;
 import lineageos.providers.LineageSettings;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class CustomButtonSettings extends DashboardFragment implements
+public class AltairSettingsButtons extends DashboardFragment implements
         Preference.OnPreferenceChangeListener {
-    private static final String TAG = "CustomButtonSettings";
+    private static final String TAG = "AltairSettingsButtons";
 
     private static final String KEY_BUTTON_BACKLIGHT = "button_backlight";
     private static final String KEY_BACK_WAKE_SCREEN = "back_wake_screen";
@@ -140,7 +140,7 @@ public class CustomButtonSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.menu_button_settings;
+        return R.xml.altair_settings_buttons;
     }
 
     @Override
@@ -772,7 +772,7 @@ public class CustomButtonSettings extends DashboardFragment implements
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.menu_button_settings;
+                    sir.xmlResId = R.xml.altair_settings_buttons;
                     return Arrays.asList(sir);
                 }
 

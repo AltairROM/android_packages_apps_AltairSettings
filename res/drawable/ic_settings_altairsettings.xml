@@ -9,7 +9,7 @@
            android:translateX="-10.6595"
            android:translateY="7.54499">
         <path android:pathData="M31.265 11.4L28.065 11.379L25.686 7.4L18.931 7.4L20.427 4.921L24.186 4.921L21.719 0.833L15.302 11.4L12.119 11.4L19.848 -1.475C20.043 -1.808 20.314 -2.114 20.661 -2.392C21.078 -2.711 21.453 -2.871 21.786 -2.871C22.147 -2.871 22.522 -2.718 22.911 -2.412C23.244 -2.148 23.515 -1.836 23.723 -1.475L31.265 11.4Z"
-              android:fillColor="#000000"
+              android:fillColor="@android:color/white"
               android:strokeLineJoin="round"
               android:strokeMiterLimit="2"/>
     </group>

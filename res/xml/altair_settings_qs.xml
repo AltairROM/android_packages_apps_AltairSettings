@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2019-2023 Altair ROM Project
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
+     SPDX-FileCopyrightText: 2019-2025 Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
 -->
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:lineage="http://schemas.android.com/apk/res-auto"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-    android:title="@string/menu_qs_settings_title">
+    android:title="@string/altair_settings_qs_title">
 
     <!-- Quick Settings quick pulldown -->
     <lineageos.preference.LineageSystemSettingListPreference
@@ -204,14 +193,14 @@
             android:summary="@string/qs_footer_datausage_summary" />
 
         <!-- Show network monitoring alerts in footer -->
-        <com.lineage.support.preferences.SystemSettingSwitchPreference
+        <!--<com.lineage.support.preferences.SystemSettingSwitchPreference
             android:key="qs_footer_warnings"
             android:title="@string/qs_footer_warnings_title"
             android:summary="@string/qs_footer_warnings_summary"
-            android:defaultValue="true"/>
+            android:defaultValue="true"/>-->
 
         <!-- QS footer transparency -->
-        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+        <!--<com.lineage.support.preferences.SystemSettingSeekBarPreference
             android:key="qs_footer_transparency"
             android:title="@string/qs_footer_opacity_title"
             android:summary="@string/qs_footer_opacity_summary"
@@ -219,21 +208,21 @@
             settings:interval="1"
             settings:units="%"
             android:max="100"
-            android:min="1" />
+            android:min="1" />-->
 
     </PreferenceCategory>
 
     <!-- Quick Settings tile actions -->
-    <PreferenceCategory
-        android:title="@string/qs_tile_actions_category">
+    <!--<PreferenceCategory
+        android:title="@string/qs_tile_actions_category">-->
 
         <!-- QS Bluetooth auto on -->
-        <com.lineage.support.preferences.SystemSettingSwitchPreference
+        <!--<com.lineage.support.preferences.SystemSettingSwitchPreference
             android:key="qs_bt_auto_on"
             android:title="@string/qs_bt_auto_on_title"
             android:summary="@string/qs_bt_auto_on_summary"
-            android:defaultValue="false" />
+            android:defaultValue="false" />-->
 
-    </PreferenceCategory>
+    <!--</PreferenceCategory>-->
 
 </PreferenceScreen>

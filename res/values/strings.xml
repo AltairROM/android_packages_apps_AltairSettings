@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2019-2024 Altair ROM Project
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
+     SPDX-FileCopyrightText: 2019-2025 Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
@@ -20,30 +9,28 @@
     <string name="altair_settings_activity_summary">Buttons, navigation, status bar, themes</string>
 
     <!-- Main menu entry titles -->
-    <string name="menu_button_settings_title">Buttons</string>
-    <string name="menu_button_settings_summary">Tweak the actions of physical buttons on the device</string>
-    <string name="menu_display_settings_title">Display</string>
-    <string name="menu_display_settings_summary">Adjust various elements of the display screen</string>
-    <string name="menu_gesture_settings_title">Gestures</string>
-    <string name="menu_gesture_settings_summary">Adjust touchscreen gestures and button quick actions</string>
-    <string name="menu_lockscreen_settings_title">Lock screen</string>
-    <string name="menu_lockscreen_settings_summary">Manage lock screen settings</string>
-    <string name="menu_miscellaneous_settings_title">Miscellaneous</string>
-    <string name="menu_miscellaneous_settings_summary">Miscellaneous configuration settings</string>
-    <string name="menu_navigation_settings_title">Navigation</string>
-    <string name="menu_navigation_settings_summary">Customize navigation bar and hardware keys</string>
-    <string name="menu_notification_settings_title">Notifications</string>
-    <string name="menu_notification_settings_summary">Adjust notification settings</string>
-    <string name="menu_qs_settings_title">Quick settings</string>
-    <string name="menu_qs_settings_summary">Manage your quick settings tiles</string>
-    <string name="menu_sound_settings_title">Sound</string>
-    <string name="menu_sound_settings_summary">Adjust various sound-related settings</string>
-    <string name="menu_status_bar_settings_title">Status bar</string>
-    <string name="menu_status_bar_settings_summary">Adjust various status bar elements</string>
-    <string name="menu_theme_settings_title">Themes</string>
-    <string name="menu_theme_settings_summary">Change accent color, wallpaper, etc.</string>
-    <string name="menu_user_interface_settings_title">User interface</string>
-    <string name="menu_user_interface_settings_summary">Adjust various elements of the user interface</string>
+    <string name="altair_settings_buttons_title">Buttons</string>
+    <string name="altair_settings_buttons_summary">Tweak the actions of physical buttons on the device</string>
+    <string name="altair_settings_display_title">Display</string>
+    <string name="altair_settings_display_summary">Adjust various elements of the display screen</string>
+    <string name="altair_settings_gestures_title">Gestures</string>
+    <string name="altair_settings_gestures_summary">Adjust touchscreen gestures and button quick actions</string>
+    <string name="altair_settings_lockscreen_title">Lock screen</string>
+    <string name="altair_settings_lockscreen_summary">Manage lock screen settings</string>
+    <string name="altair_settings_navigation_title">Navigation</string>
+    <string name="altair_settings_navigation_summary">Customize navigation bar and hardware keys</string>
+    <string name="altair_settings_notifications_title">Notifications</string>
+    <string name="altair_settings_notifications_summary">Adjust notification settings</string>
+    <string name="altair_settings_qs_title">Quick settings</string>
+    <string name="altair_settings_qs_summary">Manage your quick settings tiles</string>
+    <string name="altair_settings_sound_title">Sound</string>
+    <string name="altair_settings_sound_summary">Adjust sound- and volume-related settings</string>
+    <string name="altair_settings_status_bar_title">Status bar</string>
+    <string name="altair_settings_status_bar_summary">Adjust various status bar elements</string>
+    <string name="altair_settings_themes_title">Themes</string>
+    <string name="altair_settings_themes_summary">Change accent color, wallpaper, etc.</string>
+    <string name="altair_settings_ui_title">User interface</string>
+    <string name="altair_settings_ui_summary">Adjust various elements of the user interface</string>
 
     <!-- Miscellaneous -->
     <string name="reset">Reset</string>

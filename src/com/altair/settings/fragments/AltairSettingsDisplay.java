@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2023 Altair ROM Project
+ * Copyright (C) 2019-2025 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,9 @@
 package com.altair.settings.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
@@ -33,18 +35,30 @@ import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class CustomNotificationSettings extends DashboardFragment implements
+public class AltairSettingsDisplay extends DashboardFragment implements
         Preference.OnPreferenceChangeListener {
-    private static final String TAG = "CustomNotificationSettings";
+    private static final String TAG = "AltairSettingsDisplay";
+
+    private static final String KEY_SMART_PIXELS = "smart_pixels";
+
+    private static final String CATEGORY_MISCELLANEOUS = "miscellaneous";
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.menu_notification_settings;
+        return R.xml.altair_settings_display;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Smart Pixels
+        boolean enableSmartPixels = getContext().getResources().
+                getBoolean(com.android.internal.R.bool.config_supportSmartPixels);
+        Preference smartPixels = findPreference(KEY_SMART_PIXELS);
+        if (!enableSmartPixels) {
+            smartPixels.setEnabled(false);
+        }
     }
 
     @Override
@@ -88,13 +102,19 @@ public class CustomNotificationSettings extends DashboardFragment implements
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.menu_user_interface_settings;
+                    sir.xmlResId = R.xml.altair_settings_display;
                     return Arrays.asList(sir);
                 }
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
+
+                    boolean enableSmartPixels = context.getResources().
+                            getBoolean(com.android.internal.R.bool.config_supportSmartPixels);
+                    if (!enableSmartPixels) {
+                        keys.add(KEY_SMART_PIXELS);
+                    }
 
                     return keys;
                 }

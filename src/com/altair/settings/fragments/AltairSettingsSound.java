@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2024 Altair ROM Project
+ * Copyright (C) 2019-2025 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,9 +44,9 @@ import lineageos.preference.LineageSecureSettingSwitchPreference;
 import lineageos.providers.LineageSettings;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class CustomSoundSettings extends DashboardFragment implements
+public class AltairSettingsSound extends DashboardFragment implements
         Preference.OnPreferenceChangeListener {
-    private static final String TAG = "CustomSoundSettings";
+    private static final String TAG = "AltairSettingsSound";
 
     private static final String KEY_VOLUME_PANEL_ON_LEFT = "volume_panel_on_left";
 
@@ -56,7 +56,7 @@ public class CustomSoundSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.menu_sound_settings;
+        return R.xml.altair_settings_sound;
     }
 
     @Override
@@ -147,7 +147,7 @@ public class CustomSoundSettings extends DashboardFragment implements
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.menu_button_settings;
+                    sir.xmlResId = R.xml.altair_settings_sound;
                     return Arrays.asList(sir);
                 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2024 Altair ROM Project
+ * Copyright (C) 2019-2025 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,9 +65,9 @@ import lineageos.providers.LineageSettings;
 import static org.lineageos.internal.util.DeviceKeysConstants.*;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class CustomNavigationSettings extends DashboardFragment implements
+public class AltairSettingsNavigation extends DashboardFragment implements
         Preference.OnPreferenceChangeListener {
-    private static final String TAG = "CustomNavigationSettings";
+    private static final String TAG = "AltairSettingsNavigation";
 
     private static final String KEY_DISABLE_NAV_KEYS = "disable_nav_keys";
     private static final String KEY_ENABLE_TASKBAR = "enable_taskbar";
@@ -111,7 +111,7 @@ public class CustomNavigationSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.menu_navigation_settings;
+        return R.xml.altair_settings_navigation;
     }
 
     @Override
@@ -542,7 +542,7 @@ public class CustomNavigationSettings extends DashboardFragment implements
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.menu_navigation_settings;
+                    sir.xmlResId = R.xml.altair_settings_navigation;
                     return Arrays.asList(sir);
                 }
 

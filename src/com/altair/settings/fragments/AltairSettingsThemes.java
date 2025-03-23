@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2023 Altair ROM Project
+ * Copyright (C) 2019-2025 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,9 +42,9 @@ import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class CustomThemeSettings extends DashboardFragment implements
+public class AltairSettingsThemes extends DashboardFragment implements
         Preference.OnPreferenceChangeListener {
-    private static final String TAG = "CustomThemeSettings";
+    private static final String TAG = "AltairSettingsThemes";
 
     private static final String KEY_THEME_DARK_UI_MODE = "theme_dark_ui_mode";
     private static final String KEY_THEME_FONT = ThemeUtils.FONT_KEY;
@@ -71,7 +71,7 @@ public class CustomThemeSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.menu_theme_settings;
+        return R.xml.altair_settings_themes;
     }
 
     @Override
@@ -175,7 +175,7 @@ public class CustomThemeSettings extends DashboardFragment implements
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.menu_theme_settings;
+                    sir.xmlResId = R.xml.altair_settings_themes;
                     return Arrays.asList(sir);
                 }
 

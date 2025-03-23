@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2019-2023 Altair ROM Project
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
+     SPDX-FileCopyrightText: 2019-2025 Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
 -->
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:lineage="http://schemas.android.com/apk/res/lineageos.platform"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-    android:title="@string/menu_notification_settings_title">
+    android:title="@string/altair_settings_notifications_title">
 
     <!-- Notification sound and vibration when screen on -->
     <com.lineage.support.preferences.SystemSettingSwitchPreference
@@ -75,24 +64,24 @@
     </PreferenceCategory>
 
     <!-- reTicker -->
-    <PreferenceCategory
+    <!--<PreferenceCategory
         android:key="notification_reticker_category"
-        android:title="@string/notification_reticker_category" >
+        android:title="@string/notification_reticker_category" >-->
 
         <!-- Enable reTicker -->
-        <com.lineage.support.preferences.SystemSettingSwitchPreference
+        <!--<com.lineage.support.preferences.SystemSettingSwitchPreference
             android:key="reticker_status"
             android:title="@string/reticker_title"
             android:summary="@string/reticker_summary"
-            android:dependency="heads_up_notifications_enabled" />
+            android:dependency="heads_up_notifications_enabled" />-->
 
         <!-- Use app colored background for reTicker -->
-        <com.lineage.support.preferences.SystemSettingSwitchPreference
+        <!--<com.lineage.support.preferences.SystemSettingSwitchPreference
             android:key="reticker_colored"
             android:title="@string/reticker_colored_title"
             android:summary="@string/reticker_colored_summary"
-            android:dependency="reticker_status" />
+            android:dependency="reticker_status" />-->
 
-    </PreferenceCategory>
+    <!--</PreferenceCategory>-->
 
 </PreferenceScreen>
