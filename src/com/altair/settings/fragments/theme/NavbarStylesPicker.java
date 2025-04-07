@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2022 crDroid Android Project
- * Copyright (C) 2022-2023 Altair ROM Project
+ * Copyright (C) 2022-2025 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ public class NavbarStylesPicker extends SettingsPreferenceFragment {
     private RecyclerView mRecyclerView;
     private ThemeUtils mThemeUtils;
     private String mCategory = ThemeUtils.NAVBAR_KEY;
-    private String mTarget = "com.android.systemui";
+    private String mTarget = "com.android.launcher3";
 
     private List<String> mPkgs;
 

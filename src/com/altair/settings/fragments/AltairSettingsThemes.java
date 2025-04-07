@@ -98,7 +98,7 @@ public class AltairSettingsThemes extends DashboardFragment implements
         mWiFiIconPreference = prefScreen.findPreference(KEY_THEME_WIFI_ICON);
         updateSummary(mWiFiIconPreference, "android");
         mNavbarStylePreference = prefScreen.findPreference(KEY_THEME_NAVBAR_STYLE);
-        updateSummary(mNavbarStylePreference, "com.android.systemui");
+        updateSummary(mNavbarStylePreference, "com.android.launcher3");
         mLockScreenClockFontPreference = prefScreen.findPreference(KEY_THEME_LOCKSCREEN_FONT);
         updateSummary(mLockScreenClockFontPreference, "android");
     }
@@ -145,7 +145,7 @@ public class AltairSettingsThemes extends DashboardFragment implements
                 updateSummary(mWiFiIconPreference, "android");
                 break;
             case KEY_THEME_NAVBAR_STYLE:
-                updateSummary(mNavbarStylePreference, "com.android.systemui");
+                updateSummary(mNavbarStylePreference, "com.android.launcher3");
                 break;
             case KEY_THEME_LOCKSCREEN_FONT:
                 updateSummary(mLockScreenClockFontPreference, "android");
