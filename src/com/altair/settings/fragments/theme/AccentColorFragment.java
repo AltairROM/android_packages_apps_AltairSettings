@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2024 Altair ROM Project
+ * Copyright (C) 2022-2025 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,52 +16,64 @@
 
 package com.altair.settings.fragments.theme;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.utils.MonetUtils;
-import com.android.settings.utils.ThemeUtils;
 
-import com.lineage.support.preferences.SecureSettingSeekBarPreference;
-import com.lineage.support.preferences.SecureSettingSwitchPreference;
+import com.lineage.support.preferences.CustomSeekBarPreference;
 
+import java.lang.CharSequence;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class AccentColorFragment extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
-    private static final String KEY_THEME_COLORS_ACCENT_COLOR = "theme_colors_accent_color";
-    private static final String KEY_MONET_ENGINE_RICHER_COLORS = "monet_engine_richer_colors";
-    private static final String KEY_MONET_ENGINE_CHROMA_FACTOR = "monet_engine_chroma_factor";
-    private static final String KEY_MONET_ENGINE_LUMINANCE_FACTOR = "monet_engine_luminance_factor";
+    private static final String KEY_ACCENT_COLOR = "theme_colors_accent_color";
+    private static final String KEY_RICHER_COLORS = "theme_colors_richer_colors";
+    private static final String KEY_LUMINANCE_FACTOR = "theme_colors_luminance_factor";
+    private static final String KEY_CHROMA_FACTOR = "theme_colors_chroma_factor";
+    private static final String KEY_WHOLE_PALETTE = "theme_colors_whole_palette";
+    private static final String KEY_TINT_BACKGROUND = "theme_colors_tint_background";
 
     private Context mContext;
     private Resources mResources;
 
-    private ThemeUtils mThemeUtils;
     private MonetUtils mMonetUtils;
 
     private List<String> mAccentColorValues;
     private List<String> mAccentColorNames;
+    private String mAccentColorValue;
 
     private Preference mAccentColorPreference;
-    private SecureSettingSwitchPreference mRicherColorsPreference;
-    private SecureSettingSeekBarPreference mChromaFactorPreference;
-    private SecureSettingSeekBarPreference mLuminanceFactorPreference;
+    private SwitchPreferenceCompat mRicherColorsPreference;
+    private CustomSeekBarPreference mChromaFactorPreference;
+    private CustomSeekBarPreference mLuminanceFactorPreference;
+    private SwitchPreferenceCompat mWholePalettePreference;
+    private SwitchPreferenceCompat mTintBackgroundPreference;
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -74,25 +86,29 @@ public class AccentColorFragment extends SettingsPreferenceFragment implements
 
         mContext = getActivity().getApplicationContext();
         mResources = getResources();
-
-        final PreferenceScreen prefScreen = getPreferenceScreen();
-
-        mThemeUtils = new ThemeUtils(mContext);
-        mMonetUtils = new MonetUtils(mContext);
+        mMonetUtils = new MonetUtils(getActivity());
 
         mAccentColorValues = Arrays.asList(mResources.getStringArray(
                 R.array.theme_accent_color_values));
         mAccentColorNames = Arrays.asList(mResources.getStringArray(
                 R.array.theme_accent_color_names));
+        mAccentColorValue = mMonetUtils.getAccentColor();
 
-        mAccentColorPreference = prefScreen.findPreference(KEY_THEME_COLORS_ACCENT_COLOR);
-        updateAccentColorSummary();
+        final PreferenceScreen prefScreen = getPreferenceScreen();
+        mAccentColorPreference = prefScreen.findPreference(KEY_ACCENT_COLOR);
+        mAccentColorPreference.setOnPreferenceChangeListener(this);
+        mRicherColorsPreference = prefScreen.findPreference(KEY_RICHER_COLORS);
+        mRicherColorsPreference.setOnPreferenceChangeListener(this);
+        mChromaFactorPreference = prefScreen.findPreference(KEY_CHROMA_FACTOR);
+        mChromaFactorPreference.setOnPreferenceChangeListener(this);
+        mLuminanceFactorPreference = prefScreen.findPreference(KEY_LUMINANCE_FACTOR);
+        mLuminanceFactorPreference.setOnPreferenceChangeListener(this);
+        mWholePalettePreference = prefScreen.findPreference(KEY_WHOLE_PALETTE);
+        mWholePalettePreference.setOnPreferenceChangeListener(this);
+        mTintBackgroundPreference = prefScreen.findPreference(KEY_TINT_BACKGROUND);
+        mTintBackgroundPreference.setOnPreferenceChangeListener(this);
 
-        mRicherColorsPreference = prefScreen.findPreference(KEY_MONET_ENGINE_RICHER_COLORS);
-        mChromaFactorPreference = prefScreen.findPreference(KEY_MONET_ENGINE_CHROMA_FACTOR);
-        mLuminanceFactorPreference = prefScreen.findPreference(KEY_MONET_ENGINE_LUMINANCE_FACTOR);
-        updateMonetPreferences();
-
+        updatePreferences();
         setHasOptionsMenu(true);
     }
 
@@ -123,10 +139,12 @@ public class AccentColorFragment extends SettingsPreferenceFragment implements
                     .setMessage(R.string.theme_colors_reset_settings_message)
                     .setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
                          public void onClick(DialogInterface dialog, int id) {
-                             mMonetUtils.setRicherColorsEnabled(MonetUtils.RICHER_COLORS_DEFAULT);
-                             mMonetUtils.setTintBackgroundEnabled(MonetUtils.TINT_BACKGROUND_DEFAULT);
-                             mMonetUtils.setChromaFactor(MonetUtils.CHROMA_FACTOR_DEFAULT);
+                             mMonetUtils.setRicherColors(MonetUtils.RICHER_COLORS_DEFAULT);
                              mMonetUtils.setLuminanceFactor(MonetUtils.LUMINANCE_FACTOR_DEFAULT);
+                             mMonetUtils.setChromaFactor(MonetUtils.CHROMA_FACTOR_DEFAULT);
+                             mMonetUtils.setWholePalette(MonetUtils.WHOLE_PALETTE_DEFAULT);
+                             mMonetUtils.setTintBackground(MonetUtils.TINT_BACKGROUND_DEFAULT);
+                             updatePreferences();
                         }
                     })
                     .setNegativeButton(R.string.dlg_cancel, null);
@@ -139,6 +157,7 @@ public class AccentColorFragment extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
+        updatePreferences();
     }
 
     @Override
@@ -155,33 +174,72 @@ public class AccentColorFragment extends SettingsPreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String key = preference.getKey();
         switch (key) {
-            case KEY_THEME_COLORS_ACCENT_COLOR:
+            case KEY_ACCENT_COLOR:
+                mAccentColorValue = mMonetUtils.getAccentColor();
                 updateAccentColorSummary();
                 break;
-            case KEY_MONET_ENGINE_RICHER_COLORS:
-                updateMonetPreferences();
+            case KEY_RICHER_COLORS:
+                boolean enabled = (Boolean) newValue;
+                mMonetUtils.setRicherColors(enabled);
+                mLuminanceFactorPreference.setEnabled(!enabled);
+                mChromaFactorPreference.setEnabled(!enabled);
+                break;
+            case KEY_LUMINANCE_FACTOR:
+                int lumin = (Integer) newValue;
+                mMonetUtils.setLuminanceFactor(lumin == 0 ? 0d : 1d + ((double) lumin / 100d));
+                break;
+            case KEY_CHROMA_FACTOR:
+                int chroma = (Integer) newValue;
+                mMonetUtils.setChromaFactor(chroma == 0 ? 0d : 1d + ((double) chroma / 100d));
+                break;
+            case KEY_WHOLE_PALETTE:
+                mMonetUtils.setWholePalette((Boolean) newValue);
+                break;
+            case KEY_TINT_BACKGROUND:
+                mMonetUtils.setTintBackground((Boolean) newValue);
                 break;
         }
+
         return true;
     }
 
     public void updateAccentColorSummary() {
-        if (mMonetUtils.isAccentColorSet()) {
-            final String color = String.format("#%06X", (0xFFFFFF & mMonetUtils.getAccentColor()));
-            final int index = mAccentColorValues.indexOf(color.toLowerCase());
-            if (index < 0) {
-                return;
-            }
-            mAccentColorPreference.setSummary(mAccentColorNames.get(index));
-        } else {
-            mAccentColorPreference.setSummary(mResources.getString(
-                    R.string.theme_colors_wallpaper_accent_color));
+        String summary = mResources.getString(R.string.theme_colors_wallpaper_accent_color);
+        final String color = "#" + mAccentColorValue;
+        final int index = mAccentColorValues.indexOf(color.toLowerCase());
+        if (index >= 0) {
+            summary = mAccentColorNames.get(index);
         }
+        mAccentColorPreference.setSummary(summary);
     }
 
-    private void updateMonetPreferences() {
-        final boolean richerColors = mRicherColorsPreference.isChecked();
-        mChromaFactorPreference.setEnabled(!richerColors);
+    private void updatePreferences() {
+        updateAccentColorSummary();
+
+        final boolean richerColors = mMonetUtils.isRicherColorsEnabled();
+        mRicherColorsPreference.setChecked(richerColors);
+
+        final float lumin = (float) mMonetUtils.getLuminanceFactor();
+        int luminV = 0;
+        if (lumin > 1d) {
+            luminV = Math.round((lumin - 1f) * 100f);
+        } else if (lumin < 1d) {
+            luminV = -1 * Math.round((1f - lumin) * 100f);
+        }
+        mLuminanceFactorPreference.setValue(luminV);
         mLuminanceFactorPreference.setEnabled(!richerColors);
+
+        final float chroma = (float) mMonetUtils.getChromaFactor();
+        int chromaV = 0;
+        if (chroma > 1d) {
+            chromaV = Math.round((chroma - 1f) * 100f);
+        } else if (chroma < 1d) {
+            chromaV = -1 * Math.round((1f - chroma) * 100f);
+        }
+        mChromaFactorPreference.setValue(chromaV);
+        mChromaFactorPreference.setEnabled(!richerColors);
+
+        mWholePalettePreference.setChecked(mMonetUtils.isWholePaletteEnabled());
+        mTintBackgroundPreference.setChecked(mMonetUtils.isTintBackgroundEnabled());
     }
 }

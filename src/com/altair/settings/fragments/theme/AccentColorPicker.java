@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2024 Altair ROM Project
+ * Copyright (C) 2022-2025 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.altair.settings.fragments.theme;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
@@ -27,6 +28,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -51,14 +53,17 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.utils.MonetUtils;
 import com.android.settingslib.Utils;
 
+import com.lineage.support.preferences.CustomSeekBarPreference;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class AccentColorPicker extends SettingsPreferenceFragment {
     private static final String TAG = "AccentColorPicker";
-
-    private static final String KEY_MONET_COLOR_ACCENT = "monet_engine_color_accent";
 
     private RecyclerView mRecyclerView;
     private MonetUtils mMonetUtils;
@@ -67,6 +72,8 @@ public class AccentColorPicker extends SettingsPreferenceFragment {
     private List<String> mAccentColorValues;
     private List<String> mAccentColorValuesDark;
     private List<String> mAccentColorValuesDarkRich;
+
+    private String mAccentColorValue;
 
     private Context mContext;
     private ContentResolver mResolver;
@@ -78,8 +85,9 @@ public class AccentColorPicker extends SettingsPreferenceFragment {
 
         mContext = getActivity().getApplicationContext();
         mResolver = getActivity().getContentResolver();
-
         mMonetUtils = new MonetUtils(getActivity());
+
+        mAccentColorValue = mMonetUtils.getAccentColor();
 
         final Resources res = getResources();
         mAccentColorNames = Arrays.asList(res.getStringArray(R.array.theme_accent_color_names));
@@ -167,7 +175,8 @@ public class AccentColorPicker extends SettingsPreferenceFragment {
         @Override
         public void onBindViewHolder(CustomViewHolder holder, final int position) {
             final int selectedColor = Color.parseColor(mAccentColorValues.get(position));
-            final int currentColor = mMonetUtils.getAccentColor();
+            final int currentColor = mAccentColorValue == MonetUtils.ACCENT_COLOR_DEFAULT
+                    ? 0 : Color.parseColor("#" + mAccentColorValue);
 
             holder.image.setBackgroundResource(R.drawable.accent_background);
             final int viewColor = Color.parseColor(getViewAccentColor(position));
@@ -184,7 +193,8 @@ public class AccentColorPicker extends SettingsPreferenceFragment {
                     updateActivatedStatus(oldColor, false);
                     updateActivatedStatus(newColor, true);
 
-                    mMonetUtils.setAccentColor(selectedColor);
+                    mAccentColorValue = String.format("%06X", (0xFFFFFF & selectedColor));
+                    mMonetUtils.setAccentColor(mAccentColorValue);
                 }
             });
         }
