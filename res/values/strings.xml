@@ -432,12 +432,10 @@
     <string name="status_bar_battery_percentage_text_next">Next to the icon</string>
 
     <!-- Brightness slider -->
-    <!--
     <string name="status_bar_brightness_category">Brightness</string>
 
     <string name="status_bar_toggle_brightness">Brightness control</string>
     <string name="status_bar_toggle_brightness_summary">Adjust brightness by sliding across the status bar</string>
-    -->
 
     <!-- Network traffic monitor dialog -->
     <string name="network_traffic_settings_title">Network traffic monitor</string>
