@@ -541,6 +541,8 @@
     <string name="power_menu_items_title">Power menu items</string>
     <string name="power_menu_advanced_restart_title">Advanced restart</string>
     <string name="power_menu_advanced_restart_summary">When unlocked, include options in the power menu for restarting into recovery or bootloader</string>
+    <string name="power_menu_advanced_restart_secured_title">Secured lockscreen</string>
+    <string name="power_menu_advanced_restart_secured_summary">Display advanced restart options on secured lockscreen</string>
 
     <!-- Miscellaneous -->
     <string name="toast_icon_title">Toast icon</string>

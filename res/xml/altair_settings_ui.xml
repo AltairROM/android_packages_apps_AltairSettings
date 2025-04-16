@@ -27,6 +27,14 @@
             android:summary="@string/power_menu_advanced_restart_summary"
             android:defaultValue="true" />
 
+        <!-- Allow advanced restart on secure lockscreen -->
+        <lineageos.preference.LineageSecureSettingSwitchPreference
+            android:key="advanced_reboot_secured"
+            android:title="@string/power_menu_advanced_restart_secured_title"
+            android:summary="@string/power_menu_advanced_restart_secured_summary"
+            android:dependency="advanced_reboot"
+            android:defaultValue="true" />
+
     </PreferenceCategory>
 
     <!-- Miscellaneous -->
