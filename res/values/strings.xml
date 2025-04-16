@@ -421,6 +421,8 @@
     <string name="status_bar_am_pm_normal">Normal</string>
     <string name="status_bar_am_pm_small">Small</string>
     <string name="status_bar_am_pm_hidden">Hidden</string>
+    <string name="status_bar_clock_chip_title">Background chip</string>
+    <string name="status_bar_clock_chip_summary">Display accented chip behind clock</string>
 
     <!-- Battery -->
     <string name="status_bar_battery_category">Battery</string>
