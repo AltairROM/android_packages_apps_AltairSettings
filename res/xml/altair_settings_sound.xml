@@ -60,4 +60,18 @@
             settings:units="@string/unit_steps" />
     </PreferenceCategory>
 
+    <!-- Miscellaneous -->
+    <PreferenceCategory
+        android:key="miscellaneous"
+        android:title="@string/miscellaneous_category">
+
+        <!-- Screenshot shutter sound  -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="screenshot_shutter_sound"
+            android:title="@string/screenshot_shutter_sound_title"
+            android:summary="@string/screenshot_shutter_sound_summary"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
