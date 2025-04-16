@@ -15,11 +15,11 @@
         android:title="@string/lockscreen_interface_category">
 
         <!-- Album art -->
-        <lineageos.preference.LineageSecureSettingSwitchPreference
+        <!--<lineageos.preference.LineageSecureSettingSwitchPreference
             android:key="lockscreen_media_metadata"
             android:title="@string/lockscreen_media_art_title"
             android:summary="@string/lockscreen_media_art_summary"
-            android:defaultValue="false" />
+            android:defaultValue="false" />-->
 
         <!-- Album art filter -->
         <!--<com.lineage.support.preferences.SystemSettingListPreference
