@@ -56,13 +56,6 @@
             android:summary="@string/charging_animation_summary"
             android:defaultValue="true" />
 
-        <!-- Show per-app volume button in volume dialog -->
-        <com.lineage.support.preferences.SystemSettingSwitchPreference
-            android:key="show_app_volume"
-            android:title="@string/app_volume_title"
-            android:summary="@string/app_volume_summary"
-            android:defaultValue="false" />
-
         <!-- Three-fingers-swipe to screenshot -->
         <!--<com.lineage.support.preferences.SystemSettingSwitchPreference
             android:key="three_finger_gesture"
