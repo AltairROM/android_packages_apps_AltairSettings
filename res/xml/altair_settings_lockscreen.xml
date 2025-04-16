@@ -14,6 +14,12 @@
         android:key="lockscreen_interface"
         android:title="@string/lockscreen_interface_category">
 
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="lockscreen_show_carrier"
+            android:title="@string/lockscreen_show_carrier_title"
+            android:summary="@string/lockscreen_show_carrier_summary"
+            android:defaultValue="true" />
+
         <!-- Album art -->
         <!--<lineageos.preference.LineageSecureSettingSwitchPreference
             android:key="lockscreen_media_metadata"

@@ -156,6 +156,8 @@
     <!-- Lockscreen interface -->
     <string name="lockscreen_interface_category">Interface</string>
 
+    <string name="lockscreen_show_carrier_title">Carrier name</string>
+    <string name="lockscreen_show_carrier_summary">Display carrier name in the status bar</string>
     <string name="lockscreen_media_art_title">Media cover art</string>
     <string name="lockscreen_media_art_summary">Display media cover art when available</string>
     <string name="lockscreen_albumart_filter_title">Media cover art filter</string>
