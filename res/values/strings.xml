@@ -398,6 +398,8 @@
     <string name="status_bar_show_fourg_icon_summary">Display 4G for signal icon instead of LTE</string>
     <string name="status_bar_roaming_indicator_icon_title">Roaming indicator</string>
     <string name="status_bar_roaming_indicator_icon_summary">Display roaming indicator in signal icon when in roaming mode</string>
+    <string name="status_bar_wifi_standard_icon_title">WiFi standard</string>
+    <string name="status_bar_wifi_standard_icon_summary">Display WiFi standard next to WiFi signal</string>
 
     <!-- Clock -->
     <string name="status_bar_clock_category">Clock</string>

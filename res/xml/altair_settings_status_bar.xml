@@ -118,6 +118,13 @@
             android:summary="@string/status_bar_roaming_indicator_icon_summary"
             android:defaultValue="true"/>-->
 
+        <!-- Show Wi-Fi standard -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="wifi_standard_icon"
+            android:title="@string/status_bar_wifi_standard_icon_title"
+            android:summary="@string/status_bar_wifi_standard_icon_summary"
+            android:defaultValue="false"/>
+
     </PreferenceCategory>
 
     <!-- Clock -->
