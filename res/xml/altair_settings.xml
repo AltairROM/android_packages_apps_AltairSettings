@@ -30,7 +30,7 @@
         android:title="@string/altair_settings_gestures_title"
         android:summary="@string/altair_settings_gestures_summary"
         android:icon="@drawable/ic_settings_gestures"
-        android:fragment="com.android.settings.gestures.Gesture"
+        android:fragment="com.android.settings.gestures.GestureSettings"
         settings:controller="com.android.settings.gestures.GesturesSettingPreferenceController"/>
 
     <!-- Lockscreen -->
