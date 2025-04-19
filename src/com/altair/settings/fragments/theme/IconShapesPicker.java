@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2022-2023 Altair ROM Project
+ * Copyright (C) 2022 crDroid Android Project
+ * Copyright (C) 2022-2025 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,8 +22,8 @@ import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.ColorUtils;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -42,38 +42,46 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.utils.ThemeUtils;
 import com.android.settingslib.Utils;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class IconShapesPicker extends SettingsPreferenceFragment {
 
+    private static final String TAG = "IconShapesPicker";
+
     private RecyclerView mRecyclerView;
     private ThemeUtils mThemeUtils;
-    private String mCategory = ThemeUtils.ICON_SHAPE_KEY;
-    private String mTarget = "android";
-
+    private final String mCategory = ThemeUtils.ICON_SHAPE_KEY;
     private List<String> mPkgs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActivity().setTitle(R.string.theme_elements_icon_shape_title);
-
-        mThemeUtils = new ThemeUtils(getActivity());
-        mPkgs = mThemeUtils.getOverlayPackagesForCategory(mCategory, mTarget);
+        if (!isAdded()) {
+            return;
+        }
+        requireActivity().setTitle(R.string.theme_elements_icon_shape_title);
+        mThemeUtils = new ThemeUtils(requireContext());
+        mPkgs = mThemeUtils.getOverlayPackagesForCategory(mCategory, "android");
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.picker_recycler_view, container, false);
-
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
-        mRecyclerView.setLayoutManager(gridLayoutManager);
-        Adapter mAdapter = new Adapter(getActivity());
-        mRecyclerView.setAdapter(mAdapter);
-
+        mRecyclerView = view.findViewById(R.id.recycler_view);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 3));
+        mRecyclerView.setAdapter(new Adapter(requireContext(), mPkgs, mThemeUtils, mCategory, mRecyclerView));
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mRecyclerView != null) {
+            mRecyclerView.setAdapter(null);
+            mRecyclerView = null;
+        }
     }
 
     @Override
@@ -81,55 +89,70 @@ public class IconShapesPicker extends SettingsPreferenceFragment {
         return MetricsEvent.ALTAIR_SETTINGS;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+    public static class Adapter extends RecyclerView.Adapter<Adapter.CustomViewHolder> {
+        private final WeakReference<Context> contextRef;
+        private final List<String> mPkgs;
+        private final ThemeUtils mThemeUtils;
+        private final String mCategory;
+        private final RecyclerView mRecyclerView;
+        private final String mAppliedPkg;
+        private String mSelectedPkg;
 
-    public class Adapter extends RecyclerView.Adapter<Adapter.CustomViewHolder> {
-        Context context;
-        String mSelectedPkg;
-        String mAppliedPkg;
+        public Adapter(Context context, List<String> pkgs, ThemeUtils themeUtils, String category,
+                       RecyclerView recyclerView) {
+            this.contextRef = new WeakReference<>(context);
+            this.mPkgs = pkgs;
+            this.mThemeUtils = themeUtils;
+            this.mCategory = category;
+            this.mRecyclerView = recyclerView;
 
-        public Adapter(Context context) {
-            this.context = context;
+            mAppliedPkg = mThemeUtils.getOverlayInfos(mCategory).stream()
+                    .filter(info -> info.isEnabled())
+                    .map(info -> info.packageName)
+                    .findFirst()
+                    .orElse("android");
+
+            mSelectedPkg = mAppliedPkg;
+        }
+
+        @NonNull
+        @Override
+        public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.picker_option_generic,
+                    parent, false);
+            return new CustomViewHolder(view);
         }
 
         @Override
-        public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(
-                    R.layout.picker_option_generic, parent, false);
-            CustomViewHolder vh = new CustomViewHolder(v);
-            return vh;
-        }
+        public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+            Context context = contextRef.get();
+            if (context == null) {
+                return;
+            }
 
-        @Override
-        public void onBindViewHolder(CustomViewHolder holder, final int position) {
             String pkg = mPkgs.get(position);
+            Drawable drawable = mThemeUtils.createShapeDrawable(pkg);
+            if (drawable != null) {
+                holder.image.setBackground(drawable);
+            }
 
-            holder.image.setBackgroundDrawable(mThemeUtils.createShapeDrawable(pkg));
+            String label = getLabel(context, pkg);
+            holder.name.setText("android".equals(pkg) ? "Default" : label);
 
-            String currentPackageName = mThemeUtils.getOverlayInfos(mCategory).stream()
-                .filter(info -> info.isEnabled())
-                .map(info -> info.packageName)
-                .findFirst()
-                .orElse(mTarget);
-
-            holder.name.setText(mTarget.equals(pkg) ? "Default"
-                    : getLabel(holder.name.getContext(), pkg));
-
-            final boolean isDefault = mTarget.equals(currentPackageName) && mTarget.equals(pkg);
-            final int color = ColorUtils.setAlphaComponent(
-                     Utils.getColorAttrDefaultColor(getContext(), android.R.attr.textColorPrimary),
-                     pkg.equals(currentPackageName) || isDefault ? 255 : 61);
+            boolean isDefault = "android".equals(mAppliedPkg) && "android".equals(pkg);
+            int color = ColorUtils.setAlphaComponent(
+                    Utils.getColorAttrDefaultColor(context, android.R.attr.textColorPrimary),
+                    pkg.equals(mAppliedPkg) || isDefault ? 255 : 61);
             holder.image.setBackgroundTintList(ColorStateList.valueOf(color));
 
-            holder.itemView.findViewById(R.id.option_tile).setBackgroundDrawable(null);
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    enableOverlays(position);
+            holder.itemView.findViewById(R.id.option_tile).setBackground(null);
+            holder.itemView.setActivated(pkg.equals(mSelectedPkg));
+            holder.itemView.setOnClickListener(view -> {
+                if (!pkg.equals(mSelectedPkg)) {
+                    mSelectedPkg = pkg;
+                    mThemeUtils.setOverlayEnabled(mCategory, pkg, "android");
                 }
+                updateActivatedStatus();
             });
         }
 
@@ -138,42 +161,28 @@ public class IconShapesPicker extends SettingsPreferenceFragment {
             return mPkgs.size();
         }
 
-        public class CustomViewHolder extends RecyclerView.ViewHolder {
+        private void updateActivatedStatus() {
+            notifyDataSetChanged();
+        }
+
+        public static class CustomViewHolder extends RecyclerView.ViewHolder {
             TextView name;
             ImageView image;
             public CustomViewHolder(View itemView) {
                 super(itemView);
-                name = (TextView) itemView.findViewById(R.id.option_label);
-                image = (ImageView) itemView.findViewById(R.id.option_thumbnail);
+                name = itemView.findViewById(R.id.option_label);
+                image = itemView.findViewById(R.id.option_thumbnail);
             }
         }
-    }
 
-    public Drawable getDrawable(Context context, String pkg, String drawableName) {
-        try {
+        private String getLabel(Context context, String pkg) {
             PackageManager pm = context.getPackageManager();
-            Resources res = pkg.equals(mTarget) ? Resources.getSystem()
-                    : pm.getResourcesForApplication(pkg);
-            return res.getDrawable(res.getIdentifier(drawableName, "drawable", pkg));
+            try {
+                return pm.getApplicationInfo(pkg, 0).loadLabel(pm).toString();
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.e(TAG, "Label load failed for pkg: " + pkg, e);
+            }
+            return pkg;
         }
-        catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public String getLabel(Context context, String pkg) {
-        PackageManager pm = context.getPackageManager();
-        try {
-            return pm.getApplicationInfo(pkg, 0)
-                    .loadLabel(pm).toString();
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return pkg;
-    }
-
-    public void enableOverlays(int position) {
-        mThemeUtils.setOverlayEnabled(mCategory, mPkgs.get(position), mTarget);
     }
 }
