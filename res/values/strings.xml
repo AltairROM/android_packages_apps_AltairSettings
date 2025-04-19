@@ -181,6 +181,8 @@
 
     <string name="lockscreen_doubletap_sleep_title">Tap to sleep</string>
     <string name="lockscreen_doubletap_sleep_summary">Double-tap on the lock screen to put device asleep</string>
+    <string name="screen_off_udfps_title">Screen off UDFPS</string>
+    <string name="screen_off_udfps_summary">Keep UDFPS enabled when the screen is off</string>
     <string name="fp_success_vibrate_title">Fingerprint authentication vibration</string>
     <string name="fp_success_vibrate_summary">Vibrate when fingerprint authentication is successful</string>
     <string name="fp_error_vibrate_title">Fingerprint error vibration</string>
