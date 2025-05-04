@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.altair.settings.fragments.theme;
+package com.altair.settings.fragments.lockscreen;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -59,7 +59,7 @@ public class LockClockFontsPicker extends SettingsPreferenceFragment {
         if (!isAdded()) {
             return;
         }
-        requireActivity().setTitle(R.string.theme_elements_lock_clock_title);
+        requireActivity().setTitle(R.string.lockscreen_clock_font_title);
 
         mThemeUtils = new ThemeUtils(getActivity());
         mPkgs = mThemeUtils.getOverlayPackagesForCategory(mCategory, "android");

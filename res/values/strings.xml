@@ -160,6 +160,11 @@
 
     <!-- LOCKSCREEN -->
 
+    <!-- Lockscreen clock -->
+    <string name="lockscreen_clock_category">Clock</string>
+
+    <string name="lockscreen_clock_font_title">Clock font</string>
+
     <!-- Lockscreen interface -->
     <string name="lockscreen_interface_category">Interface</string>
 
@@ -503,7 +508,6 @@
     <string name="theme_elements_signal_icon_title">Signal icon style</string>
     <string name="theme_elements_wifi_icon_title">Wi-Fi icon style</string>
     <string name="theme_elements_navbar_title">Navigation bar style</string>
-    <string name="theme_elements_lock_clock_title">Lock screen clock font</string>
 
     <!-- Accent color dialog -->
     <string name="theme_colors_current_accent_color_title">Current accent color</string>

@@ -36,6 +36,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.utils.ThemeUtils;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.Arrays;
@@ -47,11 +48,17 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
     private static final String TAG = "AltairSettingsLockscreen";
 
     private static final String LOCKSCREEN_GESTURES_CATEGORY = "lockscreen_gestures_category";
+    private static final String KEY_LOCKSCREEN_FONT = ThemeUtils.LOCKSCREEN_FONT_KEY;
     private static final String KEY_SCREEN_OFF_UDFPS_ENABLED = "screen_off_udfps_enabled";
     private static final String KEY_FP_SUCCESS_VIBRATE = "fp_success_vibrate";
     private static final String KEY_FP_ERROR_VIBRATE = "fp_error_vibrate";
     private static final String KEY_RIPPLE_EFFECT = "enable_ripple_effect";
 
+    private Context mContext;
+
+    private ThemeUtils mThemeUtils;
+
+    private Preference mClockFontPreference;
     private Preference mScreenOffUdfps;
     private Preference mFingerprintVib;
     private Preference mFingerprintVibErr;
@@ -66,7 +73,13 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mContext = getActivity().getApplicationContext();
+        mThemeUtils = new ThemeUtils(mContext);
+
         PreferenceCategory gestCategory = findPreference(LOCKSCREEN_GESTURES_CATEGORY);
+
+        mClockFontPreference = findPreference(KEY_LOCKSCREEN_FONT);
+        updateSummary(mClockFontPreference, "android");
 
         FingerprintManager mFingerprintManager = (FingerprintManager)
                 getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
@@ -120,12 +133,33 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        return false;
+        String key = preference.getKey();
+        switch (key) {
+            case KEY_LOCKSCREEN_FONT:
+                updateSummary(mClockFontPreference, "android");
+                break;
+        }
+        return true;
     }
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         return super.onPreferenceTreeClick(preference);
+    }
+
+    public void updateSummary(Preference preference, String target) {
+        String currentPackageName = mThemeUtils.getOverlayInfos(preference.getKey(), target)
+                .stream()
+                .filter(info -> info.isEnabled())
+                .map(info -> info.packageName)
+                .findFirst()
+                .orElse(target);
+
+        List<String> pkgs = mThemeUtils.getOverlayPackagesForCategory(preference.getKey(), target);
+        List<String> labels = mThemeUtils.getLabels(preference.getKey(), target);
+
+        preference.setSummary(target.equals(currentPackageName) ? "Default"
+                : labels.get(pkgs.indexOf(currentPackageName)));
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

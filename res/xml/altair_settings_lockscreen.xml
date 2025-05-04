@@ -9,6 +9,19 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/altair_settings_lockscreen_title">
 
+    <!-- Clock -->
+    <PreferenceCategory
+        android:key="lockscreen_clock"
+        android:title="@string/lockscreen_clock_category">
+
+        <!-- Lockscreen Clock Font style -->
+        <Preference
+            android:key="android.theme.customization.lockscreen_clock_font"
+            android:title="@string/lockscreen_clock_font_title"
+            android:fragment="com.altair.settings.fragments.lockscreen.LockClockFontsPicker"/>
+
+    </PreferenceCategory>
+
     <!-- Interface -->
     <PreferenceCategory
         android:key="lockscreen_interface"
