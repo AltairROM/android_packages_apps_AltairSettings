@@ -37,6 +37,24 @@
 
     </PreferenceCategory>
 
+    <!-- Launcher -->
+    <PreferenceCategory
+        android:key="launcher"
+        android:title="@string/launcher_category">
+
+        <!-- Recents -->
+        <Preference
+            android:key="laucher_recents_settings"
+            android:title="@string/launcher_recents_settings_title"
+            android:summary="@string/launcher_recents_settings_summary">
+            <intent
+                android:action="android.settings.APPLICATION_DETAILS_SETTINGS"
+                android:targetPackage="com.android.launcher3"
+                android:targetClass="com.android.launcher3.settings.SettingsRecents" />
+        </Preference>
+
+    </PreferenceCategory>
+
     <!-- Miscellaneous -->
     <PreferenceCategory
         android:key="miscellaneous"

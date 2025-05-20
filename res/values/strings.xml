@@ -559,6 +559,12 @@
     <string name="power_menu_advanced_restart_secured_title">Secured lockscreen</string>
     <string name="power_menu_advanced_restart_secured_summary">Display advanced restart options on secured lockscreen</string>
 
+    <!-- Launcher -->
+    <string name="launcher_category">Launcher</string>
+
+    <string name="launcher_recents_settings_title">Recents</string>
+    <string name="launcher_recents_settings_summary">Access recent apps overview settings when using a third-party launcher</string>
+
     <!-- Miscellaneous -->
     <string name="toast_icon_title">Toast icon</string>
     <string name="toast_icon_summary">Display the app icon corresponding with the toast</string>
