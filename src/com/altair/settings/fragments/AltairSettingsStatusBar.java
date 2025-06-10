@@ -42,6 +42,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import com.lineage.support.preferences.SystemSettingListPreference;
 import com.lineage.support.preferences.SystemSettingSwitchPreference;
 
 import java.util.Arrays;
@@ -73,7 +74,10 @@ public class AltairSettingsStatusBar extends DashboardFragment implements
     private static final String STATUS_BAR_BATTERY_STYLE = "status_bar_battery_style";
     private static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
 
-    private static final int STATUS_BAR_BATTERY_STYLE_TEXT = 2;
+    private static final int BATTERY_STYLE_PORTRAIT = 0;
+    private static final int BATTERY_STYLE_CIRCLE = 1;
+    private static final int BATTERY_STYLE_TEXT = 2;
+    private static final int BATTERY_STYLE_TWO_TONE_PORTRAIT = 3;
 
     private static final String NETWORK_TRAFFIC_SETTINGS = "network_traffic_settings";
 
@@ -89,7 +93,7 @@ public class AltairSettingsStatusBar extends DashboardFragment implements
     private LineageSystemSettingListPreference mStatusBarAmPm;
 
     private SwitchPreferenceCompat mStatusBarShowBattery;
-    private LineageSystemSettingListPreference mStatusBarBatteryShowPercent;
+    private SystemSettingListPreference mStatusBarBatteryShowPercent;
 
     private PreferenceCategory mStatusBarBatteryCategory;
     private PreferenceCategory mStatusBarClockCategory;
@@ -151,10 +155,10 @@ public class AltairSettingsStatusBar extends DashboardFragment implements
         mStatusBarShowBattery.setOnPreferenceChangeListener(this);
 
         mStatusBarBatteryShowPercent = findPreference(STATUS_BAR_SHOW_BATTERY_PERCENT);
-        LineageSystemSettingListPreference statusBarBattery =
+        SystemSettingListPreference statusBarBattery =
                 findPreference(STATUS_BAR_BATTERY_STYLE);
         statusBarBattery.setOnPreferenceChangeListener(this);
-        enableStatusBarBatteryDependents(statusBarBattery.getIntValue(2));
+        enableStatusBarBatteryDependents(statusBarBattery.getIntValue(BATTERY_STYLE_PORTRAIT));
     }
 
     @Override
@@ -228,7 +232,7 @@ public class AltairSettingsStatusBar extends DashboardFragment implements
     }
 
     private void enableStatusBarBatteryDependents(int batteryIconStyle) {
-        mStatusBarBatteryShowPercent.setEnabled(batteryIconStyle != STATUS_BAR_BATTERY_STYLE_TEXT);
+        mStatusBarBatteryShowPercent.setEnabled(batteryIconStyle != BATTERY_STYLE_TEXT);
     }
 
     private int getNetworkTrafficStatus() {
