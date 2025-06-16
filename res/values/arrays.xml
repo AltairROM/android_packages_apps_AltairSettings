@@ -245,6 +245,7 @@
         <item>@string/navbar_key_action_last_app</item>
         <item>@string/navbar_key_action_split_screen</item>
         <item>@string/navbar_key_action_kill_app</item>
+        <item>@string/navbar_key_action_play_pause_music</item>
         <item>@string/navbar_key_action_torch</item>
         <item>@string/navbar_key_action_screenshot</item>
         <item>@string/navbar_key_action_volume_panel</item>
@@ -273,6 +274,7 @@
         <item>15</item>
         <item>16</item>
         <item>17</item>
+        <item>18</item>
     </string-array>
 
     <!-- Torch long press power timeout -->

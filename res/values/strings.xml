@@ -59,6 +59,7 @@
     <string name="navbar_key_action_last_app">Last app</string>
     <string name="navbar_key_action_split_screen">Split screen</string>
     <string name="navbar_key_action_kill_app">Kill foreground app</string>
+    <string name="navbar_key_action_play_pause_music">Play/pause music playback</string>
     <string name="navbar_key_action_torch">Toggle flashlight</string>
     <string name="navbar_key_action_screenshot">Take screenshot</string>
     <string name="navbar_key_action_volume_panel">Toggle volume panel</string>
