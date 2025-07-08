@@ -49,6 +49,9 @@ public class AltairSettingsSound extends DashboardFragment implements
     private static final String TAG = "AltairSettingsSound";
 
     private static final String KEY_VOLUME_PANEL_ON_LEFT = "volume_panel_on_left";
+    private static final String KEY_MAX_MUSIC_VOLUME = "max_music_volume";
+    private static final String KEY_MAX_CALL_VOLUME = "max_call_volume";
+    private static final String KEY_MAX_ALARM_VOLUME = "max_alarm_volume";
 
     private ContentResolver mResolver;
 
@@ -77,19 +80,19 @@ public class AltairSettingsSound extends DashboardFragment implements
         mVolumePanelOnLeft.setChecked(isAudioPanelOnLeft);
 
         // Volume steps
-        final int count = prefScreen.getPreferenceCount();
-        for (int i = 0; i < count; i++) {
-            Preference pref = prefScreen.getPreference(i);
-            if (!(pref instanceof CustomSeekBarPreference))
-                continue;
-            String key = pref.getKey();
-            final int def = Settings.System.getIntForUser(mResolver, "default_" + key, 15, UserHandle.USER_CURRENT);
-            final int value = Settings.System.getIntForUser(mResolver, key, def, UserHandle.USER_CURRENT);
-            CustomSeekBarPreference sbPref = (CustomSeekBarPreference) pref;
-            sbPref.setDefaultValue(def);
-            sbPref.setValue(value);
-            sbPref.setOnPreferenceChangeListener(this);
-        }
+        setVolumeStepsPreference(prefScreen, KEY_MAX_MUSIC_VOLUME);
+        setVolumeStepsPreference(prefScreen, KEY_MAX_CALL_VOLUME);
+        setVolumeStepsPreference(prefScreen, KEY_MAX_ALARM_VOLUME);
+    }
+
+    private void setVolumeStepsPreference(PreferenceScreen prefScreen, String key) {
+        final int defaultValue = Settings.System.getIntForUser(mResolver, "default_" + key, 15,
+                UserHandle.USER_CURRENT);
+        final int value = Settings.System.getIntForUser(mResolver, key, defaultValue, UserHandle.USER_CURRENT);
+        CustomSeekBarPreference pref = prefScreen.findPreference(key);
+        pref.setDefaultValue(defaultValue);
+        pref.setValue(value);
+        pref.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -119,8 +122,9 @@ public class AltairSettingsSound extends DashboardFragment implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (!(preference instanceof CustomSeekBarPreference))
+        if (!(preference instanceof CustomSeekBarPreference)) {
             return false;
+        }
         Settings.System.putIntForUser(mResolver, preference.getKey(), (Integer) newValue, UserHandle.USER_CURRENT);
         return true;
     }
