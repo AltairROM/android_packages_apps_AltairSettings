@@ -362,6 +362,13 @@ public class AltairSettingsQS extends DashboardFragment implements
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
+                    final Resources res = context.getResources();
+
+                    boolean automaticAvailable = res.getBoolean(
+                            com.android.internal.R.bool.config_automatic_brightness_available);
+                    if (!automaticAvailable) {
+                        keys.add(KEY_SHOW_AUTO_BRIGHTNESS);
+                    }
 
                     return keys;
                 }
