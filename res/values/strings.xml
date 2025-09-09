@@ -276,15 +276,15 @@
     <string name="qs_quick_pulldown_right">Right</string>
     <string name="qs_quick_pulldown_always">Always show quick settings on status bar pull down</string>
 
-    <!-- QS dual tone background -->
+    <!-- QS dual tone background
     <string name="qs_dual_tone_title">Dual tone themed</string>
-    <string name="qs_dual_tone_summary">Use dual tone background colors instead of AOSP single tone</string>
+    <string name="qs_dual_tone_summary">Use dual tone background colors instead of AOSP single tone</string>-->
 
-    <!-- QS background opacity -->
+    <!-- QS background opacity
     <string name="qs_transparency_title">Background opacity</string>
-    <string name="qs_transparency_summary">Set opacity level for QS background</string>
+    <string name="qs_transparency_summary">Set opacity level for QS background</string>-->
 
-    <!-- QS tiles layout  -->
+    <!-- QS tiles layout
     <string name="qs_layout_category">Tiles layout</string>
 
     <string name="qs_tile_ui_style_title">QS tiles style</string>
@@ -311,9 +311,9 @@
     <string name="qs_rows_portrait_title">Rows (portrait)</string>
     <string name="qs_rows_landscape_title">Rows (landscape)</string>
     <string name="qqs_rows_portrait_title">Quick QS rows (portrait)</string>
-    <string name="qqs_rows_landscape_title">Quick QS rows (landscape)</string>
+    <string name="qqs_rows_landscape_title">Quick QS rows (landscape)</string>-->
 
-    <!-- QS tiles animation -->
+    <!-- QS tiles animation
     <string name="qs_tile_animation_category">Tiles animation</string>
 
     <string name="qs_tile_animation_style_title">Animation style</string>
@@ -330,7 +330,7 @@
     <string name="qs_tile_animation_interpolator_bounceInterpolator">Bounce</string>
     <string name="qs_tile_animation_interpolator_overshootInterpolator">Overshoot</string>
     <string name="qs_tile_animation_interpolator_anticipateInterpolator">Anticipate</string>
-    <string name="qs_tile_animation_interpolator_anticipateOvershootInterpolator">Anticipate overshoot</string>
+    <string name="qs_tile_animation_interpolator_anticipateOvershootInterpolator">Anticipate overshoot</string>-->
 
     <!-- QS header -->
     <string name="qs_header_category">Header</string>

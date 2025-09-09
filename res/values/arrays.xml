@@ -395,7 +395,7 @@
         <item>@string/theme_accent_color_material_yellow</item>
     </string-array>
 
-    <!-- QS Tiles Style -->
+    <!-- QS Tiles Style
     <string-array name="qs_tile_ui_style_entries">
         <item>@string/sys_default</item>
         <item>@string/qs_tile_ui_style_a11_circle</item>
@@ -408,9 +408,9 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
-    </string-array>
+    </string-array>-->
 
-    <!-- QS Panel Style -->
+    <!-- QS Panel Style
     <string-array name="qs_panel_style_entries" translatable="false">
         <item>@string/sys_default</item>
         <item>@string/qs_panel_style_outline</item>
@@ -435,9 +435,9 @@
         <item>7</item>
         <item>8</item>
         <item>9</item>
-    </string-array>
+    </string-array>-->
 
-    <!-- QS Tiles animation style -->
+    <!-- QS Tiles animation style
     <string-array name="qs_tile_animation_style_entries" translatable="false">
         <item>@string/qs_tile_animation_style_off</item>
         <item>@string/qs_tile_animation_style_rotate</item>
@@ -450,9 +450,9 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
-    </string-array>
+    </string-array>-->
 
-    <!-- QS Tiles animation interpolator -->
+    <!-- QS Tiles animation interpolator
     <string-array name="qs_tile_animation_interpolator_entries" translatable="false">
         <item>@string/qs_tile_animation_interpolator_linearInterpolator</item>
         <item>@string/qs_tile_animation_interpolator_accelerateInterpolator</item>
@@ -473,7 +473,7 @@
         <item>5</item>
         <item>6</item>
         <item>7</item>
-    </string-array>
+    </string-array>-->
 
     <!-- Lockscreen album art filter -->
     <string-array name="lockscreen_albumart_filter_entries">

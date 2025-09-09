@@ -35,7 +35,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.utils.ThemeUtils;
+//import com.android.settings.utils.ThemeUtils;
 import com.android.settingslib.search.SearchIndexable;
 import com.lineage.support.preferences.CustomSeekBarPreference;
 
@@ -56,11 +56,11 @@ public class AltairSettingsQS extends DashboardFragment implements
     private static final String KEY_SHOW_BRIGHTNESS_SLIDER = "qs_show_brightness_slider";
     private static final String KEY_BRIGHTNESS_SLIDER_POSITION = "qs_brightness_slider_position";
     private static final String KEY_SHOW_AUTO_BRIGHTNESS = "qs_show_auto_brightness";
-    private static final String KEY_QS_UI_STYLE = "qs_tile_ui_style";
-    private static final String KEY_QS_PANEL_STYLE = "qs_panel_style";
-    private static final String KEY_TILE_ANIMATION_STYLE = "qs_tile_animation_style";
-    private static final String KEY_TILE_ANIMATION_DURATION = "qs_tile_animation_duration";
-    private static final String KEY_TILE_ANIMATION_INTERPOLATOR = "qs_tile_animation_interpolator";
+    //private static final String KEY_QS_UI_STYLE = "qs_tile_ui_style";
+    //private static final String KEY_QS_PANEL_STYLE = "qs_panel_style";
+    //private static final String KEY_TILE_ANIMATION_STYLE = "qs_tile_animation_style";
+    //private static final String KEY_TILE_ANIMATION_DURATION = "qs_tile_animation_duration";
+    //private static final String KEY_TILE_ANIMATION_INTERPOLATOR = "qs_tile_animation_interpolator";
 
     private static final int PULLDOWN_DIR_NONE = 0;
     private static final int PULLDOWN_DIR_RIGHT = 1;
@@ -71,13 +71,13 @@ public class AltairSettingsQS extends DashboardFragment implements
     private LineageSecureSettingSwitchPreference mShowBrightnessSlider;
     private LineageSecureSettingListPreference mBrightnessSliderPosition;
     private LineageSecureSettingSwitchPreference mShowAutoBrightness;
-    private ListPreference mQsUI;
-    private ListPreference mQsPanelStyle;
-    private ListPreference mTileAnimationStyle;
-    private CustomSeekBarPreference mTileAnimationDuration;
-    private ListPreference mTileAnimationInterpolator;
+    //private ListPreference mQsUI;
+    //private ListPreference mQsPanelStyle;
+    //private ListPreference mTileAnimationStyle;
+    //private CustomSeekBarPreference mTileAnimationDuration;
+    //private ListPreference mTileAnimationInterpolator;
 
-    private static ThemeUtils mThemeUtils;
+    //private static ThemeUtils mThemeUtils;
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -92,7 +92,7 @@ public class AltairSettingsQS extends DashboardFragment implements
         final ContentResolver resolver = mContext.getContentResolver();
         final PreferenceScreen prefScreen = getPreferenceScreen();
 
-        mThemeUtils = new ThemeUtils(getActivity());
+        //mThemeUtils = new ThemeUtils(getActivity());
 
         mQuickPulldown = findPreference(KEY_QUICK_PULLDOWN);
         mQuickPulldown.setOnPreferenceChangeListener(this);
@@ -115,6 +115,7 @@ public class AltairSettingsQS extends DashboardFragment implements
             prefScreen.removePreference(mShowAutoBrightness);
         }
 
+        /*
         mQsUI = findPreference(KEY_QS_UI_STYLE);
         mQsUI.setOnPreferenceChangeListener(this);
 
@@ -132,6 +133,7 @@ public class AltairSettingsQS extends DashboardFragment implements
         int tileAnimationStyle = Settings.System.getIntForUser(resolver,
                 Settings.System.QS_TILE_ANIMATION_STYLE, 0, UserHandle.USER_CURRENT);
         updateAnimTileStyle(tileAnimationStyle);
+        */
     }
 
     @Override
@@ -179,7 +181,7 @@ public class AltairSettingsQS extends DashboardFragment implements
                 if (mShowAutoBrightness != null)
                     mShowAutoBrightness.setEnabled(value);
                 return true;
-            case KEY_QS_UI_STYLE:
+            /*case KEY_QS_UI_STYLE:
                 Settings.System.putIntForUser(resolver,
                         Settings.System.QS_TILE_UI_STYLE, Integer.parseInt((String) newValue),
                         UserHandle.USER_CURRENT);
@@ -195,7 +197,7 @@ public class AltairSettingsQS extends DashboardFragment implements
                 return true;
             case KEY_TILE_ANIMATION_STYLE:
                 updateAnimTileStyle(Integer.parseInt((String) newValue));
-                return true;
+                return true;*/
         }
         return true;
     }
@@ -230,7 +232,7 @@ public class AltairSettingsQS extends DashboardFragment implements
         mQuickPulldown.setSummary(summary);
     }
 
-    private static void updateQsStyle(Context context) {
+    /*private static void updateQsStyle(Context context) {
         ContentResolver resolver = context.getContentResolver();
 
         boolean isA11Style = Settings.System.getIntForUser(resolver,
@@ -250,9 +252,9 @@ public class AltairSettingsQS extends DashboardFragment implements
 	    if (isA11Style) {
             mThemeUtils.setOverlayEnabled(qsUIStyleCategory, overlayThemePackage, overlayThemeTarget);
 	    }
-    }
+    }*/
 
-    private static void updateQsPanelStyle(Context context) {
+    /*private static void updateQsPanelStyle(Context context) {
         ContentResolver resolver = context.getContentResolver();
 
         int qsPanelStyle = Settings.System.getIntForUser(resolver,
@@ -302,9 +304,9 @@ public class AltairSettingsQS extends DashboardFragment implements
         if (qsPanelStyle > 0) {
             mThemeUtils.setOverlayEnabled(qsPanelStyleCategory, overlayThemePackage, overlayThemeTarget);
         }
-    }
+    }*/
 
-    private void checkQSOverlays(Context context) {
+    /*private void checkQSOverlays(Context context) {
         ContentResolver resolver = context.getContentResolver();
         int isA11Style = Settings.System.getIntForUser(resolver,
                 Settings.System.QS_TILE_UI_STYLE , 0, UserHandle.USER_CURRENT);
@@ -342,12 +344,12 @@ public class AltairSettingsQS extends DashboardFragment implements
         index = mQsPanelStyle.findIndexOfValue(Integer.toString(qsPanelStyle));
         mQsPanelStyle.setValue(Integer.toString(qsPanelStyle));
         mQsPanelStyle.setSummary(mQsPanelStyle.getEntries()[index]);
-    }
+    }*/
 
-    private void updateAnimTileStyle(int tileAnimationStyle) {
+    /*private void updateAnimTileStyle(int tileAnimationStyle) {
         mTileAnimationDuration.setEnabled(tileAnimationStyle != 0);
         mTileAnimationInterpolator.setEnabled(tileAnimationStyle != 0);
-    }
+    }*/
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
