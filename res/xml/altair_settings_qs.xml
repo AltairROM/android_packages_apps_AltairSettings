@@ -36,9 +36,9 @@
         android:min="1" />-->
 
     <!-- Quick Settings tiles layout -->
-    <!--PreferenceCategory
+    <PreferenceCategory
         android:key="qs_layout_category"
-        android:title="@string/qs_layout_category">-->
+        android:title="@string/qs_layout_category">
 
         <!-- Tile UI style -->
         <!--ListPreference
@@ -81,58 +81,60 @@
             android:defaultValue="false" />-->
 
         <!-- Number of columns (portrait) -->
-        <!--com.lineage.support.preferences.SystemSettingSeekBarPreference
-            android:key="qs_layout_columns"
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="qs_tiles_columns"
             android:title="@string/qs_columns_portrait_title"
-            android:max="5"
+            android:max="6"
             settings:min="2"
             settings:interval="1"
-            android:defaultValue="2" />-->
+            android:defaultValue="4" />
 
         <!-- Number of columns (landscape) -->
-        <!--com.lineage.support.preferences.SystemSettingSeekBarPreference
-            android:key="qs_layout_columns_landscape"
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="qs_tiles_columns_landscape"
             android:title="@string/qs_columns_landscape_title"
             android:max="6"
             settings:min="2"
             settings:interval="1"
-            android:defaultValue="4" />-->
+            android:defaultValue="4" />
 
         <!-- Number of rows (portrait) -->
-        <!--com.lineage.support.preferences.SystemSettingSeekBarPreference
-            android:key="qs_layout_rows"
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="qs_tiles_rows"
             android:title="@string/qs_rows_portrait_title"
             android:max="5"
             settings:min="2"
             settings:interval="1"
-            android:defaultValue="4" />-->
+            android:defaultValue="4" />
 
         <!-- Number of rows (landscape) -->
-        <!--com.lineage.support.preferences.SystemSettingSeekBarPreference
-            android:key="qs_layout_rows_landscape"
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="qs_tiles_rows_landscape"
             android:title="@string/qs_rows_landscape_title"
             android:max="3"
             settings:min="1"
             settings:interval="1"
-            android:defaultValue="2" />-->
+            android:defaultValue="2" />
 
-        <!--com.lineage.support.preferences.SystemSettingSeekBarPreference
-            android:key="qqs_layout_rows"
+        <!-- Number of Quick QS rows (portrait) -->
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="qqs_tiles_rows"
             android:title="@string/qqs_rows_portrait_title"
             android:max="3"
             settings:min="1"
             settings:interval="1"
-            android:defaultValue="2" />-->
+            android:defaultValue="2" />
 
-        <!--com.lineage.support.preferences.SystemSettingSeekBarPreference
-            android:key="qqs_layout_rows_landscape"
+        <!-- Number of Quick QS rows (landscape) -->
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="qqs_tiles_rows_landscape"
             android:title="@string/qqs_rows_landscape_title"
             android:max="3"
             settings:min="1"
             settings:interval="1"
-            android:defaultValue="2" />-->
+            android:defaultValue="2" />
 
-    <!--/PreferenceCategory>-->
+    </PreferenceCategory>
 
     <!-- Quick Settings tiles animation
     <PreferenceCategory
