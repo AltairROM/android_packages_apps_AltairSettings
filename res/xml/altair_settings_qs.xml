@@ -251,6 +251,12 @@
             android:summary="@string/qs_bt_show_dialog_summary"
             android:defaultValue="true" />
 
+        <!-- QS tile haptic feedback -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="qs_tile_haptic"
+            android:title="@string/qs_brightness_slider_haptic_title"
+            android:summary="@string/qs_tile_haptic_summary" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
