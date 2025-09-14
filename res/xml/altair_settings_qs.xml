@@ -40,13 +40,13 @@
         android:key="qs_layout_category"
         android:title="@string/qs_layout_category">
 
-        <!-- Tile UI style -->
-        <!--ListPreference
-            android:key="qs_tile_ui_style"
-            android:title="@string/qs_tile_ui_style_title"
-            android:entries="@array/qs_tile_ui_style_entries"
-            android:entryValues="@array/qs_tile_ui_style_values"
-            android:defaultValue="0" />-->
+        <!-- Tile shape -->
+        <com.lineage.support.preferences.SystemSettingListPreference
+            android:key="qs_tile_shape"
+            android:title="@string/qs_tile_shape_title"
+            android:entries="@array/qs_tile_shape_entries"
+            android:entryValues="@array/qs_tile_shape_values"
+            android:defaultValue="0" />
 
         <!-- Panel style -->
         <!--ListPreference
