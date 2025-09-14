@@ -14,7 +14,7 @@
         android:title="@string/altair_settings_buttons_title"
         android:summary="@string/altair_settings_buttons_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsButtons"
-        android:icon="@drawable/ic_settings_menu_buttons"/>
+        android:icon="@drawable/ic_homepage_buttons"/>
 
     <!-- Display -->
     <Preference
@@ -22,14 +22,14 @@
         android:title="@string/altair_settings_display_title"
         android:summary="@string/altair_settings_display_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsDisplay"
-        android:icon="@drawable/ic_settings_menu_display"/>
+        android:icon="@drawable/ic_homepage_display"/>
 
     <!-- Gestures -->
     <Preference
         android:key="gesture_settings"
         android:title="@string/altair_settings_gestures_title"
         android:summary="@string/altair_settings_gestures_summary"
-        android:icon="@drawable/ic_settings_gestures"
+        android:icon="@drawable/ic_homepage_gestures"
         android:fragment="com.android.settings.gestures.GestureSettings"
         settings:controller="com.android.settings.gestures.GesturesSettingPreferenceController"/>
 
@@ -39,7 +39,7 @@
         android:title="@string/altair_settings_lockscreen_title"
         android:summary="@string/altair_settings_lockscreen_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsLockscreen"
-        android:icon="@drawable/ic_settings_menu_lockscreen" />
+        android:icon="@drawable/ic_homepage_lockscreen" />
 
     <!-- Navigation -->
     <Preference
@@ -47,7 +47,7 @@
         android:title="@string/altair_settings_navigation_title"
         android:summary="@string/altair_settings_navigation_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsNavigation"
-        android:icon="@drawable/ic_settings_menu_navigation" />
+        android:icon="@drawable/ic_homepage_navigation" />
 
     <!-- Notifications -->
     <Preference
@@ -55,7 +55,7 @@
         android:title="@string/altair_settings_notifications_title"
         android:summary="@string/altair_settings_notifications_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsNotifications"
-        android:icon="@drawable/ic_settings_menu_notification" />
+        android:icon="@drawable/ic_homepage_notification" />
 
     <!-- Quick settings panel -->
     <Preference
@@ -63,7 +63,7 @@
         android:title="@string/altair_settings_qs_title"
         android:summary="@string/altair_settings_qs_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsQS"
-        android:icon="@drawable/ic_settings_menu_qs"/>
+        android:icon="@drawable/ic_homepage_qs"/>
 
     <!-- Sound -->
     <Preference
@@ -71,7 +71,7 @@
         android:title="@string/altair_settings_sound_title"
         android:summary="@string/altair_settings_sound_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsSound"
-        android:icon="@drawable/ic_settings_menu_sound"/>
+        android:icon="@drawable/ic_homepage_sound"/>
 
     <!-- Status bar -->
     <Preference
@@ -79,7 +79,7 @@
         android:title="@string/altair_settings_status_bar_title"
         android:summary="@string/altair_settings_status_bar_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsStatusBar"
-        android:icon="@drawable/ic_settings_menu_status_bar"/>
+        android:icon="@drawable/ic_homepage_status_bar"/>
 
     <!-- Themes -->
     <Preference
@@ -87,7 +87,7 @@
         android:title="@string/altair_settings_themes_title"
         android:summary="@string/altair_settings_themes_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsThemes"
-        android:icon="@drawable/ic_settings_menu_themes"/>
+        android:icon="@drawable/ic_homepage_themes"/>
 
     <!-- User interface -->
     <Preference
@@ -95,6 +95,6 @@
         android:title="@string/altair_settings_ui_title"
         android:summary="@string/altair_settings_ui_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsUI"
-        android:icon="@drawable/ic_settings_menu_ui"/>
+        android:icon="@drawable/ic_homepage_ui"/>
 
 </PreferenceScreen>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2019-2025 Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<com.android.settings.widget.TintDrawable
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_settings_menu_themes"
+    android:tint="@color/homepage_themes_foreground" />

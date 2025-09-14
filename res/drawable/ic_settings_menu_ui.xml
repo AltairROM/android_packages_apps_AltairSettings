@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2019-2023 Altair ROM Project
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-          http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
+     SPDX-FileCopyrightText: 2019-2025 Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
         android:width="24dp"
@@ -22,6 +11,6 @@
         android:tint="?android:attr/colorControlNormal">
 
     <path
-        android:fillColor="?android:attr/colorPrimary"
+        android:fillColor="@android:color/white"
         android:pathData="M3,4L20,4C21.097,4 22,4.903 22,6L22,8L18,8L18,6L5,6L5,18L14,18L14,20L3,20C1.903,20 1,19.097 1,18L1,6C1,4.903 1.903,4 3,4M17,10L23,10C23.549,10 24,10.451 24,11L24,21C24,21.549 23.549,22 23,22L17,22C16.451,22 16,21.549 16,21L16,11C16,10.451 16.451,10 17,10M18,12L18,19L22,19L22,12L18,12Z" />
 </vector>

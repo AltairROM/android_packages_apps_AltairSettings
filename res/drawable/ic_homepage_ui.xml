@@ -9,7 +9,7 @@
         <com.android.settingslib.widget.AdaptiveIconShapeDrawable
             android:width="@dimen/dashboard_tile_image_size"
             android:height="@dimen/dashboard_tile_image_size"
-            android:color="@color/homepage_altairsettings_background" />
+            android:color="@color/homepage_ui_background" />
     </item>
 
     <item
@@ -17,5 +17,5 @@
         android:height="@dimen/dashboard_tile_foreground_image_size"
         android:start="@dimen/dashboard_tile_foreground_image_inset"
         android:top="@dimen/dashboard_tile_foreground_image_inset"
-        android:drawable="@drawable/ic_settings_altairsettings_expressive" />
+        android:drawable="@drawable/ic_settings_menu_ui_expressive" />
 </layer-list>
