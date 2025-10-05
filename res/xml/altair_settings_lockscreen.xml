@@ -33,28 +33,57 @@
             android:summary="@string/lockscreen_show_carrier_summary"
             android:defaultValue="true" />
 
-        <!-- Album art -->
-        <!--<lineageos.preference.LineageSecureSettingSwitchPreference
-            android:key="lockscreen_media_metadata"
-            android:title="@string/lockscreen_media_art_title"
-            android:summary="@string/lockscreen_media_art_summary"
-            android:defaultValue="false" />-->
-
-        <!-- Album art filter -->
-        <!--<com.lineage.support.preferences.SystemSettingListPreference
-            android:key="lockscreen_albumart_filter"
-            android:title="@string/lockscreen_albumart_filter_title"
-            android:entries="@array/lockscreen_albumart_filter_entries"
-            android:entryValues="@array/lockscreen_albumart_filter_values"
-            android:dependency="lockscreen_media_metadata"
-            android:defaultValue="0" />-->
-
         <!-- Battery charging info -->
         <com.lineage.support.preferences.SystemSettingSwitchPreference
             android:key="lockscreen_battery_info"
             android:title="@string/lockscreen_battery_info_title"
             android:summary="@string/lockscreen_battery_info_summary"
             android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+    <!-- Media -->
+    <PreferenceCategory
+        android:key="lockscreen_media"
+        android:title="@string/lockscreen_media_category">
+
+        <!-- Media cover art -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="ls_media_art_enabled"
+            android:title="@string/ls_media_art_title"
+            android:summary="@string/ls_media_art_summary"
+            android:defaultValue="false" />
+
+        <!-- Media cover art filter -->
+        <com.lineage.support.preferences.SystemSettingListPreference
+            android:key="ls_media_art_filter"
+            android:title="@string/ls_media_art_filter_title"
+            android:entries="@array/ls_media_art_filter_entries"
+            android:entryValues="@array/ls_media_art_filter_values"
+            android:dependency="ls_media_art_enabled"
+            android:defaultValue="0" />
+
+        <!-- Media cover art fade level -->
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="ls_media_art_fade_level"
+            android:title="@string/ls_media_art_fade_level_title"
+            android:summary="@string/ls_media_art_fade_level_summary"
+            android:defaultValue="40"
+            settings:interval="1"
+            settings:units="%"
+            android:max="100"
+            android:min="0"
+            android:dependency="ls_media_art_enabled" />
+
+        <!-- Media cover art blur level -->
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="ls_media_art_blur_level"
+            android:title="@string/ls_media_art_blur_level_title"
+            android:summary="@string/ls_media_art_blur_level_summary"
+            android:max="600"
+            android:min="0"
+            android:defaultValue="200"
+            android:dependency="ls_media_art_enabled" />
 
     </PreferenceCategory>
 
