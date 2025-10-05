@@ -16,6 +16,13 @@
         android:summary="@string/notification_sound_vib_screen_on_summary"
         android:defaultValue="true" />
 
+    <!-- Notification row translucency -->
+    <com.lineage.support.preferences.SecureSettingSwitchPreference
+        android:key="notification_row_transparency"
+        android:title="@string/notification_row_transparency_title"
+        android:summary="@string/notification_row_transparency_summary"
+        android:defaultValue="true" />
+
     <!-- Notification guts kill app button -->
     <com.lineage.support.preferences.SystemSettingSwitchPreference
         android:key="notification_guts_kill_app_button"
