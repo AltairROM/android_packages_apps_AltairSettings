@@ -47,6 +47,13 @@
         android:key="lockscreen_media"
         android:title="@string/lockscreen_media_category">
 
+        <!-- Pulse music visualizer -->
+        <Preference
+            android:key="pulse_settings"
+            android:title="@string/pulse_settings_title"
+            android:summary="@string/pulse_settings_summary"
+            android:fragment="com.altair.settings.fragments.lockscreen.PulseSettings" />
+
         <!-- Media cover art -->
         <com.lineage.support.preferences.SystemSettingSwitchPreference
             android:key="ls_media_art_enabled"
