@@ -197,8 +197,8 @@
     <string name="enable_fingerprint_ripple_effect_summary">Show ripple effect on unlock with fingerprint</string>
 
     <!-- Lockscreen miscellaneous -->
-    <string name="disable_qs_title">Hide QS on secure lock screen</string>
-    <string name="disable_qs_summary">Prevent access to QS tiles on secure lock screen</string>
+    <string name="lockscreen_quick_settings_title">QS on lock screen</string>
+    <string name="lockscreen_quick_settings_summary">Allow swipe down on lock screen to view Quick Settings</string>
     <string name="lockscreen_enable_power_menu_title">Power menu</string>
     <string name="lockscreen_enable_power_menu_summary">Allow accessing power menu on secure lockscreen</string>
 

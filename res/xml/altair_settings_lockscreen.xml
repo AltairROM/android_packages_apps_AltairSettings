@@ -106,10 +106,11 @@
         android:title="@string/miscellaneous_category">
 
         <!-- Disable Quick Settings on secure lockscreen -->
-        <com.lineage.support.preferences.SystemSettingSwitchPreference
-            android:key="secure_lockscreen_qs_disabled"
-            android:title="@string/disable_qs_title"
-            android:summary="@string/disable_qs_summary"/>
+        <com.lineage.support.preferences.SecureSettingSwitchPreference
+            android:key="enable_lockscreen_quick_settings"
+            android:title="@string/lockscreen_quick_settings_title"
+            android:summary="@string/lockscreen_quick_settings_summary"
+            android:defaultValue="true" />
 
         <!-- Enable power menu on secure lockscreen -->
         <com.lineage.support.preferences.SystemSettingSwitchPreference
