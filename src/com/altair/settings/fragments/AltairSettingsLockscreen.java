@@ -16,19 +16,15 @@
 
 package com.altair.settings.fragments;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.text.TextUtils;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.SwitchPreference;
 
@@ -49,7 +45,6 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
 
     private static final String LOCKSCREEN_GESTURES_CATEGORY = "lockscreen_gestures_category";
     private static final String KEY_LOCKSCREEN_FONT = ThemeUtils.LOCKSCREEN_FONT_KEY;
-    private static final String KEY_SCREEN_OFF_UDFPS_ENABLED = "screen_off_udfps_enabled";
     private static final String KEY_FP_SUCCESS_VIBRATE = "fp_success_vibrate";
     private static final String KEY_FP_ERROR_VIBRATE = "fp_error_vibrate";
     private static final String KEY_RIPPLE_EFFECT = "enable_ripple_effect";
@@ -59,7 +54,6 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
     private ThemeUtils mThemeUtils;
 
     private Preference mClockFontPreference;
-    private Preference mScreenOffUdfps;
     private Preference mFingerprintVib;
     private Preference mFingerprintVibErr;
     private Preference mRippleEffect;
@@ -87,22 +81,11 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
         mFingerprintVib = findPreference(KEY_FP_SUCCESS_VIBRATE);
         mFingerprintVibErr = findPreference(KEY_FP_ERROR_VIBRATE);
         mRippleEffect = findPreference(KEY_RIPPLE_EFFECT);
-        mScreenOffUdfps = findPreference(KEY_SCREEN_OFF_UDFPS_ENABLED);
 
         if (mFingerprintManager == null || !mFingerprintManager.isHardwareDetected()) {
-            gestCategory.removePreference(mScreenOffUdfps);
             gestCategory.removePreference(mFingerprintVib);
             gestCategory.removePreference(mFingerprintVibErr);
             gestCategory.removePreference(mRippleEffect);
-        } else {
-            Resources resources = getResources();
-            boolean screenOffUdfpsAvailable = resources.getBoolean(
-                    com.android.internal.R.bool.config_supportScreenOffUdfps) ||
-                    !TextUtils.isEmpty(resources.getString(
-                        com.android.internal.R.string.config_dozeUdfpsLongPressSensorType));
-            if (!screenOffUdfpsAvailable) {
-                gestCategory.removePreference(mScreenOffUdfps);
-            }
         }
     }
 
@@ -182,15 +165,6 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
                         keys.add(KEY_FP_SUCCESS_VIBRATE);
                         keys.add(KEY_FP_ERROR_VIBRATE);
                         keys.add(KEY_RIPPLE_EFFECT);
-                    } else {
-                        Resources resources = context.getResources();
-                        boolean screenOffUdfpsAvailable = resources.getBoolean(
-                            com.android.internal.R.bool.config_supportScreenOffUdfps) ||
-                            !TextUtils.isEmpty(resources.getString(
-                                com.android.internal.R.string.config_dozeUdfpsLongPressSensorType));
-                        if (!screenOffUdfpsAvailable) {
-                            keys.add(KEY_SCREEN_OFF_UDFPS_ENABLED);
-                        }
                     }
 
                     return keys;
