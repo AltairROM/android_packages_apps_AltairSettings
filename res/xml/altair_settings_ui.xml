@@ -67,6 +67,13 @@
             android:summary="@string/toast_icon_summary"
             android:defaultValue="true" />
 
+        <!-- Edge Light -->
+        <Preference
+            android:key="edge_light_settings"
+            android:title="@string/edge_light_title"
+            android:summary="@string/edge_light_summary"
+            android:fragment="com.altair.settings.fragments.ui.EdgeLightSettings" />
+
         <!-- Charging animation -->
         <com.lineage.support.preferences.SystemSettingSwitchPreference
             android:key="charging_animation"
