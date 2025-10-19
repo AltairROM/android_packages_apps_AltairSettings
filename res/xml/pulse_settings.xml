@@ -27,6 +27,13 @@
         android:summary="@string/pulse_settings_summary"
         android:defaultValue="false" />
 
+    <com.lineage.support.preferences.SecureSettingSwitchPreference
+        android:key="ambient_pulse_enabled"
+        android:title="@string/ambient_pulse_enabled_title"
+        android:summary="@string/ambient_pulse_enabled_summary"
+        android:defaultValue="true"
+        android:dependency="lockscreen_pulse_enabled" />
+
     <com.lineage.support.preferences.SecureSettingListPreference
         android:key="pulse_renderer"
         android:title="@string/pulse_renderer"
