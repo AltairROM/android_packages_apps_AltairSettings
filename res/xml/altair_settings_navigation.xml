@@ -64,15 +64,6 @@
             android:entryValues="@array/navbar_key_action_values"
             android:persistent="false" />
 
-        <!-- Back button double tap action -->
-        <!--<ListPreference
-            android:key="navigation_back_double_tap"
-            android:dialogTitle="@string/navigation_bar_back_double_tap_title"
-            android:title="@string/navigation_bar_back_double_tap_title"
-            android:entries="@array/navbar_key_action_entries"
-            android:entryValues="@array/navbar_key_action_values"
-            android:persistent="false" />-->
-
         <!-- Home button long press action -->
         <ListPreference
             android:key="navigation_home_long_press"
@@ -90,15 +81,6 @@
             android:entries="@array/navbar_key_action_entries"
             android:entryValues="@array/navbar_key_action_values"
             android:persistent="false" />
-
-        <!-- Recnets button press action -->
-        <!--<ListPreference
-            android:key="navigation_app_switch_press"
-            android:dialogTitle="@string/navigation_bar_app_switch_press_title"
-            android:title="@string/navigation_bar_app_switch_press_title"
-            android:entries="@array/navbar_key_action_entries"
-            android:entryValues="@array/navbar_key_action_values"
-            android:persistent="false" />-->
 
         <!-- Recents button long press action -->
         <ListPreference

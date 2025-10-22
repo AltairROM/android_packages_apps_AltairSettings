@@ -77,25 +77,4 @@
 
     </PreferenceCategory>
 
-    <!-- reTicker -->
-    <!--<PreferenceCategory
-        android:key="notification_reticker_category"
-        android:title="@string/notification_reticker_category" >-->
-
-        <!-- Enable reTicker -->
-        <!--<com.lineage.support.preferences.SystemSettingSwitchPreference
-            android:key="reticker_status"
-            android:title="@string/reticker_title"
-            android:summary="@string/reticker_summary"
-            android:dependency="heads_up_notifications_enabled" />-->
-
-        <!-- Use app colored background for reTicker -->
-        <!--<com.lineage.support.preferences.SystemSettingSwitchPreference
-            android:key="reticker_colored"
-            android:title="@string/reticker_colored_title"
-            android:summary="@string/reticker_colored_summary"
-            android:dependency="reticker_status" />-->
-
-    <!--</PreferenceCategory>-->
-
 </PreferenceScreen>

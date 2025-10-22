@@ -113,15 +113,6 @@
             android:entryValues="@array/navbar_key_action_values"
             android:persistent="false" />
 
-        <!-- Back button double tap action -->
-        <!--<ListPreference
-            android:key="hardware_keys_back_double_tap"
-            android:dialogTitle="@string/hardware_keys_double_tap_title"
-            android:title="@string/hardware_keys_double_tap_title"
-            android:entries="@array/navbar_key_action_entries"
-            android:entryValues="@array/navbar_key_action_values"
-            android:persistent="false" />-->
-
     </PreferenceCategory>
 
     <!-- Menu button -->
@@ -153,15 +144,6 @@
             android:entryValues="@array/navbar_key_action_values"
             android:persistent="false" />
 
-        <!-- Menu button double tap action -->
-        <!--<ListPreference
-            android:key="hardware_keys_menu_double_tap"
-            android:dialogTitle="@string/hardware_keys_double_tap_title"
-            android:title="@string/hardware_keys_double_tap_title"
-            android:entries="@array/navbar_key_action_entries"
-            android:entryValues="@array/navbar_key_action_values"
-            android:persistent="false" />-->
-
     </PreferenceCategory>
 
     <!-- Assist button -->
@@ -192,15 +174,6 @@
             android:entries="@array/navbar_key_action_entries"
             android:entryValues="@array/navbar_key_action_values"
             android:persistent="false" />
-
-        <!-- Assist button double tap action -->
-        <!--<ListPreference
-            android:key="hardware_keys_assist_double_tap"
-            android:dialogTitle="@string/hardware_keys_double_tap_title"
-            android:title="@string/hardware_keys_double_tap_title"
-            android:entries="@array/navbar_key_action_entries"
-            android:entryValues="@array/navbar_key_action_values"
-            android:persistent="false" />-->
 
     </PreferenceCategory>
 

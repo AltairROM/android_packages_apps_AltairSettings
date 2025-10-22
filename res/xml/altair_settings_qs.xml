@@ -17,24 +17,6 @@
         android:entryValues="@array/qs_quick_pulldown_values"
         android:defaultValue="0" />
 
-    <!-- QS dual tone background -->
-    <!--<com.lineage.support.preferences.SystemSettingSwitchPreference
-        android:key="qs_dual_tone"
-        android:title="@string/qs_dual_tone_title"
-        android:summary="@string/qs_dual_tone_summary"
-        android:defaultValue="true" />-->
-
-    <!-- QS background transparency -->
-    <!--<com.lineage.support.preferences.SystemSettingSeekBarPreference
-        android:key="qs_transparency"
-        android:title="@string/qs_transparency_title"
-        android:summary="@string/qs_transparency_summary"
-        android:defaultValue="100"
-        settings:interval="1"
-        settings:units="%"
-        android:max="100"
-        android:min="1" />-->
-
     <!-- Quick Settings tiles layout -->
     <PreferenceCategory
         android:key="qs_layout_category"
@@ -47,38 +29,6 @@
             android:entries="@array/qs_tile_shape_entries"
             android:entryValues="@array/qs_tile_shape_values"
             android:defaultValue="0" />
-
-        <!-- Panel style -->
-        <!--ListPreference
-            android:key="qs_panel_style"
-            android:title="@string/qs_panel_style_title"
-            android:entries="@array/qs_panel_style_entries"
-            android:entryValues="@array/qs_panel_style_values"
-            android:defaultValue="0" />-->
-
-        <!-- Hide labels -->
-        <!--com.lineage.support.preferences.SystemSettingSwitchPreference
-            android:key="qs_tile_label_hide"
-            android:title="@string/qs_tile_label_hide_title"
-            android:summary="@string/qs_tile_label_hide_summary"
-            android:defaultValue="false" />-->
-
-        <!-- Label text size -->
-        <!--com.lineage.support.preferences.SystemSettingSeekBarPreference
-            android:key="qs_tile_label_size"
-            android:title="@string/qs_tile_label_size_title"
-            android:max="15"
-            settings:min="10"
-            settings:interval="1"
-            settings:units="sp"
-            android:defaultValue="14" />-->
-
-        <!-- Use vertical layout for labels -->
-        <!--com.lineage.support.preferences.SystemSettingSwitchPreference
-            android:key="qs_tile_vertical_layout"
-            android:title="@string/qs_tile_layout_title"
-            android:summary="@string/qs_tile_layout_summary"
-            android:defaultValue="false" />-->
 
         <!-- Number of columns (portrait) -->
         <com.lineage.support.preferences.SystemSettingSeekBarPreference
@@ -136,36 +86,6 @@
 
     </PreferenceCategory>
 
-    <!-- Quick Settings tiles animation
-    <PreferenceCategory
-        android:key="qs_tile_animation_category"
-        android:title="@string/qs_tile_animation_category">
-
-        <com.lineage.support.preferences.SystemSettingListPreference
-            android:key="qs_tile_animation_style"
-            android:title="@string/qs_tile_animation_style_title"
-            android:entries="@array/qs_tile_animation_style_entries"
-            android:entryValues="@array/qs_tile_animation_style_values"
-            android:defaultValue="0" />
-
-        <com.lineage.support.preferences.SystemSettingSeekBarPreference
-            android:key="qs_tile_animation_duration"
-            android:title="@string/qs_tile_animation_duration_title"
-            android:defaultValue="1"
-            settings:interval="1"
-            settings:units="@string/unit_seconds"
-            android:max="5"
-            android:min="1" />
-
-        <com.lineage.support.preferences.SystemSettingListPreference
-            android:key="qs_tile_animation_interpolator"
-            android:title="@string/qs_tile_animation_interpolator_title"
-            android:entries="@array/qs_tile_animation_interpolator_entries"
-            android:entryValues="@array/qs_tile_animation_interpolator_values"
-            android:defaultValue="0" />
-
-    </PreferenceCategory>-->
-
     <!-- Quick Settings header -->
     <PreferenceCategory
         android:title="@string/qs_header_category">
@@ -219,24 +139,6 @@
             android:key="qs_show_data_usage"
             android:title="@string/qs_footer_datausage_title"
             android:summary="@string/qs_footer_datausage_summary" />
-
-        <!-- Show network monitoring alerts in footer -->
-        <!--<com.lineage.support.preferences.SystemSettingSwitchPreference
-            android:key="qs_footer_warnings"
-            android:title="@string/qs_footer_warnings_title"
-            android:summary="@string/qs_footer_warnings_summary"
-            android:defaultValue="true"/>-->
-
-        <!-- QS footer transparency -->
-        <!--<com.lineage.support.preferences.SystemSettingSeekBarPreference
-            android:key="qs_footer_transparency"
-            android:title="@string/qs_footer_opacity_title"
-            android:summary="@string/qs_footer_opacity_summary"
-            android:defaultValue="100"
-            settings:interval="1"
-            settings:units="%"
-            android:max="100"
-            android:min="1" />-->
 
     </PreferenceCategory>
 

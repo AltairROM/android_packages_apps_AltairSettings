@@ -10,10 +10,6 @@
     <color name="homepage_altairsettings_background">@color/homepage_grey_bg</color>
     <color name="homepage_buttons_foreground">@color/homepage_blue_variant_fg</color>
     <color name="homepage_buttons_background">@color/homepage_blue_variant_bg</color>
-    <!--
-    <color name="homepage_display_foreground">@color/homepage_orange_fg</color>
-    <color name="homepage_display_background">@color/homepage_orange_bg</color>
-    -->
     <color name="homepage_gestures_foreground">@color/homepage_purple_fg</color>
     <color name="homepage_gestures_background">@color/homepage_purple_bg</color>
     <color name="homepage_lockscreen_foreground">@color/homepage_yellow_fg</color>
@@ -22,16 +18,8 @@
     <color name="homepage_misc_background">@color/homepage_green_bg</color>
     <color name="homepage_navigation_foreground">@color/homepage_cyan_fg</color>
     <color name="homepage_navigation_background">@color/homepage_cyan_bg</color>
-    <!--
-    <color name="homepage_notification_foreground">@color/homepage_pink_fg</color>
-    <color name="homepage_notification_background">@color/homepage_pink_bg</color>
-    -->
     <color name="homepage_qs_foreground">@color/homepage_red_fg</color>
     <color name="homepage_qs_background">@color/homepage_red_bg</color>
-    <!--
-    <color name="homepage_sound_foreground">@color/homepage_pink_fg</color>
-    <color name="homepage_sound_background">@color/homepage_pink_bg</color>
-    -->
     <color name="homepage_status_bar_foreground">@color/homepage_orange_fg</color>
     <color name="homepage_status_bar_background">@color/homepage_orange_bg</color>
     <color name="homepage_themes_foreground">@color/homepage_blue_fg</color>
