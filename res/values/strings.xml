@@ -214,6 +214,8 @@
     <!-- Lockscreen media art -->
     <string name="ls_media_art_title">Media cover art</string>
     <string name="ls_media_art_summary">Display media cover art when available</string>
+    <string name="ambient_media_art_title">Ambient media cover art</string>
+    <string name="ambient_media_art_summary">Display media cover art on ambient display when available</string>
 
     <string name="ls_media_art_filter_title">Media cover art filter</string>
     <string name="ls_media_art_filter_none">None</string>
