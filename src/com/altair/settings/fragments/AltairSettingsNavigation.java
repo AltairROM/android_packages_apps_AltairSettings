@@ -395,7 +395,8 @@ public class AltairSettingsNavigation extends DashboardFragment implements
         /* Toggle navbar control availability depending on navbar state */
         if (mNavigationActionsPreferencesCat != null) {
             if (force || navbarEnabled) {
-                if (DeviceUtils.isEdgeToEdgeEnabled(getContext())) {
+                if (DeviceUtils.isGestureNavigationEnabled(getContext())) {
+                    // Gesture navigation - add edge long swipe and remove everything else
                     mNavigationActionsPreferencesCat.addPreference(mEdgeLongSwipeAction);
 
                     mNavigationActionsPreferencesCat.removePreference(mNavigationArrowKeys);
@@ -409,17 +410,10 @@ public class AltairSettingsNavigation extends DashboardFragment implements
                             mNavigationAppSwitchLongPressAction);
                     mNavigationActionsPreferencesCat.removePreference(
                             mNavigationAppSwitchDoubleTapAction);
-                } else if (DeviceUtils.isSwipeUpEnabled(getContext())) {
-                    mNavigationActionsPreferencesCat.addPreference(mNavigationBackLongPressAction);
-                    mNavigationActionsPreferencesCat.addPreference(mNavigationHomeLongPressAction);
-                    mNavigationActionsPreferencesCat.addPreference(mNavigationHomeDoubleTapAction);
-
-                    mNavigationActionsPreferencesCat.removePreference(
-                            mNavigationAppSwitchLongPressAction);
-                    mNavigationActionsPreferencesCat.removePreference(
-                            mNavigationAppSwitchDoubleTapAction);
-                    mNavigationActionsPreferencesCat.removePreference(mEdgeLongSwipeAction);
                 } else {
+                    // Three-button navigation - remove edge long wipe and add everything else
+                    mNavigationActionsPreferencesCat.removePreference(mEdgeLongSwipeAction);
+
                     mNavigationActionsPreferencesCat.addPreference(mNavigationBackLongPressAction);
                     mNavigationActionsPreferencesCat.addPreference(mNavigationHomeLongPressAction);
                     mNavigationActionsPreferencesCat.addPreference(mNavigationHomeDoubleTapAction);
@@ -427,8 +421,6 @@ public class AltairSettingsNavigation extends DashboardFragment implements
                             mNavigationAppSwitchLongPressAction);
                     mNavigationActionsPreferencesCat.addPreference(
                             mNavigationAppSwitchDoubleTapAction);
-
-                    mNavigationActionsPreferencesCat.removePreference(mEdgeLongSwipeAction);
                 }
             }
         }
@@ -509,16 +501,12 @@ public class AltairSettingsNavigation extends DashboardFragment implements
                     }
 
                     if (hasNavigationBar()) {
-                        if (DeviceUtils.isEdgeToEdgeEnabled(context)) {
+                        if (DeviceUtils.isGestureNavigationEnabled(context)) {
                             keys.add(KEY_NAVIGATION_ARROW_KEYS);
                             keys.add(KEY_NAVIGATION_HOME_LONG_PRESS);
                             keys.add(KEY_NAVIGATION_HOME_DOUBLE_TAP);
                             keys.add(KEY_NAVIGATION_APP_SWITCH_LONG_PRESS);
                             keys.add(KEY_NAVIGATION_APP_SWITCH_DOUBLE_TAP);
-                        } else if (DeviceUtils.isSwipeUpEnabled(context)) {
-                            keys.add(KEY_NAVIGATION_APP_SWITCH_LONG_PRESS);
-                            keys.add(KEY_NAVIGATION_APP_SWITCH_DOUBLE_TAP);
-                            keys.add(KEY_EDGE_LONG_SWIPE);
                         } else {
                             keys.add(KEY_EDGE_LONG_SWIPE);
                         }
