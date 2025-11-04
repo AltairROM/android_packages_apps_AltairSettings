@@ -28,9 +28,10 @@ import android.view.View;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.SwitchPreference;
 
+import com.altair.settings.utils.DeviceUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -52,15 +53,20 @@ public class AltairSettingsQS extends DashboardFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "AltairSettingsQS";
 
+    private static final String QS_HEADER_CATEGORY = "qs_header_category";
+    private static final String QS_TILE_ACTIONS_CATEGORY = "qs_tile_actions_category";
+
     private static final String KEY_QUICK_PULLDOWN = "qs_quick_pulldown";
     private static final String KEY_SHOW_BRIGHTNESS_SLIDER = "qs_show_brightness_slider";
     private static final String KEY_BRIGHTNESS_SLIDER_POSITION = "qs_brightness_slider_position";
+    private static final String KEY_BRIGHTNESS_SLIDER_HAPTIC = "qs_brightness_slider_haptic";
     private static final String KEY_SHOW_AUTO_BRIGHTNESS = "qs_show_auto_brightness";
     //private static final String KEY_QS_UI_STYLE = "qs_tile_ui_style";
     //private static final String KEY_QS_PANEL_STYLE = "qs_panel_style";
     //private static final String KEY_TILE_ANIMATION_STYLE = "qs_tile_animation_style";
     //private static final String KEY_TILE_ANIMATION_DURATION = "qs_tile_animation_duration";
     //private static final String KEY_TILE_ANIMATION_INTERPOLATOR = "qs_tile_animation_interpolator";
+    private static final String KEY_QS_TILE_HAPTIC = "qs_tile_haptic";
 
     private static final int PULLDOWN_DIR_NONE = 0;
     private static final int PULLDOWN_DIR_RIGHT = 1;
@@ -76,6 +82,8 @@ public class AltairSettingsQS extends DashboardFragment implements
     //private ListPreference mTileAnimationStyle;
     //private CustomSeekBarPreference mTileAnimationDuration;
     //private ListPreference mTileAnimationInterpolator;
+    private Preference mBrightnessSliderHaptic;
+    private Preference mQsTileHaptic;
 
     //private static ThemeUtils mThemeUtils;
 
@@ -90,9 +98,14 @@ public class AltairSettingsQS extends DashboardFragment implements
 
         final Context mContext = getActivity().getApplicationContext();
         final ContentResolver resolver = mContext.getContentResolver();
-        final PreferenceScreen prefScreen = getPreferenceScreen();
+
+        PreferenceCategory headerCategory = findPreference(QS_HEADER_CATEGORY);
+        PreferenceCategory tileActionsCategory = findPreference(QS_TILE_ACTIONS_CATEGORY);
 
         //mThemeUtils = new ThemeUtils(getActivity());
+
+        mBrightnessSliderHaptic = findPreference(KEY_BRIGHTNESS_SLIDER_HAPTIC);
+        mQsTileHaptic = findPreference(KEY_QS_TILE_HAPTIC);
 
         mQuickPulldown = findPreference(KEY_QUICK_PULLDOWN);
         mQuickPulldown.setOnPreferenceChangeListener(this);
@@ -106,13 +119,21 @@ public class AltairSettingsQS extends DashboardFragment implements
         mBrightnessSliderPosition = findPreference(KEY_BRIGHTNESS_SLIDER_POSITION);
         mBrightnessSliderPosition.setEnabled(showSlider);
 
+        boolean hapticAvailable = DeviceUtils.hasVibrator(mContext);
+        if (hapticAvailable) {
+            mBrightnessSliderHaptic.setEnabled(showSlider);
+        } else {
+            headerCategory.removePreference(mBrightnessSliderHaptic);
+            tileActionsCategory.removePreference(mQsTileHaptic);
+        }
+
         mShowAutoBrightness = findPreference(KEY_SHOW_AUTO_BRIGHTNESS);
         boolean automaticAvailable = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_automatic_brightness_available);
         if (automaticAvailable) {
             mShowAutoBrightness.setEnabled(showSlider);
         } else {
-            prefScreen.removePreference(mShowAutoBrightness);
+            headerCategory.removePreference(mShowAutoBrightness);
         }
 
         /*
@@ -178,6 +199,8 @@ public class AltairSettingsQS extends DashboardFragment implements
             case KEY_SHOW_BRIGHTNESS_SLIDER:
                 final boolean value = (Boolean) newValue;
                 mBrightnessSliderPosition.setEnabled(value);
+                if (mBrightnessSliderHaptic != null)
+                    mBrightnessSliderHaptic.setEnabled(value);
                 if (mShowAutoBrightness != null)
                     mShowAutoBrightness.setEnabled(value);
                 return true;
@@ -370,6 +393,12 @@ public class AltairSettingsQS extends DashboardFragment implements
                             com.android.internal.R.bool.config_automatic_brightness_available);
                     if (!automaticAvailable) {
                         keys.add(KEY_SHOW_AUTO_BRIGHTNESS);
+                    }
+
+                    boolean hapticAvailable = DeviceUtils.hasVibrator(context);
+                    if (!hapticAvailable) {
+                        keys.add(KEY_BRIGHTNESS_SLIDER_HAPTIC);
+                        keys.add(KEY_QS_TILE_HAPTIC);
                     }
 
                     return keys;

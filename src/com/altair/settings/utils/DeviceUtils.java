@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2016 The CyanogenMod project
- * Copyright (C) 2017-2022 The LineageOS project
+ * Copyright (C) 2016-2025 crDroid Android Project
+ * Copyright (C) 2019-2025 Altair ROM Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,10 @@ import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
+import android.hardware.fingerprint.FingerprintManager;
+import android.os.Vibrator;
 import android.view.Display;
 import android.view.DisplayCutout;
 import android.view.KeyCharacterMap;
@@ -184,7 +185,7 @@ public class DeviceUtils {
                     return true;
                 }
             }
-        } catch (CameraAccessException | AssertionError e) {
+        } catch (Exception | AssertionError e) {
             // Ignore
         }
         return false;
@@ -201,5 +202,21 @@ public class DeviceUtils {
     public static boolean isEdgeToEdgeEnabled(Context context) {
         return NAV_BAR_MODE_GESTURAL == context.getResources().getInteger(
                 com.android.internal.R.integer.config_navBarInteractionMode);
+    }
+
+    public static boolean hasVibrator(Context context) {
+        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator == null || !vibrator.hasVibrator()) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean hasFingerprint(Context context) {
+        FingerprintManager fp = (FingerprintManager) context.getSystemService(Context.FINGERPRINT_SERVICE);
+        if (fp == null || !fp.isHardwareDetected()) {
+            return false;
+        }
+        return true;
     }
 }

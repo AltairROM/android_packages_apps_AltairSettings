@@ -88,6 +88,7 @@
 
     <!-- Quick Settings header -->
     <PreferenceCategory
+        android:key="qs_header_category"
         android:title="@string/qs_header_category">
 
         <!-- Enable brightness slider -->
@@ -144,6 +145,7 @@
 
     <!-- Quick Settings tile actions -->
     <PreferenceCategory
+        android:key="qs_tile_actions_category"
         android:title="@string/qs_tile_actions_category">
 
         <!-- QS bluetooth dialog -->

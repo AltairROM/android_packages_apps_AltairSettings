@@ -17,7 +17,6 @@
 package com.altair.settings.fragments;
 
 import android.content.Context;
-import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
@@ -28,6 +27,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.SwitchPreference;
 
+import com.altair.settings.utils.DeviceUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -75,17 +75,18 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
         mClockFontPreference = findPreference(KEY_LOCKSCREEN_FONT);
         updateSummary(mClockFontPreference, "android");
 
-        FingerprintManager mFingerprintManager = (FingerprintManager)
-                getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
-
         mFingerprintVib = findPreference(KEY_FP_SUCCESS_VIBRATE);
         mFingerprintVibErr = findPreference(KEY_FP_ERROR_VIBRATE);
         mRippleEffect = findPreference(KEY_RIPPLE_EFFECT);
 
-        if (mFingerprintManager == null || !mFingerprintManager.isHardwareDetected()) {
+        boolean hasFingerprint = DeviceUtils.hasFingerprint(mContext);
+        if (!hasFingerprint) {
+            gestCategory.removePreference(mRippleEffect);
+        }
+        boolean hapticAvailable = DeviceUtils.hasVibrator(mContext);
+        if (!hasFingerprint || !hapticAvailable) {
             gestCategory.removePreference(mFingerprintVib);
             gestCategory.removePreference(mFingerprintVibErr);
-            gestCategory.removePreference(mRippleEffect);
         }
     }
 
@@ -159,12 +160,14 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
 
-                    FingerprintManager mFingerprintManager = (FingerprintManager)
-                            context.getSystemService(Context.FINGERPRINT_SERVICE);
-                    if (mFingerprintManager == null || !mFingerprintManager.isHardwareDetected()) {
+                    boolean hasFingerprint = DeviceUtils.hasFingerprint(context);
+                    if (!hasFingerprint) {
+                        keys.add(KEY_RIPPLE_EFFECT);
+                    }
+                    boolean hapticAvailable = DeviceUtils.hasVibrator(context);
+                    if (!hasFingerprint || !hapticAvailable) {
                         keys.add(KEY_FP_SUCCESS_VIBRATE);
                         keys.add(KEY_FP_ERROR_VIBRATE);
-                        keys.add(KEY_RIPPLE_EFFECT);
                     }
 
                     return keys;
