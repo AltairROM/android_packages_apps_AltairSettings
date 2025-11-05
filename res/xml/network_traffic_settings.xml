@@ -43,7 +43,7 @@
         android:key="network_traffic_autohide"
         android:title="@string/network_traffic_autohide"
         android:summary="@string/network_traffic_autohide_summary"
-        android:defaultValue="true" />
+        android:defaultValue="false" />
 
     <!-- Traffic measurement units -->
     <ListPreference
@@ -55,10 +55,12 @@
         android:persistent="false" />
 
     <!-- Show measurement units -->
-    <lineageos.preference.LineageSecureSettingSwitchPreference
+    <ListPreference
         android:key="network_traffic_show_units"
         android:title="@string/network_traffic_show_units"
-        android:summary="@string/network_traffic_show_units_summary"
-        android:defaultValue="true" />
+        android:summary="%s"
+        android:entries="@array/network_traffic_show_units_entries"
+        android:entryValues="@array/network_traffic_show_units_values"
+        android:persistent="false" />
 
 </PreferenceScreen>
