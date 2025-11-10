@@ -210,6 +210,7 @@
     <string name="pulse_renderer_neon_glow">Neon glow</string>
     <string name="pulse_renderer_retro_vu_meter">Retro VU meter</string>
     <string name="pulse_renderer_minimal_wave">Minimal wave</string>
+    <string name="pulse_renderer_sparkle">Sparkle</string>
 
     <!-- Lockscreen media art -->
     <string name="ls_media_art_title">Media cover art</string>
