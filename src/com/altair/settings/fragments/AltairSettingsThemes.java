@@ -19,6 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.altair.settings.utils.TelephonyUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -80,12 +81,18 @@ public class AltairSettingsThemes extends DashboardFragment implements
         updateSummary(mFontPreference, "android");
         mIconShapePreference = prefScreen.findPreference(KEY_THEME_ICON_SHAPE);
         updateSummary(mIconShapePreference, "android");
-        mSignalIconPreference = prefScreen.findPreference(KEY_THEME_SIGNAL_ICON);
-        updateSummary(mSignalIconPreference, "android");
         mWiFiIconPreference = prefScreen.findPreference(KEY_THEME_WIFI_ICON);
         updateSummary(mWiFiIconPreference, "android");
         mNavbarStylePreference = prefScreen.findPreference(KEY_THEME_NAVBAR_STYLE);
         updateSummary(mNavbarStylePreference, "com.android.launcher3");
+
+        boolean voiceCapable = TelephonyUtils.isVoiceCapable(mContext);
+        if (!voiceCapable) {
+            prefScreen.removePreference(prefScreen.findPreference(KEY_THEME_SIGNAL_ICON));
+        } else {
+            mSignalIconPreference = prefScreen.findPreference(KEY_THEME_SIGNAL_ICON);
+            updateSummary(mSignalIconPreference, "android");
+        }
     }
 
     @Override
@@ -164,6 +171,11 @@ public class AltairSettingsThemes extends DashboardFragment implements
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
+
+                    boolean voiceCapable = TelephonyUtils.isVoiceCapable(context);
+                    if (!voiceCapable) {
+                        keys.add(KEY_THEME_SIGNAL_ICON);
+                    }
 
                     return keys;
                 }
