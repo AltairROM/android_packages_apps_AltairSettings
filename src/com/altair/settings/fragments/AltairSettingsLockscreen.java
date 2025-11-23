@@ -17,6 +17,7 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.SwitchPreference;
 
 import com.altair.settings.utils.DeviceUtils;
+import com.altair.settings.utils.TelephonyUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -33,10 +34,12 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
     private static final String TAG = "AltairSettingsLockscreen";
 
     private static final String LOCKSCREEN_GESTURES_CATEGORY = "lockscreen_gestures_category";
+    private static final String LOCKSCREEN_INTERFACE_CATEGORY = "lockscreen_interface_category";
     private static final String KEY_LOCKSCREEN_FONT = ThemeUtils.LOCKSCREEN_FONT_KEY;
     private static final String KEY_FP_SUCCESS_VIBRATE = "fp_success_vibrate";
     private static final String KEY_FP_ERROR_VIBRATE = "fp_error_vibrate";
     private static final String KEY_RIPPLE_EFFECT = "enable_ripple_effect";
+    private static final String KEY_CARRIER_NAME = "lockscreen_show_carrier";
 
     private Context mContext;
 
@@ -76,6 +79,12 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
         if (!hasFingerprint || !hapticAvailable) {
             gestCategory.removePreference(mFingerprintVib);
             gestCategory.removePreference(mFingerprintVibErr);
+        }
+
+        if (!TelephonyUtils.isVoiceCapable(mContext)) {
+            PreferenceCategory intCategory = findPreference(LOCKSCREEN_INTERFACE_CATEGORY);
+            Preference carrierName = findPreference(KEY_CARRIER_NAME);
+            intCategory.removePreference(carrierName);
         }
     }
 
@@ -157,6 +166,9 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
                     if (!hasFingerprint || !hapticAvailable) {
                         keys.add(KEY_FP_SUCCESS_VIBRATE);
                         keys.add(KEY_FP_ERROR_VIBRATE);
+                    }
+                    if (!TelephonyUtils.isVoiceCapable(context)) {
+                        keys.add(KEY_CARRIER_NAME);
                     }
 
                     return keys;
