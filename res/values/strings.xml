@@ -11,6 +11,8 @@
     <!-- Main menu entry titles -->
     <string name="altair_settings_buttons_title">Buttons</string>
     <string name="altair_settings_buttons_summary">Tweak the actions of physical buttons on the device</string>
+    <string name="altair_settings_device_settings_title">Device</string>
+    <string name="altair_settings_device_settings_summary">Adjust device-specific settings</string>
     <string name="altair_settings_display_title">Display</string>
     <string name="altair_settings_display_summary">Adjust various elements of the display screen</string>
     <string name="altair_settings_gestures_title">Gestures</string>

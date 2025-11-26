@@ -5,6 +5,7 @@
 -->
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lineage="http://schemas.android.com/apk/res-auto"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/altair_settings_activity_title" >
 
@@ -15,6 +16,17 @@
         android:summary="@string/altair_settings_buttons_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsButtons"
         android:icon="@drawable/ic_homepage_buttons"/>
+
+    <!-- Device-specific -->
+    <lineageos.preference.RemotePreference
+        android:key="device_specific_settings"
+        android:title="@string/altair_settings_device_settings_title"
+        android:summary="@string/altair_settings_device_settings_summary"
+        android:icon="@drawable/ic_homepage_device"
+        lineage:requiresAction="org.lineageos.settings.device.DEVICE_SPECIFIC_SETTINGS">
+        <intent
+            android:action="org.lineageos.settings.device.DEVICE_SPECIFIC_SETTINGS"/>
+    </lineageos.preference.RemotePreference>
 
     <!-- Display -->
     <Preference

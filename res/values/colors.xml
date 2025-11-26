@@ -10,6 +10,8 @@
     <color name="homepage_altairsettings_background">@color/homepage_grey_bg</color>
     <color name="homepage_buttons_foreground">@color/homepage_blue_variant_fg</color>
     <color name="homepage_buttons_background">@color/homepage_blue_variant_bg</color>
+    <color name="homepage_device_foreground">@color/homepage_grey_fg</color>
+    <color name="homepage_device_background">@color/homepage_grey_bg</color>
     <color name="homepage_gestures_foreground">@color/homepage_purple_fg</color>
     <color name="homepage_gestures_background">@color/homepage_purple_bg</color>
     <color name="homepage_lockscreen_foreground">@color/homepage_yellow_fg</color>
