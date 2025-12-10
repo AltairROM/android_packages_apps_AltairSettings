@@ -8,6 +8,7 @@ package com.altair.settings.fragments;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
@@ -29,6 +30,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.fuelgauge.BatteryUtils;
 import com.android.settingslib.search.SearchIndexable;
 
 import com.lineage.support.preferences.SystemSettingListPreference;
@@ -48,6 +50,8 @@ public class AltairSettingsStatusBar extends DashboardFragment implements
     private static final String CATEGORY_NETWORK = "network_category";
     private static final String CATEGORY_BATTERY = "status_bar_battery_key";
     private static final String CATEGORY_CLOCK = "status_bar_clock_key";
+
+    private static final String ICON_BLACKLIST = "icon_blacklist";
 
     private static final String KEY_DATA_DISABLED_ICON = "data_disabled_icon";
     private static final String KEY_ROAMING_INDICATOR_ICON = "roaming_indicator_icon";
@@ -83,6 +87,8 @@ public class AltairSettingsStatusBar extends DashboardFragment implements
 
     private PreferenceCategory mStatusBarBatteryCategory;
     private PreferenceCategory mStatusBarClockCategory;
+
+    private boolean mBatteryPresent;
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -127,6 +133,11 @@ public class AltairSettingsStatusBar extends DashboardFragment implements
         mBatteryIcon = new StatusBarIcon(mContext, "battery");
         mStatusBarBatteryCategory = prefScreen.findPreference(CATEGORY_BATTERY);
 
+        Intent intent = BatteryUtils.getBatteryIntent(getContext());
+        if (intent != null) {
+            mBatteryPresent = intent.getBooleanExtra(BatteryManager.EXTRA_PRESENT, true);
+        }
+
         mStatusBarShowBattery = findPreference(STATUS_BAR_SHOW_BATTERY);
         mStatusBarShowBattery.setOnPreferenceChangeListener(this);
 
@@ -150,6 +161,22 @@ public class AltairSettingsStatusBar extends DashboardFragment implements
     @Override
     public void onResume() {
         super.onResume();
+
+        final String curIconBlacklist = Settings.Secure.getString(getContext().getContentResolver(),
+                ICON_BLACKLIST);
+
+        if (TextUtils.delimitedStringContains(curIconBlacklist, ',', "clock")) {
+            getPreferenceScreen().removePreference(mStatusBarClockCategory);
+        } else {
+            getPreferenceScreen().addPreference(mStatusBarClockCategory);
+        }
+
+        if (!mBatteryPresent ||
+                TextUtils.delimitedStringContains(curIconBlacklist, ',', "battery")) {
+            getPreferenceScreen().removePreference(mStatusBarBatteryCategory);
+        } else {
+            getPreferenceScreen().addPreference(mStatusBarBatteryCategory);
+        }
 
         if (DateFormat.is24HourFormat(getActivity())) {
             mStatusBarAmPm.setEnabled(false);
@@ -213,11 +240,6 @@ public class AltairSettingsStatusBar extends DashboardFragment implements
         int position = LineageSettings.Secure.getInt(getActivity().getContentResolver(),
                 LineageSettings.Secure.NETWORK_TRAFFIC_POSITION, /* Center */ 1);
         return mode != 0 && position == 1 ? 1 : 0;
-    }
-
-    private int getClockPosition() {
-        return LineageSettings.System.getInt(getActivity().getContentResolver(),
-                STATUS_BAR_CLOCK_STYLE, 2);
     }
 
     @Override

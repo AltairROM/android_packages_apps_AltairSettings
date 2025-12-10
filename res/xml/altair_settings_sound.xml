@@ -14,11 +14,13 @@
         android:key="volume_panel_category"
         android:title="@string/volume_panel_title" >
 
-        <!-- Show volume panel on left side of screen -->
-        <lineageos.preference.LineageSecureSettingSwitchPreference
+        <!-- Volume panel position -->
+        <lineageos.preference.LineageSecureSettingListPreference
             android:key="volume_panel_on_left"
-            android:title="@string/volume_panel_on_left_title"
-            android:summary="@string/volume_panel_on_left_summary" />
+            android:title="@string/volume_panel_position_title"
+            android:summary="%s"
+            android:entries="@array/volume_panel_position_entries"
+            android:entryValues="@array/volume_panel_position_values" />
 
         <!-- Show per-app volume button in volume dialog -->
         <com.lineage.support.preferences.SystemSettingSwitchPreference

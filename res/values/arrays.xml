@@ -550,4 +550,15 @@
         <item>chase</item>
         <item>comet</item>
     </string-array>
+
+    <!-- Volume panel position -->
+    <string-array name="volume_panel_position_entries" translatable="false">
+        <item>@string/volume_panel_position_left</item>
+        <item>@string/volume_panel_position_right</item>
+    </string-array>
+
+    <string-array name="volume_panel_position_values" translatable="false">
+        <item>1</item>
+        <item>0</item>
+    </string-array>
 </resources>

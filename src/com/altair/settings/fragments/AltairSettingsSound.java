@@ -16,9 +16,10 @@ import android.provider.Settings;
 import android.util.Log;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
+import com.altair.settings.utils.DeviceUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -29,7 +30,6 @@ import com.lineage.support.preferences.CustomSeekBarPreference;
 import java.util.Arrays;
 import java.util.List;
 
-import lineageos.preference.LineageSecureSettingSwitchPreference;
 import lineageos.providers.LineageSettings;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -37,14 +37,15 @@ public class AltairSettingsSound extends DashboardFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "AltairSettingsSound";
 
-    private static final String KEY_VOLUME_PANEL_ON_LEFT = "volume_panel_on_left";
+    private static final String KEY_VOLUME_PANEL_POSITION = "volume_panel_on_left";
+    private static final String KEY_SHOW_APP_VOLUME = "show_app_volume";
     private static final String KEY_MAX_MUSIC_VOLUME = "max_music_volume";
     private static final String KEY_MAX_CALL_VOLUME = "max_call_volume";
     private static final String KEY_MAX_ALARM_VOLUME = "max_alarm_volume";
 
-    private ContentResolver mResolver;
+    private static final String CATEGORY_VOLUME_PANEL = "volume_panel_control";
 
-    private LineageSecureSettingSwitchPreference mVolumePanelOnLeft;
+    private ContentResolver mResolver;
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -60,18 +61,17 @@ public class AltairSettingsSound extends DashboardFragment implements
         final Resources res = getResources();
         final PreferenceScreen prefScreen = getPreferenceScreen();
 
-        // Volume panel on left
-        boolean isAudioPanelOnLeft = LineageSettings.Secure.getIntForUser(mResolver,
-                LineageSettings.Secure.VOLUME_PANEL_ON_LEFT, isAudioPanelOnLeftSide(getActivity()) ? 1 : 0,
-                UserHandle.USER_CURRENT) != 0;
+        final PreferenceCategory volumePanel = prefScreen.findPreference(CATEGORY_VOLUME_PANEL);
 
-        mVolumePanelOnLeft = prefScreen.findPreference(KEY_VOLUME_PANEL_ON_LEFT);
-        mVolumePanelOnLeft.setChecked(isAudioPanelOnLeft);
-
-        // Volume steps
-        setVolumeStepsPreference(prefScreen, KEY_MAX_MUSIC_VOLUME);
-        setVolumeStepsPreference(prefScreen, KEY_MAX_CALL_VOLUME);
-        setVolumeStepsPreference(prefScreen, KEY_MAX_ALARM_VOLUME);
+        final boolean hasVolumeKeys = DeviceUtils.hasVolumeKeys(getActivity());
+        if (hasVolumeKeys) {
+            // Volume steps
+            setVolumeStepsPreference(prefScreen, KEY_MAX_MUSIC_VOLUME);
+            setVolumeStepsPreference(prefScreen, KEY_MAX_CALL_VOLUME);
+            setVolumeStepsPreference(prefScreen, KEY_MAX_ALARM_VOLUME);
+        } else {
+            prefScreen.removePreference(volumePanel);
+        }
     }
 
     private void setVolumeStepsPreference(PreferenceScreen prefScreen, String key) {
@@ -123,17 +123,6 @@ public class AltairSettingsSound extends DashboardFragment implements
         return super.onPreferenceTreeClick(preference);
     }
 
-    private static boolean isAudioPanelOnLeftSide(Context context) {
-        try {
-            Context con = context.createPackageContext("org.lineageos.lineagesettings", 0);
-            int id = con.getResources().getIdentifier("def_volume_panel_on_left",
-                    "bool", "org.lineageos.lineagesettings");
-            return con.getResources().getBoolean(id);
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
-        }
-    }
-
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
@@ -147,6 +136,11 @@ public class AltairSettingsSound extends DashboardFragment implements
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
+
+                    if (!DeviceUtils.hasVolumeKeys(context)) {
+                        keys.add(KEY_VOLUME_PANEL_POSITION);
+                        keys.add(KEY_SHOW_APP_VOLUME);
+                    }
 
                     return keys;
                 }

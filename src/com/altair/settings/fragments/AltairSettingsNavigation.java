@@ -5,9 +5,7 @@
 
 package com.altair.settings.fragments;
 
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVERLAY;
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL_OVERLAY;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -325,20 +323,11 @@ public class AltairSettingsNavigation extends DashboardFragment implements
             return true;
         } else if (preference == mEnableTaskbar) {
             toggleTaskBarDependencies((Boolean) newValue);
-            if ((Boolean) newValue && is2ButtonNavigationEnabled(getContext())) {
-                // Let's switch to gestural mode if user previously had 2 buttons enabled.
-                setButtonNavigationMode(NAV_BAR_MODE_GESTURAL_OVERLAY);
-            }
             LineageSettings.System.putInt(mResolver, LineageSettings.System.ENABLE_TASKBAR,
                     ((Boolean) newValue) ? 1 : 0);
             return true;
         }
         return false;
-    }
-
-    private static boolean is2ButtonNavigationEnabled(Context context) {
-        return NAV_BAR_MODE_2BUTTON == context.getResources().getInteger(
-                com.android.internal.R.integer.config_navBarInteractionMode);
     }
 
     private static void setButtonNavigationMode(String overlayPackage) {

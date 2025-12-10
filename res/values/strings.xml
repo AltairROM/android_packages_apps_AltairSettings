@@ -374,8 +374,9 @@
 
     <!-- Volume panel -->
     <string name="volume_panel_title">Volume panel</string>
-    <string name="volume_panel_on_left_title">Show panel on left</string>
-    <string name="volume_panel_on_left_summary">Display volume panel on the left side of the screen</string>
+    <string name="volume_panel_position_title">Volume panel position</string>
+    <string name="volume_panel_position_left">Left</string>
+    <string name="volume_panel_position_right">Right</string>
     <string name="app_volume_title">Per-app volume control</string>
     <string name="app_volume_summary">Show per-app volume button in volume panel</string>
 

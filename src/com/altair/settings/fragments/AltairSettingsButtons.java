@@ -5,10 +5,6 @@
 
 package com.altair.settings.fragments;
 
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON;
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVERLAY;
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL_OVERLAY;
-
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
