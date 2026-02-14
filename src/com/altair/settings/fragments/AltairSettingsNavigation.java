@@ -59,7 +59,7 @@ public class AltairSettingsNavigation extends DashboardFragment implements
     private static final String KEY_DISABLE_NAV_KEYS = "disable_nav_keys";
     private static final String KEY_ENABLE_TASKBAR = "enable_taskbar";
     private static final String KEY_NAVIGATION_ARROW_KEYS = "navigation_bar_menu_arrow_keys";
-    private static final String KEY_NAV_BAR_INVERSE = "sysui_nav_bar_inverse";
+    private static final String KEY_NAVIGATIONBAR_KEY_ORDER = "navigationbar_key_order";
     private static final String KEY_NAVIGATION_BACK_LONG_PRESS = "navigation_back_long_press";
     private static final String KEY_NAVIGATION_HOME_LONG_PRESS = "navigation_home_long_press";
     private static final String KEY_NAVIGATION_HOME_DOUBLE_TAP = "navigation_home_double_tap";
@@ -189,7 +189,7 @@ public class AltairSettingsNavigation extends DashboardFragment implements
             enableNavigationPreferencesCats(false);
         }
 
-        mNavBarInverse = findPreference(KEY_NAV_BAR_INVERSE);
+        mNavBarInverse = findPreference(KEY_NAVIGATIONBAR_KEY_ORDER);
 
         mEnableTaskbar = findPreference(KEY_ENABLE_TASKBAR);
         if (mEnableTaskbar != null) {
