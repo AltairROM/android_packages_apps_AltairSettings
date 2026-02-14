@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2019-2025 Altair ROM Project
+ * SPDX-FileCopyrightText: 2019-2026 Altair ROM Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -39,11 +39,13 @@ public class AltairSettingsSound extends DashboardFragment implements
 
     private static final String KEY_VOLUME_PANEL_POSITION = "volume_panel_on_left";
     private static final String KEY_SHOW_APP_VOLUME = "show_app_volume";
+    /*
     private static final String KEY_MAX_MUSIC_VOLUME = "max_music_volume";
     private static final String KEY_MAX_CALL_VOLUME = "max_call_volume";
     private static final String KEY_MAX_ALARM_VOLUME = "max_alarm_volume";
 
     private static final String CATEGORY_VOLUME_PANEL = "volume_panel_control";
+    */
 
     private ContentResolver mResolver;
 
@@ -61,6 +63,7 @@ public class AltairSettingsSound extends DashboardFragment implements
         final Resources res = getResources();
         final PreferenceScreen prefScreen = getPreferenceScreen();
 
+        /*
         final PreferenceCategory volumePanel = prefScreen.findPreference(CATEGORY_VOLUME_PANEL);
 
         final boolean hasVolumeKeys = DeviceUtils.hasVolumeKeys(getActivity());
@@ -72,8 +75,10 @@ public class AltairSettingsSound extends DashboardFragment implements
         } else {
             prefScreen.removePreference(volumePanel);
         }
+        */
     }
 
+    /*
     private void setVolumeStepsPreference(PreferenceScreen prefScreen, String key) {
         final int defaultValue = Settings.System.getIntForUser(mResolver, "default_" + key, 15,
                 UserHandle.USER_CURRENT);
@@ -83,6 +88,7 @@ public class AltairSettingsSound extends DashboardFragment implements
         pref.setValue(value);
         pref.setOnPreferenceChangeListener(this);
     }
+    */
 
     @Override
     public int getMetricsCategory() {

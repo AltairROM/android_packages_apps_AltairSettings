@@ -31,7 +31,7 @@
     </PreferenceCategory>
 
     <!-- Volume steps -->
-    <PreferenceCategory
+    <!--<PreferenceCategory
         android:key="volume_steps_category"
         android:title="@string/volume_steps_title" >
 
@@ -58,7 +58,7 @@
             settings:min="7"
             settings:interval="1"
             settings:units="@string/unit_steps" />
-    </PreferenceCategory>
+    </PreferenceCategory>-->
 
     <!-- Miscellaneous -->
     <PreferenceCategory
