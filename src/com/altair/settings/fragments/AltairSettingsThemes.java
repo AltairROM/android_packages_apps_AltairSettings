@@ -39,8 +39,10 @@ public class AltairSettingsThemes extends DashboardFragment implements
     private static final String KEY_THEME_DARK_UI_MODE = "theme_dark_ui_mode";
     private static final String KEY_THEME_FONT = ThemeUtils.FONT_KEY;
     private static final String KEY_THEME_ICON_SHAPE = ThemeUtils.ICON_SHAPE_KEY;
+    /*
     private static final String KEY_THEME_SIGNAL_ICON = ThemeUtils.SIGNAL_ICON_KEY;
     private static final String KEY_THEME_WIFI_ICON = ThemeUtils.WIFI_ICON_KEY;
+    */
     private static final String KEY_THEME_NAVBAR_STYLE = ThemeUtils.NAVBAR_KEY;
 
     private Context mContext;
@@ -53,8 +55,10 @@ public class AltairSettingsThemes extends DashboardFragment implements
 
     private Preference mFontPreference;
     private Preference mIconShapePreference;
+    /*
     private Preference mSignalIconPreference;
     private Preference mWiFiIconPreference;
+    */
     private Preference mNavbarStylePreference;
 
     @Override
@@ -81,11 +85,14 @@ public class AltairSettingsThemes extends DashboardFragment implements
         updateSummary(mFontPreference, "android");
         mIconShapePreference = prefScreen.findPreference(KEY_THEME_ICON_SHAPE);
         updateSummary(mIconShapePreference, "android");
+        /*
         mWiFiIconPreference = prefScreen.findPreference(KEY_THEME_WIFI_ICON);
         updateSummary(mWiFiIconPreference, "android");
+        */
         mNavbarStylePreference = prefScreen.findPreference(KEY_THEME_NAVBAR_STYLE);
         updateSummary(mNavbarStylePreference, "com.android.launcher3");
 
+        /*
         boolean voiceCapable = TelephonyUtils.isVoiceCapable(mContext);
         if (!voiceCapable) {
             prefScreen.removePreference(prefScreen.findPreference(KEY_THEME_SIGNAL_ICON));
@@ -93,6 +100,7 @@ public class AltairSettingsThemes extends DashboardFragment implements
             mSignalIconPreference = prefScreen.findPreference(KEY_THEME_SIGNAL_ICON);
             updateSummary(mSignalIconPreference, "android");
         }
+        */
     }
 
     @Override
@@ -130,12 +138,14 @@ public class AltairSettingsThemes extends DashboardFragment implements
             case KEY_THEME_FONT:
                 updateSummary(mFontPreference, "android");
                 break;
+            /*
             case KEY_THEME_SIGNAL_ICON:
                 updateSummary(mSignalIconPreference, "android");
                 break;
             case KEY_THEME_WIFI_ICON:
                 updateSummary(mWiFiIconPreference, "android");
                 break;
+            */
             case KEY_THEME_NAVBAR_STYLE:
                 updateSummary(mNavbarStylePreference, "com.android.launcher3");
                 break;
@@ -172,10 +182,12 @@ public class AltairSettingsThemes extends DashboardFragment implements
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
 
+                    /*
                     boolean voiceCapable = TelephonyUtils.isVoiceCapable(context);
                     if (!voiceCapable) {
                         keys.add(KEY_THEME_SIGNAL_ICON);
                     }
+                    */
 
                     return keys;
                 }

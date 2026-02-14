@@ -60,16 +60,16 @@
             android:fragment="com.altair.settings.fragments.theme.IconShapesPicker" />
 
         <!-- Signal icon style -->
-        <Preference
+        <!--<Preference
             android:key="android.theme.customization.signal_icon"
             android:title="@string/theme_elements_signal_icon_title"
-            android:fragment="com.altair.settings.fragments.theme.SignalIconsPicker" />
+            android:fragment="com.altair.settings.fragments.theme.SignalIconsPicker" />-->
 
         <!-- Wi-Fi icon style -->
-        <Preference
+        <!--<Preference
             android:key="android.theme.customization.wifi_icon"
             android:title="@string/theme_elements_wifi_icon_title"
-            android:fragment="com.altair.settings.fragments.theme.WifiIconsPicker" />
+            android:fragment="com.altair.settings.fragments.theme.WifiIconsPicker" />-->
 
         <!-- Navigation bar style -->
         <Preference
