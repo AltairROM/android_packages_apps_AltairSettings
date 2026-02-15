@@ -17,11 +17,11 @@
         android:defaultValue="true" />
 
     <!-- Notification row translucency -->
-    <!--<com.lineage.support.preferences.SecureSettingSwitchPreference
+    <com.lineage.support.preferences.SecureSettingSwitchPreference
         android:key="notification_row_transparency"
         android:title="@string/notification_row_transparency_title"
         android:summary="@string/notification_row_transparency_summary"
-        android:defaultValue="true" />-->
+        android:defaultValue="true" />
 
     <!-- Notification row translucency on lockscreen -->
     <com.lineage.support.preferences.SecureSettingSwitchPreference
