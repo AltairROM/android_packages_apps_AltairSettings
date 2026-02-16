@@ -56,9 +56,6 @@ public class AltairSettingsStatusBar extends DashboardFragment implements
     private static final String KEY_DATA_DISABLED_ICON = "data_disabled_icon";
     private static final String KEY_ROAMING_INDICATOR_ICON = "roaming_indicator_icon";
     private static final String KEY_SHOW_FOURG_ICON = "show_fourg_icon";
-    private static final String KEY_SHOW_VOLTE_ICON = "show_volte_icon";
-    private static final String KEY_SHOW_VOWIFI_ICON = "show_vowifi_icon";
-    private static final String KEY_VOLTE_VOWIFI_OVERRIDE = "volte_vowifi_override";
 
     private static final String STATUS_BAR_CLOCK_STYLE = "status_bar_clock";
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
@@ -109,18 +106,11 @@ public class AltairSettingsStatusBar extends DashboardFragment implements
         SystemSettingSwitchPreference roamingIndicatorIcon =
                 findPreference(KEY_ROAMING_INDICATOR_ICON);
         SystemSettingSwitchPreference showFourgIcon = findPreference(KEY_SHOW_FOURG_ICON);
-        SystemSettingSwitchPreference showVoLTEIcon = findPreference(KEY_SHOW_VOLTE_ICON);
-        SystemSettingSwitchPreference showVoWiFiIcon = findPreference(KEY_SHOW_VOWIFI_ICON);
-        SystemSettingSwitchPreference voLTEvoWiFiOverride =
-                findPreference(KEY_VOLTE_VOWIFI_OVERRIDE);
 
         if (!TelephonyUtils.isVoiceCapable(getActivity())) {
             networkCategory.removePreference(dataDisabledIcon);
             networkCategory.removePreference(roamingIndicatorIcon);
             networkCategory.removePreference(showFourgIcon);
-            networkCategory.removePreference(showVoLTEIcon);
-            networkCategory.removePreference(showVoWiFiIcon);
-            networkCategory.removePreference(voLTEvoWiFiOverride);
         }
 
         mClockIcon = new StatusBarIcon(mContext, "clock");
