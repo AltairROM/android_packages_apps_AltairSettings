@@ -78,9 +78,9 @@ public class AltairSettingsStatusBar extends DashboardFragment implements
 
     private LineageSystemSettingListPreference mStatusBarClock;
     private LineageSystemSettingListPreference mStatusBarAmPm;
+    private LineageSystemSettingListPreference mStatusBarBatteryShowPercent;
 
     private SwitchPreferenceCompat mStatusBarShowBattery;
-    private SystemSettingListPreference mStatusBarBatteryShowPercent;
 
     private PreferenceCategory mStatusBarBatteryCategory;
     private PreferenceCategory mStatusBarClockCategory;
@@ -132,10 +132,10 @@ public class AltairSettingsStatusBar extends DashboardFragment implements
         mStatusBarShowBattery.setOnPreferenceChangeListener(this);
 
         mStatusBarBatteryShowPercent = findPreference(STATUS_BAR_SHOW_BATTERY_PERCENT);
-        SystemSettingListPreference statusBarBattery =
+        LineageSystemSettingListPreference statusBarBattery =
                 findPreference(STATUS_BAR_BATTERY_STYLE);
         statusBarBattery.setOnPreferenceChangeListener(this);
-        enableStatusBarBatteryDependents(statusBarBattery.getIntValue(BATTERY_STYLE_PORTRAIT));
+        enableStatusBarBatteryDependents(statusBarBattery.getIntValue(BATTERY_STYLE_TEXT));
     }
 
     @Override

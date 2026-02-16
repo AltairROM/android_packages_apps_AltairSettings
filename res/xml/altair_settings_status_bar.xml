@@ -195,7 +195,7 @@
             android:title="@string/status_bar_show_battery_title" />
 
         <!-- Battery status style -->
-        <com.lineage.support.preferences.SystemSettingListPreference
+        <lineageos.preference.LineageSystemSettingListPreference
             android:key="status_bar_battery_style"
             android:dependency="status_bar_show_battery"
             android:title="@string/status_bar_battery_style_title"
@@ -206,7 +206,7 @@
             android:defaultValue="0" />
 
         <!-- Show battery percentage -->
-        <com.lineage.support.preferences.SystemSettingListPreference
+        <lineageos.preference.LineageSystemSettingListPreference
             android:key="status_bar_show_battery_percent"
             android:dependency="status_bar_show_battery"
             android:title="@string/status_bar_battery_percentage_title"
