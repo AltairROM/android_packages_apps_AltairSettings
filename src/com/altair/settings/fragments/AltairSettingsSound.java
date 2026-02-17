@@ -26,6 +26,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.lineage.support.preferences.CustomSeekBarPreference;
+import com.lineage.support.preferences.SystemSettingSwitchPreference;
 
 import java.util.Arrays;
 import java.util.List;
@@ -76,6 +77,11 @@ public class AltairSettingsSound extends DashboardFragment implements
             prefScreen.removePreference(volumePanel);
         }
         */
+
+        boolean mediaFocus = Settings.System.getIntForUser(getContext().getContentResolver(),
+            Settings.System.MULTI_AUDIO_FOCUS_ENABLED, 0, UserHandle.USER_CURRENT) != 0;
+        SystemSettingSwitchPreference mediaFocusPref = findPreference("multi_audio_focus_enabled");
+        mediaFocusPref.setChecked(mediaFocus);
     }
 
     /*
