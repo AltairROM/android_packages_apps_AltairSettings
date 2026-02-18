@@ -578,13 +578,17 @@
     <string name="launcher_recents_settings_title">Recents</string>
     <string name="launcher_recents_settings_summary">Access recent apps overview settings when using a third-party launcher</string>
 
+    <!-- Ambient display -->
+    <string name="ambient_display_category">Ambient display</string>
+
+    <string name="doze_always_on_wallpaper_title">Ambient wallpaper</string>
+    <string name="doze_always_on_wallpaper_summary">Show lockscreen wallpaper on Ambient Display</string>
+
     <!-- Miscellaneous -->
     <string name="toast_icon_title">Toast icon</string>
     <string name="toast_icon_summary">Display the app icon corresponding with the toast</string>
     <string name="charging_animation_title">Charging animation</string>
     <string name="charging_animation_summary">Display an animation when the device is plugged in</string>
-    <string name="doze_always_on_wallpaper_title">Ambient wallpaper</string>
-    <string name="doze_always_on_wallpaper_summary">Show lockscreen wallpaper on Ambient Display</string>
     <string name="pocket_judge_title">Pocket detection</string>
     <string name="pocket_judge_summary">Block screen and button inputs when device is in pocket</string>
 

@@ -55,6 +55,20 @@
 
     </PreferenceCategory>
 
+    <!-- Ambient display -->
+    <PreferenceCategory
+        android:key="launcher"
+        android:title="@string/ambient_display_category">
+
+        <!-- Ambient Wallpaper -->
+        <com.lineage.support.preferences.SecureSettingSwitchPreference
+            android:key="doze_always_on_wallpaper_enabled"
+            android:title="@string/doze_always_on_wallpaper_title"
+            android:summary="@string/doze_always_on_wallpaper_summary"
+            android:defaultValue="@*android:bool/config_dozeSupportsAodWallpaper" />
+
+    </PreferenceCategory>
+
     <!-- Miscellaneous -->
     <PreferenceCategory
         android:key="miscellaneous"
@@ -80,13 +94,6 @@
             android:title="@string/charging_animation_title"
             android:summary="@string/charging_animation_summary"
             android:defaultValue="true" />
-
-        <!-- Ambient Wallpaper -->
-        <com.lineage.support.preferences.SecureSettingSwitchPreference
-            android:key="doze_always_on_wallpaper_enabled"
-            android:title="@string/doze_always_on_wallpaper_title"
-            android:summary="@string/doze_always_on_wallpaper_summary"
-            android:defaultValue="@*android:bool/config_dozeSupportsAodWallpaper" />
 
         <!-- Pocket Judge -->
         <com.lineage.support.preferences.SystemSettingSwitchPreference
