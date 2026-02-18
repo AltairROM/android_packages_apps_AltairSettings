@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2016-2024 crDroid Android Project
+     SPDX-FileCopyrightText: 2026 Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/doze_display_title">
+
+    <com.lineage.support.preferences.SecureSettingSwitchPreference
+        android:key="doze_enabled"
+        android:title="@string/doze_title"
+        android:summary="@string/doze_summary" />
+
+    <com.lineage.support.preferences.SecureSettingSwitchPreference
+        android:key="doze_always_on"
+        android:title="@string/doze_always_on_title"
+        android:summary="@string/doze_always_on_summary" />
+
+    <Preference
+        android:key="always_on_display_schedule"
+        android:title="@string/always_on_display_schedule_title"
+        android:summary="@string/always_on_display_schedule_summary"
+        android:fragment="com.altair.settings.fragments.ui.doze.AODSchedule"
+        android:dependency="doze_always_on" />
+
+    <com.lineage.support.preferences.SecureSettingSwitchPreference
+        android:key="doze_on_charge"
+        android:title="@string/doze_on_charge_title"
+        android:summary="@string/doze_on_charge_summary" />
+
+    <lineageos.preference.RemotePreference
+        android:key="doze_device_settings"
+        android:title="@string/doze_additional_settings_title"
+        android:summary="@string/doze_additional_settings_summary">
+        <intent
+            android:action="org.lineageos.settings.device.DOZE_SETTINGS" />
+    </lineageos.preference.RemotePreference>
+
+    <PreferenceCategory
+        android:key="doze_sensor"
+        android:title="@string/doze_sensor_title" >
+
+        <com.lineage.support.preferences.SecureSettingSwitchPreference
+            android:key="doze_tilt_gesture"
+            android:defaultValue="false"
+            android:title="@string/tilt_title"
+            android:summary="@string/tilt_summary" />
+
+        <com.lineage.support.preferences.SecureSettingSwitchPreference
+            android:key="doze_pick_up_gesture"
+            android:defaultValue="false"
+            android:title="@string/pickup_title"
+            android:summary="@string/pickup_summary" />
+
+        <com.lineage.support.preferences.SecureSettingSwitchPreference
+            android:key="doze_handwave_gesture"
+            android:defaultValue="false"
+            android:title="@string/handwave_title"
+            android:summary="@string/handwave_summary" />
+
+        <com.lineage.support.preferences.SecureSettingSwitchPreference
+            android:key="doze_pocket_gesture"
+            android:defaultValue="false"
+            android:title="@string/pocket_title"
+            android:summary="@string/pocket_summary" />
+
+        <com.lineage.support.preferences.SecureSettingSwitchPreference
+            android:key="raise_to_wake_gesture"
+            android:defaultValue="false"
+            android:title="@string/raise_to_wake_title"
+            android:summary="@string/raise_to_wake_summary" />
+
+        <com.lineage.support.preferences.SecureSettingSeekBarPreference
+            android:key="doze_gesture_vibrate"
+            android:title="@string/doze_vibrate"
+            android:summary="@string/doze_vibrate_summary"
+            android:defaultValue="0"
+            settings:defaultValueText="@string/disabled"
+            android:max="2000"
+            settings:min="0"
+            settings:interval="10"
+            settings:units="@string/unit_milliseconds" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

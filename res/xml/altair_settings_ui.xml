@@ -60,6 +60,13 @@
         android:key="launcher"
         android:title="@string/ambient_display_category">
 
+        <!-- Ambient Display settings -->
+        <Preference
+            android:key="doze_fragment"
+            android:title="@string/doze_display_title"
+            android:summary="@string/doze_display_summary"
+            android:fragment="com.altair.settings.fragments.ui.DozeSettings" />
+
         <!-- Ambient Wallpaper -->
         <com.lineage.support.preferences.SecureSettingSwitchPreference
             android:key="doze_always_on_wallpaper_enabled"
