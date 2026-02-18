@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2019-2025 Altair ROM Project
+ * SPDX-FileCopyrightText: 2019-2026 Altair ROM Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -11,6 +11,7 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -26,6 +27,10 @@ public class AltairSettingsUI extends DashboardFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "AltairSettingsUI";
 
+    private static final String KEY_POCKET_JUDGE = "pocket_judge";
+
+    private Preference mPocketJudge;
+
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.altair_settings_ui;
@@ -34,6 +39,16 @@ public class AltairSettingsUI extends DashboardFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        final PreferenceScreen prefScreen = getPreferenceScreen();
+        final Resources res = getResources();
+
+        mPocketJudge = (Preference) prefScreen.findPreference(KEY_POCKET_JUDGE);
+        boolean mPocketJudgeSupported = res.getBoolean(
+                com.android.internal.R.bool.config_pocketModeSupported);
+        if (!mPocketJudgeSupported) {
+            prefScreen.removePreference(mPocketJudge);
+        }
     }
 
     @Override
@@ -84,6 +99,13 @@ public class AltairSettingsUI extends DashboardFragment implements
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
+                    final Resources res = context.getResources();
+
+                    boolean mPocketJudgeSupported = res.getBoolean(
+                            com.android.internal.R.bool.config_pocketModeSupported);
+                    if (!mPocketJudgeSupported) {
+                        keys.add(KEY_POCKET_JUDGE);
+                    }
 
                     return keys;
                 }

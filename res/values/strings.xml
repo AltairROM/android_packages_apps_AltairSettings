@@ -585,6 +585,8 @@
     <string name="charging_animation_summary">Display an animation when the device is plugged in</string>
     <string name="doze_always_on_wallpaper_title">Ambient wallpaper</string>
     <string name="doze_always_on_wallpaper_summary">Show lockscreen wallpaper on Ambient Display</string>
+    <string name="pocket_judge_title">Pocket detection</string>
+    <string name="pocket_judge_summary">Block screen and button inputs when device is in pocket</string>
 
     <!-- Advanced restart actions menu -->
     <string name="power_menu_screenshot_title">Screenshot</string>
