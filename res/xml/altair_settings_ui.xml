@@ -67,6 +67,13 @@
             android:summary="@string/doze_always_on_wallpaper_summary"
             android:defaultValue="@*android:bool/config_dozeSupportsAodWallpaper" />
 
+        <!-- Ambient Music Ticker -->
+        <com.lineage.support.preferences.SecureSettingSwitchPreference
+            android:key="pulse_on_new_tracks"
+            android:title="@string/pulse_on_new_tracks_title"
+            android:summary="@string/pulse_on_new_tracks_summary"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 
     <!-- Miscellaneous -->

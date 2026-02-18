@@ -583,6 +583,8 @@
 
     <string name="doze_always_on_wallpaper_title">Ambient wallpaper</string>
     <string name="doze_always_on_wallpaper_summary">Show lockscreen wallpaper on Ambient Display</string>
+    <string name="pulse_on_new_tracks_title">Music ticker</string>
+    <string name="pulse_on_new_tracks_summary">Show music ticker on Ambient Display during track change</string>
 
     <!-- Miscellaneous -->
     <string name="toast_icon_title">Toast icon</string>
