@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     SPDX-FileCopyrightText: 2020-2025 Altair ROM Project
+     SPDX-FileCopyrightText: 2020-2026 Altair ROM Project
      SPDX-License-Identifier: Apache-2.0
 -->
 <PreferenceScreen
@@ -47,6 +47,15 @@
             android:title="@string/navigation_bar_invert_layout_title"
             android:summary="@string/navigation_bar_invert_layout_summary"
             android:defaultValue="false" />
+
+        <!-- Navigation bar layout -->
+        <com.lineage.support.preferences.SecureSettingListPreference
+            android:key="navbar_layout_mode"
+            android:title="@string/navigation_bar_layout_title"
+            android:summary="%s"
+            android:entries="@array/navigation_bar_layout_entries"
+            android:entryValues="@array/navigation_bar_layout_values"
+            android:defaultValue="0" />
 
     </PreferenceCategory>
 

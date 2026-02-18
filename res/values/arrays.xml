@@ -563,4 +563,20 @@
         <item>1</item>
         <item>0</item>
     </string-array>
+
+    <!-- Navigation bar layout -->
+    <string-array name="navigation_bar_layout_entries" translatable="false">
+        <item>@string/navigation_bar_layout_normal</item>
+        <item>@string/navigation_bar_layout_compact</item>
+        <!--<item>@string/navigation_bar_layout_expanded</item>-->
+        <item>@string/navigation_bar_layout_leftleaning</item>
+        <item>@string/navigation_bar_layout_rightleaning</item>
+    </string-array>
+
+    <string-array name="navigation_bar_layout_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 </resources>
