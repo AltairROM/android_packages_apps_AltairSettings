@@ -389,6 +389,7 @@
     <string name="volume_panel_position_title">Volume panel position</string>
     <string name="volume_panel_position_left">Left</string>
     <string name="volume_panel_position_right">Right</string>
+    <string name="volume_dialog_timeout_title">Volume panel timeout</string>
     <string name="app_volume_title">Per-app volume control</string>
     <string name="app_volume_summary">Show per-app volume button in volume panel</string>
 

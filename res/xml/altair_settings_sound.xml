@@ -22,6 +22,16 @@
             android:entries="@array/volume_panel_position_entries"
             android:entryValues="@array/volume_panel_position_values" />
 
+        <!-- Volume panel dismiss timeout -->
+        <com.lineage.support.preferences.SecureSettingSeekBarPreference
+            android:key="volume_dialog_dismiss_timeout"
+            android:title="@string/volume_dialog_timeout_title"
+            android:defaultValue="3000"
+            android:max="10000"
+            settings:min="1000"
+            settings:interval="500"
+            settings:units="@string/unit_milliseconds" />
+
         <!-- Show per-app volume button in volume dialog -->
         <com.lineage.support.preferences.SystemSettingSwitchPreference
             android:key="show_app_volume"
