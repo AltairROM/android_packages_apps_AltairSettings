@@ -55,6 +55,7 @@
     <string name="unit_seconds">seconds</string>
     <string name="unit_milliseconds">milliseconds</string>
     <string name="unit_steps">steps</string>
+    <string name="unit_hz" translatable="false">hz</string>
 
     <!-- Common category titles -->
     <string name="miscellaneous_category">Miscellaneous</string>
@@ -320,6 +321,19 @@
     <string name="less_boring_heads_up_summary">Display popup notifications only for alarm, dialer and messaging app</string>
     <string name="notification_heads_up_timeout_title">Timeout</string>
     <string name="notification_heads_up_timeout_summary">Time to display heads up notifications</string>
+
+    <!-- Blink flashlight for incoming calls -->
+    <string name="notification_flashlight_category">Flashlight</string>
+
+    <string name="flashlight_on_call_title">Blink flashlight for incoming call</string>
+    <string name="flashlight_on_call_disabled">Disabled</string>
+    <string name="flashlight_on_call_ringer">When ringing</string>
+    <string name="flashlight_on_call_no_ringer">When ringer is silent</string>
+    <string name="flashlight_on_call_silent">When entirely silent (no ringer or vibrator)</string>
+    <string name="flashlight_on_call_always">Always</string>
+    <string name="flashlight_on_call_ignore_dnd_title">Ignore DND</string>
+    <string name="flashlight_on_call_ignore_dnd_summary">Whether to flash when Do Not Disturb mode is active</string>
+    <string name="flashlight_on_call_rate_title">Blink rate</string>
 
     <!-- QUICK SETTINGS -->
 
