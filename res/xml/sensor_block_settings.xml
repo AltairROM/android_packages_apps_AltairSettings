@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2016-2025 crDroid Android Project
+     SPDX-FileCopyrightText: 2026 Altair ROM Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/sensor_block_title">
+
+    <!-- Master switch -->
+    <lineageos.preference.GlobalSettingMainSwitchPreference
+        android:key="sensor_block"
+        android:title="@string/enable" />
+
+    <!-- App picker activity for sensor block -->
+    <PreferenceCategory
+        android:title="@string/sensor_block_app_picker_title"
+        android:dependency="sensor_block"
+        android:key="sensor_block_applications">
+        <Preference
+            android:key="add_sensor_block_packages"
+            android:icon="@drawable/ic_menu_add_white"
+            android:title="@string/add_sensor_block_package_title" />
+    </PreferenceCategory>
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="sensor_block_footer"
+        android:selectable="false"
+        settings:searchable="false"
+        android:dependency="sensor_block" />
+</PreferenceScreen>
