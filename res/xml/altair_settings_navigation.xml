@@ -41,14 +41,14 @@
             android:summary="@string/navigation_bar_arrow_keys_summary"
             android:defaultValue="false" />
 
-        <!-- Invert navigation bar layout -->
+        <!-- Navigation bar key order -->
         <lineageos.preference.SecureSettingSwitchPreference
             android:key="navigationbar_key_order"
-            android:title="@string/navigation_bar_invert_layout_title"
-            android:summary="@string/navigation_bar_invert_layout_summary"
+            android:title="@string/navigation_bar_key_order_title"
+            android:summary="@string/navigation_bar_key_order_summary"
             android:defaultValue="false" />
 
-        <!-- Navigation bar layout -->
+        <!-- Navigation bar button layout -->
         <com.lineage.support.preferences.SecureSettingListPreference
             android:key="navbar_layout_mode"
             android:title="@string/navigation_bar_layout_title"

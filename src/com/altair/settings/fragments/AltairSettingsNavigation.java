@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2019-2025 Altair ROM Project
+ * SPDX-FileCopyrightText: 2019-2026 Altair ROM Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -57,17 +57,17 @@ public class AltairSettingsNavigation extends DashboardFragment implements
     private static final String TAG = "AltairSettingsNavigation";
 
     private static final String KEY_DISABLE_NAV_KEYS = "disable_nav_keys";
+
     private static final String KEY_ENABLE_TASKBAR = "enable_taskbar";
-    private static final String KEY_NAVIGATION_ARROW_KEYS = "navigation_bar_menu_arrow_keys";
-    private static final String KEY_NAVIGATIONBAR_KEY_ORDER = "navigationbar_key_order";
-    private static final String KEY_NAVIGATION_BACK_LONG_PRESS = "navigation_back_long_press";
-    private static final String KEY_NAVIGATION_HOME_LONG_PRESS = "navigation_home_long_press";
-    private static final String KEY_NAVIGATION_HOME_DOUBLE_TAP = "navigation_home_double_tap";
-    private static final String KEY_NAVIGATION_APP_SWITCH_PRESS = "navigation_app_switch_press";
-    private static final String KEY_NAVIGATION_APP_SWITCH_LONG_PRESS =
-            "navigation_app_switch_long_press";
-    private static final String KEY_NAVIGATION_APP_SWITCH_DOUBLE_TAP =
-            "navigation_app_switch_double_tap";
+    private static final String KEY_NAVBAR_ARROW_KEYS = "navigation_bar_menu_arrow_keys";
+    private static final String KEY_NAVBAR_KEY_ORDER = "navigationbar_key_order";
+    private static final String KEY_NAVBAR_LAYOUT_MODE = "navbar_layout_mode";
+
+    private static final String KEY_BACK_LONG_PRESS = "navigation_back_long_press";
+    private static final String KEY_HOME_LONG_PRESS = "navigation_home_long_press";
+    private static final String KEY_HOME_DOUBLE_TAP = "navigation_home_double_tap";
+    private static final String KEY_APP_SWITCH_LONG_PRESS = "navigation_app_switch_long_press";
+    private static final String KEY_APP_SWITCH_DOUBLE_TAP = "navigation_app_switch_double_tap";
     private static final String KEY_EDGE_LONG_SWIPE = "navigation_bar_edge_long_swipe";
 
     private static final String CATEGORY_NAVBAR_OPTIONS = "navigation_bar_options_category";
@@ -78,18 +78,21 @@ public class AltairSettingsNavigation extends DashboardFragment implements
     private ContentResolver mResolver;
 
     private SwitchPreferenceCompat mDisableNavigationKeys;
+
     private SwitchPreferenceCompat mEnableTaskbar;
-    private SwitchPreferenceCompat mNavigationArrowKeys;
-    private SwitchPreferenceCompat mNavBarInverse;
-    private ListPreference mNavigationBackLongPressAction;
-    private ListPreference mNavigationHomeLongPressAction;
-    private ListPreference mNavigationHomeDoubleTapAction;
-    private ListPreference mNavigationAppSwitchLongPressAction;
-    private ListPreference mNavigationAppSwitchDoubleTapAction;
+    private SwitchPreferenceCompat mNavbarArrowKeys;
+    private SwitchPreferenceCompat mNavbarKeyOrder;
+    private ListPreference mNavbarLayout;
+
+    private ListPreference mBackLongPressAction;
+    private ListPreference mHomeLongPressAction;
+    private ListPreference mHomeDoubleTapAction;
+    private ListPreference mAppSwitchLongPressAction;
+    private ListPreference mAppSwitchDoubleTapAction;
     private ListPreference mEdgeLongSwipeAction;
 
-    private PreferenceCategory mNavigationOptionsPreferencesCat;
-    private PreferenceCategory mNavigationActionsPreferencesCat;
+    private PreferenceCategory mNavigationOptionsCategory;
+    private PreferenceCategory mNavigationActionsCategory;
 
     private LineageHardwareManager mHardware;
 
@@ -114,8 +117,8 @@ public class AltairSettingsNavigation extends DashboardFragment implements
         // Force Navigation bar related options
         mDisableNavigationKeys = findPreference(KEY_DISABLE_NAV_KEYS);
 
-        mNavigationOptionsPreferencesCat = findPreference(CATEGORY_NAVBAR_OPTIONS);
-        mNavigationActionsPreferencesCat = findPreference(CATEGORY_NAVBAR_ACTIONS);
+        mNavigationOptionsCategory = findPreference(CATEGORY_NAVBAR_OPTIONS);
+        mNavigationActionsCategory = findPreference(CATEGORY_NAVBAR_ACTIONS);
 
         Action defaultBackLongPressAction = Action.fromIntSafe(res.getInteger(
                 org.lineageos.platform.internal.R.integer.config_longPressOnBackBehavior));
@@ -147,26 +150,32 @@ public class AltairSettingsNavigation extends DashboardFragment implements
                 Action.NOTHING);
 
         // Navigation bar arrow keys while typing
-        mNavigationArrowKeys = findPreference(KEY_NAVIGATION_ARROW_KEYS);
+        mNavbarArrowKeys = findPreference(KEY_NAVBAR_ARROW_KEYS);
+
+        // Navigation bar key order
+        mNavbarKeyOrder = findPreference(KEY_NAVBAR_KEY_ORDER);
+
+        // Navigation bar layout mode
+        mNavbarLayout = findPreference(KEY_NAVBAR_LAYOUT_MODE);
 
         // Navigation bar back long press
-        mNavigationBackLongPressAction = initList(KEY_NAVIGATION_BACK_LONG_PRESS,
+        mBackLongPressAction = initList(KEY_BACK_LONG_PRESS,
                 backLongPressAction);
 
         // Navigation bar home long press
-        mNavigationHomeLongPressAction = initList(KEY_NAVIGATION_HOME_LONG_PRESS,
+        mHomeLongPressAction = initList(KEY_HOME_LONG_PRESS,
                 homeLongPressAction);
 
         // Navigation bar home double tap
-        mNavigationHomeDoubleTapAction = initList(KEY_NAVIGATION_HOME_DOUBLE_TAP,
+        mHomeDoubleTapAction = initList(KEY_HOME_DOUBLE_TAP,
                 homeDoubleTapAction);
 
         // Navigation bar app switch long press
-        mNavigationAppSwitchLongPressAction = initList(KEY_NAVIGATION_APP_SWITCH_LONG_PRESS,
+        mAppSwitchLongPressAction = initList(KEY_APP_SWITCH_LONG_PRESS,
                 appSwitchLongPressAction);
 
         // Navigation bar app switch double tap
-        mNavigationAppSwitchDoubleTapAction = initList(KEY_NAVIGATION_APP_SWITCH_DOUBLE_TAP,
+        mAppSwitchDoubleTapAction = initList(KEY_APP_SWITCH_DOUBLE_TAP,
                 appSwitchDoubleTapAction);
 
         // Edge long swipe gesture
@@ -176,7 +185,7 @@ public class AltairSettingsNavigation extends DashboardFragment implements
         if (isKeyDisablerSupported(getActivity())) {
             // Remove keys that can be provided by the navbar
             updateDisableNavkeysOption();
-            enableNavigationPreferencesCats(mDisableNavigationKeys.isChecked());
+            enableNavigationCategories(mDisableNavigationKeys.isChecked());
             mDisableNavigationKeys.setDisableDependentsState(true);
         } else {
             prefScreen.removePreference(mDisableNavigationKeys);
@@ -186,16 +195,13 @@ public class AltairSettingsNavigation extends DashboardFragment implements
         // Only show the navigation bar category on devices that have a navigation bar
         // or support disabling the hardware keys
         if (!hasNavigationBar() && !isKeyDisablerSupported(getActivity())) {
-            enableNavigationPreferencesCats(false);
+            enableNavigationCategories(false);
         }
-
-        mNavBarInverse = findPreference(KEY_NAVIGATIONBAR_KEY_ORDER);
 
         mEnableTaskbar = findPreference(KEY_ENABLE_TASKBAR);
         if (mEnableTaskbar != null) {
             if (!isLargeScreen(getContext()) || !hasNavigationBar()) {
-                mNavigationOptionsPreferencesCat.removePreference(mEnableTaskbar);
-                mNavigationActionsPreferencesCat.removePreference(mEnableTaskbar);
+                mNavigationActionsCategory.removePreference(mEnableTaskbar);
             } else {
                 mEnableTaskbar.setOnPreferenceChangeListener(this);
                 mEnableTaskbar.setChecked(LineageSettings.System.getInt(mResolver,
@@ -224,20 +230,20 @@ public class AltairSettingsNavigation extends DashboardFragment implements
         String[] actionEntries = entries.toArray(new String[0]);
         String[] actionValues = values.toArray(new String[0]);
 
-        mNavigationBackLongPressAction.setEntries(actionEntries);
-        mNavigationBackLongPressAction.setEntryValues(actionValues);
+        mBackLongPressAction.setEntries(actionEntries);
+        mBackLongPressAction.setEntryValues(actionValues);
 
-        mNavigationHomeLongPressAction.setEntries(actionEntries);
-        mNavigationHomeLongPressAction.setEntryValues(actionValues);
+        mHomeLongPressAction.setEntries(actionEntries);
+        mHomeLongPressAction.setEntryValues(actionValues);
 
-        mNavigationHomeDoubleTapAction.setEntries(actionEntries);
-        mNavigationHomeDoubleTapAction.setEntryValues(actionValues);
+        mHomeDoubleTapAction.setEntries(actionEntries);
+        mHomeDoubleTapAction.setEntryValues(actionValues);
 
-        mNavigationAppSwitchLongPressAction.setEntries(actionEntries);
-        mNavigationAppSwitchLongPressAction.setEntryValues(actionValues);
+        mAppSwitchLongPressAction.setEntries(actionEntries);
+        mAppSwitchLongPressAction.setEntryValues(actionValues);
 
-        mNavigationAppSwitchDoubleTapAction.setEntries(actionEntries);
-        mNavigationAppSwitchDoubleTapAction.setEntryValues(actionValues);
+        mAppSwitchDoubleTapAction.setEntries(actionEntries);
+        mAppSwitchDoubleTapAction.setEntryValues(actionValues);
 
         mEdgeLongSwipeAction.setEntries(actionEntries);
         mEdgeLongSwipeAction.setEntryValues(actionValues);
@@ -297,23 +303,23 @@ public class AltairSettingsNavigation extends DashboardFragment implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mNavigationBackLongPressAction) {
+        if (preference == mBackLongPressAction) {
             handleListChange((ListPreference) preference, newValue,
                     LineageSettings.System.KEY_BACK_LONG_PRESS_ACTION);
             return true;
-        } else if (preference == mNavigationHomeLongPressAction) {
+        } else if (preference == mHomeLongPressAction) {
             handleListChange((ListPreference) preference, newValue,
                     LineageSettings.System.KEY_HOME_LONG_PRESS_ACTION);
             return true;
-        } else if (preference == mNavigationHomeDoubleTapAction) {
+        } else if (preference == mHomeDoubleTapAction) {
             handleListChange((ListPreference) preference, newValue,
                     LineageSettings.System.KEY_HOME_DOUBLE_TAP_ACTION);
             return true;
-        } else if (preference == mNavigationAppSwitchLongPressAction) {
+        } else if (preference == mAppSwitchLongPressAction) {
             handleListChange((ListPreference) preference, newValue,
                     LineageSettings.System.KEY_APP_SWITCH_LONG_PRESS_ACTION);
             return true;
-        } else if (preference == mNavigationAppSwitchDoubleTapAction) {
+        } else if (preference == mAppSwitchDoubleTapAction) {
             handleListChange((ListPreference) preference, newValue,
                     LineageSettings.System.KEY_APP_SWITCH_DOUBLE_TAP_ACTION);
             return true;
@@ -347,13 +353,14 @@ public class AltairSettingsNavigation extends DashboardFragment implements
     }
 
     private void toggleTaskBarDependencies(boolean enabled) {
-        enablePreference(mNavigationArrowKeys, !enabled);
-        enablePreference(mNavBarInverse, !enabled);
-        enablePreference(mNavigationBackLongPressAction, !enabled);
-        enablePreference(mNavigationHomeLongPressAction, !enabled);
-        enablePreference(mNavigationHomeDoubleTapAction, !enabled);
-        enablePreference(mNavigationAppSwitchLongPressAction, !enabled);
-        enablePreference(mNavigationAppSwitchDoubleTapAction, !enabled);
+        enablePreference(mNavbarArrowKeys, !enabled);
+        enablePreference(mNavbarKeyOrder, !enabled);
+        enablePreference(mNavbarLayout, !enabled);
+        enablePreference(mBackLongPressAction, !enabled);
+        enablePreference(mHomeLongPressAction, !enabled);
+        enablePreference(mHomeDoubleTapAction, !enabled);
+        enablePreference(mAppSwitchLongPressAction, !enabled);
+        enablePreference(mAppSwitchDoubleTapAction, !enabled);
     }
 
     private static void writeDisableNavkeysOption(Context context, boolean enabled) {
@@ -369,44 +376,50 @@ public class AltairSettingsNavigation extends DashboardFragment implements
     }
 
     private void updateDisableNavkeysCategories(boolean navbarEnabled, boolean force) {
-
-        /* Toggle navbar control availability depending on navbar state */
-        if (mNavigationActionsPreferencesCat != null) {
+        // Toggle navbar options and actions depending on navbar state
+        if (mNavigationOptionsCategory != null && mNavigationActionsCategory != null) {
             if (force || navbarEnabled) {
                 if (DeviceUtils.isGestureNavigationEnabled(getContext())) {
                     // Gesture navigation - add edge long swipe and remove everything else
-                    mNavigationActionsPreferencesCat.addPreference(mEdgeLongSwipeAction);
+                    mNavigationOptionsCategory.removePreference(mNavbarArrowKeys);
+                    mNavigationOptionsCategory.removePreference(mNavbarKeyOrder);
+                    mNavigationOptionsCategory.removePreference(mNavbarLayout);
 
-                    mNavigationActionsPreferencesCat.removePreference(mNavigationArrowKeys);
-                    mNavigationActionsPreferencesCat.removePreference(
-                            mNavigationBackLongPressAction);
-                    mNavigationActionsPreferencesCat.removePreference(
-                            mNavigationHomeLongPressAction);
-                    mNavigationActionsPreferencesCat.removePreference(
-                            mNavigationHomeDoubleTapAction);
-                    mNavigationActionsPreferencesCat.removePreference(
-                            mNavigationAppSwitchLongPressAction);
-                    mNavigationActionsPreferencesCat.removePreference(
-                            mNavigationAppSwitchDoubleTapAction);
+                    mNavigationActionsCategory.removePreference(mBackLongPressAction);
+                    mNavigationActionsCategory.removePreference(mHomeLongPressAction);
+                    mNavigationActionsCategory.removePreference(mHomeDoubleTapAction);
+                    mNavigationActionsCategory.removePreference(mAppSwitchLongPressAction);
+                    mNavigationActionsCategory.removePreference(mAppSwitchDoubleTapAction);
+                    mNavigationActionsCategory.addPreference(mEdgeLongSwipeAction);
                 } else {
                     // Three-button navigation - remove edge long wipe and add everything else
-                    mNavigationActionsPreferencesCat.removePreference(mEdgeLongSwipeAction);
+                    mNavigationOptionsCategory.addPreference(mNavbarArrowKeys);
+                    mNavigationOptionsCategory.addPreference(mNavbarKeyOrder);
+                    mNavigationOptionsCategory.addPreference(mNavbarLayout);
 
-                    mNavigationActionsPreferencesCat.addPreference(mNavigationBackLongPressAction);
-                    mNavigationActionsPreferencesCat.addPreference(mNavigationHomeLongPressAction);
-                    mNavigationActionsPreferencesCat.addPreference(mNavigationHomeDoubleTapAction);
-                    mNavigationActionsPreferencesCat.addPreference(
-                            mNavigationAppSwitchLongPressAction);
-                    mNavigationActionsPreferencesCat.addPreference(
-                            mNavigationAppSwitchDoubleTapAction);
+                    mNavigationActionsCategory.addPreference(mBackLongPressAction);
+                    mNavigationActionsCategory.addPreference(mHomeLongPressAction);
+                    mNavigationActionsCategory.addPreference(mHomeDoubleTapAction);
+                    mNavigationActionsCategory.addPreference(mAppSwitchLongPressAction);
+                    mNavigationActionsCategory.addPreference(mAppSwitchDoubleTapAction);
+                    mNavigationActionsCategory.removePreference(mEdgeLongSwipeAction);
                 }
             }
         }
     }
 
-    private void enableNavigationPreferencesCats(boolean enable) {
-        mNavigationOptionsPreferencesCat.setEnabled(enable);
-        mNavigationActionsPreferencesCat.setEnabled(enable);
+    private void enableNavigationCategories(boolean enable) {
+        setCategoryEnabled(mNavigationOptionsCategory, enable);
+        setCategoryEnabled(mNavigationActionsCategory, enable);
+    }
+
+    private void setCategoryEnabled(PreferenceCategory category, boolean enable) {
+        if (category != null) {
+            category.setEnabled(enable);
+            for (int i = 0; i < category.getPreferenceCount(); i++) {
+                category.getPreference(i).setEnabled(enable);
+            }
+        }
     }
 
     private static boolean hasNavigationBar() {
@@ -440,7 +453,7 @@ public class AltairSettingsNavigation extends DashboardFragment implements
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference == mDisableNavigationKeys) {
             mDisableNavigationKeys.setEnabled(false);
-            enableNavigationPreferencesCats(false);
+            enableNavigationCategories(false);
             if (!mDisableNavigationKeys.isChecked()) {
                 setButtonNavigationMode(NAV_BAR_MODE_3BUTTON_OVERLAY);
             }
@@ -451,7 +464,7 @@ public class AltairSettingsNavigation extends DashboardFragment implements
                 @Override
                 public void run() {
                     mDisableNavigationKeys.setEnabled(true);
-                    enableNavigationPreferencesCats(mDisableNavigationKeys.isChecked());
+                    enableNavigationCategories(mDisableNavigationKeys.isChecked());
                     updateDisableNavkeysCategories(mDisableNavigationKeys.isChecked(), false);
                 }
             }, 1000);
@@ -480,11 +493,14 @@ public class AltairSettingsNavigation extends DashboardFragment implements
 
                     if (hasNavigationBar()) {
                         if (DeviceUtils.isGestureNavigationEnabled(context)) {
-                            keys.add(KEY_NAVIGATION_ARROW_KEYS);
-                            keys.add(KEY_NAVIGATION_HOME_LONG_PRESS);
-                            keys.add(KEY_NAVIGATION_HOME_DOUBLE_TAP);
-                            keys.add(KEY_NAVIGATION_APP_SWITCH_LONG_PRESS);
-                            keys.add(KEY_NAVIGATION_APP_SWITCH_DOUBLE_TAP);
+                            keys.add(KEY_NAVBAR_ARROW_KEYS);
+                            keys.add(KEY_NAVBAR_KEY_ORDER);
+                            keys.add(KEY_NAVBAR_LAYOUT_MODE);
+                            keys.add(KEY_BACK_LONG_PRESS);
+                            keys.add(KEY_HOME_LONG_PRESS);
+                            keys.add(KEY_HOME_DOUBLE_TAP);
+                            keys.add(KEY_APP_SWITCH_LONG_PRESS);
+                            keys.add(KEY_APP_SWITCH_DOUBLE_TAP);
                         } else {
                             keys.add(KEY_EDGE_LONG_SWIPE);
                         }
