@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     SPDX-FileCopyrightText: 2020-2025 Altair ROM Project
+     SPDX-FileCopyrightText: 2020-2026 Altair ROM Project
      SPDX-License-Identifier: Apache-2.0
 -->
 <PreferenceScreen
@@ -22,6 +22,22 @@
         android:title="@string/button_backlight_title"
         android:dialogTitle="@string/button_backlight_title"
         android:persistent="false" />
+
+    <!-- Short press volume down and power buttons for partial screenshot -->
+    <lineageos.preference.LineageSystemSettingSwitchPreference
+        android:key="click_partial_screenshot"
+        android:title="@string/click_partial_screenshot_title"
+        android:summary="@string/click_partial_screenshot_summary"
+        android:defaultValue="false" />
+
+    <!-- Launch additional button settings -->
+    <lineageos.preference.RemotePreference
+        android:key="additional_buttons"
+        android:title="@string/additional_buttons_title"
+        lineage:requiresAction="org.lineageos.settings.device.ADDITIONAL_BUTTONS_SETTINGS">
+        <intent
+            android:action="org.lineageos.settings.device.ADDITIONAL_BUTTONS_SETTINGS" />
+    </lineageos.preference.RemotePreference>
 
     <!-- Power button -->
     <PreferenceCategory
@@ -283,29 +299,6 @@
             android:key="swap_volume_buttons"
             android:title="@string/swap_volume_buttons_title"
             android:summary="@string/swap_volume_buttons_summary" />
-    </PreferenceCategory>
-
-    <!-- Extras -->
-    <PreferenceCategory
-        android:key="extras_category"
-        android:title="@string/extras_title" >
-
-        <!-- Launch additional button settings -->
-        <lineageos.preference.RemotePreference
-            android:key="additional_buttons"
-            android:title="@string/additional_buttons_title"
-            lineage:requiresAction="org.lineageos.settings.device.ADDITIONAL_BUTTONS_SETTINGS">
-            <intent
-                android:action="org.lineageos.settings.device.ADDITIONAL_BUTTONS_SETTINGS" />
-        </lineageos.preference.RemotePreference>
-
-        <!-- Short press volume down and power buttons for partial screenshot -->
-        <lineageos.preference.LineageSystemSettingSwitchPreference
-            android:key="click_partial_screenshot"
-            android:title="@string/click_partial_screenshot_title"
-            android:summary="@string/click_partial_screenshot_summary"
-            android:defaultValue="false" />
-
     </PreferenceCategory>
 
 </PreferenceScreen>

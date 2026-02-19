@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2019-2025 Altair ROM Project
+ * SPDX-FileCopyrightText: 2019-2026 Altair ROM Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -49,7 +49,12 @@ public class AltairSettingsButtons extends DashboardFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "AltairSettingsButtons";
 
+    private static final String KEY_SWAP_CAPACITIVE_KEYS = "swap_capacitive_keys";
     private static final String KEY_BUTTON_BACKLIGHT = "button_backlight";
+    private static final String KEY_CLICK_PARTIAL_SCREENSHOT =
+            "click_partial_screenshot";
+    private static final String KEY_ADDITIONAL_BUTTONS = "additional_buttons";
+
     private static final String KEY_BACK_WAKE_SCREEN = "back_wake_screen";
     private static final String KEY_CAMERA_LAUNCH = "camera_launch";
     private static final String KEY_CAMERA_SLEEP_ON_RELEASE = "camera_sleep_on_release";
@@ -79,9 +84,6 @@ public class AltairSettingsButtons extends DashboardFragment implements
             "torch_long_press_power_gesture";
     private static final String KEY_TORCH_LONG_PRESS_POWER_TIMEOUT =
             "torch_long_press_power_timeout";
-    private static final String KEY_CLICK_PARTIAL_SCREENSHOT =
-            "click_partial_screenshot";
-    private static final String KEY_SWAP_CAPACITIVE_KEYS = "swap_capacitive_keys";
 
     private static final String CATEGORY_POWER = "power_key";
     private static final String CATEGORY_HOME = "home_key";
@@ -92,9 +94,10 @@ public class AltairSettingsButtons extends DashboardFragment implements
     private static final String CATEGORY_CAMERA = "camera_key";
     private static final String CATEGORY_VOLUME = "volume_keys";
     private static final String CATEGORY_BACKLIGHT = "key_backlight";
-    private static final String CATEGORY_EXTRAS = "extras_category";
 
     private ContentResolver mResolver;
+
+    private SwitchPreferenceCompat mSwapCapacitiveKeys;
 
     private ListPreference mBackLongPressAction;
     private ListPreference mHomeLongPressAction;
@@ -113,7 +116,6 @@ public class AltairSettingsButtons extends DashboardFragment implements
     private SwitchPreferenceCompat mPowerEndCall;
     private SwitchPreferenceCompat mHomeAnswerCall;
     private ListPreference mTorchLongPressPowerTimeout;
-    private SwitchPreferenceCompat mSwapCapacitiveKeys;
 
     private LineageHardwareManager mHardware;
 
@@ -158,7 +160,6 @@ public class AltairSettingsButtons extends DashboardFragment implements
         final PreferenceCategory appSwitchCategory = prefScreen.findPreference(CATEGORY_APPSWITCH);
         final PreferenceCategory volumeCategory = prefScreen.findPreference(CATEGORY_VOLUME);
         final PreferenceCategory cameraCategory = prefScreen.findPreference(CATEGORY_CAMERA);
-        final PreferenceCategory extrasCategory = prefScreen.findPreference(CATEGORY_EXTRAS);
 
         // Power button ends calls.
         mPowerEndCall = findPreference(KEY_POWER_END_CALL);
@@ -349,7 +350,7 @@ public class AltairSettingsButtons extends DashboardFragment implements
                 mSwapVolumeButtons.setChecked(swapVolumeKeys > 0);
             }
         } else {
-            extrasCategory.removePreference(findPreference(KEY_CLICK_PARTIAL_SCREENSHOT));
+            prefScreen.removePreference(findPreference(KEY_CLICK_PARTIAL_SCREENSHOT));
         }
         if (!hasVolumeKeys || volumeCategory.getPreferenceCount() == 0) {
             prefScreen.removePreference(volumeCategory);
@@ -720,92 +721,71 @@ public class AltairSettingsButtons extends DashboardFragment implements
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
 
-                    if (!TelephonyUtils.isVoiceCapable(context)) {
-                        keys.add(KEY_POWER_END_CALL);
-                        keys.add(KEY_HOME_ANSWER_CALL);
-                        keys.add(KEY_VOLUME_ANSWER_CALL);
-                    }
-
-                    if (!DeviceUtils.hasBackKey(context)) {
-                        keys.add(CATEGORY_BACK);
-                        keys.add(KEY_BACK_LONG_PRESS);
-                        keys.add(KEY_BACK_WAKE_SCREEN);
-                    } else if (!DeviceUtils.canWakeUsingHomeKey(context)) {
-                        keys.add(KEY_BACK_WAKE_SCREEN);
-                    }
-
-                    if (!DeviceUtils.hasHomeKey(context)) {
-                        keys.add(CATEGORY_HOME);
-                        keys.add(KEY_HOME_LONG_PRESS);
-                        keys.add(KEY_HOME_DOUBLE_TAP);
-                        keys.add(KEY_HOME_ANSWER_CALL);
-                        keys.add(KEY_HOME_WAKE_SCREEN);
-                    } else if (!DeviceUtils.canWakeUsingHomeKey(context)) {
-                        keys.add(KEY_HOME_WAKE_SCREEN);
-                    }
-
-                    if (!DeviceUtils.hasMenuKey(context)) {
-                        keys.add(CATEGORY_MENU);
-                        keys.add(KEY_MENU_PRESS);
-                        keys.add(KEY_MENU_LONG_PRESS);
-                        keys.add(KEY_MENU_WAKE_SCREEN);
-                    } else if (!DeviceUtils.canWakeUsingMenuKey(context)) {
-                        keys.add(KEY_MENU_WAKE_SCREEN);
-                    }
-
-                    if (!DeviceUtils.hasAssistKey(context)) {
-                        keys.add(CATEGORY_ASSIST);
-                        keys.add(KEY_ASSIST_PRESS);
-                        keys.add(KEY_ASSIST_LONG_PRESS);
-                        keys.add(KEY_ASSIST_WAKE_SCREEN);
-                    } else if (!DeviceUtils.canWakeUsingAssistKey(context)) {
-                        keys.add(KEY_ASSIST_WAKE_SCREEN);
-                    }
-
-                    if (!DeviceUtils.hasAppSwitchKey(context)) {
-                        keys.add(CATEGORY_APPSWITCH);
-                        keys.add(KEY_APP_SWITCH_PRESS);
-                        keys.add(KEY_APP_SWITCH_LONG_PRESS);
-                        keys.add(KEY_APP_SWITCH_DOUBLE_TAP);
-                        keys.add(KEY_APP_SWITCH_WAKE_SCREEN);
-                    } else if (!DeviceUtils.canWakeUsingAppSwitchKey(context)) {
-                        keys.add(KEY_APP_SWITCH_WAKE_SCREEN);
-                    }
-
-                    if (!DeviceUtils.hasCameraKey(context)) {
-                        keys.add(CATEGORY_CAMERA);
-                        keys.add(KEY_CAMERA_LAUNCH);
-                        keys.add(KEY_CAMERA_SLEEP_ON_RELEASE);
-                        keys.add(KEY_CAMERA_WAKE_SCREEN);
-                    } else if (!DeviceUtils.canWakeUsingCameraKey(context)) {
-                        keys.add(KEY_CAMERA_WAKE_SCREEN);
-                    }
-
-                    if (!DeviceUtils.hasVolumeKeys(context)) {
-                        keys.add(CATEGORY_VOLUME);
-                        keys.add(KEY_SWAP_VOLUME_BUTTONS);
-                        keys.add(KEY_VOLUME_ANSWER_CALL);
-                        keys.add(KEY_VOLUME_KEY_CURSOR_CONTROL);
-                        keys.add(KEY_VOLUME_MUSIC_CONTROLS);
-                        keys.add(KEY_VOLUME_WAKE_SCREEN);
-                        keys.add(KEY_CLICK_PARTIAL_SCREENSHOT);
-                    } else if (!DeviceUtils.canWakeUsingVolumeKeys(context)) {
-                        keys.add(KEY_VOLUME_WAKE_SCREEN);
-                    }
-
-                    if (!DeviceUtils.deviceSupportsFlashLight(context)) {
-                        keys.add(KEY_TORCH_LONG_PRESS_POWER_GESTURE);
-                        keys.add(KEY_TORCH_LONG_PRESS_POWER_TIMEOUT);
-                    }
-
                     if (!isKeySwapperSupported(context)) {
                         keys.add(KEY_SWAP_CAPACITIVE_KEYS);
+                    }
+
+                    if (!DeviceUtils.hasPowerKey()) {
+                        keys.add(KEY_POWER_END_CALL);
+                        keys.add(KEY_TORCH_LONG_PRESS_POWER_GESTURE);
+                        keys.add(KEY_TORCH_LONG_PRESS_POWER_TIMEOUT);
+                    } else {
+                        if (!TelephonyUtils.isVoiceCapable(context)) {
+                            keys.add(KEY_POWER_END_CALL);
+                        }
+                        if (!DeviceUtils.deviceSupportsFlashLight(context)) {
+                            keys.add(KEY_TORCH_LONG_PRESS_POWER_GESTURE);
+                            keys.add(KEY_TORCH_LONG_PRESS_POWER_TIMEOUT);
+                        }
+                    }
+
+                    keys.add(KEY_HOME_WAKE_SCREEN);
+                    keys.add(KEY_HOME_LONG_PRESS);
+                    keys.add(KEY_HOME_DOUBLE_TAP);
+
+                    if (!DeviceUtils.hasHomeKey(context) || !TelephonyUtils.isVoiceCapable(context)) {
+                        keys.add(KEY_HOME_ANSWER_CALL);
+                    }
+
+                    keys.add(KEY_BACK_WAKE_SCREEN);
+                    keys.add(KEY_BACK_LONG_PRESS);
+                    keys.add(KEY_MENU_WAKE_SCREEN);
+                    keys.add(KEY_MENU_PRESS);
+                    keys.add(KEY_MENU_LONG_PRESS);
+                    keys.add(KEY_ASSIST_WAKE_SCREEN);
+                    keys.add(KEY_ASSIST_PRESS);
+                    keys.add(KEY_ASSIST_LONG_PRESS);
+                    keys.add(KEY_APP_SWITCH_WAKE_SCREEN);
+                    keys.add(KEY_APP_SWITCH_PRESS);
+                    keys.add(KEY_APP_SWITCH_LONG_PRESS);
+                    keys.add(KEY_APP_SWITCH_DOUBLE_TAP);
+                    keys.add(KEY_CAMERA_WAKE_SCREEN);
+
+                    if (!DeviceUtils.hasCameraKey(context)) {
+                        keys.add(KEY_CAMERA_SLEEP_ON_RELEASE);
+                        keys.add(KEY_CAMERA_LAUNCH);
+                    }
+
+                    keys.add(KEY_VOLUME_WAKE_SCREEN);
+
+                    if (!DeviceUtils.hasVolumeKeys(context)) {
+                        keys.add(KEY_VOLUME_ANSWER_CALL);
+                        keys.add(KEY_VOLUME_MUSIC_CONTROLS);
+                        keys.add(KEY_VOLUME_KEY_CURSOR_CONTROL);
+                        keys.add(KEY_SWAP_VOLUME_BUTTONS);
+                        keys.add(KEY_CLICK_PARTIAL_SCREENSHOT);
+                    } else {
+                        if (!TelephonyUtils.isVoiceCapable(context)) {
+                            keys.add(KEY_VOLUME_ANSWER_CALL);
+                        }
                     }
 
                     if (!DeviceUtils.hasButtonBacklightSupport(context)
                             && !DeviceUtils.hasKeyboardBacklightSupport(context)) {
                         keys.add(KEY_BUTTON_BACKLIGHT);
                     }
+
+                    keys.add(KEY_ADDITIONAL_BUTTONS);
 
                     return keys;
                 }
