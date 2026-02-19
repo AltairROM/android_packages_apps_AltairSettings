@@ -32,6 +32,12 @@
             settings:interval="500"
             settings:units="@string/unit_milliseconds" />
 
+        <!-- Volume panel haptic feedback -->
+        <com.lineage.support.preferences.SecureSettingSwitchPreference
+            android:key="volume_dialog_haptic_feedback"
+            android:title="@string/volume_dialog_haptic_feedback_title"
+            android:defaultValue="true" />
+
         <!-- Show per-app volume button in volume dialog -->
         <com.lineage.support.preferences.SystemSettingSwitchPreference
             android:key="show_app_volume"
