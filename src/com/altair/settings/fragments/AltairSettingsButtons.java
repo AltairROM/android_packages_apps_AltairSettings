@@ -53,6 +53,7 @@ public class AltairSettingsButtons extends DashboardFragment implements
     private static final String KEY_BUTTON_BACKLIGHT = "button_backlight";
     private static final String KEY_CLICK_PARTIAL_SCREENSHOT =
             "click_partial_screenshot";
+    private static final String KEY_ANBI_ENABLED = "anbi_enabled";
     private static final String KEY_ADDITIONAL_BUTTONS = "additional_buttons";
 
     private static final String KEY_BACK_WAKE_SCREEN = "back_wake_screen";
@@ -98,6 +99,7 @@ public class AltairSettingsButtons extends DashboardFragment implements
     private ContentResolver mResolver;
 
     private SwitchPreferenceCompat mSwapCapacitiveKeys;
+    private SwitchPreferenceCompat mAnbiEnabled;
 
     private ListPreference mBackLongPressAction;
     private ListPreference mHomeLongPressAction;
@@ -161,6 +163,8 @@ public class AltairSettingsButtons extends DashboardFragment implements
         final PreferenceCategory volumeCategory = prefScreen.findPreference(CATEGORY_VOLUME);
         final PreferenceCategory cameraCategory = prefScreen.findPreference(CATEGORY_CAMERA);
 
+        mAnbiEnabled = (SwitchPreferenceCompat) prefScreen.findPreference(KEY_ANBI_ENABLED);
+
         // Power button ends calls.
         mPowerEndCall = findPreference(KEY_POWER_END_CALL);
 
@@ -208,6 +212,11 @@ public class AltairSettingsButtons extends DashboardFragment implements
                 mResolver, LineageSettings.System.FORCE_SHOW_NAVBAR, 0,
                 UserHandle.USER_CURRENT) != 0;
         updateDisableNavkeysCategories(navkeysEnabled, /* force */ true);
+
+        if (!hasHomeKey && !hasBackKey && !hasMenuKey && !hasAssistKey && !hasAppSwitchKey) {
+            prefScreen.removePreference(mAnbiEnabled);
+            mAnbiEnabled = null;
+        }
 
         if (hasPowerKey) {
             if (!TelephonyUtils.isVoiceCapable(getActivity())) {
@@ -721,8 +730,19 @@ public class AltairSettingsButtons extends DashboardFragment implements
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
 
+                    final boolean hasHomeKey = DeviceUtils.hasHomeKey(context);
+                    final boolean hasBackKey = DeviceUtils.hasBackKey(context);
+                    final boolean hasMenuKey = DeviceUtils.hasMenuKey(context);
+                    final boolean hasAssistKey = DeviceUtils.hasAssistKey(context);
+                    final boolean hasAppSwitchKey = DeviceUtils.hasAppSwitchKey(context);
+
                     if (!isKeySwapperSupported(context)) {
                         keys.add(KEY_SWAP_CAPACITIVE_KEYS);
+                    }
+
+                    if (!hasHomeKey && !hasBackKey && !hasMenuKey && !hasAssistKey
+                            && !hasAppSwitchKey) {
+                        keys.add(KEY_ANBI_ENABLED);
                     }
 
                     if (!DeviceUtils.hasPowerKey()) {

@@ -30,6 +30,12 @@
         android:summary="@string/click_partial_screenshot_summary"
         android:defaultValue="false" />
 
+    <com.lineage.support.preferences.SystemSettingSwitchPreference
+        android:key="anbi_enabled"
+        android:title="@string/anbi_title"
+        android:summary="@string/anbi_summary"
+        android:defaultValue="false" />
+
     <!-- Launch additional button settings -->
     <lineageos.preference.RemotePreference
         android:key="additional_buttons"
