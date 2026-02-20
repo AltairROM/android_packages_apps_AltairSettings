@@ -231,4 +231,41 @@
 
     </PreferenceCategory>-->
 
+    <!-- Extra padding -->
+    <PreferenceCategory
+        android:key="status_bar_extra_padding_key"
+        android:title="@string/statusbar_extra_padding_category">
+
+        <!-- Start padding -->
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="statusbar_extra_padding_start"
+            android:title="@string/statusbar_extra_padding_start_title"
+            android:defaultValue="0"
+            settings:interval="1"
+            settings:units="@string/unit_pixels"
+            android:max="30"
+            settings:min="-30" />
+
+        <!-- Top padding -->
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="statusbar_extra_padding_top"
+            android:title="@string/statusbar_extra_padding_top_title"
+            android:defaultValue="0"
+            settings:interval="1"
+            settings:units="@string/unit_pixels"
+            android:max="30"
+            settings:min="-30" />
+
+        <!-- End padding -->
+        <com.lineage.support.preferences.SystemSettingSeekBarPreference
+            android:key="statusbar_extra_padding_end"
+            android:title="@string/statusbar_extra_padding_end_title"
+            android:defaultValue="0"
+            settings:interval="1"
+            settings:units="@string/unit_pixels"
+            android:max="30"
+            settings:min="-30" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
