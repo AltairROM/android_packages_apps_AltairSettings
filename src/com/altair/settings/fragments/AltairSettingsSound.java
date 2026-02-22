@@ -39,14 +39,11 @@ public class AltairSettingsSound extends DashboardFragment implements
     private static final String TAG = "AltairSettingsSound";
 
     private static final String KEY_VOLUME_PANEL_POSITION = "volume_panel_on_left";
+    private static final String KEY_VOLUME_DIALOG_DISMISS_TIMEOUT = "volume_dialog_dismiss_timeout";
+    private static final String KEY_VOLUME_DIALOG_HAPTIC_FEEDBACK = "volume_dialog_haptic_feedback";
     private static final String KEY_SHOW_APP_VOLUME = "show_app_volume";
-    /*
-    private static final String KEY_MAX_MUSIC_VOLUME = "max_music_volume";
-    private static final String KEY_MAX_CALL_VOLUME = "max_call_volume";
-    private static final String KEY_MAX_ALARM_VOLUME = "max_alarm_volume";
 
     private static final String CATEGORY_VOLUME_PANEL = "volume_panel_control";
-    */
 
     private ContentResolver mResolver;
 
@@ -64,37 +61,18 @@ public class AltairSettingsSound extends DashboardFragment implements
         final Resources res = getResources();
         final PreferenceScreen prefScreen = getPreferenceScreen();
 
-        /*
         final PreferenceCategory volumePanel = prefScreen.findPreference(CATEGORY_VOLUME_PANEL);
 
         final boolean hasVolumeKeys = DeviceUtils.hasVolumeKeys(getActivity());
-        if (hasVolumeKeys) {
-            // Volume steps
-            setVolumeStepsPreference(prefScreen, KEY_MAX_MUSIC_VOLUME);
-            setVolumeStepsPreference(prefScreen, KEY_MAX_CALL_VOLUME);
-            setVolumeStepsPreference(prefScreen, KEY_MAX_ALARM_VOLUME);
-        } else {
+        if (!hasVolumeKeys) {
             prefScreen.removePreference(volumePanel);
         }
-        */
 
         boolean mediaFocus = Settings.System.getIntForUser(getContext().getContentResolver(),
             Settings.System.MULTI_AUDIO_FOCUS_ENABLED, 0, UserHandle.USER_CURRENT) != 0;
         SystemSettingSwitchPreference mediaFocusPref = findPreference("multi_audio_focus_enabled");
         mediaFocusPref.setChecked(mediaFocus);
     }
-
-    /*
-    private void setVolumeStepsPreference(PreferenceScreen prefScreen, String key) {
-        final int defaultValue = Settings.System.getIntForUser(mResolver, "default_" + key, 15,
-                UserHandle.USER_CURRENT);
-        final int value = Settings.System.getIntForUser(mResolver, key, defaultValue, UserHandle.USER_CURRENT);
-        CustomSeekBarPreference pref = prefScreen.findPreference(key);
-        pref.setDefaultValue(defaultValue);
-        pref.setValue(value);
-        pref.setOnPreferenceChangeListener(this);
-    }
-    */
 
     @Override
     public int getMetricsCategory() {
@@ -151,6 +129,8 @@ public class AltairSettingsSound extends DashboardFragment implements
 
                     if (!DeviceUtils.hasVolumeKeys(context)) {
                         keys.add(KEY_VOLUME_PANEL_POSITION);
+                        keys.add(KEY_VOLUME_DIALOG_DISMISS_TIMEOUT);
+                        keys.add(KEY_VOLUME_DIALOG_HAPTIC_FEEDBACK);
                         keys.add(KEY_SHOW_APP_VOLUME);
                     }
 
