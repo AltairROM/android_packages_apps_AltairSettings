@@ -7,7 +7,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:lineage="http://schemas.android.com/apk/res/lineageos.platform"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/altair_settings_notifications_title">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="notification_settings_header"
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/noti_illustration" />
 
     <!-- Notification sound and vibration when screen on -->
     <com.lineage.support.preferences.SystemSettingSwitchPreference

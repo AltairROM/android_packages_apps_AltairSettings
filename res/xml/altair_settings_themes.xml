@@ -7,7 +7,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:lineage="http://schemas.android.com/apk/res/lineageos.platform"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/altair_settings_themes_title">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="theme_settings_header"
+        settings:searchable="false"
+        app:lottie_rawRes="@raw/lottie_theme_settings" />
 
     <!-- Styles & wallpapers -->
     <PreferenceCategory
