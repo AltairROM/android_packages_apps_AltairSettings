@@ -102,6 +102,13 @@
             android:summary="@string/edge_light_summary"
             android:fragment="com.altair.settings.fragments.ui.EdgeLightSettings" />
 
+        <!-- Gradient Customization -->
+        <Preference
+            android:key="gradient_settings"
+            android:title="@string/gradient_settings_title"
+            android:summary="@string/gradient_settings_summary"
+            android:fragment="com.altair.settings.fragments.ui.GradientSettings" />
+
         <!-- Charging animation -->
         <com.lineage.support.preferences.SystemSettingSwitchPreference
             android:key="charging_animation"
