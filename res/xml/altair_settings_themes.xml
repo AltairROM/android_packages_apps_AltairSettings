@@ -54,10 +54,10 @@
         android:title="@string/theme_elements_category">
 
         <!-- Font -->
-        <Preference
-            android:key="android.theme.customization.font"
+        <com.altair.settings.preferences.FontsPickerPreference
+            android:key="system_font"
             android:title="@string/theme_elements_font_title"
-            android:fragment="com.altair.settings.fragments.theme.FontsPicker" />
+            android:summary="theme_customization_font_summary" />
 
         <!-- Icon shape -->
         <Preference

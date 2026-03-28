@@ -37,7 +37,6 @@ public class AltairSettingsThemes extends DashboardFragment implements
     private static final String TAG = "AltairSettingsThemes";
 
     private static final String KEY_THEME_DARK_UI_MODE = "theme_dark_ui_mode";
-    private static final String KEY_THEME_FONT = ThemeUtils.FONT_KEY;
     private static final String KEY_THEME_ICON_SHAPE = ThemeUtils.ICON_SHAPE_KEY;
     /*
     private static final String KEY_THEME_SIGNAL_ICON = ThemeUtils.SIGNAL_ICON_KEY;
@@ -53,7 +52,6 @@ public class AltairSettingsThemes extends DashboardFragment implements
 
     private DarkModePreference mDarkMode;
 
-    private Preference mFontPreference;
     private Preference mIconShapePreference;
     /*
     private Preference mSignalIconPreference;
@@ -81,8 +79,6 @@ public class AltairSettingsThemes extends DashboardFragment implements
         mDarkMode = findPreference(KEY_THEME_DARK_UI_MODE);
         mDarkMode.setOnPreferenceChangeListener(this);
 
-        mFontPreference = prefScreen.findPreference(KEY_THEME_FONT);
-        updateSummary(mFontPreference, "android");
         mIconShapePreference = prefScreen.findPreference(KEY_THEME_ICON_SHAPE);
         updateSummary(mIconShapePreference, "android");
         /*
@@ -134,9 +130,6 @@ public class AltairSettingsThemes extends DashboardFragment implements
         switch (key) {
             case KEY_THEME_DARK_UI_MODE:
                 mUiModeManager.setNightModeActivated((boolean) newValue);
-                break;
-            case KEY_THEME_FONT:
-                updateSummary(mFontPreference, "android");
                 break;
             /*
             case KEY_THEME_SIGNAL_ICON:

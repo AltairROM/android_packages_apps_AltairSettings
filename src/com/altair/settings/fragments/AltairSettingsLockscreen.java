@@ -35,7 +35,6 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
 
     private static final String LOCKSCREEN_GESTURES_CATEGORY = "lockscreen_gestures_category";
     private static final String LOCKSCREEN_INTERFACE_CATEGORY = "lockscreen_interface_category";
-    private static final String KEY_LOCKSCREEN_FONT = ThemeUtils.LOCKSCREEN_FONT_KEY;
     private static final String KEY_FP_SUCCESS_VIBRATE = "fp_success_vibrate";
     private static final String KEY_FP_ERROR_VIBRATE = "fp_error_vibrate";
     private static final String KEY_RIPPLE_EFFECT = "enable_ripple_effect";
@@ -45,7 +44,6 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
 
     private ThemeUtils mThemeUtils;
 
-    private Preference mClockFontPreference;
     private Preference mFingerprintVib;
     private Preference mFingerprintVibErr;
     private Preference mRippleEffect;
@@ -63,9 +61,6 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
         mThemeUtils = new ThemeUtils(mContext);
 
         PreferenceCategory gestCategory = findPreference(LOCKSCREEN_GESTURES_CATEGORY);
-
-        mClockFontPreference = findPreference(KEY_LOCKSCREEN_FONT);
-        updateSummary(mClockFontPreference, "android");
 
         mFingerprintVib = findPreference(KEY_FP_SUCCESS_VIBRATE);
         mFingerprintVibErr = findPreference(KEY_FP_ERROR_VIBRATE);
@@ -116,11 +111,6 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String key = preference.getKey();
-        switch (key) {
-            case KEY_LOCKSCREEN_FONT:
-                updateSummary(mClockFontPreference, "android");
-                break;
-        }
         return true;
     }
 

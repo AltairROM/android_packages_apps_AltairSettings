@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     SPDX-FileCopyrightText: 2019 The Android Open Source Project
+     SPDX-FileCopyrightText: 2026 crDroid Android Project
+     SPDX-FileCopyrightText: 2026 Altair ROM Project
      SPDX-License-Identifier: Apache-2.0
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="7dp"
-    android:layout_gravity="center"
-    android:orientation="vertical">
+    android:layout_margin="4dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:background="@drawable/selector_border_edge_custom">
 
     <FrameLayout
         android:id="@+id/option_tile"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_gravity="center"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="10dp"
-        android:background="@drawable/option_border_custom">
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="8dp">
 
         <TextClock
-            android:id="@+id/option_title"
+            android:id="@+id/option_clock"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:format12Hour="hh:mm"
             android:format24Hour="kk:mm"
             android:textAppearance="@style/OptionTitleTextAppearance"/>
-
     </FrameLayout>
 
     <TextView
         android:id="@+id/option_label"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:paddingVertical="8dp"
         android:textAppearance="@style/OptionTitleTextAppearance"/>
 </LinearLayout>
