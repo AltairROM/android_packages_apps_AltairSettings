@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2019-2025 Altair ROM Project
+ * SPDX-FileCopyrightText: 2019-2026 Altair ROM Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -18,7 +18,7 @@ import android.view.View;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.altair.settings.utils.DeviceUtils;
 import com.android.internal.logging.nano.MetricsProto;
@@ -49,6 +49,10 @@ public class AltairSettingsQS extends DashboardFragment implements
     private static final String KEY_BRIGHTNESS_SLIDER_HAPTIC = "qs_brightness_slider_haptic";
     private static final String KEY_SHOW_AUTO_BRIGHTNESS = "qs_show_auto_brightness";
     private static final String KEY_QS_TILE_HAPTIC = "qs_tile_haptic";
+    private static final String KEY_QS_PANEL_STYLE = "qs_panel_style";
+    private static final String KEY_QS_TILE_SHAPE = "qs_tile_shape";
+    private static final String KEY_QS_TILE_ICON_SHAPE = "qs_tile_icon_shape";
+    private static final String KEY_QS_TILE_LABEL_HIDE = "qs_tile_label_hide";
 
     private static final int PULLDOWN_DIR_NONE = 0;
     private static final int PULLDOWN_DIR_RIGHT = 1;
@@ -61,6 +65,10 @@ public class AltairSettingsQS extends DashboardFragment implements
     private LineageSecureSettingSwitchPreference mShowAutoBrightness;
     private Preference mBrightnessSliderHaptic;
     private Preference mQsTileHaptic;
+    private ListPreference mQsPanelStyle;
+    private Preference mQsTileShape;
+    private Preference mQsTileIconShape;
+    private SwitchPreferenceCompat mQsTileLabelHide;
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -107,6 +115,30 @@ public class AltairSettingsQS extends DashboardFragment implements
             mShowAutoBrightness.setEnabled(showSlider);
         } else {
             headerCategory.removePreference(mShowAutoBrightness);
+        }
+
+        mQsPanelStyle = findPreference(KEY_QS_PANEL_STYLE);
+        mQsPanelStyle.setOnPreferenceChangeListener(this);
+        mQsTileShape = findPreference(KEY_QS_TILE_SHAPE);
+        mQsTileIconShape = findPreference(KEY_QS_TILE_ICON_SHAPE);
+        mQsTileLabelHide = findPreference(KEY_QS_TILE_LABEL_HIDE);
+
+        int panelStyle = Settings.System.getIntForUser(resolver,
+                Settings.System.QS_PANEL_STYLE, 0, UserHandle.USER_CURRENT);
+        updatePanelStylePrefs(panelStyle);
+    }
+
+    private void updatePanelStylePrefs(int panelStyle) {
+        boolean isClassic = panelStyle == 1;
+
+        if (mQsTileShape != null) {
+            mQsTileShape.setVisible(!isClassic);
+        }
+        if (mQsTileIconShape != null) {
+            mQsTileIconShape.setVisible(isClassic);
+        }
+        if (mQsTileLabelHide != null) {
+            mQsTileLabelHide.setVisible(isClassic);
         }
     }
 
@@ -156,6 +188,9 @@ public class AltairSettingsQS extends DashboardFragment implements
                     mBrightnessSliderHaptic.setEnabled(value);
                 if (mShowAutoBrightness != null)
                     mShowAutoBrightness.setEnabled(value);
+                return true;
+            case KEY_QS_PANEL_STYLE:
+                updatePanelStylePrefs(Integer.parseInt((String) newValue));
                 return true;
         }
         return true;
