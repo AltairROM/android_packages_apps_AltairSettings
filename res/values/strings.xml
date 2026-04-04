@@ -579,6 +579,8 @@
     <!-- Theme elements -->
     <string name="theme_elements_category">Theme elements</string>
 
+    <string name="custom_system_theme_title">Custom themes</string>
+    <string name="custom_system_theme_summary">Customize system appearance with themes and icon packs</string>
     <string name="theme_elements_font_title">System font</string>
     <string name="theme_elements_icon_shape_title">Icon shape</string>
     <string name="theme_elements_signal_icon_title">Signal icon style</string>
