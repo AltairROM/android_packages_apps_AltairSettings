@@ -41,7 +41,7 @@
     <string name="dlg_ok">OK</string>
     <string name="enable">Enable</string>
     <string name="disable">Disable</string>
-    <string name="sys_default">System default</string>
+    <string name="sys_default">Default</string>
     <string name="accent_color">Accent color (default)</string>
     <string name="notification_color">Notification color</string>
     <string name="wallpaper_color">Wallpaper color</string>
@@ -381,6 +381,15 @@
     <string name="qs_rows_landscape_title">Rows (landscape)</string>
     <string name="qqs_rows_portrait_title">Quick QS rows (portrait)</string>
     <string name="qqs_rows_landscape_title">Quick QS rows (landscape)</string>
+
+    <!-- QS Tiles animation -->
+    <string name="qs_tile_animation_style_title">QS tiles animation</string>
+    <string name="qs_tile_animation_style_bounce">Bounce</string>
+    <string name="qs_tile_animation_style_ripple">Ripple</string>
+    <string name="qs_tile_animation_style_flip">Flip</string>
+    <string name="qs_tile_animation_style_fade">Fade</string>
+    <string name="qs_tile_animation_style_pulse">Pulse</string>
+    <string name="qs_tile_animation_style_shake">Shake</string>
 
     <!-- QS header -->
     <string name="qs_header_category">Header</string>

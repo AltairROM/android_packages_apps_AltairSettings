@@ -50,6 +50,14 @@
             android:summary="@string/qs_tile_label_hide_summary"
             android:defaultValue="false" />
 
+        <!-- Tile animation style -->
+        <com.lineage.support.preferences.SystemSettingListPreference
+            android:key="qs_tile_animation_style"
+            android:title="@string/qs_tile_animation_style_title"
+            android:entries="@array/qs_tile_animation_style_entries"
+            android:entryValues="@array/qs_tile_animation_style_values"
+            android:defaultValue="0" />
+
         <!-- Number of columns (portrait) -->
         <com.lineage.support.preferences.SystemSettingSeekBarPreference
             android:key="qs_tiles_columns"
