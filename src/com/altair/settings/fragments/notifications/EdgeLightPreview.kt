@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: Apache-2.0
  */
 
-package com.altair.settings.fragments.ui
+package com.altair.settings.fragments.notifications
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter

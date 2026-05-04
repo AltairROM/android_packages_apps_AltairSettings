@@ -43,6 +43,13 @@
         android:summary="@string/notification_guts_kill_app_button_summary"
         android:defaultValue="false" />
 
+    <!-- Edge Light -->
+    <Preference
+        android:key="edge_light_settings"
+        android:title="@string/edge_light_title"
+        android:summary="@string/edge_light_summary"
+        android:fragment="com.altair.settings.fragments.notifications.EdgeLightSettings" />
+
     <!-- Show clipboard overlay -->
     <com.lineage.support.preferences.SecureSettingSwitchPreference
         android:key="show_clipboard_overlay"

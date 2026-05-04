@@ -44,7 +44,7 @@
                     android:contentDescription="@null"
                     android:importantForAccessibility="no" />
 
-                <com.altair.settings.fragments.ui.EdgeLightPreviewView
+                <com.altair.settings.fragments.notifications.EdgeLightPreviewView
                     android:id="@+id/edge_light_preview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />

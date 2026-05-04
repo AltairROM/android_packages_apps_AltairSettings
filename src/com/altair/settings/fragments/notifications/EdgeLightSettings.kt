@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: Apache-2.0
  */
 
-package com.altair.settings.fragments.ui
+package com.altair.settings.fragments.notifications
 
 import android.content.Context
 import android.graphics.Color
