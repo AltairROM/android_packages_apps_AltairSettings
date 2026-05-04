@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     SPDX-FileCopyrightText: 2019-2025 Altair ROM Project
+     SPDX-FileCopyrightText: Altair ROM Project
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
@@ -62,4 +62,7 @@
 
     <!-- Sensor trigger values -->
     <item name="pickup_sensor_value" format="float" type="dimen">1.0</item>
+
+    <!-- Edge light -->
+    <integer name="edge_light_preview_pulse_duration_ms">6000</integer>
 </resources>

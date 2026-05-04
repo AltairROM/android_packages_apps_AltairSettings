@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     SPDX-FileCopyrightText: 2023-2025 crDroid Android Project
-     SPDX-FileCopyrightText: 2025 Altair ROM Project
+     SPDX-FileCopyrightText: crDroid Android Project
+     SPDX-FileCopyrightText: Altair ROM Project
      SPDX-License-Identifier: Apache-2.0
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/edge_light_title">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="edge_light_preview"
+        android:layout="@layout/edge_light_preview"
+        android:selectable="false"
+        app:allowDividerBelow="false"
+        settings:searchable="false" />
 
     <lineageos.preference.SystemSettingMainSwitchPreference
         android:key="edge_light_enabled"
@@ -57,6 +65,7 @@
         android:title="@string/edge_light_animation_effect_title"
         android:entries="@array/edge_light_animation_entries"
         android:entryValues="@array/edge_light_animation_values"
+        android:summary="%s"
         android:defaultValue="none"
         android:dependency="edge_light_enabled" />
 
