@@ -50,13 +50,6 @@
         android:summary="@string/edge_light_summary"
         android:fragment="com.altair.settings.fragments.notifications.EdgeLightSettings" />
 
-    <!-- Show clipboard overlay -->
-    <com.lineage.support.preferences.SecureSettingSwitchPreference
-        android:key="show_clipboard_overlay"
-        android:title="@string/show_clipboard_overlay_title"
-        android:summary="@string/show_clipboard_overlay_summary"
-        android:defaultValue="true" />
-
     <!-- Heads up -->
     <PreferenceCategory
         android:key="notification_heads_up_category"
