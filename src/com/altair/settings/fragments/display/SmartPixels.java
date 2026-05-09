@@ -1,6 +1,6 @@
 /*
- * SPDX-FileCopyrightText: 2018 CarbonROM
- * SPDX-FileCopyrightText: 2019-2023 Altair ROM Project
+ * SPDX-FileCopyrightText: CarbonROM
+ * SPDX-FileCopyrightText: Altair ROM Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -25,11 +25,6 @@ public class SmartPixels extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "SmartPixels";
 
-    private static final String ON_POWER_SAVE = "smart_pixels_on_power_save";
-    private static final String SMART_PIXELS_FOOTER = "smart_pixels_footer";
-
-    private SystemSettingSwitchPreference mSmartPixelsOnPowerSave;
-
     ContentResolver mResolver;
 
     @Override
@@ -38,12 +33,6 @@ public class SmartPixels extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.smart_pixels);
 
         mResolver = getActivity().getContentResolver();
-
-        mSmartPixelsOnPowerSave = findPreference(ON_POWER_SAVE);
-
-        findPreference(SMART_PIXELS_FOOTER).setTitle(R.string.smart_pixels_warning_text);
-
-        updateDependency();
     }
 
     @Override
@@ -63,19 +52,6 @@ public class SmartPixels extends SettingsPreferenceFragment implements
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         final String key = preference.getKey();
-        updateDependency();
         return true;
-    }
-
-    private void updateDependency() {
-        boolean mUseOnPowerSave = (Settings.System.getIntForUser(
-                mResolver, Settings.System.SMART_PIXELS_ON_POWER_SAVE,
-                0, UserHandle.USER_CURRENT) == 1);
-        PowerManager pm = (PowerManager)getActivity().getSystemService(Context.POWER_SERVICE);
-        if (pm.isPowerSaveMode() && mUseOnPowerSave) {
-            mSmartPixelsOnPowerSave.setEnabled(false);
-        } else {
-            mSmartPixelsOnPowerSave.setEnabled(true);
-        }
     }
 }

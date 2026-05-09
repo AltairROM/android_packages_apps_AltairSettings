@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     SPDX-FileCopyrightText: 2018 CarbonROM
-     SPDX-FileCopyrightText: 2020-2022 Altair ROM Project
+     SPDX-FileCopyrightText: CarbonROM
+     SPDX-FileCopyrightText: Altair ROM Project
      SPDX-License-Identifier: Apache-2.0
 -->
 <PreferenceScreen
@@ -10,42 +10,24 @@
     android:title="@string/smart_pixels_title" >
 
     <!-- Enable Smart Pixels -->
-    <com.lineage.support.preferences.SystemSettingSwitchPreference
-        android:key="smart_pixels_enable"
-        android:title="@string/smart_pixels_enable_title"
-        android:summary="@string/smart_pixels_enable_summary"
-        android:defaultValue="false" />
-
-    <!-- Auto-enable on battery saver -->
-    <com.lineage.support.preferences.SystemSettingSwitchPreference
-        android:key="smart_pixels_on_power_save"
-        android:dependency="smart_pixels_enable"
-        android:title="@string/smart_pixels_on_power_save_title"
-        android:summary="@string/smart_pixels_on_power_save_summary"
-        android:defaultValue="false" />
+    <lineageos.preference.SecureSettingMainSwitchPreference
+        android:key="smart_pixel_filter_enabled"
+        android:title="@string/enable" />
 
     <!-- Percent of pixels to disable -->
-    <com.lineage.support.preferences.SystemSettingListPreference
-        android:key="smart_pixels_pattern"
-        android:dependency="smart_pixels_enable"
-        android:entries="@array/smart_pixels_percent_strings"
-        android:entryValues="@array/smart_pixels_percent_values"
-        android:defaultValue="3"
+    <com.lineage.support.preferences.SecureSettingSeekBarPreference
+        android:key="smart_pixel_filter_percent"
         android:title="@string/smart_pixels_percent"
-        android:dialogTitle="@string/smart_pixels_percent" />
-
-    <!-- Shift pixels to prevent burn-in -->
-    <com.lineage.support.preferences.SystemSettingListPreference
-        android:key="smart_pixels_shift_timeout"
-        android:dependency="smart_pixels_enable"
-        android:entries="@array/smart_pixels_shift_times"
-        android:entryValues="@array/smart_pixels_shift_values"
-        android:defaultValue="5"
-        android:title="@string/smart_pixels_shift"
-        android:dialogTitle="@string/smart_pixels_shift" />
+        android:defaultValue="25"
+        android:max="75"
+        settings:min="10"
+        settings:units="%"
+        settings:interval="1"
+        android:dependency="smart_pixel_filter_enabled" />
 
     <com.android.settingslib.widget.FooterPreference
         android:key="smart_pixels_footer"
+        android:title="@string/smart_pixels_warning_text"
         android:selectable="false"
         settings:searchable="false" />
 
