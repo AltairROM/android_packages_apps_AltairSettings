@@ -109,13 +109,6 @@
             android:summary="@string/gradient_settings_summary"
             android:fragment="com.altair.settings.fragments.ui.GradientSettings" />
 
-        <!-- Charging animation -->
-        <com.lineage.support.preferences.SystemSettingSwitchPreference
-            android:key="charging_animation"
-            android:title="@string/charging_animation_title"
-            android:summary="@string/charging_animation_summary"
-            android:defaultValue="true" />
-
         <!-- Sensor block per package -->
         <Preference
             android:key="sensor_block_settings"
