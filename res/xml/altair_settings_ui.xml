@@ -130,6 +130,13 @@
             android:summary="@string/floating_rotation_button_summary"
             android:defaultValue="true" />
 
+        <!-- Settings icon -->
+        <Preference
+            android:key="settings_icon"
+            android:title="@string/settings_icon_title"
+            android:summary="@string/settings_icon_summary"
+            android:fragment="com.altair.settings.fragments.ui.SettingsIcon" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
