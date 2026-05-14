@@ -15,14 +15,14 @@
         android:title="@string/altair_settings_buttons_title"
         android:summary="@string/altair_settings_buttons_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsButtons"
-        android:icon="@drawable/ic_homepage_buttons"/>
+        android:icon="@drawable/ic_settings_menu_buttons"/>
 
     <!-- Device-specific -->
     <lineageos.preference.RemotePreference
         android:key="device_specific_settings"
         android:title="@string/altair_settings_device_settings_title"
         android:summary="@string/altair_settings_device_settings_summary"
-        android:icon="@drawable/ic_homepage_device"
+        android:icon="@drawable/ic_settings_menu_device"
         lineage:requiresAction="org.lineageos.settings.device.DEVICE_SPECIFIC_SETTINGS">
         <intent
             android:action="org.lineageos.settings.device.DEVICE_SPECIFIC_SETTINGS"/>
@@ -34,14 +34,14 @@
         android:title="@string/altair_settings_display_title"
         android:summary="@string/altair_settings_display_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsDisplay"
-        android:icon="@drawable/ic_homepage_display"/>
+        android:icon="@drawable/ic_settings_menu_display"/>
 
     <!-- Gestures -->
     <Preference
         android:key="gesture_settings"
         android:title="@string/altair_settings_gestures_title"
         android:summary="@string/altair_settings_gestures_summary"
-        android:icon="@drawable/ic_homepage_gestures"
+        android:icon="@drawable/ic_settings_gestures"
         android:fragment="com.android.settings.gestures.GestureSettings"
         settings:controller="com.android.settings.gestures.GesturesSettingPreferenceController"/>
 
@@ -51,7 +51,7 @@
         android:title="@string/altair_settings_lockscreen_title"
         android:summary="@string/altair_settings_lockscreen_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsLockscreen"
-        android:icon="@drawable/ic_homepage_lockscreen" />
+        android:icon="@drawable/ic_settings_menu_lockscreen" />
 
     <!-- Navigation -->
     <Preference
@@ -59,7 +59,7 @@
         android:title="@string/altair_settings_navigation_title"
         android:summary="@string/altair_settings_navigation_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsNavigation"
-        android:icon="@drawable/ic_homepage_navigation" />
+        android:icon="@drawable/ic_settings_menu_navigation" />
 
     <!-- Notifications -->
     <Preference
@@ -67,7 +67,7 @@
         android:title="@string/altair_settings_notifications_title"
         android:summary="@string/altair_settings_notifications_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsNotifications"
-        android:icon="@drawable/ic_homepage_notification" />
+        android:icon="@drawable/ic_settings_menu_notification" />
 
     <!-- Quick settings panel -->
     <Preference
@@ -75,7 +75,7 @@
         android:title="@string/altair_settings_qs_title"
         android:summary="@string/altair_settings_qs_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsQS"
-        android:icon="@drawable/ic_homepage_qs"/>
+        android:icon="@drawable/ic_settings_menu_qs"/>
 
     <!-- Sound -->
     <Preference
@@ -83,7 +83,7 @@
         android:title="@string/altair_settings_sound_title"
         android:summary="@string/altair_settings_sound_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsSound"
-        android:icon="@drawable/ic_homepage_sound"/>
+        android:icon="@drawable/ic_settings_menu_sound"/>
 
     <!-- Status bar -->
     <Preference
@@ -91,7 +91,7 @@
         android:title="@string/altair_settings_status_bar_title"
         android:summary="@string/altair_settings_status_bar_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsStatusBar"
-        android:icon="@drawable/ic_homepage_status_bar"/>
+        android:icon="@drawable/ic_settings_menu_status_bar"/>
 
     <!-- Themes -->
     <Preference
@@ -99,7 +99,7 @@
         android:title="@string/altair_settings_themes_title"
         android:summary="@string/altair_settings_themes_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsThemes"
-        android:icon="@drawable/ic_homepage_themes"/>
+        android:icon="@drawable/ic_settings_menu_themes"/>
 
     <!-- User interface -->
     <Preference
@@ -107,6 +107,6 @@
         android:title="@string/altair_settings_ui_title"
         android:summary="@string/altair_settings_ui_summary"
         android:fragment="com.altair.settings.fragments.AltairSettingsUI"
-        android:icon="@drawable/ic_homepage_ui"/>
+        android:icon="@drawable/ic_settings_menu_ui"/>
 
 </PreferenceScreen>
