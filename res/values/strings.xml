@@ -565,6 +565,8 @@
 
     <string name="status_bar_toggle_brightness">Brightness control</string>
     <string name="status_bar_toggle_brightness_summary">Adjust brightness by sliding across the status bar</string>
+    <string name="status_bar_toggle_brightness_lockscreen_title">Brightness control on lockscreen</string>
+    <string name="status_bar_toggle_brightness_lockscreen_summary">Allow brightness control on lockscreen status bar</string>
 
     <!-- Extra padding -->
     <string name="statusbar_extra_padding_category">Extra padding</string>

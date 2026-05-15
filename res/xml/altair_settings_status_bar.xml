@@ -219,17 +219,25 @@
     </PreferenceCategory>
 
     <!-- Status bar brightness slider -->
-    <!--<PreferenceCategory
+    <PreferenceCategory
         android:title="@string/status_bar_brightness_category">-->
 
         <!-- Adjust brightness by sliding across status bar -->
-        <!--<com.lineage.support.preferences.SystemSettingSwitchPreference
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
             android:key="status_bar_brightness_control"
             android:title="@string/status_bar_toggle_brightness"
             android:summary="@string/status_bar_toggle_brightness_summary"
             android:defaultValue="false" />
 
-    </PreferenceCategory>-->
+        <!-- Allow brightness control on lockscreen status bar -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="status_bar_brightness_control_lockscreen"
+            android:title="@string/status_bar_toggle_brightness_lockscreen_title"
+            android:summary="@string/status_bar_toggle_brightness_lockscreen_summary"
+            android:defaultValue="false"
+            android:dependency="status_bar_brightness_control" />
+
+    </PreferenceCategory>
 
     <!-- Extra padding -->
     <PreferenceCategory
