@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2019-2023 Altair ROM Project
+ * SPDX-FileCopyrightText: Altair ROM Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -16,6 +16,7 @@ import android.view.Surface;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.common.utils.IconTinterUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -30,6 +31,12 @@ public class AltairSettings extends SettingsPreferenceFragment {
         PreferenceScreen prefSet = getPreferenceScreen();
         ContentResolver resolver = getActivity().getContentResolver();
         Context context = getActivity().getApplicationContext();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        IconTinterUtils.tintIcons(getPreferenceScreen(), getContext());
     }
 
     @Override
