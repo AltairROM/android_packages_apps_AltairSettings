@@ -76,6 +76,7 @@
     <string name="navbar_key_action_play_pause_music">Play/pause music playback</string>
     <string name="navbar_key_action_torch">Toggle flashlight</string>
     <string name="navbar_key_action_screenshot">Take screenshot</string>
+    <string name="navbar_key_action_partial_screenshot">Take partial screenshot</string>
     <string name="navbar_key_action_volume_panel">Toggle volume panel</string>
     <string name="navbar_key_action_clear_all_notifications">Clear all notifications</string>
     <string name="navbar_key_action_notifications_panel">Toggle notifications panel</string>
