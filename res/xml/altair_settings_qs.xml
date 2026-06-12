@@ -126,6 +126,14 @@
             android:summary="@string/qs_brightness_slider_summary"
             android:defaultValue="true" />
 
+        <!-- Show volume slider -->
+        <com.lineage.support.preferences.SystemSettingListPreference
+            android:key="qs_show_volume_slider"
+            android:title="@string/qs_show_volume_slider_title"
+            android:entries="@array/qs_show_volume_slider_entries"
+            android:entryValues="@array/qs_show_volume_slider_values"
+            android:defaultValue="1" />
+
         <!-- Brightness slider shape -->
         <com.lineage.support.preferences.SystemSettingListPreference
             android:key="qs_brightness_slider_shape"
@@ -155,6 +163,13 @@
             android:summary="@string/qs_brightness_slider_auto_summary"
             android:dependency="qs_show_brightness_slider"
             lineage:requiresConfig="@*android:bool/config_automatic_brightness_available"
+            android:defaultValue="true" />
+
+        <!-- Show ringer mode icon -->
+        <com.lineage.support.preferences.SystemSettingSwitchPreference
+            android:key="qs_show_ringer_mode"
+            android:title="@string/qs_show_ringer_mode_title"
+            android:summary="@string/qs_show_ringer_mode_summary"
             android:defaultValue="true" />
 
     </PreferenceCategory>
