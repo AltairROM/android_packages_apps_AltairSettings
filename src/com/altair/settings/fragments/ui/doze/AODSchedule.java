@@ -1,6 +1,6 @@
 /*
- * SPDX-FileCopyrightText: 2021 Yet Another AOSP Project
- * SPDX-FileCopyrightText: 2026 Altair ROM Project
+ * SPDX-FileCopyrightText: Yet Another AOSP Project
+ * SPDX-FileCopyrightText: Altair ROM Project
  * SPDX-License-Identifier: Apache-2.0
  */
 

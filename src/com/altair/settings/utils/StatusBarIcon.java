@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2013 The CyanogenMod Project
+ * SPDX-FileCopyrightText: The CyanogenMod Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -72,4 +72,4 @@ public class StatusBarIcon {
         Settings.Secure.putStringForUser(contentResolver, ICON_BLACKLIST,
                 TextUtils.join(",", blacklist), ActivityManager.getCurrentUser());
     }
-}
+}

@@ -1,7 +1,7 @@
 /*
- * SPDX-FileCopyrightText: 2014-2015 The CyanogenMod Project
- * SPDX-FileCopyrightText: 2017-2023 The LineageOS Project
- * SPDX-FileCopyrightText: 2020-2024 Altair ROM Project
+ * SPDX-FileCopyrightText: The CyanogenMod Project
+ * SPDX-FileCopyrightText: The LineageOS Project
+ * SPDX-FileCopyrightText: Altair ROM Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
