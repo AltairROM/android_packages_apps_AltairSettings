@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2019-2026 Altair ROM Project
+ * SPDX-FileCopyrightText: Altair ROM Project
  * SPDX-License-Identifier: Apache-2.0
  */
 

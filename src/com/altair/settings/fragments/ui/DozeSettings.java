@@ -1,6 +1,6 @@
 /*
- * SPDX-FileCopyrightText: 2018-2026 crDroid Android Project
- * SPDX-FileCopyrightText: 2026 Altair ROM Project
+ * SPDX-FileCopyrightText: crDroid Android Project
+ * SPDX-FileCopyrightText: Altair ROM Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
