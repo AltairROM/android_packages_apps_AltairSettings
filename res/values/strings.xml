@@ -434,7 +434,7 @@
     <string name="qs_show_ringer_mode_title">Ringer mode</string>
     <string name="qs_show_ringer_mode_summary">Show ringer mode icon with the volume slider</string>
     <string name="qs_brightness_slider_haptic_title">Haptic feedback</string>
-    <string name="qs_brightness_slider_haptic_summary">Provide haptic feedback on changing brightness using slider</string>
+    <string name="qs_brightness_slider_haptic_summary">Provide haptic feedback on brightness and volume sliders</string>
 
     <!-- QS footer -->
     <string name="qs_footer_category">Footer</string>
