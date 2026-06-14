@@ -154,7 +154,8 @@
         <com.lineage.support.preferences.SystemSettingSwitchPreference
             android:key="qs_brightness_slider_haptic"
             android:title="@string/qs_brightness_slider_haptic_title"
-            android:summary="@string/qs_brightness_slider_haptic_summary"/>
+            android:summary="@string/qs_brightness_slider_haptic_summary"
+            android:defaultValue="true" />
 
         <!-- Show auto-brightness button -->
         <lineageos.preference.LineageSecureSettingSwitchPreference
@@ -182,7 +183,8 @@
         <com.lineage.support.preferences.SystemSettingSwitchPreference
             android:key="qs_show_data_usage"
             android:title="@string/qs_footer_datausage_title"
-            android:summary="@string/qs_footer_datausage_summary" />
+            android:summary="@string/qs_footer_datausage_summary"
+            android:defaultValue="false" />
 
     </PreferenceCategory>
 
@@ -202,7 +204,8 @@
         <com.lineage.support.preferences.SystemSettingSwitchPreference
             android:key="qs_tile_haptic"
             android:title="@string/qs_brightness_slider_haptic_title"
-            android:summary="@string/qs_tile_haptic_summary" />
+            android:summary="@string/qs_tile_haptic_summary"
+            android:defaultValue="false" />
 
     </PreferenceCategory>
 
