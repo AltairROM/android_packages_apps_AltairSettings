@@ -15,38 +15,38 @@
         settings:searchable="false"
         app:lottie_rawRes="@raw/lottie_theme_settings" />
 
-    <!-- Styles & wallpapers -->
-    <PreferenceCategory
-        android:key="theme_styles"
-        android:title="@string/theme_styles_category">
+    <!-- Accent color -->
+    <Preference
+        android:key="theme_accent_color"
+        android:title="@string/theme_accent_color_title"
+        android:fragment="com.altair.settings.fragments.theme.AccentColorPicker" />
 
-        <!-- Accent color -->
-        <Preference
-            android:key="theme_accent_color"
-            android:title="@string/theme_accent_color_title"
-            android:summary="@string/theme_accent_color_summary"
-            android:fragment="com.altair.settings.fragments.theme.AccentColorFragment" />
+    <!-- Theme color style -->
+    <ListPreference
+        android:key="theme_color_style"
+        android:title="@string/theme_color_style_title"
+        android:entries="@array/theme_color_style_entries"
+        android:entryValues="@array/theme_color_style_values"
+        android:defaultValue="0" />
 
-        <!-- Dark mode -->
-        <com.android.settings.display.darkmode.DarkModePreference
-            android:key="theme_dark_ui_mode"
-            android:title="@string/dark_ui_mode"
-            android:fragment="com.android.settings.display.darkmode.DarkModeSettingsFragment"
-            android:widgetLayout="@null"
-            settings:widgetLayout="@null"
-            settings:controller="com.android.settings.display.DarkUIPreferenceController"
-            settings:searchable="false" />
+    <!-- Dark mode -->
+    <com.android.settings.display.darkmode.DarkModePreference
+        android:key="theme_dark_ui_mode"
+        android:title="@string/dark_ui_mode"
+        android:fragment="com.android.settings.display.darkmode.DarkModeSettingsFragment"
+        android:widgetLayout="@null"
+        settings:widgetLayout="@null"
+        settings:controller="com.android.settings.display.DarkUIPreferenceController"
+        settings:searchable="false" />
 
-        <!-- Change wallpaper -->
-        <com.android.settingslib.RestrictedPreference
-            android:key="wallpaper"
-            android:title="@string/wallpaper_settings_title"
-            settings:keywords="@string/keywords_display_wallpaper"
-            settings:useAdminDisabledSummary="true"
-            settings:controller="com.android.settings.display.WallpaperPreferenceController">
-        </com.android.settingslib.RestrictedPreference>
-
-    </PreferenceCategory>
+    <!-- Change wallpaper -->
+    <com.android.settingslib.RestrictedPreference
+        android:key="wallpaper"
+        android:title="@string/wallpaper_settings_title"
+        settings:keywords="@string/keywords_display_wallpaper"
+        settings:useAdminDisabledSummary="true"
+        settings:controller="com.android.settings.display.WallpaperPreferenceController">
+    </com.android.settingslib.RestrictedPreference>
 
     <!-- Theme elements -->
     <PreferenceCategory
@@ -75,18 +75,6 @@
             android:key="android.theme.customization.adaptive_icon_shape"
             android:title="@string/theme_elements_icon_shape_title"
             android:fragment="com.altair.settings.fragments.theme.IconShapesPicker" />
-
-        <!-- Signal icon style -->
-        <!--<Preference
-            android:key="android.theme.customization.signal_icon"
-            android:title="@string/theme_elements_signal_icon_title"
-            android:fragment="com.altair.settings.fragments.theme.SignalIconsPicker" />-->
-
-        <!-- Wi-Fi icon style -->
-        <!--<Preference
-            android:key="android.theme.customization.wifi_icon"
-            android:title="@string/theme_elements_wifi_icon_title"
-            android:fragment="com.altair.settings.fragments.theme.WifiIconsPicker" />-->
 
         <!-- Navigation bar style -->
         <Preference

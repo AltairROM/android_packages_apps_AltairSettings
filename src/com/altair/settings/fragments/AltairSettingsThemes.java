@@ -16,10 +16,11 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.altair.settings.utils.TelephonyUtils;
+import com.altair.settings.utils.MonetUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -28,6 +29,8 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.utils.ThemeUtils;
 import com.android.settingslib.search.SearchIndexable;
 
+import java.lang.CharSequence;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,12 +39,10 @@ public class AltairSettingsThemes extends DashboardFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "AltairSettingsThemes";
 
+    private static final String KEY_ACCENT_COLOR = "theme_accent_color";
+    private static final String KEY_THEME_STYLE = "theme_color_style";
     private static final String KEY_THEME_DARK_UI_MODE = "theme_dark_ui_mode";
     private static final String KEY_THEME_ICON_SHAPE = ThemeUtils.ICON_SHAPE_KEY;
-    /*
-    private static final String KEY_THEME_SIGNAL_ICON = ThemeUtils.SIGNAL_ICON_KEY;
-    private static final String KEY_THEME_WIFI_ICON = ThemeUtils.WIFI_ICON_KEY;
-    */
     private static final String KEY_THEME_NAVBAR_STYLE = ThemeUtils.NAVBAR_KEY;
 
     private Context mContext;
@@ -49,14 +50,17 @@ public class AltairSettingsThemes extends DashboardFragment implements
 
     private UiModeManager mUiModeManager;
     private ThemeUtils mThemeUtils;
+    private MonetUtils mMonetUtils;
 
+    private List<String> mAccentColorValues;
+    private List<String> mAccentColorNames;
+    private String mAccentColorValue;
+    private String mThemeStyleValue;
+
+    private Preference mAccentColorPreference;
+    private ListPreference mThemeStylePreference;
     private DarkModePreference mDarkMode;
-
     private Preference mIconShapePreference;
-    /*
-    private Preference mSignalIconPreference;
-    private Preference mWiFiIconPreference;
-    */
     private Preference mNavbarStylePreference;
 
     @Override
@@ -75,28 +79,32 @@ public class AltairSettingsThemes extends DashboardFragment implements
 
         mUiModeManager = getContext().getSystemService(UiModeManager.class);
         mThemeUtils = new ThemeUtils(mContext);
+        mMonetUtils = new MonetUtils(mContext);
+
+        mAccentColorPreference = prefScreen.findPreference(KEY_ACCENT_COLOR);
+        mAccentColorPreference.setOnPreferenceChangeListener(this);
+        mAccentColorValues = Arrays.asList(mResources.getStringArray(
+                R.array.theme_accent_color_values));
+        mAccentColorNames = Arrays.asList(mResources.getStringArray(
+                R.array.theme_accent_color_names));
+        mAccentColorValue = mMonetUtils.getAccentColor();
+
+        mThemeStylePreference = prefScreen.findPreference(KEY_THEME_STYLE);
+        mThemeStylePreference.setOnPreferenceChangeListener(this);
+        mThemeStyleValue = mMonetUtils.getThemeStyle();
+        updateThemeStyleValue();
 
         mDarkMode = findPreference(KEY_THEME_DARK_UI_MODE);
         mDarkMode.setOnPreferenceChangeListener(this);
 
         mIconShapePreference = prefScreen.findPreference(KEY_THEME_ICON_SHAPE);
         updateSummary(mIconShapePreference, "android");
-        /*
-        mWiFiIconPreference = prefScreen.findPreference(KEY_THEME_WIFI_ICON);
-        updateSummary(mWiFiIconPreference, "android");
-        */
+
         mNavbarStylePreference = prefScreen.findPreference(KEY_THEME_NAVBAR_STYLE);
         updateSummary(mNavbarStylePreference, "com.android.launcher3");
 
-        /*
-        boolean voiceCapable = TelephonyUtils.isVoiceCapable(mContext);
-        if (!voiceCapable) {
-            prefScreen.removePreference(prefScreen.findPreference(KEY_THEME_SIGNAL_ICON));
-        } else {
-            mSignalIconPreference = prefScreen.findPreference(KEY_THEME_SIGNAL_ICON);
-            updateSummary(mSignalIconPreference, "android");
-        }
-        */
+        updateAccentColorSummary();
+        updateThemeStyleSummary();
     }
 
     @Override
@@ -128,17 +136,19 @@ public class AltairSettingsThemes extends DashboardFragment implements
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String key = preference.getKey();
         switch (key) {
+            case KEY_ACCENT_COLOR:
+                mAccentColorValue = mMonetUtils.getAccentColor();
+                updateAccentColorSummary();
+                break;
+            case KEY_THEME_STYLE:
+                mThemeStyleValue = (String) newValue;
+                mMonetUtils.setThemeStyle(mThemeStyleValue);
+                updateThemeStyleValue();
+                updateThemeStyleSummary();
+                break;
             case KEY_THEME_DARK_UI_MODE:
                 mUiModeManager.setNightModeActivated((boolean) newValue);
                 break;
-            /*
-            case KEY_THEME_SIGNAL_ICON:
-                updateSummary(mSignalIconPreference, "android");
-                break;
-            case KEY_THEME_WIFI_ICON:
-                updateSummary(mWiFiIconPreference, "android");
-                break;
-            */
             case KEY_THEME_NAVBAR_STYLE:
                 updateSummary(mNavbarStylePreference, "com.android.launcher3");
                 break;
@@ -161,6 +171,25 @@ public class AltairSettingsThemes extends DashboardFragment implements
                 : labels.get(pkgs.indexOf(currentPackageName)));
     }
 
+    private void updateAccentColorSummary() {
+        String summary = mResources.getString(R.string.theme_default_accent_color);
+        final String color = "#" + mAccentColorValue;
+        final int index = mAccentColorValues.indexOf(color.toLowerCase());
+        if (index >= 0) {
+            summary = mAccentColorNames.get(index);
+        }
+        mAccentColorPreference.setSummary(summary);
+    }
+
+    private void updateThemeStyleValue() {
+        mThemeStylePreference.setValue(mThemeStyleValue);
+    }
+
+    private void updateThemeStyleSummary() {
+        final int index = mThemeStylePreference.findIndexOfValue(mThemeStyleValue);
+        mThemeStylePreference.setSummary(mThemeStylePreference.getEntries()[index].toString());
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
@@ -174,13 +203,6 @@ public class AltairSettingsThemes extends DashboardFragment implements
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
-
-                    /*
-                    boolean voiceCapable = TelephonyUtils.isVoiceCapable(context);
-                    if (!voiceCapable) {
-                        keys.add(KEY_THEME_SIGNAL_ICON);
-                    }
-                    */
 
                     return keys;
                 }

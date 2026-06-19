@@ -36,10 +36,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.altair.settings.utils.MonetUtils;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.utils.MonetUtils;
 import com.android.settingslib.Utils;
 
 import com.lineage.support.preferences.CustomSeekBarPreference;

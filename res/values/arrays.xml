@@ -365,6 +365,27 @@
         <item>@string/theme_accent_color_material_yellow</item>
     </string-array>
 
+    <!-- Theme color styles  -->
+    <string-array name="theme_color_style_entries" translatable="false">
+        <item>@string/theme_color_style_tonal_spot</item>
+        <item>@string/theme_color_style_vibrant</item>
+        <item>@string/theme_color_style_expressive</item>
+        <item>@string/theme_color_style_spritz</item>
+        <item>@string/theme_color_style_rainbow</item>
+        <item>@string/theme_color_style_fruit_salad</item>
+        <item>@string/theme_color_style_monochromatic</item>
+    </string-array>
+
+    <string-array name="theme_color_style_values" translatable="false">
+        <item>TONAL_SPOT</item>
+        <item>VIBRANT</item>
+        <item>EXPRESSIVE</item>
+        <item>SPRITZ</item>
+        <item>RAINBOW</item>
+        <item>FRUIT_SALAD</item>
+        <item>MONOCHROMATIC</item>
+    </string-array>
+
     <!-- QS Tiles Shape -->
     <string-array name="qs_tile_shape_entries">
         <item>@string/qs_tile_shape_dynamic</item>
