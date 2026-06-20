@@ -29,8 +29,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.altair.settings.utils.SystemUtils
+import com.altair.settings.utils.ThemeUtils;
 import com.android.settings.R
-import com.android.settings.utils.ThemeUtils
 
 import java.util.concurrent.Executors
 

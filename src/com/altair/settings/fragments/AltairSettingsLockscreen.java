@@ -18,11 +18,11 @@ import androidx.preference.SwitchPreference;
 
 import com.altair.settings.utils.DeviceUtils;
 import com.altair.settings.utils.TelephonyUtils;
+import com.altair.settings.utils.ThemeUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.utils.ThemeUtils;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.Arrays;
