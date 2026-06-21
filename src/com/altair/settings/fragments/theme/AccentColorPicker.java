@@ -192,11 +192,9 @@ public class AccentColorPicker extends SettingsPreferenceFragment {
             String color;
             final boolean nightMode = (mContext.getResources().getConfiguration().uiMode &
                     Configuration.UI_MODE_NIGHT_YES) != 0;
-            final boolean richerColors = mMonetUtils.isRicherColorsEnabled();
-
             if (nightMode) {
-                color = richerColors ? mAccentColorValuesDarkRich.get(position)
-                                     : mAccentColorValuesDark.get(position);
+                color = mMonetUtils.isEnhancedColorsEnabled() ? mAccentColorValuesDarkRich.get(position)
+                                                              : mAccentColorValuesDark.get(position);
             } else {
                 color = mAccentColorValues.get(position);
             }
