@@ -613,6 +613,8 @@
 
     <string name="theme_accent_color_title">Accent color</string>
     <string name="theme_color_style_title">Theme color style</string>
+    <string name="theme_enhanced_colors_title">Enhanced colors</string>
+    <string name="theme_enhanced_colors_summary">Tweak certain system accent colors to use deeper shades</string>
     <string name="theme_default_accent_color">Wallpaper (default)</string>
 
     <!-- Theme elements -->

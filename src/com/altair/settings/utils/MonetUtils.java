@@ -20,20 +20,12 @@ public class MonetUtils {
     private static final String OVERLAY_ACCENT_COLOR = "android.theme.customization.accent_color";
     private static final String OVERLAY_SYSTEM_PALETTE = "android.theme.customization.system_palette";
     private static final String OVERLAY_THEME_STYLE = "android.theme.customization.theme_style";
-    private static final String OVERLAY_LUMINANCE_FACTOR = "android.theme.customization.luminance_factor";
-    private static final String OVERLAY_CHROMA_FACTOR = "android.theme.customization.chroma_factor";
-    private static final String OVERLAY_WHOLE_PALETTE = "android.theme.customization.whole_palette";
-    private static final String OVERLAY_RICHER_COLORS = "android.theme.customization.richer_colors";
-    private static final String OVERLAY_TINT_BACKGROUND = "android.theme.customization.tint_background";
+    private static final String OVERLAY_ENHANCED_COLORS = "android.theme.customization.enhanced_colors";
     private static final String TIMESTAMP_FIELD = "_applied_timestamp";
 
     public static final String ACCENT_COLOR_DEFAULT = "";
     public static final String THEME_STYLE_DEFAULT = "TONAL_SPOT";
-    public static final double LUMINANCE_FACTOR_DEFAULT = 1d;
-    public static final double CHROMA_FACTOR_DEFAULT = 1d;
-    public static final boolean RICHER_COLORS_DEFAULT = false;
-    public static final boolean WHOLE_PALETTE_DEFAULT = false;
-    public static final boolean TINT_BACKGROUND_DEFAULT = false;
+    public static final boolean ENHANCED_COLORS_DEFAULT = false;
 
     private Context mContext;
 
@@ -140,14 +132,14 @@ public class MonetUtils {
      * Public class functions.
      */
 
-    // Returns true if richer colors is enabled, false if not.
-    public boolean isRicherColorsEnabled() {
-        return getBooleanValue(OVERLAY_RICHER_COLORS, RICHER_COLORS_DEFAULT);
+    // Returns true if enhanced accent colors is enabled, false if not.
+    public boolean isEnhancedColorsEnabled() {
+        return getBooleanValue(OVERLAY_ENHANCED_COLORS, ENHANCED_COLORS_DEFAULT);
     }
 
-    // Enables or disables richer accent colors.
-    public void setRicherColors(boolean enable) {
-        setBooleanValue(OVERLAY_RICHER_COLORS, enable);
+    // Enables or disables enhanced accent colors.
+    public void setEnhancedColors(boolean enable) {
+        setBooleanValue(OVERLAY_ENHANCED_COLORS, enable);
     }
 
     // Returns true if accent color is set, false if not.
@@ -165,46 +157,6 @@ public class MonetUtils {
     public void setAccentColor(String color) {
         setStringValue(OVERLAY_ACCENT_COLOR, color);
         setStringValue(OVERLAY_SYSTEM_PALETTE, color);
-    }
-
-    // Returns true if whole palette luminance/chroma is enabled, false if not.
-    public boolean isWholePaletteEnabled() {
-        return getBooleanValue(OVERLAY_WHOLE_PALETTE, WHOLE_PALETTE_DEFAULT);
-    }
-
-    // Enables or disables whole palette luminance/chroma.
-    public void setWholePalette(boolean enable) {
-        setBooleanValue(OVERLAY_WHOLE_PALETTE, enable);
-    }
-
-    // Returns true if background color tinting is enabled, false if not.
-    public boolean isTintBackgroundEnabled() {
-        return getBooleanValue(OVERLAY_TINT_BACKGROUND, TINT_BACKGROUND_DEFAULT);
-    }
-
-    // Enables or disables background color tinting.
-    public void setTintBackground(boolean enable) {
-        setBooleanValue(OVERLAY_TINT_BACKGROUND, enable);
-    }
-
-    // Returns the current chroma factor value.
-    public double getChromaFactor() {
-        return getDoubleValue(OVERLAY_CHROMA_FACTOR, CHROMA_FACTOR_DEFAULT);
-    }
-
-    // Sets the chroma factor value.
-    public void setChromaFactor(double value) {
-        setDoubleValue(OVERLAY_CHROMA_FACTOR, value);
-    }
-
-    // Returns the current luminance factor value.
-    public double getLuminanceFactor() {
-        return getDoubleValue(OVERLAY_LUMINANCE_FACTOR, LUMINANCE_FACTOR_DEFAULT);
-    }
-
-    // Sets the luminance factor value.
-    public void setLuminanceFactor(double value) {
-        setDoubleValue(OVERLAY_LUMINANCE_FACTOR, value);
     }
 
     // Returns the current theme style.

@@ -21,6 +21,13 @@
         android:title="@string/theme_accent_color_title"
         android:fragment="com.altair.settings.fragments.theme.AccentColorPicker" />
 
+    <!-- Enhanced colors -->
+    <SwitchPreferenceCompat
+        android:key="theme_enhanced_colors"
+        android:title="@string/theme_enhanced_colors_title"
+        android:summary="@string/theme_enhanced_colors_summary"
+        android:defaultValue="false" />
+
     <!-- Theme color style -->
     <ListPreference
         android:key="theme_color_style"

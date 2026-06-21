@@ -19,6 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.altair.settings.utils.MonetUtils;
 import com.altair.settings.utils.ThemeUtils;
@@ -40,6 +41,7 @@ public class AltairSettingsThemes extends DashboardFragment implements
     private static final String TAG = "AltairSettingsThemes";
 
     private static final String KEY_ACCENT_COLOR = "theme_accent_color";
+    private static final String KEY_ENHANCED_COLORS = "theme_enhanced_colors";
     private static final String KEY_THEME_STYLE = "theme_color_style";
     private static final String KEY_THEME_DARK_UI_MODE = "theme_dark_ui_mode";
     private static final String KEY_THEME_ICON_SHAPE = ThemeUtils.ICON_SHAPE_KEY;
@@ -58,6 +60,7 @@ public class AltairSettingsThemes extends DashboardFragment implements
     private String mThemeStyleValue;
 
     private Preference mAccentColorPreference;
+    private SwitchPreferenceCompat mEnhancedColorsPreference;
     private ListPreference mThemeStylePreference;
     private DarkModePreference mDarkMode;
     private Preference mIconShapePreference;
@@ -89,6 +92,9 @@ public class AltairSettingsThemes extends DashboardFragment implements
                 R.array.theme_accent_color_names));
         mAccentColorValue = mMonetUtils.getAccentColor();
 
+        mEnhancedColorsPreference = prefScreen.findPreference(KEY_ENHANCED_COLORS);
+        mEnhancedColorsPreference.setOnPreferenceChangeListener(this);
+
         mThemeStylePreference = prefScreen.findPreference(KEY_THEME_STYLE);
         mThemeStylePreference.setOnPreferenceChangeListener(this);
         mThemeStyleValue = mMonetUtils.getThemeStyle();
@@ -103,8 +109,7 @@ public class AltairSettingsThemes extends DashboardFragment implements
         mNavbarStylePreference = prefScreen.findPreference(KEY_THEME_NAVBAR_STYLE);
         updateSummary(mNavbarStylePreference, "com.android.launcher3");
 
-        updateAccentColorSummary();
-        updateThemeStyleSummary();
+        updatePreferences();
     }
 
     @Override
@@ -139,6 +144,10 @@ public class AltairSettingsThemes extends DashboardFragment implements
             case KEY_ACCENT_COLOR:
                 mAccentColorValue = mMonetUtils.getAccentColor();
                 updateAccentColorSummary();
+                break;
+            case KEY_ENHANCED_COLORS:
+                boolean enabled = (Boolean) newValue;
+                mMonetUtils.setEnhancedColors(enabled);
                 break;
             case KEY_THEME_STYLE:
                 mThemeStyleValue = (String) newValue;
@@ -188,6 +197,13 @@ public class AltairSettingsThemes extends DashboardFragment implements
     private void updateThemeStyleSummary() {
         final int index = mThemeStylePreference.findIndexOfValue(mThemeStyleValue);
         mThemeStylePreference.setSummary(mThemeStylePreference.getEntries()[index].toString());
+    }
+
+    private void updatePreferences() {
+        final boolean enhancedColors = mMonetUtils.isEnhancedColorsEnabled();
+        mEnhancedColorsPreference.setChecked(enhancedColors);
+        updateAccentColorSummary();
+        updateThemeStyleSummary();
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
