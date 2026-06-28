@@ -29,7 +29,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.altair.settings.utils.SystemUtils
-import com.altair.settings.utils.ThemeUtils
+import com.android.internal.util.theme.ThemeUtils
 import com.android.settings.R
 
 import java.util.concurrent.Executors

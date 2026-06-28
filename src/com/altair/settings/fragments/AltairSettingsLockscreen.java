@@ -18,7 +18,7 @@ import androidx.preference.SwitchPreference;
 
 import com.altair.settings.utils.DeviceUtils;
 import com.altair.settings.utils.TelephonyUtils;
-import com.altair.settings.utils.ThemeUtils;
+import com.android.internal.util.theme.ThemeUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;

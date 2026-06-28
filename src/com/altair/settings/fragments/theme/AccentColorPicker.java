@@ -36,8 +36,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.altair.settings.utils.MonetUtils;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.util.theme.MonetUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.Utils;

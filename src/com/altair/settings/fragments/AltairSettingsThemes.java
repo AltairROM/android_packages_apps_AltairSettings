@@ -21,9 +21,9 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreferenceCompat;
 
-import com.altair.settings.utils.MonetUtils;
-import com.altair.settings.utils.ThemeUtils;
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.util.theme.MonetUtils;
+import com.android.internal.util.theme.ThemeUtils;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.display.darkmode.DarkModePreference;
