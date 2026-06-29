@@ -18,6 +18,7 @@ import androidx.preference.SwitchPreference;
 
 import com.altair.settings.utils.DeviceUtils;
 import com.altair.settings.utils.TelephonyUtils;
+import com.android.internal.util.theme.MonetUtils;
 import com.android.internal.util.theme.ThemeUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -35,6 +36,7 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
 
     private static final String LOCKSCREEN_GESTURES_CATEGORY = "lockscreen_gestures_category";
     private static final String LOCKSCREEN_INTERFACE_CATEGORY = "lockscreen_interface_category";
+    private static final String KEY_CLOCK_COLOR_STYLE = "lock_clock_color_style";
     private static final String KEY_FP_SUCCESS_VIBRATE = "fp_success_vibrate";
     private static final String KEY_FP_ERROR_VIBRATE = "fp_error_vibrate";
     private static final String KEY_RIPPLE_EFFECT = "enable_ripple_effect";
@@ -43,7 +45,11 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
     private Context mContext;
 
     private ThemeUtils mThemeUtils;
+    private MonetUtils mMonetUtils;
 
+    private int mClockColorStyleValue;
+
+    private ListPreference mClockColorStylePreference;
     private Preference mFingerprintVib;
     private Preference mFingerprintVibErr;
     private Preference mRippleEffect;
@@ -59,8 +65,15 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
 
         mContext = getActivity().getApplicationContext();
         mThemeUtils = new ThemeUtils(mContext);
+        mMonetUtils = new MonetUtils(mContext);
 
         PreferenceCategory gestCategory = findPreference(LOCKSCREEN_GESTURES_CATEGORY);
+
+        mClockColorStylePreference = findPreference(KEY_CLOCK_COLOR_STYLE);
+        mClockColorStylePreference.setOnPreferenceChangeListener(this);
+        mClockColorStyleValue = mMonetUtils.getLockClockColorType();
+        updateClockColorStyleValue();
+        updateClockColorStyleSummary();
 
         mFingerprintVib = findPreference(KEY_FP_SUCCESS_VIBRATE);
         mFingerprintVibErr = findPreference(KEY_FP_ERROR_VIBRATE);
@@ -111,6 +124,14 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String key = preference.getKey();
+        switch (key) {
+            case KEY_CLOCK_COLOR_STYLE:
+                mClockColorStyleValue = Integer.parseInt((String) newValue);
+                mMonetUtils.setLockClockColorType(mClockColorStyleValue);
+                updateClockColorStyleValue();
+                updateClockColorStyleSummary();
+                break;
+        }
         return true;
     }
 
@@ -132,6 +153,16 @@ public class AltairSettingsLockscreen extends DashboardFragment implements
 
         preference.setSummary(target.equals(currentPackageName) ? "Default"
                 : labels.get(pkgs.indexOf(currentPackageName)));
+    }
+
+    private void updateClockColorStyleValue() {
+        mClockColorStylePreference.setValue(Integer.toString(mClockColorStyleValue));
+    }
+
+    private void updateClockColorStyleSummary() {
+        String value = Integer.toString(mClockColorStyleValue);
+        final int index = mClockColorStylePreference.findIndexOfValue(value);
+        mClockColorStylePreference.setSummary(mClockColorStylePreference.getEntries()[index]);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

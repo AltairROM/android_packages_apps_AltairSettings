@@ -719,4 +719,15 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+
+    <!-- Lockscreen clock color styles -->
+    <string-array name="lock_clock_color_style_entries">
+        <item>@string/sys_default</item>
+        <item>@string/lock_clock_accent_color</item>
+    </string-array>
+
+    <string-array name="lock_clock_color_style_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
 </resources>
