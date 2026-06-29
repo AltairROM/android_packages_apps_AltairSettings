@@ -172,6 +172,8 @@
     <string name="lockscreen_clock_category">Clock</string>
 
     <string name="lockscreen_clock_font_title">Clock font</string>
+    <string name="lock_clock_color_style_title">Clock color style</string>
+    <string name="lock_clock_accent_color">Accent color</string>
 
     <!-- Lockscreen interface -->
     <string name="lockscreen_interface_category">Interface</string>

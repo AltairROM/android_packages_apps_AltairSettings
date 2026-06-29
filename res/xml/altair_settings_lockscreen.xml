@@ -26,6 +26,14 @@
             android:title="@string/lockscreen_clock_font_title"
             android:summary="theme_customization_lock_clock_summary" />
 
+        <!-- Lockscreen clock color style -->
+        <ListPreference
+            android:key="lock_clock_color_style"
+            android:title="@string/lock_clock_color_style_title"
+            android:entries="@array/lock_clock_color_style_entries"
+            android:entryValues="@array/lock_clock_color_style_values"
+            android:defaultValue="0" />
+
     </PreferenceCategory>
 
     <!-- Interface -->
