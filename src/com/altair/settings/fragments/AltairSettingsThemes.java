@@ -181,7 +181,7 @@ public class AltairSettingsThemes extends DashboardFragment implements
     }
 
     private void updateAccentColorSummary() {
-        String summary = mResources.getString(R.string.theme_default_accent_color);
+        String summary = mResources.getString(R.string.default);
         final String color = "#" + mAccentColorValue;
         final int index = mAccentColorValues.indexOf(color.toLowerCase());
         if (index >= 0) {

@@ -405,7 +405,7 @@
 
     <!--Brightness Slider Shape -->
     <string-array name="qs_brightness_slider_shape_entries">
-        <item>@string/sys_default</item>
+        <item>@string/default</item>
         <item>@string/qs_tile_shape_circle</item>
         <item>@string/qs_tile_shape_rounded_square</item>
         <item>@string/qs_tile_shape_square</item>
@@ -632,7 +632,7 @@
 
     <!-- QS Tiles animation style -->
     <string-array name="qs_tile_animation_style_entries" translatable="false">
-        <item>@string/sys_default</item>
+        <item>@string/default</item>
         <item>@string/qs_tile_animation_style_bounce</item>
         <item>@string/qs_tile_animation_style_ripple</item>
         <item>@string/qs_tile_animation_style_flip</item>
@@ -722,8 +722,8 @@
 
     <!-- Lockscreen clock color styles -->
     <string-array name="lock_clock_color_style_entries">
-        <item>@string/sys_default</item>
-        <item>@string/lock_clock_accent_color</item>
+        <item>@string/default</item>
+        <item>@string/accent_color</item>
     </string-array>
 
     <string-array name="lock_clock_color_style_values">

@@ -6,7 +6,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/reset_button"
-        android:title="@string/reset"
+        android:title="@android:string/reset"
         android:icon="@drawable/ic_reset_24dp"
         android:showAsAction="always" />
 </menu>
