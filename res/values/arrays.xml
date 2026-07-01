@@ -5,157 +5,41 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- Statusbar Clock options -->
-    <string-array name="status_bar_clock_position_entries" translatable="false">
-        <item>@string/status_bar_clock_position_right</item>
-        <item>@string/status_bar_clock_position_center</item>
-        <item>@string/status_bar_clock_position_left</item>
-        <item>@string/status_bar_clock_position_hidden</item>
+    <!-- BUTTONS -->
+
+    <!-- Torch long press power timeout -->
+    <string-array name="torch_long_press_power_timeout_entries" translatable="false">
+        <item>@string/torch_long_press_power_timeout_never</item>
+        <item>@string/torch_long_press_power_timeout_1min</item>
+        <item>@string/torch_long_press_power_timeout_2min</item>
+        <item>@string/torch_long_press_power_timeout_5min</item>
+        <item>@string/torch_long_press_power_timeout_10min</item>
     </string-array>
 
-    <string-array name="status_bar_clock_position_entries_rtl" translatable="false">
-        <item>@string/status_bar_clock_position_left</item>
-        <item>@string/status_bar_clock_position_center</item>
-        <item>@string/status_bar_clock_position_right</item>
-        <item>@string/status_bar_clock_position_hidden</item>
-    </string-array>
-
-    <string-array name="status_bar_clock_position_values" translatable="false">
+    <string-array name="torch_long_press_power_timeout_values" translatable="false">
         <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
+        <item>60</item>
+        <item>120</item>
+        <item>300</item>
+        <item>600</item>
     </string-array>
 
-    <string-array name="status_bar_clock_position_entries_notch" translatable="false">
-        <item>@string/status_bar_clock_position_right</item>
-        <item>@string/status_bar_clock_position_left</item>
-        <item>@string/status_bar_clock_position_hidden</item>
+    <!-- Volume key cursor control -->
+    <string-array name="volbtn_cursor_control_entries" translatable="false">
+        <item>@string/volbtn_cursor_control_off</item>
+        <item>@string/volbtn_cursor_control_on</item>
+        <item>@string/volbtn_cursor_control_on_reverse</item>
     </string-array>
 
-    <string-array name="status_bar_clock_position_entries_notch_rtl" translatable="false">
-        <item>@string/status_bar_clock_position_left</item>
-        <item>@string/status_bar_clock_position_right</item>
-        <item>@string/status_bar_clock_position_hidden</item>
-    </string-array>
-
-    <string-array name="status_bar_clock_position_values_notch" translatable="false">
-        <item>0</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <string-array name="status_bar_am_pm_entries" translatable="false">
-        <item>@string/status_bar_am_pm_normal</item>
-        <item>@string/status_bar_am_pm_small</item>
-        <item>@string/status_bar_am_pm_hidden</item>
-    </string-array>
-
-    <string-array name="status_bar_am_pm_values" translatable="false">
+    <string-array name="volbtn_cursor_control_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
     </string-array>
 
-    <string-array name="status_bar_battery_style_entries" translatable="false">
-        <item>@string/status_bar_battery_style_icon_landscape</item>
-        <!--<item>@string/status_bar_battery_style_icon_portrait_two_tone</item>-->
-        <item>@string/status_bar_battery_style_circle</item>
-        <item>@string/status_bar_battery_style_dotted_circle</item>
-        <item>@string/status_bar_battery_style_text</item>
-    </string-array>
+    <!-- DISPLAY -->
 
-    <string-array name="status_bar_battery_style_values" translatable="false">
-        <item>0</item>
-        <!--<item>4</item>-->
-        <item>1</item>
-        <item>3</item>
-        <item>2</item>
-    </string-array>
-
-    <string-array name="status_bar_battery_percentage_entries" translatable="false">
-        <item>@string/status_bar_battery_percentage_default</item>
-        <item>@string/status_bar_battery_percentage_text_inside</item>
-        <item>@string/status_bar_battery_percentage_text_next</item>
-    </string-array>
-
-    <string-array name="status_bar_battery_percentage_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-
-    <!-- Network Traffic -->
-    <string-array name="network_traffic_location_entries" translatable="false">
-        <item>@string/network_traffic_location_disable</item>
-        <item>@string/network_traffic_location_statusbar</item>
-        <!--<item>@string/network_traffic_location_quick_statusbar</item>-->
-    </string-array>
-
-    <string-array name="network_traffic_location_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <!--<item>2</item>-->
-    </string-array>
-
-    <string-array name="network_traffic_mode_entries" translatable="false">
-        <item>@string/network_traffic_mode_all</item>
-        <item>@string/network_traffic_mode_up</item>
-        <item>@string/network_traffic_mode_down</item>
-    </string-array>
-
-    <string-array name="network_traffic_mode_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-
-    <string-array name="network_traffic_units_entries" translatable="false">
-        <item>@string/network_traffic_units_bits</item>
-        <item>@string/network_traffic_units_bytes</item>
-    </string-array>
-
-    <string-array name="network_traffic_units_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <!-- Quick pulldown -->
-    <string-array name="qs_quick_pulldown_entries" translatable="false">
-        <item>@string/qs_quick_pulldown_off</item>
-        <item>@string/qs_quick_pulldown_right</item>
-        <item>@string/qs_quick_pulldown_left</item>
-        <item>@string/qs_quick_pulldown_always</item>
-    </string-array>
-
-    <string-array name="qs_quick_pulldown_entries_rtl" translatable="false">
-        <item>@string/qs_quick_pulldown_off</item>
-        <item>@string/qs_quick_pulldown_left</item>
-        <item>@string/qs_quick_pulldown_right</item>
-        <item>@string/qs_quick_pulldown_always</item>
-    </string-array>
-
-    <string-array name="qs_quick_pulldown_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <!-- Brightness slider position -->
-    <string-array name="qs_brightness_slider_position_entries" translatable="false">
-        <item>@string/qs_brightness_slider_position_top</item>
-        <item>@string/qs_brightness_slider_position_bottom</item>
-    </string-array>
-
-    <string-array name="qs_brightness_slider_position_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-    </string-array>
-
-    <!-- Smart Pixels -->
+    <!-- Smart Pixels percent -->
     <string-array name="smart_pixels_percent_strings" translatable="false">
         <item>12</item>
         <item>25</item>
@@ -176,19 +60,82 @@
         <item>6</item>
     </string-array>
 
-    <string-array name="smart_pixels_shift_times">
-        <item>15 seconds</item>
-        <item>30 seconds</item>
-        <item>1 minute</item>
-        <item>2 minutes</item>
-        <item>5 minutes</item>
-        <item>10 minutes</item>
-        <item>20 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
+    <!-- LOCKSCREEN -->
+
+    <!-- Lockscreen clock color styles -->
+    <string-array name="lock_clock_color_style_entries">
+        <item>@string/default</item>
+        <item>@string/accent_color</item>
     </string-array>
 
-    <string-array name="smart_pixels_shift_values">
+    <string-array name="lock_clock_color_style_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- Pulse music visualizer bass haptics -->
+    <string-array name="pulse_bass_haptics_entries" translatable="false">
+        <item>@string/pulse_bass_haptics_none</item>
+        <item>@string/pulse_bass_haptics_running</item>
+        <item>@string/pulse_bass_haptics_always</item>
+    </string-array>
+
+    <string-array name="pulse_bass_haptics_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Pulse music visualizer style -->
+    <string-array name="pulse_renderer_entries">
+        <item>@string/pulse_renderer_solid</item>
+        <item>@string/pulse_renderer_fading</item>
+        <item>@string/pulse_renderer_neon_glow</item>
+        <item>@string/pulse_renderer_retro_vu_meter</item>
+        <item>@string/pulse_renderer_minimal_wave</item>
+        <item>@string/pulse_renderer_sparkle</item>
+        <item>@string/pulse_renderer_matrix</item>
+        <item>@string/pulse_renderer_particle</item>
+        <item>@string/pulse_renderer_waveform</item>
+    </string-array>
+
+    <string-array name="pulse_renderer_values">
+        <item>solid</item>
+        <item>fading</item>
+        <item>neon</item>
+        <item>retro</item>
+        <item>minimal</item>
+        <item>sparkle</item>
+        <item>matrix</item>
+        <item>particle</item>
+        <item>waveform</item>
+    </string-array>
+
+    <!-- Pulse music visualizer color -->
+    <string-array name="pulse_color_entries">
+        <item>@string/pulse_color_lavalamp</item>
+        <item>@string/pulse_color_album</item>
+        <item>@string/pulse_color_accent</item>
+    </string-array>
+
+    <string-array name="pulse_color_values">
+        <item>lavalamp</item>
+        <item>album</item>
+        <item>accent</item>
+    </string-array>
+
+    <!-- Lock screen media art filter -->
+    <string-array name="ls_media_art_filter_entries">
+        <item>@string/ls_media_art_filter_none</item>
+        <item>@string/ls_media_art_filter_blur</item>
+        <item>@string/ls_media_art_filter_grayscale</item>
+        <item>@string/ls_media_art_filter_sepia</item>
+        <item>@string/ls_media_art_filter_tint</item>
+        <item>@string/ls_media_art_filter_invert</item>
+        <item>@string/ls_media_art_filter_grayblur</item>
+    </string-array>
+
+    <string-array name="ls_media_art_filter_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -196,11 +143,26 @@
         <item>4</item>
         <item>5</item>
         <item>6</item>
-        <item>7</item>
-        <item>8</item>
     </string-array>
 
-    <!-- Navbar key rebinding -->
+    <!-- NAVIGATION -->
+
+    <!-- Navigation bar layout -->
+    <string-array name="navigation_bar_layout_entries" translatable="false">
+        <item>@string/navigation_bar_layout_normal</item>
+        <item>@string/navigation_bar_layout_compact</item>
+        <item>@string/navigation_bar_layout_leftleaning</item>
+        <item>@string/navigation_bar_layout_rightleaning</item>
+    </string-array>
+
+    <string-array name="navigation_bar_layout_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Navigation bar actions -->
     <string-array name="navbar_key_action_entries" translatable="false">
         <item>@string/navbar_key_action_nothing</item>
         <item>@string/navbar_key_action_menu</item>
@@ -247,35 +209,357 @@
         <item>19</item>
     </string-array>
 
-    <!-- Torch long press power timeout -->
-    <string-array name="torch_long_press_power_timeout_entries" translatable="false">
-        <item>@string/torch_long_press_power_timeout_never</item>
-        <item>@string/torch_long_press_power_timeout_1min</item>
-        <item>@string/torch_long_press_power_timeout_2min</item>
-        <item>@string/torch_long_press_power_timeout_5min</item>
-        <item>@string/torch_long_press_power_timeout_10min</item>
+    <!-- NOTIFICATIONS -->
+
+    <!-- Edge light color mode-->
+    <string-array name="edge_light_color_mode_entries" translatable="false">
+        <item>@string/accent_color</item>
+        <item>@string/edge_light_notification_color</item>
+        <item>@string/wallpaper_color</item>
+        <item>@string/edge_light_rainbow_color</item>
+        <item>@string/custom_color</item>
     </string-array>
 
-    <string-array name="torch_long_press_power_timeout_values" translatable="false">
+    <string-array name="edge_light_color_mode_values" translatable="false">
+        <item>accent</item>
+        <item>notification</item>
+        <item>wallpaper</item>
+        <item>rainbow</item>
+        <item>custom</item>
+    </string-array>
+
+    <!-- Edge light render style-->
+    <string-array name="edge_light_style_entries" translatable="false">
+        <item>@string/edge_light_style_default</item>
+        <item>@string/edge_light_style_frame</item>
+    </string-array>
+
+    <string-array name="edge_light_style_values" translatable="false">
+        <item>default</item>
+        <item>rounded</item>
+    </string-array>
+
+    <!-- Edge light animation effect -->
+    <string-array name="edge_light_animation_entries" translatable="false">
+        <item>@string/edge_light_animation_effect_none</item>
+        <item>@string/edge_light_animation_effect_breathing</item>
+        <item>@string/edge_light_animation_effect_wave</item>
+        <item>@string/edge_light_animation_effect_sparkle</item>
+        <item>@string/edge_light_animation_effect_chase</item>
+        <item>@string/edge_light_animation_effect_comet</item>
+    </string-array>
+
+    <string-array name="edge_light_animation_values" translatable="false">
+        <item>none</item>
+        <item>breathing</item>
+        <item>wave</item>
+        <item>sparkle</item>
+        <item>chase</item>
+        <item>comet</item>
+    </string-array>
+
+    <!-- Blink flashlight for incoming calls -->
+    <string-array name="flashlight_on_call_entries" translatable="false">
+        <item>@string/flashlight_on_call_disabled</item>
+        <item>@string/flashlight_on_call_ringer</item>
+        <item>@string/flashlight_on_call_no_ringer</item>
+        <item>@string/flashlight_on_call_silent</item>
+        <item>@string/flashlight_on_call_always</item>
+    </string-array>
+
+    <string-array name="flashlight_on_call_values" translatable="false">
         <item>0</item>
-        <item>60</item>
-        <item>120</item>
-        <item>300</item>
-        <item>600</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
     </string-array>
 
-    <!-- Volume key cursor control -->
-    <string-array name="volbtn_cursor_control_entries" translatable="false">
-        <item>@string/volbtn_cursor_control_off</item>
-        <item>@string/volbtn_cursor_control_on</item>
-        <item>@string/volbtn_cursor_control_on_reverse</item>
+    <!-- QUICK SETTINGS -->
+
+    <!-- Quick pulldown -->
+    <string-array name="qs_quick_pulldown_entries" translatable="false">
+        <item>@string/qs_quick_pulldown_off</item>
+        <item>@string/qs_quick_pulldown_right</item>
+        <item>@string/qs_quick_pulldown_left</item>
+        <item>@string/qs_quick_pulldown_always</item>
     </string-array>
 
-    <string-array name="volbtn_cursor_control_values" translatable="false">
+    <string-array name="qs_quick_pulldown_entries_rtl" translatable="false">
+        <item>@string/qs_quick_pulldown_off</item>
+        <item>@string/qs_quick_pulldown_left</item>
+        <item>@string/qs_quick_pulldown_right</item>
+        <item>@string/qs_quick_pulldown_always</item>
+    </string-array>
+
+    <string-array name="qs_quick_pulldown_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- QS panel style -->
+    <string-array name="qs_panel_style_entries" translatable="false">
+        <item>@string/qs_panel_style_card</item>
+        <item>@string/qs_panel_style_classic</item>
+    </string-array>
+
+    <string-array name="qs_panel_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- QS classic tile icon shape -->
+    <string-array name="qs_tile_icon_shape_entries" translatable="false">
+        <item>@string/shape_circle</item>
+        <item>@string/shape_square</item>
+        <item>@string/shape_ios_rounded_square</item>
+        <item>@string/shape_cylindrical</item>
+        <item>@string/shape_rice_balls</item>
+        <item>@string/shape_rounded_rect</item>
+        <item>@string/shape_squircle</item>
+        <item>@string/shape_teardrop</item>
+        <item>@string/shape_vessel</item>
+        <item>@string/shape_rounded_hexagon</item>
+    </string-array>
+
+    <string-array name="qs_tile_icon_shape_values" translatable="false">
+        <item>circle</item>
+        <item>square</item>
+        <item>ios_rounded_square</item>
+        <item>cylindrical</item>
+        <item>rice_balls</item>
+        <item>rounded_rect</item>
+        <item>squircle</item>
+        <item>teardrop</item>
+        <item>vessel</item>
+        <item>rounded_hexagon</item>
+    </string-array>
+
+    <!-- QS card tiles shape -->
+    <string-array name="qs_tile_shape_entries">
+        <item>@string/qs_tile_shape_dynamic</item>
+        <item>@string/qs_tile_shape_rounded_square_smooth</item>
+        <item>@string/qs_tile_shape_rounded_square</item>
+        <item>@string/qs_tile_shape_square</item>
+        <item>@string/qs_tile_shape_circle</item>
+    </string-array>
+
+    <string-array name="qs_tile_shape_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- QS tiles animation style -->
+    <string-array name="qs_tile_animation_style_entries" translatable="false">
+        <item>@string/default</item>
+        <item>@string/qs_tile_animation_style_bounce</item>
+        <item>@string/qs_tile_animation_style_ripple</item>
+        <item>@string/qs_tile_animation_style_flip</item>
+        <item>@string/qs_tile_animation_style_fade</item>
+        <item>@string/qs_tile_animation_style_pulse</item>
+        <item>@string/qs_tile_animation_style_shake</item>
+        <item>@string/qs_tile_animation_style_wobble</item>
+        <item>@string/qs_tile_animation_style_spin</item>
+        <item>@string/qs_tile_animation_style_squish</item>
+        <item>@string/qs_tile_animation_style_tilt</item>
+        <item>@string/qs_tile_animation_style_heartbeat</item>
+        <item>@string/qs_tile_animation_style_swing</item>
+    </string-array>
+
+    <string-array name="qs_tile_animation_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+
+    <!-- Brightness/volume slider mode -->
+    <string-array name="qs_show_volume_slider_entries">
+        <item>@string/qs_show_volume_slider_hide</item>
+        <item>@string/qs_show_volume_slider_both</item>
+        <item>@string/qs_show_volume_slider_only</item>
+    </string-array>
+
+    <string-array name="qs_show_volume_slider_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
     </string-array>
+
+    <!-- Brightness slider shape -->
+    <string-array name="qs_brightness_slider_shape_entries">
+        <item>@string/default</item>
+        <item>@string/qs_tile_shape_circle</item>
+        <item>@string/qs_tile_shape_rounded_square</item>
+        <item>@string/qs_tile_shape_square</item>
+    </string-array>
+
+    <string-array name="qs_brightness_slider_shape_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Brightness slider position -->
+    <string-array name="qs_brightness_slider_position_entries" translatable="false">
+        <item>@string/qs_brightness_slider_position_top</item>
+        <item>@string/qs_brightness_slider_position_bottom</item>
+    </string-array>
+
+    <string-array name="qs_brightness_slider_position_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- SOUND -->
+
+    <!-- Volume panel position -->
+    <string-array name="volume_panel_position_entries" translatable="false">
+        <item>@string/volume_panel_position_left</item>
+        <item>@string/volume_panel_position_right</item>
+    </string-array>
+
+    <string-array name="volume_panel_position_values" translatable="false">
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+
+    <!-- STATUS BAR -->
+
+    <!-- Clock position -->
+    <string-array name="status_bar_clock_position_entries" translatable="false">
+        <item>@string/status_bar_clock_position_right</item>
+        <item>@string/status_bar_clock_position_center</item>
+        <item>@string/status_bar_clock_position_left</item>
+        <item>@string/status_bar_clock_position_hidden</item>
+    </string-array>
+
+    <string-array name="status_bar_clock_position_entries_rtl" translatable="false">
+        <item>@string/status_bar_clock_position_left</item>
+        <item>@string/status_bar_clock_position_center</item>
+        <item>@string/status_bar_clock_position_right</item>
+        <item>@string/status_bar_clock_position_hidden</item>
+    </string-array>
+
+    <string-array name="status_bar_clock_position_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="status_bar_clock_position_entries_notch" translatable="false">
+        <item>@string/status_bar_clock_position_right</item>
+        <item>@string/status_bar_clock_position_left</item>
+        <item>@string/status_bar_clock_position_hidden</item>
+    </string-array>
+
+    <string-array name="status_bar_clock_position_entries_notch_rtl" translatable="false">
+        <item>@string/status_bar_clock_position_left</item>
+        <item>@string/status_bar_clock_position_right</item>
+        <item>@string/status_bar_clock_position_hidden</item>
+    </string-array>
+
+    <string-array name="status_bar_clock_position_values_notch" translatable="false">
+        <item>0</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Clock AM/PM style -->
+    <string-array name="status_bar_am_pm_entries" translatable="false">
+        <item>@string/status_bar_am_pm_normal</item>
+        <item>@string/status_bar_am_pm_small</item>
+        <item>@string/status_bar_am_pm_hidden</item>
+    </string-array>
+
+    <string-array name="status_bar_am_pm_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Battery style -->
+    <string-array name="status_bar_battery_style_entries" translatable="false">
+        <item>@string/status_bar_battery_style_icon_landscape</item>
+        <item>@string/status_bar_battery_style_circle</item>
+        <item>@string/status_bar_battery_style_dotted_circle</item>
+        <item>@string/status_bar_battery_style_text</item>
+    </string-array>
+
+    <string-array name="status_bar_battery_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>3</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Battery percentage -->
+    <string-array name="status_bar_battery_percentage_entries" translatable="false">
+        <item>@string/status_bar_battery_percentage_default</item>
+        <item>@string/status_bar_battery_percentage_text_inside</item>
+        <item>@string/status_bar_battery_percentage_text_next</item>
+    </string-array>
+
+    <string-array name="status_bar_battery_percentage_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Network traffic location -->
+    <string-array name="network_traffic_location_entries" translatable="false">
+        <item>@string/network_traffic_location_disable</item>
+        <item>@string/network_traffic_location_statusbar</item>
+    </string-array>
+
+    <string-array name="network_traffic_location_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- Network traffic mode -->
+    <string-array name="network_traffic_mode_entries" translatable="false">
+        <item>@string/network_traffic_mode_all</item>
+        <item>@string/network_traffic_mode_up</item>
+        <item>@string/network_traffic_mode_down</item>
+    </string-array>
+
+    <string-array name="network_traffic_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Network traffic units -->
+    <string-array name="network_traffic_units_entries" translatable="false">
+        <item>@string/network_traffic_units_bits</item>
+        <item>@string/network_traffic_units_bytes</item>
+    </string-array>
+
+    <string-array name="network_traffic_units_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- THEMES -->
 
     <!-- Predefined theme accent colors -->
     <!-- Base accent colors derived from system_accent1_500 -->
@@ -386,169 +670,9 @@
         <item>MONOCHROMATIC</item>
     </string-array>
 
-    <!-- QS Tiles Shape -->
-    <string-array name="qs_tile_shape_entries">
-        <item>@string/qs_tile_shape_dynamic</item>
-        <item>@string/qs_tile_shape_rounded_square_smooth</item>
-        <item>@string/qs_tile_shape_rounded_square</item>
-        <item>@string/qs_tile_shape_square</item>
-        <item>@string/qs_tile_shape_circle</item>
-    </string-array>
+    <!-- USER INTERFACE -->
 
-    <string-array name="qs_tile_shape_values">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-    </string-array>
-
-    <!--Brightness Slider Shape -->
-    <string-array name="qs_brightness_slider_shape_entries">
-        <item>@string/default</item>
-        <item>@string/qs_tile_shape_circle</item>
-        <item>@string/qs_tile_shape_rounded_square</item>
-        <item>@string/qs_tile_shape_square</item>
-    </string-array>
-
-    <string-array name="qs_brightness_slider_shape_values">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <!-- Lock screen album art filter -->
-    <string-array name="ls_media_art_filter_entries">
-        <item>@string/ls_media_art_filter_none</item>
-        <item>@string/ls_media_art_filter_blur</item>
-        <item>@string/ls_media_art_filter_grayscale</item>
-        <item>@string/ls_media_art_filter_sepia</item>
-        <item>@string/ls_media_art_filter_tint</item>
-        <item>@string/ls_media_art_filter_invert</item>
-        <item>@string/ls_media_art_filter_grayblur</item>
-    </string-array>
-
-    <string-array name="ls_media_art_filter_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-    </string-array>
-
-    <!-- Pulse music visualizer -->
-    <string-array name="pulse_color_entries">
-        <item>@string/pulse_color_lavalamp</item>
-        <item>@string/pulse_color_album</item>
-        <item>@string/pulse_color_accent</item>
-    </string-array>
-
-    <string-array name="pulse_color_values">
-        <item>lavalamp</item>
-        <item>album</item>
-        <item>accent</item>
-    </string-array>
-
-    <string-array name="pulse_renderer_entries">
-        <item>@string/pulse_renderer_solid</item>
-        <item>@string/pulse_renderer_fading</item>
-        <item>@string/pulse_renderer_neon_glow</item>
-        <item>@string/pulse_renderer_retro_vu_meter</item>
-        <item>@string/pulse_renderer_minimal_wave</item>
-        <item>@string/pulse_renderer_sparkle</item>
-        <item>@string/pulse_renderer_matrix</item>
-        <item>@string/pulse_renderer_particle</item>
-        <item>@string/pulse_renderer_waveform</item>
-    </string-array>
-
-    <string-array name="pulse_renderer_values">
-        <item>solid</item>
-        <item>fading</item>
-        <item>neon</item>
-        <item>retro</item>
-        <item>minimal</item>
-        <item>sparkle</item>
-        <item>matrix</item>
-        <item>particle</item>
-        <item>waveform</item>
-    </string-array>
-
-    <!-- Edge light -->
-    <string-array name="edge_light_color_mode_entries" translatable="false">
-        <item>@string/accent_color</item>
-        <item>@string/edge_light_notification_color</item>
-        <item>@string/wallpaper_color</item>
-        <item>@string/edge_light_rainbow_color</item>
-        <item>@string/custom_color</item>
-    </string-array>
-
-    <string-array name="edge_light_color_mode_values" translatable="false">
-        <item>accent</item>
-        <item>notification</item>
-        <item>wallpaper</item>
-        <item>rainbow</item>
-        <item>custom</item>
-    </string-array>
-
-    <string-array name="edge_light_style_entries" translatable="false">
-        <item>@string/edge_light_style_default</item>
-        <item>@string/edge_light_style_frame</item>
-    </string-array>
-
-    <string-array name="edge_light_style_values" translatable="false">
-        <item>default</item>
-        <item>rounded</item>
-    </string-array>
-
-    <string-array name="edge_light_animation_entries" translatable="false">
-        <item>@string/edge_light_animation_effect_none</item>
-        <item>@string/edge_light_animation_effect_breathing</item>
-        <item>@string/edge_light_animation_effect_wave</item>
-        <item>@string/edge_light_animation_effect_sparkle</item>
-        <item>@string/edge_light_animation_effect_chase</item>
-        <item>@string/edge_light_animation_effect_comet</item>
-    </string-array>
-
-    <string-array name="edge_light_animation_values" translatable="false">
-        <item>none</item>
-        <item>breathing</item>
-        <item>wave</item>
-        <item>sparkle</item>
-        <item>chase</item>
-        <item>comet</item>
-    </string-array>
-
-    <!-- Volume panel position -->
-    <string-array name="volume_panel_position_entries" translatable="false">
-        <item>@string/volume_panel_position_left</item>
-        <item>@string/volume_panel_position_right</item>
-    </string-array>
-
-    <string-array name="volume_panel_position_values" translatable="false">
-        <item>1</item>
-        <item>0</item>
-    </string-array>
-
-    <!-- Navigation bar layout -->
-    <string-array name="navigation_bar_layout_entries" translatable="false">
-        <item>@string/navigation_bar_layout_normal</item>
-        <item>@string/navigation_bar_layout_compact</item>
-        <!--<item>@string/navigation_bar_layout_expanded</item>-->
-        <item>@string/navigation_bar_layout_leftleaning</item>
-        <item>@string/navigation_bar_layout_rightleaning</item>
-    </string-array>
-
-    <string-array name="navigation_bar_layout_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <!-- AOD Schedule -->
+    <!-- AOD schedule -->
     <string-array name="doze_always_on_auto_mode_entries" translatable="false">
         <item>@string/disable</item>
         <item>@string/night_display_auto_mode_twilight</item>
@@ -565,23 +689,6 @@
         <item>2</item>
     </string-array>
 
-    <!-- Blink flashlight for incoming calls -->
-    <string-array name="flashlight_on_call_entries" translatable="false">
-        <item>@string/flashlight_on_call_disabled</item>
-        <item>@string/flashlight_on_call_ringer</item>
-        <item>@string/flashlight_on_call_no_ringer</item>
-        <item>@string/flashlight_on_call_silent</item>
-        <item>@string/flashlight_on_call_always</item>
-    </string-array>
-
-    <string-array name="flashlight_on_call_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-    </string-array>
-
     <!-- Gradient customization -->
     <string-array name="custom_gradient_color_mode_entries" translatable="false">
         <item>@string/custom_gradient_color_mode_auto</item>
@@ -593,90 +700,7 @@
         <item>1</item>
     </string-array>
 
-    <!-- QS Panel style -->
-    <string-array name="qs_panel_style_entries" translatable="false">
-        <item>@string/qs_panel_style_card</item>
-        <item>@string/qs_panel_style_classic</item>
-    </string-array>
-
-    <string-array name="qs_panel_style_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-    </string-array>
-
-    <string-array name="qs_tile_icon_shape_entries" translatable="false">
-        <item>@string/shape_circle</item>
-        <item>@string/shape_square</item>
-        <item>@string/shape_ios_rounded_square</item>
-        <item>@string/shape_cylindrical</item>
-        <item>@string/shape_rice_balls</item>
-        <item>@string/shape_rounded_rect</item>
-        <item>@string/shape_squircle</item>
-        <item>@string/shape_teardrop</item>
-        <item>@string/shape_vessel</item>
-        <item>@string/shape_rounded_hexagon</item>
-    </string-array>
-
-    <string-array name="qs_tile_icon_shape_values" translatable="false">
-        <item>circle</item>
-        <item>square</item>
-        <item>ios_rounded_square</item>
-        <item>cylindrical</item>
-        <item>rice_balls</item>
-        <item>rounded_rect</item>
-        <item>squircle</item>
-        <item>teardrop</item>
-        <item>vessel</item>
-        <item>rounded_hexagon</item>
-    </string-array>
-
-    <!-- QS Tiles animation style -->
-    <string-array name="qs_tile_animation_style_entries" translatable="false">
-        <item>@string/default</item>
-        <item>@string/qs_tile_animation_style_bounce</item>
-        <item>@string/qs_tile_animation_style_ripple</item>
-        <item>@string/qs_tile_animation_style_flip</item>
-        <item>@string/qs_tile_animation_style_fade</item>
-        <item>@string/qs_tile_animation_style_pulse</item>
-        <item>@string/qs_tile_animation_style_shake</item>
-        <item>@string/qs_tile_animation_style_wobble</item>
-        <item>@string/qs_tile_animation_style_spin</item>
-        <item>@string/qs_tile_animation_style_squish</item>
-        <item>@string/qs_tile_animation_style_tilt</item>
-        <item>@string/qs_tile_animation_style_heartbeat</item>
-        <item>@string/qs_tile_animation_style_swing</item>
-    </string-array>
-
-    <string-array name="qs_tile_animation_style_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-        <item>11</item>
-        <item>12</item>
-    </string-array>
-
-    <!-- Pulse bass haptics -->
-    <string-array name="pulse_bass_haptics_entries" translatable="false">
-        <item>@string/pulse_bass_haptics_none</item>
-        <item>@string/pulse_bass_haptics_running</item>
-        <item>@string/pulse_bass_haptics_always</item>
-    </string-array>
-
-    <string-array name="pulse_bass_haptics_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-
-    <!-- Settings icon -->
+    <!-- Settings icon color style -->
     <string-array name="settings_icon_style_entries">
         <item>@string/settings_icon_style_expressive</item>
         <item>@string/settings_icon_style_colored_bg</item>
@@ -697,6 +721,7 @@
          <item>6</item>
      </string-array>
 
+    <!-- Settings icon corner style -->
      <string-array name="settings_corner_style_entries">
         <item>@string/settings_icon_corner_style_circle</item>
         <item>@string/settings_icon_corner_style_rounded_square</item>
@@ -706,28 +731,4 @@
          <item>0</item>
          <item>1</item>
      </string-array>
-
-    <!-- Brightness / Volume slider -->
-    <string-array name="qs_show_volume_slider_entries">
-        <item>@string/qs_show_volume_slider_hide</item>
-        <item>@string/qs_show_volume_slider_both</item>
-        <item>@string/qs_show_volume_slider_only</item>
-    </string-array>
-
-    <string-array name="qs_show_volume_slider_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-
-    <!-- Lockscreen clock color styles -->
-    <string-array name="lock_clock_color_style_entries">
-        <item>@string/default</item>
-        <item>@string/accent_color</item>
-    </string-array>
-
-    <string-array name="lock_clock_color_style_values">
-        <item>0</item>
-        <item>1</item>
-    </string-array>
 </resources>
