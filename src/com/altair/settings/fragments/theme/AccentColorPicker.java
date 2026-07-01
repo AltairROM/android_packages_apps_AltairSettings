@@ -133,7 +133,7 @@ public class AccentColorPicker extends SettingsPreferenceFragment {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.theme_colors_reset_accent_color_title)
                     .setMessage(R.string.theme_colors_reset_accent_color_message)
-                    .setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             mMonetUtils.setAccentColor(MonetUtils.ACCENT_COLOR_DEFAULT);
                         }
