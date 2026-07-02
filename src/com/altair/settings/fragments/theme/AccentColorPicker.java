@@ -59,8 +59,6 @@ public class AccentColorPicker extends SettingsPreferenceFragment {
 
     private List<String> mAccentColorNames;
     private List<String> mAccentColorValues;
-    private List<String> mAccentColorValuesDark;
-    private List<String> mAccentColorValuesDarkRich;
 
     private String mAccentColorValue;
 
@@ -81,10 +79,6 @@ public class AccentColorPicker extends SettingsPreferenceFragment {
         final Resources res = getResources();
         mAccentColorNames = Arrays.asList(res.getStringArray(R.array.theme_accent_color_names));
         mAccentColorValues = Arrays.asList(res.getStringArray(R.array.theme_accent_color_values));
-        mAccentColorValuesDark =
-                Arrays.asList(res.getStringArray(R.array.theme_accent_color_values_dark));
-        mAccentColorValuesDarkRich =
-                Arrays.asList(res.getStringArray(R.array.theme_accent_color_values_dark_rich));
 
         setHasOptionsMenu(true);
     }
@@ -168,7 +162,7 @@ public class AccentColorPicker extends SettingsPreferenceFragment {
                     ? 0 : Color.parseColor("#" + mAccentColorValue);
 
             holder.image.setBackgroundResource(R.drawable.accent_background);
-            final int viewColor = Color.parseColor(getViewAccentColor(position));
+            final int viewColor = Color.parseColor(mAccentColorValues.get(position));
             holder.image.setBackgroundTintList(ColorStateList.valueOf(viewColor));
             holder.itemView.setActivated(selectedColor == currentColor);
             holder.name.setText(mAccentColorNames.get(position));
@@ -186,19 +180,6 @@ public class AccentColorPicker extends SettingsPreferenceFragment {
                     mMonetUtils.setAccentColor(mAccentColorValue);
                 }
             });
-        }
-
-        private String getViewAccentColor(final int position) {
-            String color;
-            final boolean nightMode = (mContext.getResources().getConfiguration().uiMode &
-                    Configuration.UI_MODE_NIGHT_YES) != 0;
-            if (nightMode) {
-                color = mMonetUtils.isEnhancedColorsEnabled() ? mAccentColorValuesDarkRich.get(position)
-                                                              : mAccentColorValuesDark.get(position);
-            } else {
-                color = mAccentColorValues.get(position);
-            }
-            return color;
         }
 
         @Override

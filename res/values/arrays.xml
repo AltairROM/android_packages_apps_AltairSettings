@@ -561,8 +561,7 @@
 
     <!-- THEMES -->
 
-    <!-- Predefined theme accent colors -->
-    <!-- Base accent colors derived from system_accent1_500 -->
+    <!-- Predefined theme accent colors ()derived from system_accent1_500) -->
     <string-array name="theme_accent_color_values">
         <item>#1a73e8</item> <!-- Google Blue -->
         <item>#ffb300</item> <!-- Material Amber -->
@@ -582,50 +581,6 @@
         <item>#e53935</item> <!-- Material Red -->
         <item>#00897b</item> <!-- Material Teal -->
         <item>#fdd835</item> <!-- Material Yellow -->
-    </string-array>
-
-    <!-- Dark mode colors derived from system_accent1_200 -->
-    <string-array name="theme_accent_color_values_dark">
-        <item>#8d9bf4</item> <!-- Google Blue -->
-        <item>#ffe082</item> <!-- Material Amber -->
-        <item>#90caf9</item> <!-- Material Blue -->
-        <item>#bcaaa4</item> <!-- Material Brown -->
-        <item>#80deea</item> <!-- Material Cyan -->
-        <item>#ffccbc</item> <!-- Material Deep Orange -->
-        <item>#d1c4e9</item> <!-- Material Deep Purple -->
-        <item>#c8e6c9</item> <!-- Material Green -->
-        <item>#c5cae9</item> <!-- Material Indigo -->
-        <item>#b3e5fc</item> <!-- Material Light Blue -->
-        <item>#dcedc8</item> <!-- Material Light Green -->
-        <item>#f0f4c3</item> <!-- Material Lime -->
-        <item>#ffe0b2</item> <!-- Material Orange -->
-        <item>#f8bbd0</item> <!-- Material Pink -->
-        <item>#e1bee7</item> <!-- Material Purple -->
-        <item>#ffcdd2</item> <!-- Material Red -->
-        <item>#b2dfdb</item> <!-- Material Teal -->
-        <item>#fff9c4</item> <!-- Material Yellow -->
-    </string-array>
-
-    <!-- Dark mode (rich) colors derived from system_accent1_300 -->
-    <string-array name="theme_accent_color_values_dark_rich">
-        <item>#5f9def</item> <!-- Google Blue -->
-        <item>#ffd54f</item> <!-- Material Amber -->
-        <item>#64b5f6</item> <!-- Material Blue -->
-        <item>#a1887f</item> <!-- Material Brown -->
-        <item>#4dd0e1</item> <!-- Material Cyan -->
-        <item>#ff8a65</item> <!-- Material Deep Orange -->
-        <item>#9575cd</item> <!-- Material Deep Purple -->
-        <item>#81c784</item> <!-- Material Green -->
-        <item>#7986cb</item> <!-- Material Indigo -->
-        <item>#4fc3f7</item> <!-- Material Light Blue -->
-        <item>#aed581</item> <!-- Material Light Green -->
-        <item>#dce775</item> <!-- Material Lime -->
-        <item>#ffb74d</item> <!-- Material Orange -->
-        <item>#f06292</item> <!-- Material Pink -->
-        <item>#ba68c8</item> <!-- Material Purple -->
-        <item>#e57373</item> <!-- Material Red -->
-        <item>#4db6ac</item> <!-- Material Teal -->
-        <item>#fff176</item> <!-- Material Yellow -->
     </string-array>
 
     <string-array name="theme_accent_color_names" translatable="false">
