@@ -16,10 +16,9 @@
         app:lottie_rawRes="@raw/lottie_theme_settings" />
 
     <!-- Accent color -->
-    <Preference
+    <com.altair.settings.preferences.AccentColorPreference
         android:key="theme_accent_color"
-        android:title="@string/theme_accent_color_title"
-        android:fragment="com.altair.settings.fragments.theme.AccentColorPicker" />
+        android:title="@string/theme_accent_color_title" />
 
     <!-- Enhanced colors -->
     <SwitchPreferenceCompat
@@ -69,16 +68,14 @@
             android:summary="theme_customization_font_summary" />
 
         <!-- Icon shape -->
-        <Preference
-            android:key="android.theme.customization.adaptive_icon_shape"
-            android:title="@string/theme_elements_icon_shape_title"
-            android:fragment="com.altair.settings.fragments.theme.IconShapesPicker" />
+        <com.altair.settings.preferences.IconShapePreference
+            android:key="icon_shape"
+            android:title="@string/theme_elements_icon_shape_title" />
 
         <!-- Navigation bar style -->
-        <Preference
-            android:key="android.theme.customization.navbar"
-            android:title="@string/theme_elements_navbar_title"
-            android:fragment="com.altair.settings.fragments.theme.NavbarStylesPicker" />
+        <com.altair.settings.preferences.NavigationBarStylePreference
+            android:key="navigation_bar_style"
+            android:title="@string/theme_elements_navbar_title" />
 
     </PreferenceCategory>
 
