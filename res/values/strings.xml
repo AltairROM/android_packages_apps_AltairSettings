@@ -555,6 +555,10 @@
     <string name="status_bar_am_pm_hidden">Hidden</string>
     <string name="status_bar_clock_chip_title">Background chip</string>
     <string name="status_bar_clock_chip_summary">Display accented chip behind clock</string>
+    <string name="status_bar_clock_period_separator_title">Period separator</string>
+    <string name="status_bar_clock_period_separator_summary">Show the time with a period instead of a colon (10.45 instead of 10:45)</string>
+    <string name="status_bar_clock_bold_title">Bold clock</string>
+    <string name="status_bar_clock_bold_summary">Show the status bar clock in bold text</string>
 
     <!-- Battery -->
     <string name="status_bar_battery_category">Battery</string>
