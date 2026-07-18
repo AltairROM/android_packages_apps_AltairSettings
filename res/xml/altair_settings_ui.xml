@@ -109,6 +109,15 @@
             android:summary="@string/gradient_settings_summary"
             android:fragment="com.altair.settings.fragments.ui.GradientSettings" />
 
+        <!-- Three fingers swipe action -->
+        <ListPreference
+            android:key="three_fingers_swipe"
+            android:title="@string/three_fingers_swipe_title"
+            android:dialogTitle="@string/three_fingers_swipe_title"
+            android:entries="@array/navbar_key_action_entries"
+            android:entryValues="@array/navbar_key_action_values"
+            android:persistent="false" />
+
         <!-- Sensor block per package -->
         <Preference
             android:key="sensor_block_settings"
