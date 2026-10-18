@@ -45,7 +45,7 @@ class NavigationBarStylePreference @JvmOverloads constructor(
     private var dialog: AlertDialog? = null
     private var recyclerView: RecyclerView? = null
 
-    private val themeUtils = ThemeUtils(context)
+    private val themeUtils = ThemeUtils.getInstance(context)
 
     private val pkgs: List<String> = themeUtils.getOverlayPackagesForCategory(CATEGORY, PACKAGE)
 
