@@ -626,6 +626,11 @@
     <string name="theme_enhanced_colors_title">Enhanced colors</string>
     <string name="theme_enhanced_colors_summary">Tweak certain system accent colors to use deeper shades</string>
 
+    <!-- Dark theme -->
+    <string name="theme_dark_mode_category">Dark theme</string>
+    <string name="battery_saver_dark_theme_title">Force dark theme in battery saver</string>
+    <string name="battery_saver_dark_theme_summary">Switch to the dark theme while Battery Saver is enabled. Turning this off does not increase power consumption on LCD panels, where dark theme saves nothing anyway.</string>
+
     <!-- Theme elements -->
     <string name="theme_elements_category">Theme elements</string>
     <string name="custom_system_theme_title">Custom themes</string>

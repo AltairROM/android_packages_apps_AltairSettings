@@ -36,14 +36,28 @@
         android:defaultValue="0" />
 
     <!-- Dark mode -->
-    <com.android.settings.display.darkmode.DarkModePreference
-        android:key="theme_dark_ui_mode"
-        android:title="@string/dark_ui_mode"
-        android:fragment="com.android.settings.display.darkmode.DarkModeSettingsFragment"
-        android:widgetLayout="@null"
-        settings:widgetLayout="@null"
-        settings:controller="com.android.settings.display.DarkUIPreferenceController"
-        settings:searchable="false" />
+    <PreferenceCategory
+        android:key="theme_dark_mode"
+        android:title="@string/theme_dark_mode_category">
+
+        <!-- Dark mode -->
+        <com.android.settings.display.darkmode.DarkModePreference
+            android:key="theme_dark_ui_mode"
+            android:title="@string/dark_ui_mode"
+            android:fragment="com.android.settings.display.darkmode.DarkModeSettingsFragment"
+            android:widgetLayout="@null"
+            settings:widgetLayout="@null"
+            settings:controller="com.android.settings.display.DarkUIPreferenceController"
+            settings:searchable="false" />
+
+        <!-- Battery saver dark theme -->
+        <com.lineage.support.preferences.SecureSettingSwitchPreference
+            android:key="battery_saver_dark_theme"
+            android:title="@string/battery_saver_dark_theme_title"
+            android:summary="@string/battery_saver_dark_theme_summary"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
 
     <!-- Theme elements -->
     <PreferenceCategory
