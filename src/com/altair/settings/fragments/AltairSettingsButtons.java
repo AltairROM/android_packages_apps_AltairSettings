@@ -291,12 +291,16 @@ public class AltairSettingsButtons extends DashboardFragment implements
                 assistCategory.removePreference(findPreference(KEY_ASSIST_WAKE_SCREEN));
             }
 
+            Action defaultAssistPressAction = Action.fromIntSafe(res.getInteger(
+                    org.lineageos.platform.internal.R.integer.config_pressOnAssistBehavior));
             Action pressAction = Action.fromSettings(mResolver,
-                    LineageSettings.System.KEY_ASSIST_ACTION, Action.SEARCH);
+                    LineageSettings.System.KEY_ASSIST_ACTION, defaultAssistPressAction);
             mAssistPressAction = initList(KEY_ASSIST_PRESS, pressAction);
 
+            Action defaultAssistLongPressAction = Action.fromIntSafe(res.getInteger(
+                    org.lineageos.platform.internal.R.integer.config_longPressOnAssistBehavior));
             Action longPressAction = Action.fromSettings(mResolver,
-                    LineageSettings.System.KEY_ASSIST_LONG_PRESS_ACTION, Action.VOICE_SEARCH);
+                    LineageSettings.System.KEY_ASSIST_LONG_PRESS_ACTION, defaultAssistLongPressAction);
             mAssistLongPressAction = initList(KEY_ASSIST_LONG_PRESS, longPressAction);
         }
         if (!hasAssistKey || assistCategory.getPreferenceCount() == 0) {
