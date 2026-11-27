@@ -239,42 +239,5 @@ class DynamicBar : SettingsPreferenceFragment() {
             val size = if (sideways) rect.height() else rect.width()
             return edge > 0 && center / edge in 0.35f..0.65f && size <= edge * 0.4f
         }
-
-        @JvmStatic
-        fun reset(context: Context) {
-            val resolver = context.contentResolver
-            Settings.Secure.putIntForUser(
-                resolver, SETTINGS_KEY_ENABLED, 0,
-                UserHandle.USER_CURRENT
-            )
-            Settings.Secure.putIntForUser(
-                resolver, SETTINGS_KEY_KEYGUARD_ENABLED, 1,
-                UserHandle.USER_CURRENT
-            )
-            Settings.Secure.putIntForUser(
-                resolver, SETTINGS_KEY_COMPACT_NOTIFICATIONS, 1,
-                UserHandle.USER_CURRENT
-            )
-            Settings.Secure.putIntForUser(
-                resolver, SETTINGS_KEY_BATTERY_CHIP_MODE, 1,
-                UserHandle.USER_CURRENT
-            )
-            Settings.Secure.putIntForUser(
-                resolver, SETTINGS_KEY_HAPTICS, 1,
-                UserHandle.USER_CURRENT
-            )
-            Settings.Secure.putIntForUser(
-                resolver, SETTINGS_KEY_CHIP_MORPH, 1,
-                UserHandle.USER_CURRENT
-            )
-            Settings.Secure.putIntForUser(
-                resolver, SETTINGS_KEY_CENTER_ISLAND, 0,
-                UserHandle.USER_CURRENT
-            )
-            Settings.Secure.putIntForUser(
-                resolver, SETTINGS_KEY_CARD_STYLE, 0,
-                UserHandle.USER_CURRENT
-            )
-        }
     }
 }
